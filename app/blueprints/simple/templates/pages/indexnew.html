@@ -1,0 +1,98 @@
+{% extends "base_templates/page_base.html" %}  {# base_templates/page_base.html extends base_templates/base.html #}
+
+{% block main %}
+<!DOCTYPE html>
+<html class="bg">
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<title>Get Started - SimpleMetrics</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/simple/app/app.css" rel="stylesheet">
+	<!-- stylesheets -->
+	<link rel="stylesheet" type="text/css" href="/static/simple/css/compiled/theme.css">
+	<link rel="stylesheet" type="text/css" href="/static/simple/css/vendor/brankic.css">
+	<link rel="stylesheet" type="text/css" href="/static/simple/css/vendor/isotope.css">
+    <link href="/static/simple/css/custom.min.css" rel="stylesheet">
+
+	<!-- javascript -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="/static/simple/js/bootstrap/bootstrap.min.js"></script>
+	<script src="/static/simple/js/theme.js"></script>
+	<script src="/static/simple/js/vendor/jquery.isotope.min.js"></script>
+
+	<!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+   <body id="portfolio" style="background-color:#FFFFFF; margin-top:-8px; margin-bottom:-50px" height="100%" width="100%">
+                           <!-- Start of Live Transactions -->
+        <div class="right_col" role="main">
+        <div class="row">
+          <div class="col-md-4" style="height:1260px">
+            <div class="x_panel" style="height:99%">
+                <div class="x_title">
+                  <h2 style="font-family:Century Gothic">Live Events</h2> <small>{{ key }}</small>
+                    <div class="pull-right" style="font-family:Century Gothic"><small><u><a href="/refresh">Update</a></u></small></div>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                  <ul class="list-unstyled msg_list">
+                    {% if events|length > 0 %}
+                    {% for event in events %}
+                    <li>
+                      <a>
+                        <span>
+                          {% if event.type == "charge.succeeded" %}
+                          <span class="label label-success">Charge</span>
+                          {% elif event.type == "charge.refunded" %}
+                          <span class="label label-danger">Refund</span>
+                          {% elif event.type == "charge.failed" %}
+                          <span class="label label-danger">Failed</span>
+                          {% elif event.type == "Upgrade" %}
+                          <span class="label label-info">Upgrade</span>
+                          {% elif event.type == "Downgrade" %}
+                          <span class="label label-danger">Downgrade</span>
+                          {% elif event.type == "customer.subscription.created" %}
+                          <span class="label label-primary">New</span>
+                          {% elif event.type == "customer.subscription.deleted" %}
+                          <span class="label label-warning">Canceled</span>
+                          {% endif %}
+                          <span class="time">{{ event.p_date }}</span>
+                        </span>
+                        <span class="message">
+                          {% if event.type == "charge.succeeded" %}
+                          <b>{{ event.name }}</b> paid you <b>${{ "{:,.2f}".format(event.amount) }}</b>!
+                          {% elif event.type == "charge.refunded" %}
+                          You sent a refund of <b>${{ "{:,.2f}".format(-event.amount) }}</b> to <b>{{ event.name }}.</b>
+                          {% elif event.type == "charge.failed" %}
+                          <b>{{ event.name }}</b>'s charge of <b>${{ "{:,.2f}".format(event.amount) }}</b> failed.
+                          {% elif event.type == "Upgrade" %}
+                          <b>{{ event.name }}</b> upgraded to the <b>{{ event.plan }}</b>!
+                          {% elif event.type == "Downgrade" %}
+                          <b>{{ event.name }}</b> downgraded to the <b>{{ event.plan }}</b>.
+                          {% elif event.type == "customer.subscription.created" %}
+                          <b>{{ event.name }}</b> signed up for the <b>{{ event.plan }}</b>!
+                          {% elif event.type == "customer.subscription.deleted" %}
+                          <b>{{ event.name }}</b> canceled their <b>{{ event.plan }}</b>.
+                          {% endif %}
+                        </span>
+                      </a>
+                    </li>
+                    {% endfor %}
+                    {% else %}
+                    <center><i>There are no transactions to show.</i></center>
+                    {% endif %}
+                  </ul>
+                </div>
+            </div>
+          </div>
+
+          <!-- end of Live Transactions -->
+                       </div>
+            </div>
+       </body>
+</html>
+{% endblock %}

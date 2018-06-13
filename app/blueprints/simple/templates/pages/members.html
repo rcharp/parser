@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Welcome to Flask-Stripe</h1>
+  <h3>This is the member's page.</h3>
+  <br/>
+  <form action="/charge" method="post">
+    <script src="https://checkout.stripe.com/v2/checkout.js" class="stripe-button"
+            data-key="{{ key }}"
+            data-description="SimpleMetrics Startup"
+            data-amount="7900">
+    </script>
+  </form>
+  <br/>
+	<P><strong>Please Note:</strong> This app is running in test mode, use the following credit card information to make a purchase:
+	<ul>
+	  <li>Credit card number: 4242-4242-4242-4242</li>
+	  <li>CVC: any 3-digit number</li>
+	  <li>Expiration date: any date in the future (MM/YY)</li>
+	</ul>
+{% endblock %}

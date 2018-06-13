@@ -1,0 +1,184 @@
+{% extends 'layouts/app.html' %}
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
+    <title>Dashboard - Parser</title>
+
+    <!-- Google Analytics code -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-118470858-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-118470858-1');
+    </script>
+    <!-- End of GA code -->
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Cabin|Gotham|Gotham|Open+Sans|Comfortaa"
+          rel="stylesheet">
+    <!-- Bootstrap Core CSS -->
+    <link href="../../../page/templates/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- chartist CSS -->
+    <link href="../../../page/templates/assets/plugins/chartist-js/dist/chartist.min.css" rel="stylesheet">
+    <link href="../../../page/templates/assets/plugins/chartist-js/dist/chartist-init.css" rel="stylesheet">
+    <link href="../../../page/templates/assets/plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.css" rel="stylesheet">
+    <!--This page css - Morris CSS -->
+    <link href="../../../page/templates/assets/plugins/c3-master/c3.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../../../page/templates/page/css/style.css" rel="stylesheet">
+    <!-- You can change the theme colors from here -->
+    <link href="../../../page/templates/page/css/colors/blue.css" id="theme" rel="stylesheet">
+    <!-- MDL theme -->
+    <link href="../BS4/assets/css/material-dashboard.css" id="theme" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+</head>
+
+{% block litebody %}
+<body class="card-no-border" style="font-family:'Gotham',sans-serif;overflow-y:auto;max-width:100%;overflow-x:hidden;width:100%;padding-bottom:0;">
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <!--<div class="preloader">
+        <svg class="circular" viewBox="25 25 50 50">
+            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> </svg>
+    </div>-->
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div id="main-wrapper" style="overflow:auto;width:85%;margin:auto;">
+        <!-- ============================================================== -->
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        <div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <!-- Row -->
+                <br >
+                <div style="float:right;font-family: 'Gotham', sans-serif;position:relative;top:30px;
+                margin-bottom:20px;">
+                   Welcome, Guest!
+                </div>
+                <hr>
+                <div class="row" style="padding-top:30px;color:#007fd8">
+                    <div class="col-lg-14">
+                        <div class="card-lite" style="min-height: 40px;
+                          min-width: 250px;
+                          border-color: #d7dfe3;
+                          box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
+                          border-radius: 8px;
+                          font-weight:100;
+                          background-color:#fff;">
+                            <div class="card-block" style="flex: 1 1 auto;padding: 2.25rem;outline: none;font-size:32px;">
+                                Inbox ({{ emails|length }})
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="padding-top:30px;color:#007fd8">
+                    <div class="col-lg-14">
+                        <div class="card-lite" style="min-height: 180px; margin-bottom:30px;
+                          min-width: 250px;
+                          border-color: #d7dfe3;
+                          box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
+                          border-radius: 8px;
+                          background-color:#fff;">
+                            <div class="card-block bg-info" style="background-color: #1e88e5 !important;
+                            flex: 1 1 auto; padding: 1.25rem;">
+                                <h4 class="text-white card-title"
+                                    style="color: #ffffff !important;font-weight: 400;">Your Inbox</h4>
+                            </div>
+                            <div class="card-block" style="flex: 1 1 auto;padding: 5.25rem;outline: none;">
+                                <table class="table">
+                                    <thead>
+                                        <tr style="font-weight:bold;">
+                                            <td></td>
+                                            <td>From</td>
+                                            <td>Subject</td>
+                                            <td>Date</td>
+                                            <td>Status</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for email in emails %}
+                                        <tr style="height:60px;" valign="middle">
+                                            <form>
+                                                <td style="vertical-align:middle"><input type="checkbox"></td>
+                                                <td style="vertical-align:middle">{{ email.from_ }}</td>
+                                                <td style="vertical-align:middle">{{ email.subject }}</td>
+                                                <td style="vertical-align:middle">{{ email.date }}</td>
+                                                <td style="vertical-align:middle">Parsed</td>
+                                            </form>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                  </table>
+                            </div>
+                        </div> <!-- End contacts -->
+                    </div>
+                </div>
+                <!-- Row -->
+                <!-- Row -->
+                <!-- ============================================================== -->
+                <!-- End PAge Content -->
+                <!-- ============================================================== -->
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Container fluid  -->
+            <!-- ============================================================== -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page wrapper  -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+    <script src="../../../page/templates/assets/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="../../../page/templates/assets/plugins/bootstrap/js/tether.min.js"></script>
+    <script src="../../../page/templates/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="../../../page/templates/lite/js/jquery.slimscroll.js"></script>
+    <!--Wave Effects -->
+    <script src="../../../page/templates/lite/js/waves.js"></script>
+    <!--Menu sidebar -->
+    <script src="../../../page/templates/lite/js/sidebarmenu.js"></script>
+    <!--stickey kit -->
+    <script src="../../../page/templates/assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
+    <!--Custom JavaScript -->
+    <script src="../../../page/templates/lite/js/custom.min.js"></script>
+    <!-- ============================================================== -->
+    <!-- This page plugins -->
+    <!-- ============================================================== -->
+    <!-- chartist chart -->
+    <script src="../../../page/templates/assets/plugins/chartist-js/dist/chartist.min.js"></script>
+    <script src="../../../page/templates/assets/plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min.js"></script>
+    <!--c3 JavaScript -->
+    <script src="../../../page/templates/assets/plugins/d3/d3.min.js"></script>
+    <script src="../../../page/templates/assets/plugins/c3-master/c3.min.js"></script>
+    <!-- Chart JS -->
+    <script src="../../../page/templates/lite/js/dashboard1.js"></script>
+</body>
+{% endblock %}

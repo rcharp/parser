@@ -1,0 +1,215 @@
+{% import 'macros/flash.html' as flash with context %}
+{% import 'billing/macros/billing.html' as billing with context %}
+
+<!DOCTYPE html>
+<html style="max-width:100%;">
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-117689313-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'UA-117689313-1');
+    </script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="../../static/images/favicon.ico" type="image/x-icon">
+    <meta name="description"
+          content="{% block meta_description %}{% endblock %}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <title>{% block title %}{% endblock %}</title>
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles/vendor/bootstrap.min.css') }}">
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles/main.css') }}">
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles/vendor/font-awesome.min.css') }}">
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles/vendor/eonasdan-bootstrap-datetimepicker.4.13.30.min.css') }}">
+
+    <!-- Theme CSS -->
+    <!-- Animation library for notifications   -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles/theme/animate.min.css') }}">
+
+    <!--  Light Bootstrap Table core CSS    -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles/theme/light-bootstrap-dashboard.css?v=1.4.0') }}">
+
+    <!-- Bootstrap Theme -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles/theme/bootstrap.min.css') }}">
+
+      <!-- Javascript loader -->
+
+    <!-- Theme Fonts -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Cabin|Gotham|Gotham|Open+Sans|Comfortaa"
+          rel="stylesheet">
+
+    <!-- Lite elements -->
+    <!-- Bootstrap Core CSS -->
+    <link href="../../blueprints/page/templates/assets/plugins/bootstrap/css/bootstrap.min.css"
+          rel="stylesheet">
+    <!-- chartist CSS -->
+    <link href="../../blueprints/page/templates/assets/plugins/chartist-js/dist/chartist.min.css" rel="stylesheet">
+    <link href="../../blueprints/page/templates/assets/plugins/chartist-js/dist/chartist-init.css" rel="stylesheet">
+    <link href="../../blueprints/page/templates/assets/plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.css" rel="stylesheet">
+    <!--This page css - Morris CSS -->
+    <link href="../../blueprints/page/templates/assets/plugins/c3-master/c3.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../../blueprints/page/templates/lite/css/style.css" rel="stylesheet">
+    <!-- You can change the theme colors from here -->
+    <link href="../../blueprints/page/templates/lite/css/colors/blue.css" id="theme" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+
+    <!-- end Lite elements -->
+
+
+
+
+    <script
+      src="https://code.jquery.com/jquery-1.12.2.min.js"
+      integrity="sha256-lZFHibXzMHo3GGeehn1hudTAP3Sc0uKXBXAzHX1sjtk="
+      crossorigin="anonymous"></script>
+    <script src="https://js.stripe.com/v2/"></script>
+
+    {% if config['ANALYTICS_GOOGLE_UA'] %}
+      <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+        ga('create', "{{ config['ANALYTICS_GOOGLE_UA'] }}", 'auto');
+        ga('send', 'pageview');
+      </script>
+    {% endif %}
+
+  </head>
+  {% block litebody %}{% endblock %}
+  <body style="font-family: 'Gotham', sans-serif;margin:auto;width:100%;max-width:100%;overflow-x:hidden;padding-bottom:0;">
+    {% block header %}{% endblock %}
+    {{ billing.card_expiring_warning() }}
+    {% if request.path != '/demo' and request.path != '/dashboard' %}
+    <main class="container"style="min-height:850px;">
+      {{ flash.render() }}
+
+      <div class="md-margin-top">{% block heading %}{% endblock %}</div>
+      {% block body %}{% endblock %}
+    </main>
+    {% endif %}
+    <br /><br />
+    {% block footer %}{% endblock %}
+    <!--footer class="footer text-center" style="font-family: 'Gotham', sans-serif;">
+      <div class="container">
+        <ul class="list-inline">
+          <li class="text-muted">Parser &copy; {{ current_year() }}</li>
+
+        </ul>
+      </div>
+    </footer-->
+
+<div id="features" style="font-family: 'Gotham', sans-serif;margin-top:10px;margin-bottom:0px;
+    overflow-x:hidden;border-top:none;background:#e06c1f">
+		<div class="container" style="width:90%;margin:auto;text-align:center;color:white">
+            <div class="row header" style="margin-top:40px;padding-left:0;margin-left:0;">
+                <div class="col-md-3 col-md-3" style="min-width:275px;text-align:left;padding-top:40px;padding-left:0">
+                    <h1><a href="{{ url_for('page.home') }}"style="color:white">parser</a></h1>
+                </div>
+            </div>
+            {% if current_user.authenticated %}
+                <div class="row header"><!-- Row -->
+                    <!-- Column 1 -->
+                    <div class="col-md-3 col-md-3" style="min-width:275px;text-align:right;padding-top:40px;">
+                        <h4 style="font-weight:lighter;font-family: 'Gotham', sans-serif;float:left;
+                        margin-right:20px; vertical-align:middle;line-height:50%;">Parser &copy; {{ current_year() }}</h4><br /><br />
+                        <h4 style="font-weight:lighter;font-family: 'Gotham', sans-serif;float:left;margin-right:20px;
+                        vertical-align:middle;line-height:50%;"><a href="{{ url_for('user.logout') }}"style="color:white;">Log out</a></h4><br /><br />
+                    </div><!-- End of column 1 -->
+                    <!-- Column 2 -->
+                    <div class="col-md-3 col-md-3" style="min-width:275px;text-align:right;padding-top:40px;">
+                        <h4 style="font-weight:lighter;font-family: 'Gotham', sans-serif;float:left;margin-right:20px;
+                        vertical-align:middle;line-height:50%;"><a href="{{ url_for('billing.pricing') }}"style="color:white;">Pricing</a></h4><br /><br />
+                        <h4 style="font-weight:lighter;font-family: 'Gotham', sans-serif;float:left;margin-right:20px;
+                        vertical-align:middle;line-height:50%;"><a href="{{ url_for('user.dashboard') }}"style="color:white;">Dashboard</a></h4><br /><br />
+                        <h4 style="font-weight:lighter;font-family: 'Gotham', sans-serif;float:left;margin-right:20px;
+                        vertical-align:middle;line-height:50%;"><a href="{{ url_for('user.settings') }}"style="color:white;">Settings</a></h4><br /><br />
+                        <h4 style="font-weight:lighter;font-family: 'Gotham', sans-serif;float:left;margin-right:20px;
+                        vertical-align:middle;line-height:50%;"><a href="{{ url_for('contact.index') }}"style="color:white;">Contact</a></h4><br /><br />
+                    </div><!-- End of column 2 -->
+                    <!-- Column 3-->
+                    <div class="col-md-3 col-md-3" style="min-width:275px;text-align:right;padding-top:40px;">
+                        <h4 style="font-weight:lighter;font-family: 'Gotham', sans-serif;float:left;margin-right:20px;
+                        vertical-align:middle;line-height:50%;"><a href="{{ url_for('page.privacy') }}"style="color:white;">Privacy Policy</a></h4><br /><br />
+                        <h4 style="font-weight:lighter;font-family: 'Gotham', sans-serif;float:left;margin-right:20px;
+                        vertical-align:middle;line-height:50%;"><a href="{{ url_for('page.terms') }}"style="color:white;">Terms of Service</a></h4><br /><br />
+                    </div><!-- End of column 3 -->
+                </div><br /><br /><br /><!-- End of Row 3 -->
+            {% else %}
+                <div class="row header"><!-- Row -->
+                    <!-- Column 1 -->
+                    <div class="col-md-3 col-md-3" style="min-width:275px;text-align:right;padding-top:40px;">
+                        <h4 style="font-weight:lighter;font-family: 'Gotham', sans-serif;float:left;
+                        margin-right:20px; vertical-align:middle;line-height:50%;">Parser &copy; {{ current_year() }}</h4><br /><br />
+                        <h4 style="font-weight:lighter;font-family: 'Gotham', sans-serif;float:left;margin-right:20px;
+                        vertical-align:middle;line-height:50%;"><a href="{{ url_for('user.login') }}"style="color:white;">Log in</a></h4><br /><br />
+                        <h4 style="font-weight:lighter;font-family: 'Gotham', sans-serif;float:left;margin-right:20px;
+                        vertical-align:middle;line-height:50%;"><a href="{{ url_for('user.signup') }}"style="color:white;">Sign up</a></h4><br /><br />
+                    </div><!-- End of column 1 -->
+                    <!-- Column 2 -->
+                    <div class="col-md-3 col-md-3" style="min-width:275px;text-align:right;padding-top:40px;">
+                        <h4 style="font-weight:lighter;font-family: 'Gotham', sans-serif;float:left;margin-right:20px;
+                        vertical-align:middle;line-height:50%;"><a href="{{ url_for('billing.pricing') }}"style="color:white;">Pricing</a></h4><br /><br />
+                        <h4 style="font-weight:lighter;font-family: 'Gotham', sans-serif;float:left;margin-right:20px;
+                        vertical-align:middle;line-height:50%;"><a href="{{ url_for('page.demo') }}"style="color:white;">Demo</a></h4><br /><br />
+                        <h4 style="font-weight:lighter;font-family: 'Gotham', sans-serif;float:left;margin-right:20px;
+                        vertical-align:middle;line-height:50%;"><a href="#feature" style="color:white;">Features</a></h4><br /><br />
+                        <h4 style="font-weight:lighter;font-family: 'Gotham', sans-serif;float:left;margin-right:20px;
+                        vertical-align:middle;line-height:50%;"><a href="#info"style="color:white;">What is Parser?</a></h4><br /><br />
+                    </div><!-- End of column 2 -->
+                    <!-- Column 3-->
+                    <div class="col-md-3 col-md-3" style="min-width:275px;text-align:right;padding-top:40px;">
+                        <h4 style="font-weight:lighter;font-family: 'Gotham', sans-serif;float:left;margin-right:20px;
+                        vertical-align:middle;line-height:50%;"><a href="{{ url_for('contact.index') }}"style="color:white;">Contact</a></h4><br /><br />
+                        <h4 style="font-weight:lighter;font-family: 'Gotham', sans-serif;float:left;margin-right:20px;
+                        vertical-align:middle;line-height:50%;"><a href="{{ url_for('page.privacy') }}"style="color:white;">Privacy Policy</a></h4><br /><br />
+                        <h4 style="font-weight:lighter;font-family: 'Gotham', sans-serif;float:left;margin-right:20px;
+                        vertical-align:middle;line-height:50%;"><a href="{{ url_for('page.terms') }}"style="color:white;">Terms of Service</a></h4><br /><br />
+                    </div><!-- End of column 3 -->
+                </div><br /><br /><br /><!-- End of Row 3 -->
+            {% endif %}
+		</div>
+	</div>
+
+    <script
+      src="{{ url_for('static', filename='scripts/vendor/bootstrap.min.js') }}">
+    </script>
+    <script
+      src="{{ url_for('static', filename='scripts/vendor/moment.min.js') }}">
+    </script>
+    <script
+      src="{{ url_for('static', filename='scripts/vendor/eonasdan-bootstrap-datetimepicker.4.14.30.min.js') }}">
+    </script>
+    <script
+      src="{{ url_for('static', filename='scripts/main.js') }}">
+    </script>
+  </body>
+</html>

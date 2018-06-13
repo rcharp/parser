@@ -1,0 +1,40 @@
+{% extends 'layouts/app.html' %}
+{% import 'macros/form.html' as f with context %}
+
+{% block title %}Sign Up - Parser{% endblock %}
+
+{% block body %}
+  <div class="row">
+    <div class="col-md-5 well" style="width:90%;max-width:500px;margin-top:50px;">
+      {% call f.form_tag('user.signup') %}
+        <legend>Sign up</legend>
+
+        {% call f.form_group(form.email, css_class='sm-margin-bottom',
+                             autofocus='autofocus',
+                             placeholder='Email address') %}
+        {% endcall %}
+
+        {% call f.form_group(form.password, css_class='sm-margin-bottom') %}
+        {% endcall %}
+
+        {% call f.form_group(form.confirm, css_class='sm-margin-bottom') %}
+        {% endcall %}
+
+        <div class="row">
+          <div class="col-md-6">
+            <button type="submit" class="btn btn-primary btn-block">
+              Sign Up
+            </button>
+          </div>
+          <div class="col-md-6">
+            <div class="visible-xs visible-sm sm-margin-top"></div>
+            <a href="{{ url_for('user.login') }}"
+               class="btn btn-default btn-block">
+              Already registered?
+            </a>
+          </div>
+        </div>
+      {% endcall %}
+    </div>
+  </div>
+{% endblock %}

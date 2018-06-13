@@ -1,0 +1,79 @@
+{% extends 'layouts/base.html' %}
+
+{% block header %}
+  <!--<a href="{{ url_for('page.home') }}">
+    <img src="{{ url_for('static', filename='images/logo-large-transparent.png') }}"
+         class="img-responsive center-block md-margin-bottom"
+         width="400" height="186" title="Parser" alt="Parser"/>
+  </a>-->
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container" style="font-family: 'Gotham', sans-serif;margin-top:7px">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed"
+                data-toggle="collapse" data-target="#navbar"
+                aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+          {% if current_user.is_authenticated %}
+              {% if current_user.role == 'member' %}
+                <a href="{{ url_for('user.dashboard') }}">
+                  <img src="{{ url_for('static', filename='images/logo-white-transparent.png') }}"
+                       class="img-responsive"
+                       width="229" height="50" title="Parser" alt="Parser"/>
+                </a>
+              {% else %}
+                  <a href="{{ url_for('admin.dashboard') }}">
+                    <img src="{{ url_for('static', filename='images/logo-white-transparent.png') }}"
+                        class="img-responsive"
+                        width="229" height="50" title="Parser" alt="Parser"/>
+                    </a>
+              {% endif %}
+          {% else %}
+          <a href="{{ url_for('page.home') }}">
+          <img src="{{ url_for('static', filename='images/logo-white-transparent.png') }}"
+               class="img-responsive"
+               width="229" height="50" title="Parser" alt="Parser"/>
+        </a>
+          {% endif %}
+      </div>
+      <div id="navbar" class="collapse navbar-collapse">
+        <!--<ul class="nav navbar-nav">
+          {% if current_user.is_authenticated and current_user.subscription %}
+          {% else %}
+            <li><a href="{{ url_for('billing.pricing') }}">Pricing</a></li>
+              <li><a href="{{ url_for('page.demo') }}">Demo</a></li>
+          {% endif %}
+        </ul>-->
+        <ul class="nav navbar-nav navbar-right">
+          {% if current_user.role == 'admin' %}
+            <li>
+              {% include 'admin/_menu.html' %}
+            </li>
+          {% endif %}
+          {% if current_user.is_authenticated %}
+              {% if current_user.role == 'member' %}
+                  <li>
+                  <a href="{{ url_for('user.dashboard') }}">Dashboard</a>
+                  </li>
+              {% endif %}
+                  <li><a href="{{ url_for('user.settings') }}">Settings</a></li>
+                  <li><a href="{{ url_for('contact.index') }}">Contact Us</a></li>
+                  <li><a href="{{ url_for('user.logout') }}">Log out</a></li>
+          {% else %}
+            <li><a href="{{ url_for('billing.pricing') }}">Pricing</a></li>
+            <li><a href="{{ url_for('page.demo') }}">Demo</a></li>
+            <li><a href="{{ url_for('user.login') }}">Log in</a></li>
+            <li><a href="{{ url_for('user.signup') }}">Sign up</a></li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+{% endblock %}
+
+{% block footer %}
+  <!--li><a href="{{ url_for('user.signup') }}">Sign up today</a></li-->
+{% endblock %}

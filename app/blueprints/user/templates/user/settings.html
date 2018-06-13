@@ -1,0 +1,150 @@
+{% extends 'layouts/app.html' %}
+
+{% block title %}My Account - Parser{% endblock %}
+{% block body %}
+  <div class="row" style="overflow-x:hidden">
+    <div class="col-md-5" style="overflow-x:hidden">
+      <h3>Settings</h3>
+      <h4 class="text-muted margin-bottom">{{ current_user.email }}</h4>
+
+      <div class="list-group">
+        <a href="{{ url_for('user.update_credentials') }}"
+           class="list-group-item">
+          Update email and password
+        </a>
+        {% if current_user.username %}
+          <span class="list-group-item quarter-faded text-muted">
+            Your username is
+            <strong>{{ current_user.username }}</strong>
+          </span>
+        {% else %}
+          <a href="{{ url_for('user.welcome') }}"
+             class="list-group-item">
+            Pick a username
+          </a>
+        {% endif %}
+      </div>
+    </div>
+    <div class="col-md-5 col-md-push-1 col-md-offset-1">
+      {% if current_user.subscription %}
+        <h3> Parser {{ current_user.subscription.plan | title }}
+          Plan</h3>
+        <h4 class="text-muted margin-bottom">
+          {{ current_user.credit_card.brand }}
+          ****{{ current_user.credit_card.last4 }}
+          ({{ current_user.credit_card.exp_date.strftime('%m/%Y') }})
+        </h4>
+
+        <div class="list-group">
+          <a class="list-group-item"
+             href="{{ url_for('billing.update_payment_method') }}">
+            Update payment info
+          </a>
+          <a class="list-group-item"
+             href="{{ url_for('billing.billing_details') }}">
+            Billing details
+          </a>
+          <a class="list-group-item"
+             href="{{ url_for('billing.update') }}">
+            Change plan
+          </a>
+          <a class="list-group-item"
+             href="{{ url_for('billing.cancel') }}">
+            <span class="text-muted" style="color:red">Delete my account</span>
+          </a>
+        </div>
+
+        {% if current_user.stripe_id %}
+            <br>
+            <h3>Your Stripe account</h3>
+            <div class="list-group">
+              <div class="list-group-item">
+                  {% if email is not none %}
+                      You are currently connected to Stripe as <b>{{ email }}</b>
+                  {% else %}
+                      You are currently connected to Stripe.
+                  {% endif %}
+              </div>
+            </div>
+        {% else %}
+            <br>
+            <h3>Connect your Stripe account</h3>
+            <h4 class="text-muted margin-bottom">
+              Sign in with Stripe to access your metrics
+            </h4>
+            <div class="list-group" style="width:220px">
+              <div class="list-group-item">
+                <a href="{{ stripe_link }}">
+                    <img src="{{ url_for('static',filename='images/blue-on-light.png') }}">
+                </a>
+              </div>
+            </div>
+        {% endif %}
+      {% else %}
+          {% if trial_days_left == -1 %}
+              <h3>Your trial has <span style="color:red">expired</span>.</h3>
+          {% elif trial_days_left == 0 %}
+              <h3>Your trial <span style="color:red">expires</span> today.</h3>
+          {% elif trial_days_left == 1 %}
+              <h3>Your trial ends in <span style="color:red">1</span> day.</h3>
+          {% else %}
+              <h3>Your trial will end in <span style="color:red">{{ trial_days_left }}</span> days.</h3>
+          {% endif %}
+        <h4 class="text-muted">
+          Hey buddy, why aren't you subscribed?
+        </h4>
+
+        <p>
+          Since you've created an account, now would be the perfect time
+          to sign up for a plan to make sure you continue getting all of your metrics!
+        </p>
+        <p>
+          Click below and choose the plan that best fits your needs.
+        </p>
+        <a href="{{ url_for('billing.pricing') }}"
+           class="btn btn-primary">Choose a Plan</a>
+        <hr/>
+        {% if current_user.stripe_id %}
+            <h3>Your Stripe account</h3>
+            <div class="list-group">
+              <div class="list-group-item">
+                  {% if email is not none %}
+                      You are currently connected to Stripe as <b>{{ email }}</b>
+                  {% else %}
+                      You are currently connected to Stripe.
+                  {% endif %}
+              </div>
+            </div>
+        {% else %}
+            <br>
+            <h3>Connect your Stripe account</h3>
+            <h4 class="text-muted margin-bottom">
+              Sign in with Stripe to access your metrics
+            </h4>
+            <div class="list-group" style="width:220px">
+              <div class="list-group-item">
+                <a href="{{ stripe_link }}">
+                    <img src="{{ url_for('static',filename='images/blue-on-light.png') }}">
+                </a>
+              </div>
+            </div>
+        {% endif %}
+          <hr/>
+          <div class="list-group">
+            <a class="list-group-item" href="{{ url_for('billing.cancel') }}">
+                <span class="text-muted" style="color:red">Delete my account</span>
+            </a>
+          </div>
+        {% if current_user.invoices %}
+          <h3>Previous subscription info</h3>
+          <div class="list-group">
+            <a class="list-group-item"
+              href="{{ url_for('billing.billing_details') }}">
+              Billing details
+            </a>
+          </div>
+        {% endif %}
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

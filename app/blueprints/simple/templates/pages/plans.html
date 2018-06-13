@@ -1,0 +1,505 @@
+{% extends "base_templates/page_base.html" %}  {# base_templates/page_base.html extends base_templates/base.html #}
+
+{% block main %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<title>Pricing - SimpleMetrics</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<!-- stylesheets -->
+	<link rel="stylesheet" type="text/css" href="/static/simple/css/compiled/theme.css">
+	<link rel="stylesheet" type="text/css" href="/static/simple/css/vendor/brankic.css">
+	<link rel="stylesheet" type="text/css" href="/static/simple/css/vendor/isotope.css">
+
+	<!-- javascript -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="/static/simple/js/bootstrap/bootstrap.min.js"></script>
+	<script src="/static/simple/js/theme.js"></script>
+
+	<!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+<body id="pricing" style="margin-top:-8px">
+	<div id="first-option">
+		<div class="container">
+			<div class="row header">
+				<div class="col-md-12">
+					<h3 style="font-family:Century Gothic">Please select a plan</h3>
+					<p style="font-family:Century Gothic">Choose the pricing that best fits your business needs</p>
+				</div>
+			</div>
+
+			<div class="row charts">
+				<div class="col-md-4">
+					<div class="chart first">
+						<div class="plan-name">Hobby</div>
+						<div class="quantity">
+							<span class="dollar">$</span>
+							<span class="price">39</span>
+							<span class="period">/month</span>
+						</div>
+						<div class="specs">
+							<div class="spec">
+								<span class="variable">500</span>
+								customers
+							</div>
+							<div class="spec">
+								<span class="variable">Unlimited</span>
+								transactions
+							</div>
+							<div class="spec">
+								<span class="variable">Email</span>
+								support
+							</div>
+							<div class="spec">
+								<strike><span class="variable">Metrics</span>
+								monitoring</strike>
+							</div>
+							<div class="spec">
+								<strike><span class="variable">Customer</span>
+								profiles</strike>
+							</div>
+							<div class="spec">
+								<strike><span class="variable">Email</span>
+								reports</strike>
+							</div>
+						</div>
+						{% if current_user.user_auth.plan == 'hobby' %}
+						<a class="btn-signup button-clear" disabled>
+							<span><i>Current plan</i></span>
+						</a>
+						{% else %}
+						<form action="/charge" method="post" style="margin-top:40px">
+							<input name="plan" value="hobby" type="hidden">
+    						<script src="https://checkout.stripe.com/v2/checkout.js" class="stripe-button"
+            					data-key="{{ key }}"
+            					data-description="SimpleMetrics.io Hobby"
+								data-label="Select this plan"
+								data-email="{{ email }}"
+								receipt_email="{{ email }}"
+            					data-amount="3900">
+    						</script>
+						</form>
+						{% endif %}
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="chart featured">
+						<img src="/static/simple/images/ribbon.png" class="popular" alt="ribbon" />
+						<div class="plan-name">Startup</div>
+						<div class="quantity">
+							<span class="dollar">$</span>
+							<span class="price">79</span>
+							<span class="period">/month</span>
+						</div>						
+						<div class="specs">
+							<div class="spec">
+								<span class="variable">1000</span>
+								customers
+							</div>
+							<div class="spec">
+								<span class="variable">Unlimited</span>
+								Transactions
+							</div>
+							<div class="spec">
+								<span class="variable">Email</span>
+								support
+							</div>
+							<div class="spec">
+								<span class="variable">Metrics</span>
+								monitoring
+							</div>
+							<div class="spec">
+								<strike><span class="variable">Customer</span>
+								profiles</strike>
+							</div>
+							<div class="spec">
+								<strike><span class="variable">Email</span>
+								reports</strike>
+							</div>
+						</div>
+						{% if current_user.user_auth.plan == 'startup' %}
+						<a class="btn-signup button-clear" disabled>
+							<span><i>Current plan</i></span>
+						</a>
+						{% else %}
+						<a class="btn-signup button-clear" disabled>
+							<span>Coming Soon!</span>
+						</a>
+						<!--
+						<form action="/charge" method="post" style="margin-top:50px">
+							<input name="plan" value="startup" type="hidden">
+    						<script src="https://checkout.stripe.com/v2/checkout.js" class="stripe-button"
+            					data-key="{{ key }}"
+            					data-description="SimpleMetrics Startup"
+								data-label="Select this plan"
+								data-email="{{ email }}"
+								receipt_email="{{ email }}"
+            					data-amount="7900">
+    						</script>
+						</form>-->
+						{% endif %}
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="chart last">
+						<div class="plan-name">Professional</div>
+						<div class="quantity">
+							<span class="dollar">$</span>
+							<span class="price">149</span>
+							<span class="period">/month</span>
+						</div>
+						<div class="specs">
+							<div class="spec">
+								<span class="variable">5000</span>
+								customers
+							</div>
+							<div class="spec">
+								<span class="variable">Unlimited</span>
+								transactions
+							</div>
+							<div class="spec">
+								<span class="variable">Email</span>
+								support
+							</div>
+							<div class="spec">
+								<span class="variable">Metrics</span>
+								monitoring
+							</div>
+							<div class="spec">
+								<span class="variable">Customer</span>
+								profiles
+							</div>
+							<div class="spec">
+								<span class="variable">Email</span>
+								reports
+							</div>
+						</div>
+						{% if current_user.user_auth.plan == 'professional' %}
+						<a class="btn-signup button-clear" disabled>
+							<span><i>Current plan</i></span>
+						</a>
+						{% else %}
+						<a class="btn-signup button-clear" disabled>
+							<span>Coming Soon!</span>
+						</a>
+						{% endif %}
+					</div>
+				</div>				
+			</div>
+			<div class="row message">
+			</div>
+			<!--
+			<div class="row faq">
+				<div class="col-md-12">
+					<div class="row header">
+						<div class="col-md-12">
+							<h3>Frequently Asked Questions</h3>
+						</div>
+					</div>
+					<div class="row questions">
+						<div class="col-md-6">
+							<div class="question">
+								<strong>Do I need a card to signup?</strong>
+								<p>
+									There are many variations of passages of Lorem Ipsum available, but the randomised words which don’t look even slightly believable. If you are anything embarrassing hidden in the middle of text.
+								</p>
+							</div>
+							<div class="question">
+								<strong>Can I cancel at anytime?</strong>
+								<p>
+									Of course you can! If at anytime you feel that SimpleMetrics isn't for you, you
+									can cancel directly on your account page. No questions asked.
+								</p>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="question">
+								<strong>Can I cancel at anytime?</strong>
+								<p>
+									There are many variations of passages of Lorem Ipsum available, but the randomised words which don’t look even slightly believable. If you are anything embarrassing hidden in the middle of text.
+								</p>
+							</div>
+							<div class="question">
+								<strong>Do I need a card to signup?</strong>
+								<p>
+									There are many variations of passages of Lorem Ipsum available, but the randomised words which don’t look even slightly believable. If you are anything embarrassing hidden in the middle of text.
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>-->
+			<div class="row contact">
+				<div class="col-md-12">
+					<div class="wrapper clearfix">
+						<h4>
+							<img src="/static/simple/images/circle-icons/full-color/mail.png" width="30" height="30">
+<<<<<<< HEAD
+							Unsure which plan is best for you?
+							<a href="mailto:getsimplemetrics@gmail.com?Subject=Customer%20Request" target="_top"><strong>Send us an email!</strong>!</a>
+=======
+							Unsure which plan is best for you? Send us an email anytime at
+							<a href="mailto:support@simplemetrics.io?Subject=Customer%20Request" target="_top"><strong>support@simplemetrics.io</strong>!</a>
+>>>>>>> dd432200001e925aa59f988759d51591e1799788
+						</h4>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<!--
+	<div id="second-option">
+		<div class="container">
+			<div class="row header">
+				<div class="col-md-12">
+					<h3>Free trial. No contract. Cancel when you want.</h3>
+					<p>All plans include a 7-day free trial</p>
+				</div>
+			</div>
+			<div class="row charts">
+				<div class="col-md-4">
+					<div class="chart first">
+						<div class="quantity">
+							<span class="dollar">$</span>
+							<span class="price">29</span>
+							<span class="period">/month</span>
+						</div>
+						<div class="plan-name">Freelance</div>
+						<div class="specs">
+							<div class="spec">
+								<span class="variable">5</span>
+								team members
+							</div>
+							<div class="spec">
+								<span class="variable">Digital</span>
+								recurring billing
+							</div>
+							<div class="spec">
+								<span class="variable">Virtual</span>
+								online terminal
+							</div>
+							<div class="spec">
+								<span class="variable">10</span>
+								total products
+							</div>
+							<div class="spec">
+								<span class="variable">1.0%</span>
+								Transaction fee
+							</div>
+						</div>
+						<a class="btn-signup button-clear" href="signup.html">
+							<span>Start free trial</span>
+						</a>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="chart featured">
+						<div class="popular">Most popular</div>
+						<div class="quantity">
+							<span class="dollar">$</span>
+							<span class="price">79</span>
+							<span class="period">/month</span>
+						</div>
+						<div class="plan-name">Profesional</div>
+						<div class="specs">
+							<div class="spec">
+								<span class="variable">15</span>
+								team members
+							</div>
+							<div class="spec">
+								<span class="variable">Digital</span>
+								recurring billing
+							</div>
+							<div class="spec">
+								<span class="variable">Virtual</span>
+								online terminal
+							</div>
+							<div class="spec">
+								<span class="variable">15</span>
+								total products
+							</div>
+							<div class="spec">
+								<span class="variable">0.5%</span>
+								Transaction fee
+							</div>
+						</div>
+						<a class="btn-signup button-clear" href="signup.html">
+							<span>Start free trial</span>
+						</a>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="chart last">
+						<div class="quantity">
+							<span class="dollar">$</span>
+							<span class="price">119</span>
+							<span class="period">/month</span>
+						</div>
+						<div class="plan-name">Premium</div>
+						<div class="specs">
+							<div class="spec">
+								<span class="variable">Unlimited</span>
+								team members
+							</div>
+							<div class="spec">
+								<span class="variable">Digital</span>
+								recurring billing
+							</div>
+							<div class="spec">
+								<span class="variable">Virtual</span>
+								online terminal
+							</div>
+							<div class="spec">
+								<span class="variable">25</span>
+								total products
+							</div>
+							<div class="spec">
+								<span class="variable">No</span>
+								Transaction fee
+							</div>
+						</div>
+						<a class="btn-signup button-clear" href="signup.html">
+							<span>Start free trial</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="third-option">
+		<div class="container">
+			<div class="row header">
+				<div class="col-md-12">
+					<h3>Another format to show pricing</h3>
+					<p>This one shows 4 plans that includes a pretty basic one</p>
+				</div>
+			</div>
+
+			<div class="row charts">
+				<div class="col-md-12">
+					<div class="chart first">
+						<div class="plan-name">Freelance</div>
+						<div class="quantity">
+							<span class="dollar">$</span>
+							<span class="price">29</span>
+							<span class="period">/month</span>
+						</div>
+						<div class="specs">
+							<div class="spec">
+								<span class="variable">5</span>
+								team members
+							</div>
+							<div class="spec">
+								<span class="variable">Digital</span>
+								recurring billing
+							</div>
+							<div class="spec">
+								<span class="variable">Virtual</span>
+								online terminal
+							</div>
+							<div class="spec">
+								<span class="variable">10</span>
+								total products
+							</div>
+							<div class="spec">
+								<span class="variable">1.0%</span>
+								Transaction fee
+							</div>
+						</div>
+						<a class="btn-signup button-clear" href="signup.html">
+							<span>Start free trial</span>
+						</a>
+					</div>
+					<div class="chart featured">
+						<img src="/static/simple/images/ribbon.png" class="popular" alt="ribbon" />
+						<div class="plan-name">Profesional</div>
+						<div class="quantity">
+							<span class="dollar">$</span>
+							<span class="price">79</span>
+							<span class="period">/month</span>
+						</div>						
+						<div class="specs">
+							<div class="spec">
+								<span class="variable">15</span>
+								team members
+							</div>
+							<div class="spec">
+								<span class="variable">Digital</span>
+								recurring billing
+							</div>
+							<div class="spec">
+								<span class="variable">Virtual</span>
+								online terminal
+							</div>
+							<div class="spec">
+								<span class="variable">15</span>
+								total products
+							</div>
+							<div class="spec">
+								<span class="variable">0.5%</span>
+								Transaction fee
+							</div>
+						</div>
+						<a class="btn-signup button-clear" href="signup.html">
+							<span>Start free trial</span>
+						</a>
+					</div>
+					<div class="chart last">
+						<div class="plan-name">Premium</div>
+						<div class="quantity">
+							<span class="dollar">$</span>
+							<span class="price">119</span>
+							<span class="period">/month</span>
+						</div>
+						<div class="specs">
+							<div class="spec">
+								<span class="variable">Unlimited</span>
+								team members
+							</div>
+							<div class="spec">
+								<span class="variable">Digital</span>
+								recurring billing
+							</div>
+							<div class="spec">
+								<span class="variable">Virtual</span>
+								online terminal
+							</div>
+							<div class="spec">
+								<span class="variable">25</span>
+								total products
+							</div>
+							<div class="spec">
+								<span class="variable">No</span>
+								Transaction fee
+							</div>
+						</div>
+						<a class="btn-signup button-clear" href="signup.html">
+							<span>Start free trial</span>
+						</a>
+					</div>
+					<div class="basic-plan">
+						<div class="plan-name">Basic Plan</div>
+						<div class="quantity">
+							<span class="dollar">$</span>
+							<span class="price">9</span>
+							<span class="period">/month</span>
+						</div>
+						<p class="description">
+							This plan is great if you're just getting started or just want to test our services.
+							<a href="signup.html">Start now</a>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+-->
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,199 @@
+{% extends 'layouts/app.html' %}
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../static/images/favicon.ico">
+    <title>Dashboard - Parser</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Cabin|Gotham|Gotham|Open+Sans|Comfortaa"
+          rel="stylesheet">
+    <!-- Bootstrap Core CSS -->
+    <link href="../../../page/templates/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- chartist CSS -->
+    <link href="../../../page/templates/assets/plugins/chartist-js/dist/chartist.min.css" rel="stylesheet">
+    <link href="../../../page/templates/assets/plugins/chartist-js/dist/chartist-init.css" rel="stylesheet">
+    <link href="../../../page/templates/assets/plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.css" rel="stylesheet">
+    <!--This page css - Morris CSS -->
+    <link href="../../../page/templates/assets/plugins/c3-master/c3.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../../../page/templates/page/css/style.css" rel="stylesheet">
+    <!-- You can change the theme colors from here -->
+    <link href="../../../page/templates/page/css/colors/blue.css" id="theme" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]-->
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+</head>
+
+{% block litebody %}
+<body class="card-no-border" style="font-family:'Gotham',sans-serif;overflow-y:auto;max-width:100%;overflow-x:hidden;width:100%;padding-bottom:0">
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <!--<div class="preloader">
+        <svg class="circular" viewBox="25 25 50 50">
+            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> </svg>
+    </div>-->
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div id="main-wrapper" style="overflow:auto;width:85%;margin:auto;">
+        <!-- ============================================================== -->
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        <div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <!-- Row -->
+                    {% if name is not none %}
+                        <div style="float:right;font-family: 'Gotham', sans-serif;position:relative;top:30px;margin-bottom:20px;">
+                            Welcome, {{ name|title }}!
+                        </div>
+                    {% else %}
+                        <div style="float:right;font-family: 'Gotham', sans-serif;position:relative;top:30px;margin-bottom:20px;">
+                            Welcome!
+                        </div>
+                    {% endif %}
+
+                <div class="row" style="padding-top:30px;color:#e06c1f">
+                    <div class="col-lg-12 col-md-12">
+                        <div class="card-lite" style="min-height: 180px; margin-bottom:30px;
+                          min-width: 250px;
+                          border-color: #d7dfe3;
+                          box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
+                          border-radius: 8px;
+                          background-color:#fff;">
+                            <div class="card-block bg-info" style="background-color: #1e88e5 !important;
+                            flex: 1 1 auto; padding: 1.25rem;">
+                                <h4 class="text-white card-title"
+                                    style="color: #ffffff !important;font-weight: 400;">Recent Events</h4>
+                                <h6 class="card-subtitle text-white m-b-0 op-5"
+                                    style="color: #ffffff !important;
+                                    line-height: 16px;
+                                    font-size: 14px;
+                                    opacity: 0.9;">In your Stripe account</h6>
+                            </div>
+                            <div class="card-block" style="flex: 1 1 auto;padding: 1.25rem;outline: none;">
+                                <div class="message-box contact-box" style="position: relative;outline: none;">
+                                    <div id="events_list" class="message-widget contact-widget">
+                                    {% if events != None %}
+                                        {% for event in events %}
+                                            <!-- Message -->
+                                            <div id="event" class="event" style="padding: 15px 10px;
+                                            display: block;text-decoration: none;
+                                            color:#000; font-size:14px">
+                                                <div class="mail-content">
+                                                    <span style="margin-right:5px">
+                                                  {% if event['Type'] == "charge.succeeded" %}
+                                                  <span class="label label-success">Payment</span>
+                                                  {% elif event['Type'] == "charge.refunded" %}
+                                                  <span class="label label-danger">Refund</span>
+                                                  {% elif event['Type'] == "charge.failed" %}
+                                                  <span class="label label-danger">Failed</span>
+                                                  {% elif event['Type'] == "Upgrade" %}
+                                                  <span class="label label-info">Upgrade</span>
+                                                  {% elif event['Type'] == "Downgrade" %}
+                                                  <span class="label label-danger">Downgrade</span>
+                                                  {% elif event['Type'] == "customer.subscription.created" %}
+                                                  <span class="label label-primary">New</span>
+                                                  {% elif event['Type'] == "customer.subscription.deleted" %}
+                                                  <span class="label label-warning">Canceled</span>
+                                                  {% endif %}
+                                                </span>
+                                                <span class="message">
+                                                  {% if event['Type'] == "charge.succeeded" %}
+                                                  <span style="color:#e06c1f">A customer</span> paid you <b>${{ "{:,.0f}".format(event['Amount']) }}</b>
+                                                  {% elif event['Type'] == "charge.refunded" %}
+                                                  You sent a refund of <b>${{ "{:,.0f}".format(-event['Amount']) }}</b> to <span style="color:#e06c1f">a customer</span>
+                                                  {% elif event['Type'] == "charge.failed" %}
+                                                  <span style="color:#e06c1f">A customer</span>'s charge of <b>${{ "{:,.0f}".format(event['Amount']) }}</b> failed
+                                                  {% elif event['Type'] == "Upgrade" %}
+                                                  <span style="color:#e06c1f">A customer</span> upgraded to the <b>{{ event['Plan'] }}</b> plan
+                                                  {% elif event['Type'] == "Downgrade" %}
+                                                  <span style="color:#e06c1f">A customer</span> downgraded to the <b>{{ event['Plan'] }}</b> plan
+                                                  {% elif event['Type'] == "customer.subscription.created" %}
+                                                  <span style="color:#e06c1f">A customer</span> signed up for the <b>{{ event['Plan'] }}</b> plan
+                                                  {% elif event['Type'] == "customer.subscription.deleted" %}
+                                                  <span style="color:#e06c1f">A customer</span> canceled their <b>{{ event['Plan'] }}</b>
+                                                      plan
+                                                  {% endif %}
+                                                </span>
+                                                <br>
+                                                <span class="time">{{ event['P_date'] }}</span>
+                                                </div>
+                                            </div>
+                                            {% if not loop.last %}
+                                                <hr>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% else %}
+                                    There are no events to display.
+                                    {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!-- End contacts -->
+                    </div>
+                </div>
+                <!-- Row -->
+                <!-- Row -->
+                <!-- ============================================================== -->
+                <!-- End PAge Content -->
+                <!-- ============================================================== -->
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Container fluid  -->
+            <!-- ============================================================== -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page wrapper  -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+    <script src="../../../page/templates/assets/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="../../../page/templates/assets/plugins/bootstrap/js/tether.min.js"></script>
+    <script src="../../../page/templates/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="../../../page/templates/lite/js/jquery.slimscroll.js"></script>
+    <!--Wave Effects -->
+    <script src="../../../page/templates/lite/js/waves.js"></script>
+    <!--Menu sidebar -->
+    <script src="../../../page/templates/lite/js/sidebarmenu.js"></script>
+    <!--stickey kit -->
+    <script src="../../../page/templates/assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
+    <!--Custom JavaScript -->
+    <script src="../../../page/templates/lite/js/custom.min.js"></script>
+    <!-- ============================================================== -->
+    <!-- This page plugins -->
+    <!-- ============================================================== -->
+    <!-- chartist chart -->
+    <script src="../../../page/templates/assets/plugins/chartist-js/dist/chartist.min.js"></script>
+    <script src="../../../page/templates/assets/plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min.js"></script>
+    <!--c3 JavaScript -->
+    <script src="../../../page/templates/assets/plugins/d3/d3.min.js"></script>
+    <script src="../../../page/templates/assets/plugins/c3-master/c3.min.js"></script>
+    <!-- Chart JS -->
+    <script src="../../../page/templates/lite/js/dashboard1.js"></script>
+</body>
+{% endblock %}

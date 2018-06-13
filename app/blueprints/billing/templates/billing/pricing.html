@@ -1,0 +1,93 @@
+{% extends 'layouts/app.html' %}
+{% import 'macros/form.html' as f with context %}
+{% import 'billing/macros/billing.html' as billing with context %}
+
+{% block title %}Pricing - Parser{% endblock %}
+{% block meta_description %}Different plans for different needs.{% endblock %}
+
+{% block heading %}
+  {% if current_user.subscription %}
+    <h2 class="text-center">You're about to change plans</h2>
+    <div class="alert alert-warning text-center margin-bottom">
+      Your plan will change <strong>immediately</strong> after clicking
+      'Change plan'.
+    </div>
+  {% else %}
+    <h2 class="text-center">Choose a Plan</h2>
+    <h3 class="text-center text-muted">
+      Select the plan that best fits your needs.
+    </h3>
+    <h6 class="text-center text-muted lg-margin-bottom">
+        All plans come with a free 14-day trial. Cancel at any time.
+    </h6>
+  {% endif %}
+{% endblock %}
+
+{% block body %}
+  {% call f.form_tag('billing.update', class='text-center') %}
+    {% if current_user.subscription %}
+      <div class="lg-margin-bottom">
+        <div class="coupon-code" style="display:none">
+          {{ form.coupon_code.label }}
+          {{ f.field(form.coupon_code) }}
+          <div id="coupon_code_status"
+               class="small alert alert-small alert-success">
+          </div>
+        </div>
+      </div>
+    {% endif %}
+    <div class="row" style="overflow-x:hidden;overflow-y:hidden;">
+      {% call billing.plan(plans['0']) %}
+        <ul class="list-group list-group-flush text-center">
+          <li class="list-group-item">Up to $10,000 MRR</li>
+          <li class="list-group-item">Unlimited customers</li>
+          <li class="list-group-item">Real-time event stream</li>
+          <li class="list-group-item">Metrics monitoring</li>
+          <li class="list-group-item">Email support</li>
+          <li class="list-group-item">And more coming soon!</li>
+        </ul>
+      {% endcall %}
+      {% call billing.plan(plans['1']) %}
+        <ul class="list-group list-group-flush text-center">
+          <li class="list-group-item">Up to $50,000 MRR</li>
+          <li class="list-group-item">Unlimited customers</li>
+          <li class="list-group-item">Real-time event stream</li>
+          <li class="list-group-item">Metrics monitoring</li>
+          <li class="list-group-item">Email support</li>
+          <li class="list-group-item">And more coming soon!</li>
+        </ul>
+      {% endcall %}
+      {% call billing.plan(plans['2']) %}
+        <ul class="list-group list-group-flush text-center">
+          <li class="list-group-item">Up to $100,000 MRR</li>
+          <li class="list-group-item">Unlimited customers</li>
+          <li class="list-group-item">Real-time event stream</li>
+          <li class="list-group-item">Metrics monitoring</li>
+          <li class="list-group-item">Email support</li>
+          <li class="list-group-item">And more coming soon!</li>
+        </ul>
+      {% endcall %}
+      {% call billing.plan(plans['3']) %}
+        <ul class="list-group list-group-flush text-center">
+          <li class="list-group-item">$100,000+ MRR</li>
+          <li class="list-group-item">Unlimited customers</li>
+          <li class="list-group-item">Real-time event stream</li>
+          <li class="list-group-item">Metrics monitoring</li>
+          <li class="list-group-item">Email support</li>
+          <li class="list-group-item">And more coming soon!</li>
+        </ul>
+      {% endcall %}
+      {#% call billing.plan(plans['4']) %#}
+        <!--ul class="list-group list-group-flush text-center">
+          <li class="list-group-item">$100,000+ MRR</li>
+          <li class="list-group-item">Unlimited customers</li>
+          <li class="list-group-item">Real-time event stream</li>
+          <li class="list-group-item">Metrics monitoring</li>
+          <li class="list-group-item">Email support</li>
+          <li class="list-group-item">And more coming soon!</li>
+        </ul-->
+      {#% endcall %#}
+    </div>
+  {% endcall %}
+    <!--<h2 class="text-center">More plans coming soon!</h2>-->
+{% endblock %}

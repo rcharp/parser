@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<<<<<<< HEAD
+    <meta name="google-site-verification" content="d5QxeGjj5BNsMz28-Y_7uBbwZC4_U64L8uBWdA6xOaY" />
+=======
+>>>>>>> dd432200001e925aa59f988759d51591e1799788
+
+    <title>SimpleMetrics</title>
+
+    <!-- Bootstrap -->
+    <link href="/static/simple/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="/static/simple/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="/static/simple/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+    <!-- bootstrap-progressbar -->
+    <link href="/static/simple/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+    <!-- jVectorMap -->
+    <link href="/static/simple/css/maps/jquery-jvectormap-2.0.3.css" rel="stylesheet"/>
+<<<<<<< HEAD
+    <!-- Please wait -->
+    <link href="/static/simple/css/pleasewait/please-wait.css" rel="stylesheet">
+    <!-- spinkit -->
+    <link href="/static/simple/css/spinkit/css/spinners/3-wave.css" rel="stylesheet">
+    <link href="/static/simple/css/spinkit/css/spinners/7-three-bounce.css" rel="stylesheet">
+    <link href="/static/simple/css/spinkit/css/spinners/8-circle.css" rel="stylesheet">
+=======
+>>>>>>> dd432200001e925aa59f988759d51591e1799788
+
+    <!-- Custom Theme Style -->
+    <link href="/static/simple/css/custom.min.css" rel="stylesheet">
+    <!--<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">-->
+  </head>
+  <body class="nav-md">
+<<<<<<< HEAD
+  <!-- please wait -->
+    <script type="text/javascript" src="/static/simple/css/pleasewait/please-wait.min.js"></script>
+    <script type="text/javascript">
+        var str = "Please wait while we load your dashboard...";
+        str = str.fontcolor("white");
+        str = str.fontsize(5);
+        var loading_screen = pleaseWait({
+            logo: "/static/simple/css/spinkit/loader.gif",
+            backgroundColor: '#459ce7',
+            loadingHtml: str
+        });
+
+        window.onload = loading_screen.finish()
+    </script>
+    <div class="inner" ng-view> <!-- start of inner to hide page for loading -->
+=======
+>>>>>>> dd432200001e925aa59f988759d51591e1799788
+    <div class="container body">
+      <div class="main_container">
+        <!-- top navigation -->
+        <div class="top_nav">
+          <div class="nav_menu" style="background-color:white;padding-top:12px;padding-left:10px;padding-right:5px">
+            <nav class="" role="navigation">
+              <div id="header-div" class="clearfix with-margins"
+                   style="font-family:Century Gothic;font-size:30px;margin-bottom:9px">
+<<<<<<< HEAD
+                <div class="pull-left"><a href="{{ url_for('index') }}"><font color="#459ce7">&nbsp;&nbsp;SimpleMetrics</font></a></div>
+              <ul class="nav navbar-nav navbar-right">
+                <div class="pull-right" style="padding-right:20px;font-size:14px">
+                  {% if current_user.is_authenticated %}
+=======
+                <div class="pull-left"><a href="{{ url_for('home_page') }}"><font color="#459ce7">&nbsp;&nbsp;SimpleMetrics</font></a></div>
+              <ul class="nav navbar-nav navbar-right">
+                <div class="pull-right" style="padding-right:20px;font-size:14px">
+                  {% if current_user.is_authenticated() %}
+>>>>>>> dd432200001e925aa59f988759d51591e1799788
+                <a href="{{ url_for('user_profile_page') }}"><font color="#459ce7">{{ current_user.first_name or current_user.user_auth.username }}</font></a>
+                  &nbsp; | &nbsp;
+                <a href="{{ url_for('user.logout') }}"><font color="#459ce7">Sign Out</font></a>
+                  {% else %}
+                <a href="{{ url_for('user.login') }}"><font color="#459ce7">Sign in</font></a>
+                  {% endif %}
+                </div>
+              </ul>
+                </div>
+            </nav>
+
+            <div class="with-margins" style="font-family:Century Gothic;color:#459ce7;margin-bottom:15px;font-size:14px">
+              &nbsp;
+<<<<<<< HEAD
+            {% if current_user.is_authenticated %}
+            <a href="{{ url_for('index') }}" style="color:#459ce7">Home</a> &nbsp; | &nbsp;
+            <a href="{{ url_for('plans') }}" style="color:#459ce7">Plans</a> &nbsp; | &nbsp;
+            <a href="{{ url_for('index') }}" style="color:#459ce7">Dashboard</a> &nbsp; | &nbsp;
+=======
+            {% if current_user.is_authenticated() %}
+            <a href="{{ url_for('index') }}" style="color:#459ce7">Home</a> &nbsp; | &nbsp;
+            <a href="{{ url_for('plans') }}" style="color:#459ce7">Plans</a> &nbsp; | &nbsp;
+            <a href="{{ url_for('demo') }}" style="color:#459ce7">Demo</a> &nbsp; | &nbsp;
+>>>>>>> dd432200001e925aa59f988759d51591e1799788
+            <a href="{{ url_for('getstarted') }}" style="color:#459ce7">Stripe Credentials</a> &nbsp; | &nbsp;
+            <a href="{{ url_for('user_profile_page') }}" style="color:#459ce7">My Account</a> &nbsp; | &nbsp;
+            <a href="{{ url_for('contactus') }}" style="color:#459ce7">Contact Us</a>
+            {% else %}
+            <a href="{{ url_for('index') }}" style="color:#459ce7">Home</a> &nbsp; | &nbsp;
+            <a href="{{ url_for('pricing') }}" style="color:#459ce7">Pricing</a> &nbsp; | &nbsp;
+            <a href="{{ url_for('demo') }}" style="color:#459ce7">Demo</a> &nbsp; | &nbsp;
+            <a href="{{ url_for('user.register') }}" style="color:#459ce7">Sign Up</a> &nbsp; | &nbsp;
+            <a href="{{ url_for('contactus') }}" style="color:#459ce7">Contact Us</a>
+            {% endif %}
+            <!--<a href="{{ url_for('member_page') }}">Members</a> &nbsp; | &nbsp;-->
+            <!--<a href="{{ url_for('admin_page') }}">Admin</a> &nbsp; | &nbsp;-->
+            </div>
+
+          </div>
+        </div>
+
+        <!-- end of top nav -->
+        <!-- page content -->
+        <div class="right_col" role="main">
+          <!-- Start of Live Transactions -->
+        <div class="row">
+          <div class="col-md-4" style="height:1260px">
+            <div class="x_panel" style="height:99%">
+                <div class="x_title">
+                  <h2 style="font-family:Century Gothic">Live Events</h2> <small>{{ key }}</small>
+                    <div class="pull-right" style="font-family:Century Gothic"><small><u><a href="/refresh">Update</a></u></small></div>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                  <ul class="list-unstyled msg_list">
+                    {% if events|length > 0 %}
+                    {% for event in events %}
+                    <li>
+                      <a>
+                        <span>
+                          {% if event.type == "charge.succeeded" %}
+                          <span class="label label-success">Charge</span>
+                          {% elif event.type == "charge.refunded" %}
+                          <span class="label label-danger">Refund</span>
+                          {% elif event.type == "charge.failed" %}
+                          <span class="label label-danger">Failed</span>
+                          {% elif event.type == "Upgrade" %}
+                          <span class="label label-info">Upgrade</span>
+                          {% elif event.type == "Downgrade" %}
+                          <span class="label label-danger">Downgrade</span>
+                          {% elif event.type == "customer.subscription.created" %}
+                          <span class="label label-primary">New</span>
+                          {% elif event.type == "customer.subscription.deleted" %}
+                          <span class="label label-warning">Canceled</span>
+                          {% endif %}
+                          <span class="time">{{ event.p_date }}</span>
+                        </span>
+                        <span class="message">
+                          {% if event.type == "charge.succeeded" %}
+                          <b>{{ event.name }}</b> paid you <b>${{ "{:,.2f}".format(event.amount) }}</b>
+                          {% elif event.type == "charge.refunded" %}
+                          You sent a refund of <b>${{ "{:,.2f}".format(-event.amount) }}</b> to <b>{{ event.name }}</b>
+                          {% elif event.type == "charge.failed" %}
+                          <b>{{ event.name }}</b>'s charge of <b>${{ "{:,.2f}".format(event.amount) }}</b> failed
+                          {% elif event.type == "Upgrade" %}
+                          <b>{{ event.name }}</b> upgraded to the <b>{{ event.plan }}</b>
+                          {% elif event.type == "Downgrade" %}
+                          <b>{{ event.name }}</b> downgraded to the <b>{{ event.plan }}</b>
+                          {% elif event.type == "customer.subscription.created" %}
+                          <b>{{ event.name }}</b> signed up for the <b>{{ event.plan }}</b>
+                          {% elif event.type == "customer.subscription.deleted" %}
+                          <b>{{ event.name }}</b> canceled their <b>{{ event.plan }}</b>
+                          {% endif %}
+                        </span>
+                      </a>
+                    </li>
+                    {% endfor %}
+                    {% else %}
+                    <center><i>There are no transactions to show.</i></center>
+                    {% endif %}
+                  </ul>
+                </div>
+            </div>
+          </div>
+
+          <!-- end of Live Transactions -->
+            <div class="col-md-4 col-sm-4 col-xs-12">
+              <!--<a href="/data/monthly_recurring_revenue" style="display:block">-->
+              <div class="x_panel tile" style="height:200px">
+                <div style="border-bottom: 2px solid #E6E9ED; margin-bottom:10px">
+                  <h2 style="font-family:Century Gothic">Monthly Recurring Revenue <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="bottom" title="Recurring Revenue - Refunds"></i></h2>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-12 tile_stats_count"style="margin-top:-20px">
+                  <div
+                          class="count green"style="font-size:80px; margin-bottom:-10px; font-family:Trebuchet MS; letter-spacing:-5px">
+                    <b>{{ "${:,.0f}".format(mrr) }}</b>
+                  </div>
+                    <span class="count_bottom">
+                      {% if mrrP == 0 %}
+                        <i class="black"><i class="fa fa-minus"></i>
+                          {{ mrrP }}%
+                        </i>
+                      {% elif mrrP > 0 %}
+                        <i class="green"><i class="fa fa-sort-asc"></i>
+                          {{ mrrP }}%
+                        </i>
+                      {% else %}
+                        <i class="red"><i class="fa fa-sort-desc"></i>
+                          {{ -mrrP }}%
+                        </i>
+                      {% endif %}
+                      <small style="font-family:Century Gothic">30 days ago</small>
+                    </span>
+                </div>
+              </div>
+              <!--</a>-->
+            </div>
+
+            <div class="col-md-4 col-sm-4 col-xs-12">
+              <!--<a href="/data/net_revenue" style="display:block">-->
+              <div class="x_panel tile" style="height:200px">
+                <div style="border-bottom: 2px solid #E6E9ED; margin-bottom:10px">
+                  <h2 style="font-family:Century Gothic">Net Revenue
+                    <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="bottom" title="All Revenue (Recurring + Non-Recurring) - Refunds" style="background-color:#ffffff"></i></h2>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-12 tile_stats_count"style="margin-top:-20px">
+                  <div class="count blue"style="font-size:80px; margin-bottom:-10px; font-family:Trebuchet MS; letter-spacing:-5px">
+                    <b>{{ "${:,.0f}".format(net_revenue) }}</b>
+                  </div>
+                    <span class="count_bottom">
+                      {% if net_revenueP == 0 %}
+                        <i class="black"><i class="fa fa-minus"></i>
+                          {{ net_revenueP }}%
+                        </i>
+                      {% elif net_revenueP > 0 %}
+                        <i class="green"><i class="fa fa-sort-asc"></i>
+                          {{ net_revenueP }}%
+                        </i>
+                      {% else %}
+                        <i class="red"><i class="fa fa-sort-desc"></i>
+                          {{ -net_revenueP }}%
+                        </i>
+                      {% endif %}
+                      <small style="font-family:Century Gothic">30 days ago</small>
+                    </span>
+                </div>
+              </div>
+              <!--</a>-->
+            </div>
+
+            <div class="col-md-4 col-sm-4 col-xs-12">
+              <!--<a href="/data/annual_run_rate" style="display:block">-->
+              <div class="x_panel tile" style="height:200px">
+                <div style="border-bottom: 2px solid #E6E9ED; margin-bottom:10px">
+                  <h2 style="font-family:Century Gothic">Annual Run Rate <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="bottom" title="Monthly Recurring Revenue * 12" style=""></i></h2>
+                  <div class="clearfix"></div>
+                </div>
+                <div
+                        class="col-md-4 col-sm-4 col-xs-12 tile_stats_count"style="margin-top:-20px;">
+                  <div class="count blue"style="font-size:80px; margin-bottom:-10px; font-family:Trebuchet MS; letter-spacing:-5px">
+                    <b>{{ "${:,.0f}".format(annual) }}</b>
+                  </div>
+                    <span class="count_bottom">
+                      {% if annualP == 0 %}
+                        <i class="black"><i class="fa fa-minus"></i>
+                          {{ annualP }}%
+                        </i>
+                      {% elif annualP > 0 %}
+                        <i class="green"><i class="fa fa-sort-asc"></i>
+                          {{ annualP }}%
+                        </i>
+                      {% else %}
+                        <i class="red"><i class="fa fa-sort-desc"></i>
+                          {{ -annualP }}%
+                        </i>
+                      {% endif %}
+                      <small style="font-family:Century Gothic">30 days ago</small>
+                    </span>
+                </div>
+              </div>
+              <!--</a>-->
+            </div>
+
+            <div class="col-md-4 col-sm-4 col-xs-12">
+              <!--<a href="/data/average_revenue_per_user" style="display:block">-->
+              <div class="x_panel tile" style="height:200px">
+                <div style="border-bottom: 2px solid #E6E9ED; margin-bottom:10px">
+                  <h2 style="font-family:Century Gothic">Average Revenue Per User <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="bottom" title="Monthly Recurring Revenue / Total Customers" style=""></i></h2>
+                  <div class="clearfix"></div>
+                </div>
+                <div
+                        class="col-md-4 col-sm-4 col-xs-12 tile_stats_count"style="margin-top:-20px">
+                  <div class="count blue"style="font-size:80px; margin-bottom:-10px; font-family:Trebuchet MS; letter-spacing:-5px">
+                    <b>{{ "${:,.2f}".format(arpu) }}</b>
+                  </div>
+                    <span class="count_bottom">
+                      {% if arpuP == 0 %}
+                        <i class="black"><i class="fa fa-minus"></i>
+                          {{ arpuP }}%
+                        </i>
+                      {% elif arpuP > 0 %}
+                        <i class="green"><i class="fa fa-sort-asc"></i>
+                          {{ arpuP }}%
+                        </i>
+                      {% else %}
+                        <i class="red"><i class="fa fa-sort-desc"></i>
+                          {{ -arpuP }}%
+                        </i>
+                      {% endif %}
+                      <small style="font-family:Century Gothic">30 days ago</small>
+                    </span>
+                </div>
+              </div>
+              <!--</a>-->
+            </div>
+
+            <div class="col-md-4 col-sm-4 col-xs-12">
+              <!--<a href="/data/total_customers" style="display:block">-->
+              <div class="x_panel tile" style="height:200px">
+                <div style="border-bottom: 2px solid #E6E9ED; margin-bottom:10px">
+                  <h2 style="font-family:Century Gothic">Total Customers <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="bottom" title="Active Customers (Recurring + Non-Recurring)" style=""></i></h2>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-12 tile_stats_count"style="margin-top:-20px">
+                  <div class="count blue"style="font-size:80px; margin-bottom:-10px; font-family:Trebuchet MS; letter-spacing:-5px">
+                    <b>{{ customers }}</b>
+                  </div>
+                    <span class="count_bottom">
+                      {% if customersP == 0 %}
+                        <i class="black"><i class="fa fa-minus"></i>
+                          {{ customersP }}%
+                        </i>
+                      {% elif customersP > 0 %}
+                        <i class="green"><i class="fa fa-sort-asc"></i>
+                          {{ customersP }}%
+                        </i>
+                      {% else %}
+                        <i class="red"><i class="fa fa-sort-desc"></i>
+                          {{ -customersP }}%
+                        </i>
+                      {% endif %}
+                      <small style="font-family:Century Gothic">30 days ago</small>
+                    </span>
+                </div>
+              </div>
+              <!--</a>-->
+            </div>
+
+            <div class="col-md-4 col-sm-4 col-xs-12">
+              <!--<a href="/data/refunds" style="display:block">-->
+              <div class="x_panel tile" style="height:200px">
+                <div style="border-bottom: 2px solid #E6E9ED; margin-bottom:10px">
+                  <h2 style="font-family:Century Gothic">Refunds <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="bottom" title="Amount You've Paid to Refunds" style=""></i></h2>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-12 tile_stats_count"style="margin-top:-20px">
+                  <div class="count red"style="font-size:80px; margin-bottom:-10px; font-family:Trebuchet MS; letter-spacing:-5px">
+                    <b>{{ "${:,.0f}".format(-refunds) }}</b>
+                  </div>
+                    <span class="count_bottom">
+                      {% if refundsP == 0 %}
+                        <i class="black"><i class="fa fa-minus"></i>
+                          {{ refundsP }}%
+                        </i>
+                      {% elif refundsP > 0 %}
+                        <i class="red"><i class="fa fa-sort-asc"></i>
+                          {{ refundsP }}%
+                        </i>
+                      {% else %}
+                        <i class="green"><i class="fa fa-sort-desc"></i>
+                          {{ -refundsP }}%
+                        </i>
+                      {% endif %}
+                      <small style="font-family:Century Gothic">30 days ago</small>
+                    </span>
+                </div>
+              </div>
+              <!--</a>-->
+            </div>
+
+            <div class="col-md-4 col-sm-4 col-xs-12">
+              <!--<a href="/data/user_churn" style="display:block">-->
+              <div class="x_panel tile" style="height:200px">
+                <div style="border-bottom: 2px solid #E6E9ED; margin-bottom:10px">
+                  <h2 style="font-family:Century Gothic">User Churn <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="bottom" title="Percentage of Customers Who Have Canceled Since Last Month" style=""></i></h2>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-12 tile_stats_count" style="margin-top:-10px;">
+                  <div class="count red"style="font-size:80px; margin-bottom:-10px; vertical-align:text-top; font-family:Trebuchet MS; letter-spacing:-5px">
+                    <b>{{ "{:,.1f}".format(churn) }}%</b>
+                  </div>
+                  <!--
+                    <span class="count_bottom">
+                      {% if refundsP == 0 %}
+                        <i class="black"><i class="fa fa-minus"></i>
+                          {{ refundsP }}%
+                        </i>
+                      {% elif refundsP > 0 %}
+                        <i class="red"><i class="fa fa-sort-asc"></i>
+                          {{ refundsP }}%
+                        </i>
+                      {% else %}
+                        <i class="green"><i class="fa fa-sort-desc"></i>
+                          {{ -refundsP }}%
+                        </i>
+                      {% endif %}
+                      <small style="font-family:Century Gothic">30 days ago</small>
+                    </span>
+                    -->
+                </div>
+              </div>
+              <!--</a>-->
+            </div>
+
+            <div class="col-md-4 col-sm-4 col-xs-12">
+              <!--<a href="/data/lifetime_value" style="display:block">-->
+              <div class="x_panel tile" style="height:200px">
+                <div style="border-bottom: 2px solid #E6E9ED; margin-bottom:10px">
+                  <h2 style="font-family:Century Gothic">Lifetime Value <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="bottom" title="Average Revenue Per User / User Churn" style=""></i></h2>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-12 tile_stats_count"style="margin-top:-10px">
+                  <div class="count blue"style="font-size:80px; margin-bottom:-10px; font-family:Trebuchet MS; letter-spacing:-5px">
+                    <b>{{ "${:,.0f}".format(ltv) }}</b>
+                  </div>
+                  <!--
+                    <span class="count_bottom">
+                      {% if refundsP == 0 %}
+                        <i class="black"><i class="fa fa-minus"></i>
+                          {{ refundsP }}%
+                        </i>
+                      {% elif refundsP > 0 %}
+                        <i class="red"><i class="fa fa-sort-asc"></i>
+                          {{ refundsP }}%
+                        </i>
+                      {% else %}
+                        <i class="green"><i class="fa fa-sort-desc"></i>
+                          {{ -refundsP }}%
+                        </i>
+                      {% endif %}
+                      <small style="font-family:Century Gothic">30 days ago</small>
+                    </span>
+                    -->
+                </div>
+              </div>
+              <!--</a>-->
+            </div>
+
+            <div class="col-md-4 col-sm-4 col-xs-12">
+              <!--<a href="/data/new_customers" style="display:block">-->
+                <div class="x_panel tile" style="height:200px">
+                  <div style="border-bottom: 2px solid #E6E9ED; margin-bottom:10px">
+                    <h2 style="font-family:Century Gothic">New Customers <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="bottom" title="Number of New Customers (Recurring + Non-Recurring) this month " style=""></i></h2>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="col-md-4 col-sm-4 col-xs-12 tile_stats_count"style="margin-top:-20px">
+                    <div class="count blue"style="font-size:80px; margin-bottom:-10px; font-family:Trebuchet MS; letter-spacing:-5px">
+                      <b>{{ new_customers }}</b>
+                    </div>
+                      <span class="count_bottom">
+                        {% if new_customersP == 0 %}
+                          <i class="black"><i class="fa fa-minus"></i>
+                            {{ new_customersP }}%
+                          </i>
+                        {% elif new_customersP > 0 %}
+                          <i class="green"><i class="fa fa-sort-asc"></i>
+                            {{ new_customersP }}%
+                          </i>
+                        {% else %}
+                          <i class="red"><i class="fa fa-sort-desc"></i>
+                            {{ -new_customersP }}%
+                          </i>
+                        {% endif %}
+                        <small style="font-family:Century Gothic">30 days ago</small>
+                      </span>
+                  </div>
+                </div>
+                <!--</a>-->
+              </div>
+
+              <div class="col-md-4 col-sm-4 col-xs-12">
+              <!--<a href="/data/canceled" style="display:block">-->
+                <div class="x_panel tile" style="height:200px">
+                  <div style="border-bottom: 2px solid #E6E9ED; margin-bottom:10px">
+                    <h2 style="font-family:Century Gothic">Cancellations <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="bottom" title="Number of Cancellations This Month " style=""></i></h2>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="col-md-4 col-sm-4 col-xs-12 tile_stats_count"style="margin-top:-20px">
+                    <div class="count blue"style="font-size:80px; margin-bottom:-10px; font-family:Trebuchet MS; letter-spacing:-5px">
+                      <b>{{ canceled }}</b>
+                    </div>
+                      <span class="count_bottom">
+                        {% if new_customersP == 0 %}
+                          <i class="black"><i class="fa fa-minus"></i>
+                            {{ new_customersP }}%
+                          </i>
+                        {% elif new_customersP > 0 %}
+                          <i class="green"><i class="fa fa-sort-asc"></i>
+                            {{ new_customersP }}%
+                          </i>
+                        {% else %}
+                          <i class="red"><i class="fa fa-sort-desc"></i>
+                            {{ -new_customersP }}%
+                          </i>
+                        {% endif %}
+                        <small style="font-family:Century Gothic">30 days ago</small>
+                      </span>
+                  </div>
+                </div>
+                <!--</a>-->
+              </div>
+
+              <div class="col-md-4 col-sm-4 col-xs-12">
+              <!--<a href="/data/upgrades" style="display:block">-->
+              <div class="x_panel tile" style="height:200px">
+                <div style="border-bottom: 2px solid #E6E9ED; margin-bottom:10px">
+                  <h2 style="font-family:Century Gothic">Upgrades <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="bottom" title="Number of Upgrades This Month" style=""></i></h2>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-12 tile_stats_count"style="margin-top:-20px">
+                  <div class="count blue"style="font-size:80px; margin-bottom:-10px; font-family:Trebuchet MS; letter-spacing:-5px">
+                    <b>{{ upgrades }}</b>
+                  </div>
+                    <span class="count_bottom">
+                      {% if upgradesP == 0 %}
+                        <i class="black"><i class="fa fa-minus"></i>
+                          {{ upgradesP }}%
+                        </i>
+                      {% elif upgradesP > 0 %}
+                        <i class="green"><i class="fa fa-sort-asc"></i>
+                          {{ upgradesP }}%
+                        </i>
+                      {% else %}
+                        <i class="red"><i class="fa fa-sort-desc"></i>
+                          {{ -upgradesP }}%
+                        </i>
+                      {% endif %}
+                      <small style="font-family:Century Gothic">30 days ago</small>
+                    </span>
+                </div>
+              </div>
+              <!--</a>-->
+            </div>
+
+            <div class="col-md-4 col-sm-4 col-xs-12">
+              <!--<a href="/data/downgrades" style="display:block">-->
+              <div class="x_panel tile" style="height:200px">
+                <div style="border-bottom: 2px solid #E6E9ED; margin-bottom:10px">
+                  <h2 style="font-family:Century Gothic">Downgrades <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="bottom" title="Number of Downgrades This Month" style=""></i></h2>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-12 tile_stats_count"style="margin-top:-20px">
+                  <div class="count red"style="font-size:80px; margin-bottom:-10px; font-family:Trebuchet MS; letter-spacing:-5px">
+                    <b>{{ downgrades }}</b>
+                  </div>
+                    <span class="count_bottom">
+                      {% if downgradesP == 0 %}
+                        <i class="black"><i class="fa fa-minus"></i>
+                          {{ downgradesP }}%
+                        </i>
+                      {% elif downgradesP > 0 %}
+                        <i class="red"><i class="fa fa-sort-asc"></i>
+                          {{ downgradesP }}%
+                        </i>
+                      {% else %}
+                        <i class="green"><i class="fa fa-sort-desc"></i>
+                          {{ -downgradesP }}%
+                        </i>
+                      {% endif %}
+                      <small style="font-family:Century Gothic">30 days ago</small>
+                    </span>
+                </div>
+              </div>
+              <!--</a>-->
+            </div>
+
+          </div>
+        </div>
+        <!-- /page content -->
+
+        <!-- footer content -->
+        <footer style="border-top:1px solid #f7f7f7">
+          <div id="footer-white">
+		<div class="container" style="font-family:Century Gothic;">
+			<div class="row">
+				<div class="col-md-12 menu">
+	          				<a href="/pricing" style="color:#459ce7">Pricing</a> &nbsp; | &nbsp;
+	        				<a href="/demo" style="color:#459ce7">Demo</a> &nbsp; | &nbsp;
+	          				<a href="user/register" style="color:#459ce7">Sign Up</a> &nbsp; | &nbsp;
+<<<<<<< HEAD
+							<a href="mailto:getsimplemetrics@gmail.com?Subject=" target="_top" style="color:#459ce7">
+                              Support</a> &nbsp; | &nbsp;
+	          				<a href="http://www.facebook.com" style="color:#459ce7">Facebook</a> &nbsp; | &nbsp;
+	        				<a href="http://www.twitter.com" style="color:#459ce7">Twitter</a>
+                            <font style="float:right">© 2016 SimpleMetrics.</font>
+=======
+							<a href="mailto:support@simplemetrics.io?Subject=" target="_top" style="color:#459ce7">Support</a> &nbsp; | &nbsp;
+	          				<a href="http://www.facebook.com" style="color:#459ce7">Facebook</a> &nbsp; | &nbsp;
+	        				<a href="http://www.twitter.com" style="color:#459ce7">Twitter</a>
+                            <font style="float:right">© 2016 SimpleMetrics</font>
+>>>>>>> dd432200001e925aa59f988759d51591e1799788
+				</div>
+          </div>
+          </div>
+          <div class="clearfix"></div>
+            </div>
+        </footer>
+        <!-- /footer content -->
+      </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="/static/simple/vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="/static/simple/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="/static/simple/vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="/static/simple/vendors/nprogress/nprogress.js"></script>
+    <!-- Chart.js -->
+    <script src="/static/simple/vendors/Chart.js/dist/Chart.min.js"></script>
+    <!-- gauge.js -->
+    <script src="/static/simple/vendors/bernii/gauge.js/dist/gauge.min.js"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="/static/simple/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <!-- iCheck -->
+    <script src="/static/simple/vendors/iCheck/icheck.min.js"></script>
+    <!-- Skycons -->
+    <script src="/static/simple/vendors/skycons/skycons.js"></script>
+    <!-- Flot -->
+    <script src="/static/simple/vendors/Flot/jquery.flot.js"></script>
+    <script src="/static/simple/vendors/Flot/jquery.flot.pie.js"></script>
+    <script src="/static/simple/vendors/Flot/jquery.flot.time.js"></script>
+    <script src="/static/simple/vendors/Flot/jquery.flot.stack.js"></script>
+    <script src="/static/simple/vendors/Flot/jquery.flot.resize.js"></script>
+    <!-- Flot plugins -->
+    <script src="/static/simple/js/flot/jquery.flot.orderBars.js"></script>
+    <script src="/static/simple/js/flot/date.js"></script>
+    <script src="/static/simple/js/flot/jquery.flot.spline.js"></script>
+    <script src="/static/simple/js/flot/curvedLines.js"></script>
+    <!-- jVectorMap -->
+    <script src="/static/simple/js/maps/jquery-jvectormap-2.0.3.min.js"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script src="/static/simple/js/moment/moment.min.js"></script>
+    <script src="/static/simple/js/datepicker/daterangepicker.js"></script>
+
+    <!-- Custom Theme Scripts -->
+    <script src="/static/simple/js/custom.min.js"></script>
+
+    <!-- Datatables -->
+    <script src="/static/simple/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="/static/simple/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script src="/static/simple/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="/static/simple/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+    <script src="/static/simple/vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="/static/simple/vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="/static/simple/vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="/static/simple/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+    <script src="/static/simple/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+    <script src="/static/simple/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="/static/simple/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+    <script src="/static/simple/vendors/datatables.net-scroller/js/datatables.scroller.min.js"></script>
+    <script src="/static/simple/vendors/jszip/dist/jszip.min.js"></script>
+    <script src="/static/simple/vendors/pdfmake/build/pdfmake.min.js"></script>
+    <script src="/static/simple/vendors/pdfmake/build/vfs_fonts.js"></script>
+
+    <!-- Datatables -->
+    <!-- Chart.js -->
+    <script src="static/vendors/Chart.js/dist/Chart.min.js"></script>
+
+<<<<<<< HEAD
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js"></script>
+
+=======
+>>>>>>> dd432200001e925aa59f988759d51591e1799788
+    <!-- Chart.js -->
+    <script>
+      Chart.defaults.global.legend = {
+        enabled: false
+      };
+
+      // net revenue chart
+      var net = document.getElementById("netRevenueChart");
+      net.height = 70;
+      var dates = {{ dates|safe }}
+      dates[0] = ""
+      var amounts = {{ amounts|safe }}
+      var netRevenueChart = new Chart(net, {
+        type: 'line',
+        options: {
+            responsive: true,
+            scales: {
+                xAxes: [{
+                    gridLines: {
+                        display:false,
+                    }
+                }],
+                yAxes: [{
+                    gridLines: {
+                        color:"rgb(245,245,245)"
+                    }
+                }]
+            }
+        },
+        data: {
+          labels: dates,
+          datasets: [{
+            label: "Amount",
+            backgroundColor: "rgba(38, 185, 154, 0.31)",
+            borderColor: "rgba(38, 185, 154, 0.7)",
+            pointBorderColor: "rgba(38, 185, 154, 0.7)",
+            pointBackgroundColor: "rgba(38, 185, 154, 0.7)",
+            pointHoverBackgroundColor: "#fff",
+            pointHoverBorderColor: "rgba(220,220,220,1)",
+            pointBorderWidth: 1,
+            data: amounts
+          }]
+        },
+      });
+    </script>
+    <!-- /Chart.js -->
+
+    <script>
+      $(document).ready(function() {
+        var handleDataTableButtons = function() {
+          if ($("#datatable-buttons").length) {
+            $("#datatable-buttons").DataTable({
+              dom: "Bfrtip",
+              buttons: [
+                {
+                  extend: "copy",
+                  className: "btn-sm"
+                },
+                {
+                  extend: "csv",
+                  className: "btn-sm"
+                },
+                {
+                  extend: "excel",
+                  className: "btn-sm"
+                },
+                {
+                  extend: "pdfHtml5",
+                  className: "btn-sm"
+                },
+                {
+                  extend: "print",
+                  className: "btn-sm"
+                },
+              ],
+              responsive: true
+            });
+          }
+        };
+
+        TableManageButtons = function() {
+          "use strict";
+          return {
+            init: function() {
+              handleDataTableButtons();
+            }
+          };
+        }();
+
+        $('#datatable').dataTable();
+        $('#datatable-keytable').DataTable({
+          keys: true
+        });
+
+        $('#datatable-responsive').DataTable();
+
+        $('#datatable-scroller').DataTable({
+          ajax: "js/datatables/json/scroller-demo.json",
+          deferRender: true,
+          scrollY: 380,
+          scrollCollapse: true,
+          scroller: true
+        });
+
+        var table = $('#datatable-fixed-header').DataTable({
+          fixedHeader: true
+        });
+
+        TableManageButtons.init();
+      });
+    </script>
+    <!-- /Datatables -->
+
+    <!-- Flot -->
+    <script>
+      $(document).ready(function() {
+        var data1 = [
+          [gd(2012, 1, 1), 17],
+          [gd(2012, 1, 2), 74],
+          [gd(2012, 1, 3), 6],
+          [gd(2012, 1, 4), 39],
+          [gd(2012, 1, 5), 20],
+          [gd(2012, 1, 6), 85],
+          [gd(2012, 1, 7), 7]
+        ];
+
+        var data2 = [
+          [gd(2012, 1, 1), 82],
+          [gd(2012, 1, 2), 23],
+          [gd(2012, 1, 3), 66],
+          [gd(2012, 1, 4), 9],
+          [gd(2012, 1, 5), 119],
+          [gd(2012, 1, 6), 6],
+          [gd(2012, 1, 7), 9]
+        ];
+        $("#canvas_dahs").length && $.plot($("#canvas_dahs"), [
+          data1, data2
+        ], {
+          series: {
+            lines: {
+              show: false,
+              fill: true
+            },
+            splines: {
+              show: true,
+              tension: 0.4,
+              lineWidth: 1,
+              fill: 0.4
+            },
+            points: {
+              radius: 0,
+              show: true
+            },
+            shadowSize: 2
+          },
+          grid: {
+            verticalLines: true,
+            hoverable: true,
+            clickable: true,
+            tickColor: "#d5d5d5",
+            borderWidth: 1,
+            color: '#fff'
+          },
+          colors: ["rgba(38, 185, 154, 0.38)", "rgba(3, 88, 106, 0.38)"],
+          xaxis: {
+            tickColor: "rgba(51, 51, 51, 0.06)",
+            mode: "time",
+            tickSize: [1, "day"],
+            //tickLength: 10,
+            axisLabel: "Date",
+            axisLabelUseCanvas: true,
+            axisLabelFontSizePixels: 12,
+            axisLabelFontFamily: 'Verdana, Arial',
+            axisLabelPadding: 10
+          },
+          yaxis: {
+            ticks: 8,
+            tickColor: "rgba(51, 51, 51, 0.06)",
+          },
+          tooltip: false
+        });
+
+        function gd(year, month, day) {
+          return new Date(year, month - 1, day).getTime();
+        }
+      });
+    </script>
+    <!-- /Flot -->
+
+    <!-- jVectorMap -->
+    <script src="/static/simple/js/maps/jquery-jvectormap-world-mill-en.js"></script>
+    <script src="/static/simple/js/maps/jquery-jvectormap-us-aea-en.js"></script>
+    <script src="/static/simple/js/maps/gdp-data.js"></script>
+    <script>
+      $(document).ready(function(){
+        $('#world-map-gdp').vectorMap({
+          map: 'world_mill_en',
+          backgroundColor: 'transparent',
+          zoomOnScroll: false,
+          series: {
+            regions: [{
+              values: gdpData,
+              scale: ['#E6F2F0', '#149B7E'],
+              normalizeFunction: 'polynomial'
+            }]
+          },
+          onRegionTipShow: function(e, el, code) {
+            el.html(el.html() + ' (GDP - ' + gdpData[code] + ')');
+          }
+        });
+      });
+    </script>
+    <!-- /jVectorMap -->
+
+    <!-- Skycons -->
+    <script>
+      $(document).ready(function() {
+        var icons = new Skycons({
+            "color": "#73879C"
+          }),
+          list = [
+            "clear-day", "clear-night", "partly-cloudy-day",
+            "partly-cloudy-night", "cloudy", "rain", "sleet", "snow", "wind",
+            "fog"
+          ],
+          i;
+
+        for (i = list.length; i--;)
+          icons.set(list[i], list[i]);
+
+        icons.play();
+      });
+    </script>
+    <!-- /Skycons -->
+
+    <!-- Doughnut Chart -->
+    <script>
+      $(document).ready(function(){
+        var options = {
+          legend: false,
+          responsive: false
+        };
+
+        new Chart(document.getElementById("canvas1"), {
+          type: 'doughnut',
+          tooltipFillColor: "rgba(51, 51, 51, 0.55)",
+          data: {
+            labels: [
+              "Symbian",
+              "Blackberry",
+              "Other",
+              "Android",
+              "IOS"
+            ],
+            datasets: [{
+              data: [15, 20, 30, 10, 30],
+              backgroundColor: [
+                "#BDC3C7",
+                "#9B59B6",
+                "#E74C3C",
+                "#26B99A",
+                "#3498DB"
+              ],
+              hoverBackgroundColor: [
+                "#CFD4D8",
+                "#B370CF",
+                "#E95E4F",
+                "#36CAAB",
+                "#49A9EA"
+              ]
+            }]
+          },
+          options: options
+        });
+      });
+    </script>
+    <!-- /Doughnut Chart -->
+    
+    <!-- bootstrap-daterangepicker -->
+    <script>
+      $(document).ready(function() {
+
+        var cb = function(start, end, label) {
+          console.log(start.toISOString(), end.toISOString(), label);
+          $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+        };
+
+        var optionSet1 = {
+          startDate: moment().subtract(29, 'days'),
+          endDate: moment(),
+          minDate: '01/01/2012',
+          maxDate: '12/31/2015',
+          dateLimit: {
+            days: 60
+          },
+          showDropdowns: true,
+          showWeekNumbers: true,
+          timePicker: false,
+          timePickerIncrement: 1,
+          timePicker12Hour: true,
+          ranges: {
+            'Today': [moment(), moment()],
+            'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+            'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+            'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+            'This Month': [moment().startOf('month'), moment().endOf('month')],
+            'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+          },
+          opens: 'left',
+          buttonClasses: ['btn btn-default'],
+          applyClass: 'btn-small btn-primary',
+          cancelClass: 'btn-small',
+          format: 'MM/DD/YYYY',
+          separator: ' to ',
+          locale: {
+            applyLabel: 'Submit',
+            cancelLabel: 'Clear',
+            fromLabel: 'From',
+            toLabel: 'To',
+            customRangeLabel: 'Custom',
+            daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+            monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+            firstDay: 1
+          }
+        };
+        $('#reportrange span').html(moment().subtract(29, 'days').format('MMMM D, YYYY') + ' - ' + moment().format('MMMM D, YYYY'));
+        $('#reportrange').daterangepicker(optionSet1, cb);
+        $('#reportrange').on('show.daterangepicker', function() {
+          console.log("show event fired");
+        });
+        $('#reportrange').on('hide.daterangepicker', function() {
+          console.log("hide event fired");
+        });
+        $('#reportrange').on('apply.daterangepicker', function(ev, picker) {
+          console.log("apply event fired, start/end dates are " + picker.startDate.format('MMMM D, YYYY') + " to " + picker.endDate.format('MMMM D, YYYY'));
+        });
+        $('#reportrange').on('cancel.daterangepicker', function(ev, picker) {
+          console.log("cancel event fired");
+        });
+        $('#options1').click(function() {
+          $('#reportrange').data('daterangepicker').setOptions(optionSet1, cb);
+        });
+        $('#options2').click(function() {
+          $('#reportrange').data('daterangepicker').setOptions(optionSet2, cb);
+        });
+        $('#destroy').click(function() {
+          $('#reportrange').data('daterangepicker').remove();
+        });
+      });
+    </script>
+    <!-- /bootstrap-daterangepicker -->
+
+    <!-- gauge.js -->
+    <script>
+      var opts = {
+          lines: 12,
+          angle: 0,
+          lineWidth: 0.4,
+          pointer: {
+              length: 0.75,
+              strokeWidth: 0.042,
+              color: '#1D212A'
+          },
+          limitMax: 'false',
+          colorStart: '#1ABC9C',
+          colorStop: '#1ABC9C',
+          strokeColor: '#F0F3F3',
+          generateGradient: true
+      };
+      var target = document.getElementById('foo'),
+          gauge = new Gauge(target).setOptions(opts);
+
+      gauge.maxValue = 6000;
+      gauge.animationSpeed = 32;
+      gauge.set(3200);
+      gauge.setTextField(document.getElementById("gauge-text"));
+    </script>
+    <!-- /gauge.js -->
+<<<<<<< HEAD
+      </div> <!-- end of inner class -->
+=======
+>>>>>>> dd432200001e925aa59f988759d51591e1799788
+  </body>
+</html>

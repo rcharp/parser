@@ -1,0 +1,273 @@
+{% extends 'layouts/app.html' %}
+<head>
+<!-- please wait --
+    <script type="text/javascript" src="/static/simple/css/pleasewait/please-wait.min.js"></script>
+    <script type="text/javascript">
+        var str = "Please wait while we load your Stripe data...";
+        str = str.fontcolor("white");
+        str = str.fontsize(5);
+        var loading_screen = pleaseWait({
+            logo: "/static/simple/css/spinkit/loader.gif",
+            backgroundColor: '#459ce7',
+            loadingHtml: str
+        });
+
+        window.onload = loading_screen.finish()
+    </script>
+      <!-- end of Please Wait -->
+</head>
+{% block title %}Dashboard - Parser{% endblock %}
+
+{% block body %}
+    {% if name is not none %}
+        <div style="float:right;font-family: 'Gotham', sans-serif;position:relative;top:-20px">
+            Welcome, {{ name|title }}!
+        </div>
+    {% else %}
+        <div style="float:right;font-family: 'Gotham', sans-serif;position:relative;top:-20px">
+            Welcome!
+        </div>
+    {% endif %}
+      <div class="row">
+        <span style="font-family:'Gotham', sans-serif;font-weight:500;font-size:30px;position:relative;left:15px">
+            Metrics Dashboard <span style="font-size:14px">(Past 30 days)</span>
+        </span><br />
+          <small style="position:relative;left:17px">Last updated: {{ updated }}</small>
+          <a href="{{ url_for('user.refresh') }}" data-toggle="tooltip" style="font-family: 'Gotham', sans-serif;
+          margin-left:20px"
+             data-placement="bottom" title="This will do a new call to Stripe for your data and may take a few
+             moments. Note: You can only do this once every half an hour.">Refresh my metrics</a>
+      </div><hr>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="panel panel-default">
+          <div class="panel-heading">
+             <p>Recent Events</p>
+          </div>
+            <div class="panel-body-list" style="padding-bottom:5px; margin-bottom:20px">
+              {% for event in events %}
+                <span style="margin-right:5px">
+                  {% if event.type == "charge.succeeded" %}
+                  <span class="label label-success">Payment</span>
+                  {% elif event.type == "charge.refunded" %}
+                  <span class="label label-danger">Refund</span>
+                  {% elif event.type == "charge.failed" %}
+                  <span class="label label-danger">Failed</span>
+                  {% elif event.type == "Upgrade" %}
+                  <span class="label label-info">Upgrade</span>
+                  {% elif event.type == "Downgrade" %}
+                  <span class="label label-danger">Downgrade</span>
+                  {% elif event.type == "customer.subscription.created" %}
+                  <span class="label label-primary">New</span>
+                  {% elif event.type == "customer.subscription.deleted" %}
+                  <span class="label label-warning">Canceled</span>
+                  {% endif %}
+                </span>
+                <span class="message">
+                  {% if event.type == "charge.succeeded" %}
+                  <span style="color:#e06c1f">A Customer</span> paid you <b>${{ "{:,.0f}".format(event.amount)
+                          }}</b>
+                  {% elif event.type == "charge.refunded" %}
+                  You sent a refund of <b>${{ "{:,.0f}".format(-event.amount) }}</b> to <span
+                          style="color:#e06c1f">a Customer</span>
+                  {% elif event.type == "charge.failed" %}
+                  <span style="color:#e06c1f">A Customer</span>'s attempted payment of <b>${{ "{:,.0f}".format
+                  (event.amount) }}</b> failed
+                  {% elif event.type == "Upgrade" %}
+                  <span style="color:#e06c1f">A Customer</span> upgraded to the <b>{{ event.plan }}</b> Plan
+                  {% elif event.type == "Downgrade" %}
+                  <span style="color:#e06c1f">A Customer</span> downgraded to the <b>{{ event.plan }}</b> Plan
+                  {% elif event.type == "customer.subscription.created" %}
+                      {% if event.plan != None %}
+                        <span style="color:#e06c1f">A Customer</span> signed up for the <b>{{ event.plan }}</b> Plan
+                      {% else %}
+                        <span style="color:#e06c1f">A Customer</span> signed up for a subscription for <b>${{ "{:,.0f}"
+                        .format(event.amount) }}</b>/month
+                      {% endif %}
+                  {% elif event.type == "customer.subscription.deleted" %}
+                      {% if event.plan != None %}
+                        <span style="color:#e06c1f">A Customer</span> canceled their <b>{{ event.plan }}</b> Plan
+                      {% else %}
+                        <span style="color:#e06c1f">A Customer</span> canceled their subscription.
+                      {% endif %}
+                  {% endif %}
+                </span>
+                <br>
+                <span class="time">{{ event.p_date }}</span>
+                {% if not loop.last %}
+                    <hr>
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+        <div class="col-md-8" style="margin-bottom:40px;">
+            <div class="col-md-6">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <p>Monthly Recurring Revenue
+                  <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="bottom"
+                     title="This is the amount that you bring in each month on a recurring basis from your customers who have subscriptions, minus any refunds. (Monthly Recurring Revenue - Refunds)"></i></p>
+                </div>
+                <div class="panel-body-metrics">
+                    <span style="color:green">{{ "${:,.0f}".format(mrr) }}</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <p>Refunds
+                  <i class="fa fa-question-circle" data-toggle="tooltip"
+                     data-placement="bottom"
+                     title="This is how much you've paid this past month in refunds." style=""></i></p>
+                </div>
+                <div class="panel-body-metrics">
+                    <span style="color:red">{{ "${:,.0f}".format(refunds) }}</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <p>Net Revenue
+                    <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="bottom"
+                       title="This is all the money you've brought in this month, recurring and non-recurring, minus any refunds. (All Revenue (Recurring + Non-Recurring) - Refunds)"
+                       style="background-color:#ffffff"></i></p>
+                </div>
+                <div class="panel-body-metrics">
+                    <span style="color:#3498db">{{ "${:,.0f}".format(net_revenue) }}</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <p>Active Customers
+                  <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="bottom"
+                     title="This is the total number of active monthly recurring customers that you have for your business."
+                     style=""></i></p>
+                </div>
+                <div class="panel-body-metrics">
+                    <span style="color:#3498db">{{ active_customers }}</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <p>Avg Revenue Per User (ARPU)
+                  <i class="fa fa-question-circle" data-toggle="tooltip"
+                     data-placement="bottom"
+                     title="This is the approximate amount of money you make each month from your average user. This amount equals Monthly Recurring Revenue divided by Total Customers. (Monthly Recurring Revenue / Total Customers)"
+                     style=""></i></p>
+                </div>
+                <div class="panel-body-metrics">
+                    <span style="color:#3498db">{{ "${:,.0f}".format(arpu) }}</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <p>Failed Payments
+                  <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="bottom"
+                     title="These are all the transactions that were attempted but didn't go through." style=""></i></p>
+                </div>
+                <div class="panel-body-metrics">
+                    <span style="color:red">{{ failed }}</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <p>Annual Run Rate (ARR)
+                  <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="bottom"
+                     title="The Annual Run Rate is how much you can expect to make per year, based on your monthly recurring revenue. (Monthly Recurring Revenue * 12)"
+                     style=""></i></p>
+                </div>
+                <div class="panel-body-metrics">
+                    <span style="color:green">{{ "${:,.0f}".format(arr) }}</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <p>Lifetime Value (LTV)
+                  <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="bottom"
+                     title="The Lifetime Value is a calculation that tells you how much you can expect to make from your average user during the life of their subscription. This is calculated by dividing the Average Revenue Per User by the User Churn Rate. (Average Revenue Per User / User Churn)" style=""></i></p>
+                </div>
+                <div class="panel-body-metrics">
+                    <span style="color:#3498db">{{ "${:,.0f}".format(ltv) }}</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <p>User Churn
+                  <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="bottom"
+                     title="User Churn is a number that you want to keep low. It is the percentage of customers who have cancelled their subscriptions since this time last month. (Cancellations / ((Active Customers + Cancellations) - New Customers)*100)"
+                     style=""></i></p>
+                </div>
+                <div class="panel-body-metrics">
+                    <span style="color:red">{{ "{:,.0f}".format(churn) }}%</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <p>New Customers
+                  <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="bottom"
+                     title="This is the number of new customers who have signed up for subscrptions this month."
+                     style=""></i></p>
+                </div>
+                <div class="panel-body-metrics">
+                    <span style="color:#3498db">{{ new_customers }}</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <p>Cancellations
+                  <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="bottom"
+                     title="This is the number of cancellations this month." style=""></i></p>
+                </div>
+                <div class="panel-body-metrics">
+                    <span style="color:#3498db">{{ cancellations }}</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <p>Upgrades
+                  <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="bottom"
+                     title="This is the number of customers who have upgraded their subscriptions to a higher tier this month."
+                     style=""></i></p>
+                </div>
+                <div class="panel-body-metrics">
+                    <span style="color:#3498db">{{ upgrades }}</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <p>Downgrades
+                  <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="bottom"
+                     title="This is the number of customers who have downgraded their subscriptions to a lower tier this month."
+                     style=""></i></p>
+                </div>
+                <div class="panel-body-metrics">
+                    <span style="color:red">{{ downgrades }}</span>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+{% endblock %}

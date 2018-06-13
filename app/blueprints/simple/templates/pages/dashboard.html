@@ -1,0 +1,522 @@
+{% extends "base_templates/page_base.html" %}  {# base_templates/page_base.html extends base_templates/base.html #}
+
+{% block main %}
+<!DOCTYPE html>
+<html>
+   <head>
+      <link rel="stylesheet" href="../static/simple/assets/lib/bootstrap/dist/css/bootstrap.min.css">
+         <link rel="stylesheet" href="../static/simple/assets/css/keen-dashboards.css">
+      <!-- Original head content -->
+      <meta charset="UTF-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <title>Demo - SimpleMetrics</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+      <!-- stylesheets -->
+      <link rel="stylesheet" type="text/css" href="/static/simple/css/compiled/theme.css">
+      <link rel="stylesheet" type="text/css" href="/static/simple/css/vendor/ionicons.min.css">
+      <link rel="stylesheet" type="text/css" href="/static/simple/css/lightbox.css">
+      <link rel="stylesheet" type="text/css" href="/static/simple/css/compiled/theme.css">
+	  <link rel="stylesheet" type="text/css" href="/static/simple/css/vendor/brankic.css">
+	  <link rel="stylesheet" type="text/css" href="/static/simple/css/vendor/isotope.css">
+
+      <!-- javascript -->
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+      <script src="/static/simple/js/bootstrap/bootstrap.min.js"></script>
+      <script src="/static/simple/js/theme.js"></script>
+      <script src="/static/simple/js/vendor/jquery.isotope.min.js"></script>
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	  <script src="/static/simple/js/bootstrap/bootstrap.min.js"></script>
+	  <script src="/static/simple/js/vendor/jquery.isotope.min.js"></script>
+	  <script src="/static/simple/js/vendor/imagesloaded.js"></script>
+	  <script src="/static/simple/js/theme.js"></script>
+	  <script src="/static/simple/js/gallery.js"></script>
+
+      <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+      <![endif]-->
+
+      <!-- datepicker
+      <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+      <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+      <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+      <link rel="stylesheet" href="/resources/demos/style.css">
+      <script>
+         $(function() {
+            $("#datepicker").click(function() {
+               $(this).datepicker().datepicker( "show" )
+                  });
+            });
+      </script>
+      <!--end datepicker -->
+
+      <!-- script to show Title details -->
+      <script>
+         function changeContent(id, msg) {
+            var el = document.getElementById(id);
+            if (id) {
+               el.innerHTML = msg;
+            }
+         }
+      </script>
+      <!-- end script -->
+
+   </head><!-- end of original head content -->
+
+   <body id="support">
+<div class="container-fluid" style="margin-top:-10px">
+   <!--<div class="row">
+    <div class="col-md-5" style="text-align:right; float:left">
+    <p>Date: <input type="text" id="dp" onclick="$('#dp').datepicker();$('#dp').datepicker('show');"></p>
+    </div><!-- end col-md-5
+    </div><!-- End Row class -->
+   <a href="/refresh" style="float:right">Refresh</a>
+   <br>
+   <div class="row">
+      <div class="col-sm-3">
+         <div class="chart-wrapper">
+            <div class="chart-title">
+               Live Transactions (30 Days)
+            </div>
+            <div class="chart-stage" style="margin-left:-25px; height:630px; overflow:auto; padding-right:25px" >
+               <ul class="transactions"
+                   style="list-style-type:none; font-family:Tahoma, Geneva, sans-serif; margin-top:25px">
+                  <!-- Code to print transactions -->
+                  {% if transactions_list|length == 0 %}
+                  There are no transactions to display.
+                  {% endif %}
+                  
+                  {% for transaction in transactions_list %}
+                  {%if transaction['type'] == "Recurring Payment" or transaction['type'] == "Payment" %}
+                  <li style="font-family:Verdana, Geneva, sans-serif; font-size:12px"><b>{{ transaction['name'] }}</b> paid you <b><font color="green">${{ transaction['dollars'] }}</font></b>
+                     <br><font color="#A8A8A8" size="2">{{ transaction['p_date'] }}</font></li>
+                  {% endif %}
+                  
+                  {% if transaction['type'] == "Refund" %}
+                  <li style="font-family:Verdana, Geneva, sans-serif; font-size:12px">You refunded <b>{{ transaction['name'] }}</b> <b><font color="red">${{ transaction['dollars'] }}</font></b>
+                     <br><font color="#A8A8A8" size="2">{{ transaction['p_date'] }}</font></li>
+                  {% endif %}
+                  <p><hr></p>
+                  {% endfor %}
+               </ul>
+            </div>
+         </div>
+      </div>
+      <div class="col-sm-9">
+         <!--
+          <div class="row">
+          <div class="col-sm-12">
+          <div class="chart-wrapper">
+          <div class="chart-title">
+          Longer Box
+          </div>
+          <div class="chart-stage">
+          <img data-src="holder.js/100%x240/white">
+          </div>
+          <div class="chart-notes">
+          Notes about this chart
+          </div>
+          </div>
+          </div>
+          </div><!-- end row -->
+         <div class="row">
+            <div class="col-sm-4">
+               <div class="chart-wrapper">
+                  <div class="chart-title" id="mrr" onmouseover="changeContent(this.id,'MRR - Refunds')" onmouseout="changeContent(this.id,'Monthly Recurring Revenue')" style="cursor: pointer;">
+                     Monthly Recurring Revenue
+                  </div>
+                  <div class="chart-stage" style="text-align:center; height:180px; vertical-align:middle; padding-top:20%; padding-bootm:20%; background-image:url(/static/simple/images/area-chart.jpg)">
+                     <table width="100%">
+                        <tr>
+                           <td style="float:left">
+                              {% if (mrr >= 1000) %}
+                              <font style="font-family:Verdana, Geneva, sans-serif; font-size:30px;" color="green"><b>${{ '%0.1f'| format((mrr / 1000)|float)}}K</b>
+                              </font>
+                              {% else %}
+                              <font style="font-family:Verdana, Geneva, sans-serif; font-size:30px;" color="green"><b>${{ '%0.2f'| format(mrr|float) }}</b>
+                              </font>
+                              {% endif %}
+                           </td>
+                           <td>
+                              <font style="float:center; font-family:Verdana, Geneva, sans-serif; font-size:20px;" color=""><b>
+                                 {% if ( mrr_percent > 0) %}
+                                 {{ mrr_percent }}%
+                                 <img src="/static/simple/images/up_green.png" align="middle"/>
+                                 {% elif ( mrr_percent == 0) %}
+                                 {{ mrr_percent }}%
+                                 <img src="/static/simple/images/minus.png" align="middle"/>
+                                 {% else %}
+                                 {{ 0 - mrr_percent }}%
+                                 <img src="/static/simple/images/down_red.png" align="middle"/>
+                                 {% endif %}
+                              </b>
+                              </font>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td width="55%"></td>
+                           <td style="font-size:12px" valign="top" color="">30 days ago</td>
+                        </tr>
+                     </table>
+                  </div>
+               </div>
+            </div>
+            <div class="col-sm-4">
+               <div class="chart-wrapper">
+                  <div class="chart-title" id="net_revenue" onmouseover="changeContent(this.id,'Gross Revenue (MRR + Revenue) - Refunds')" onmouseout="changeContent(this.id,'Net Revenue (Past 30 Days)')" style="cursor: pointer;">
+                     Net Revenue (Past 30 days)
+                  </div>
+                  <div class="chart-stage" style="height:180px; text-align:center; vertical-align: middle; padding-top:20%; padding-bootm:20%; background-image:url(/static/simple/images/area-chart.jpg)">
+                     <table width="100%">
+                        <tr>
+                           <td style="float:left">
+                              {% if (net_revenue >= 1000) %}
+                              <font style="font-family:Verdana, Geneva, sans-serif; font-size:30px;" color="green"><b>${{ '%0.1f'| format((net_revenue / 1000)|float)}}K</b>
+                              </font>
+                              {% else %}
+                              <font style="font-family:Verdana, Geneva, sans-serif; font-size:30px;" color="green"><b>${{ '%0.2f'| format(net_revenue|float) }}</b>
+                              </font>
+                              {% endif %}
+                           </td>
+                           <td>
+                              <font style="float:center; font-family:Verdana, Geneva, sans-serif; font-size:20px;" color=""><b>
+                                 {% if ( net_revenue_percent > 0) %}
+                                 {{ net_revenue_percent }}%
+                                 <img src="/static/simple/images/up_green.png" align="middle"/>
+                                 {% elif ( net_revenue_percent == 0) %}
+                                 {{ net_revenue_percent }}%
+                                 <img src="/static/simple/images/minus.png" align="middle"/>
+                                 {% else %}
+                                 {{ 0 - net_revenue_percent }}%
+                                 <img src="/static/simple/images/down_red.png" align="middle"/>
+                                 {% endif %}
+                              </b>
+                              </font>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td width="55%"></td>
+                           <td style="font-size:12px; float:center" valign="top" color="">30 days ago</td>
+                        </tr>
+                     </table>
+                  </div>
+               </div>
+            </div>
+            <div class="col-sm-4">
+               <div class="chart-wrapper">
+                  <div class="chart-title" id="arpu" onmouseover="changeContent(this.id,'MRR / Number of Customers')" onmouseout="changeContent(this.id,'Avg. Revenue Per User')" style="cursor: pointer;">
+                     Avg. Revenue Per User
+                  </div>
+                  <div class="chart-stage" style="text-align:center; height:180px; vertical-align: middle; padding-top:20%; padding-bootm:20%; background-image:url(/static/simple/images/area-chart.jpg)" >
+                     <table width="100%">
+                        <tr>
+                           <td style="float:left">
+                              {% if (arpu >= 1000) %}
+                              <font style="font-family:Verdana, Geneva, sans-serif; font-size:30px;" color="green"><b>${{ '%0.1f'| format((arpu / 1000)|float)}}K</b>
+                              </font>
+                              {% else %}
+                              <font style="font-family:Verdana, Geneva, sans-serif; font-size:30px;" color="green"><b>${{ '%0.2f'| format(arpu|float) }}</b>
+                              </font>
+                              {% endif %}
+                           </td>
+                           <td>
+                              <font style="float:center; font-family:Verdana, Geneva, sans-serif; font-size:20px;" color=""><b>
+                                 {% if ( arpu_percent > 0) %}
+                                 {{ arpu_percent }}%
+                                 <img src="/static/simple/images/up_green.png" align="middle"/>
+                                 {% elif ( arpu_percent == 0) %}
+                                 {{ arpu_percent }}%
+                                 <img src="/static/simple/images/minus.png" align="middle"/>
+                                 {% else %}
+                                 {{ 0 - arpu_percent }}%
+                                 <img src="/static/simple/images/down_red.png" align="middle"/>
+                                 {% endif %}
+                              </b>
+                              </font>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td width="55%"></td>
+                           <td style="font-size:12px" valign="top" color="">30 days ago</td>
+                        </tr>
+                     </table>
+                  </div>
+               </div>
+            </div>
+         </div><!-- End first row -->
+         <div class="row">
+            <div class="col-sm-4">
+               <div class="chart-wrapper">
+                  <div class="chart-title" id="user_churn" onmouseover="changeContent(this.id,'Cancelled / Active Customers (Past 30 Days)')" onmouseout="changeContent(this.id,'User Churn')" style="cursor: pointer;">
+                     User Churn
+                  </div>
+                  <div class="chart-stage" style="height:180px; text-align:center; vertical-align: middle; line-height: 120px; padding-top:8%; padding-bootm:8%; background-image:url(/static/simple/images/area-chart.jpg)">
+                     <table width="100%">
+                        <tr>
+                           <td width="50%">
+                              <font style="font-family:Verdana, Geneva, sans-serif; font-size:30px;" color="red"><b>{{ '%0.1f'| format((user_churn)|float)}}%</b>
+                              </font>
+                           </td>
+                        </tr>
+                     </table>
+                  </div>
+               </div>
+            </div>
+            <div class="col-sm-4">
+               <div class="chart-wrapper">
+                  <div class="chart-title" id="customers" onmouseover="changeContent(this.id,'Number of Customers (Past 30 Days)')" onmouseout="changeContent(this.id,'Customers')" style="cursor: pointer;">
+                     Customers
+                  </div>
+                  <div class="chart-stage" style="height:180px; text-align:center; vertical-align: middle; padding-top:20%; padding-bootm:20%; background-image:url(/static/simple/images/area-chart.jpg)">
+                     <table width="100%">
+                        <tr>
+                           <td style="float:left">
+                              {% if (customers >= 1000) %}
+                              <font style="font-family:Verdana, Geneva, sans-serif; font-size:30px;" color=""><b>{{ '%0.1f'| format((customers / 1000)|float)}}K</b>
+                              </font>
+                              {% else %}
+                              <font style="font-family:Verdana, Geneva, sans-serif; font-size:30px;" color=""><b>{{ customers }}</b>
+                              </font>
+                              {% endif %}
+                           </td>
+                           <td>
+                              <font style="float:center; font-family:Verdana, Geneva, sans-serif; font-size:20px;" color=""><b>
+                                 {% if ( customers_percent > 0) %}
+                                 {{ customers_percent }}%
+                                 <img src="/static/simple/images/up_green.png" align="middle"/>
+                                 {% elif ( customers_percent == 0) %}
+                                 {{ customers_percent }}%
+                                 <img src="/static/simple/images/minus.png" align="middle"/>
+                                 {% else %}
+                                 {{ 0 - customers_percent }}%
+                                 <img src="/static/simple/images/down_red.png" align="middle"/>
+                                 {% endif %}
+                              </b>
+                              </font>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td width="55%"></td>
+                           <td style="font-size:12px" valign="top" color="">30 days ago</td>
+                        </tr>
+                     </table>
+                  </div>
+               </div>
+            </div>
+            <div class="col-sm-4">
+               <div class="chart-wrapper">
+                  <div class="chart-title" id="refunds" onmouseover="changeContent(this.id,'Refunds Paid in Past 30 Days')" onmouseout="changeContent(this.id,'Refunds')" style="cursor: pointer;">
+                     Refunds (Past 30 Days)
+                  </div>
+                  <div class="chart-stage" style="height:180px; text-align:center; vertical-align: middle; padding-top:20%; padding-bootm:20%; background-image:url(/static/simple/images/area-chart.jpg)">
+                     <table width="100%">
+                        <tr>
+                           <td style="float:left">
+                              {% if (refunds >= 1000) %}
+                              <font style="font-family:Verdana, Geneva, sans-serif; font-size:30px;" color="red"><b>${{ '%0.1f'| format((refunds / 1000)|float)}}K</b>
+                              </font>
+                              {% else %}
+                              <font style="font-family:Verdana, Geneva, sans-serif; font-size:30px;" color="red"><b>${{ '%0.2f'| format(refunds|float) }}</b>
+                              </font>
+                              {% endif %}
+                           </td>
+                           <td>
+                              <font style="float:center; font-family:Verdana, Geneva, sans-serif; font-size:20px;" color=""><b>
+                                 {% if ( refunds_percent > 0) %}
+                                 {{ refunds_percent }}%
+                                 <img src="/static/simple/images/up_red.png" align="middle"/>
+                                 {% elif ( refunds_percent == 0) %}
+                                 {{ refunds_percent }}%
+                                 <img src="/static/simple/images/minus.png" align="middle"/>
+                                 {% else %}
+                                 {{ 0 - refunds_percent }}%
+                                 <img src="/static/simple/images/down_green.png" align="middle"/>
+                                 {% endif %}
+                              </b>
+                              </font>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td width="55%"></td>
+                           <td style="font-size:12px" valign="top" color="">30 days ago</td>
+                        </tr>
+                     </table>
+                  </div>
+               </div>
+            </div>
+         </div><!-- End Second Row-->
+         <div class="row">
+            <div class="col-sm-4">
+               <div class="chart-wrapper">
+                  <div class="chart-title" id="run_rate" onmouseover="changeContent(this.id,'MRR * 12')" onmouseout="changeContent(this.id,'Annual Run Rate')" style="cursor: pointer;">
+                     Annual Run Rate
+                  </div>
+                  <div class="chart-stage" style="height:180px; text-align:center; vertical-align: middle; padding-top:20%; padding-bootm:20%; background-image:url(/static/simple/images/area-chart.jpg)">
+                     <table width="100%">
+                        <tr>
+                           <td style="float:left">
+                              {% if (run_rate >= 1000) %}
+                              <font style="font-family:Verdana, Geneva, sans-serif; font-size:30px;" color="green"><b>${{ '%0.1f'| format((run_rate / 1000)|float)}}K</b>
+                              </font>
+                              {% else %}
+                              <font style="font-family:Verdana, Geneva, sans-serif; font-size:30px;" color="green"><b>${{ '%0.2f'| format(run_rate|float) }}</b>
+                              </font>
+                              {% endif %}
+                           </td>
+                           <td>
+                              <font style="float:center; font-family:Verdana, Geneva, sans-serif; font-size:20px;" color=""><b>
+                                 {% if ( run_rate_percent > 0) %}
+                                 {{ run_rate_percent }}%
+                                 <img src="/static/simple/images/up_green.png" align="middle"/>
+                                 {% elif ( run_rate_percent == 0) %}
+                                 {{ run_rate_percent }}%
+                                 <img src="/static/simple/images/minus.png" align="middle"/>
+                                 {% else %}
+                                 {{ 0 - run_rate_percent }}%
+                                 <img src="/static/simple/images/down_red.png" align="middle"/>
+                                 {% endif %}
+                              </b>
+                              </font>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td width="55%"></td>
+                           <td style="font-size:12px; text-align:center" valign="top" color="">30 days ago</td>
+                        </tr>
+                     </table>
+                  </div>
+               </div>
+            </div>
+            <div class="col-sm-4">
+               <div class="chart-wrapper">
+                  <div class="chart-title" id="fees" onmouseover="changeContent(this.id,'Fees Paid (Past 30 Days)')" onmouseout="changeContent(this.id,'Fees')" style="cursor: pointer;">
+                     Fees (Past 30 Days)
+                  </div>
+                  <div class="chart-stage" style="height:180px; text-align:center; vertical-align: middle; padding-top:20%; padding-bootm:20%; background-image:url(/static/simple/images/area-chart.jpg)">
+                     <table width="100%">
+                        <tr>
+                           <td style="float:left">
+                              {% if (fees >= 1000) %}
+                              <font style="font-family:Verdana, Geneva, sans-serif; font-size:30px;" color="red"><b>${{ '%0.1f'| format((fees / 1000)|float)}}K</b>
+                              </font>
+                              {% else %}
+                              <font style="font-family:Verdana, Geneva, sans-serif; font-size:30px;" color="red"><b>${{ '%0.2f'| format(fees|float) }}</b>
+                              </font>
+                              {% endif %}
+                           </td>
+                           <td>
+                              <font style="float:center; font-family:Verdana, Geneva, sans-serif; font-size:20px;" color=""><b>
+                                 {% if ( fees_percent > 0) %}
+                                 {{ fees_percent }}%
+                                 <img src="/static/simple/images/up_red.png" align="middle"/>
+                                 {% elif ( fees_percent == 0) %}
+                                 {{ fees_percent }}%
+                                 <img src="/static/simple/images/minus.png" align="middle"/>
+                                 {% else %}
+                                 {{ 0 - fees_percent }}%
+                                 <img src="/static/simple/images/down_green.png" align="middle"/>
+                                 {% endif %}
+                              </b>
+                              </font>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td width="55%"></td>
+                           <td style="font-size:12px" valign="top" color="">30 days ago</td>
+                        </tr>
+                     </table>
+                  </div>
+               </div>
+            </div>
+            <div class="col-sm-4">
+               <div class="chart-wrapper">
+                  <div class="chart-title" id="failed" onmouseover="changeContent(this.id,'Number of Failed Transactions')" onmouseout="changeContent(this.id,'Failed Transactions')" style="cursor: pointer;">
+                     Failed Transactions
+                  </div>
+                  <div class="chart-stage" style="height:180px; text-align:center; vertical-align: middle; padding-top:20%; padding-bootm:20%; background-image:url(/static/simple/images/area-chart.jpg)">
+                     <table width="100%">
+                        <tr>
+                           <td style="float:left">
+                              {% if (failed >= 1000) %}
+                              <font style="font-family:Verdana, Geneva, sans-serif; font-size:30px;" color=""><b>{{ '%0.1f'| format((failed / 1000)|float)}}K</b>
+                              </font>
+                              {% else %}
+                              <font style="font-family:Verdana, Geneva, sans-serif; font-size:30px;" color=""><b>{{ failed }}</b>
+                              </font>
+                              {% endif %}
+                           </td>
+                           <td>
+                              <font style="float:center; font-family:Verdana, Geneva, sans-serif; font-size:20px;" color=""><b>
+                                 {% if ( failed_percent > 0) %}
+                                 {{ failed_percent }}%
+                                 <img src="/static/simple/images/up_red.png" align="middle"/>
+                                 {% elif ( failed_percent == 0) %}
+                                 {{ failed_percent }}%
+                                 <img src="/static/simple/images/minus.png" align="middle"/>
+                                 {% else %}
+                                 {{ 0 - failed_percent }}%
+                                 <img src="/static/simple/images/down_green.png" align="middle"/>
+                                 {% endif %}
+                              </b>
+                              </font>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td width="55%"></td>
+                           <td style="font-size:12px" valign="top" color="">30 days ago</td>
+                        </tr>
+                     </table>
+                  </div>
+               </div>
+            </div>
+         </div><!-- End Third Row-->
+         <!--
+          <div class="row">
+          <div class="col-sm-4">
+          <div class="chart-wrapper">
+          <div class="chart-title">
+          User Churn
+          </div>
+          <div class="chart-stage" style="text-align:center; vertical-align: middle; line-height: 120px; background-image:url(/static/simple/images/area-chart.jpg)">
+          <img data-src="holder.js/100%x120/white">
+          </div>
+          <div class="chart-notes">
+          Notes about this chart
+          </div>
+          </div>
+          </div>
+          <div class="col-sm-4">
+          <div class="chart-wrapper">
+          <div class="chart-title">
+          Avg. Lifetime Value
+          </div>
+          <div class="chart-stage" style="text-align:center; vertical-align: middle; line-height: 120px; background-image:url(/static/simple/images/area-chart.jpg)">
+          <img data-src="holder.js/100%x120/white">
+          </div>
+          <div class="chart-notes">
+          Notes about this chart
+          </div>
+          </div>
+          </div>
+          <div class="col-sm-4">
+          <div class="chart-wrapper">
+          <div class="chart-title">
+          New Customers
+          </div>
+          <div class="chart-stage" style="text-align:center; vertical-align: middle; line-height: 120px; background-image:url(/static/simple/images/area-chart.jpg)">
+          <img data-src="holder.js/100%x120/white">
+          </div>
+          <div class="chart-notes">
+          Notes about this chart
+          </div>
+          </div>
+          </div>
+          </div><!-- End Row-->
+      </div>
+   </div>
+</div>
+
+</body>
+</html>
+
+{% endblock %}

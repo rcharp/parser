@@ -1,0 +1,411 @@
+
+{% extends 'layouts/app.html' %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<title>SimpleMetrics</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<!-- stylesheets -->
+	<link rel="stylesheet" type="text/css" href="/static/simple/css/compiled/theme.css">
+	<link rel="stylesheet" type="text/css" href="/static/simple/css/vendor/animate.css">
+
+	<!-- javascript -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="/static/simple/js/bootstrap/bootstrap.min.js"></script>
+	<script src="/static/simple/js/theme.js"></script>
+
+	<!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+
+{% block body %}
+
+	<div id="hero" style="margin-top:70px">
+		<div class="container">
+			<h1 class="hero-text animated fadeInDown">
+				Simple SaaS Metrics <br />
+				For your Stripe account
+			</h1>
+			<p class="sub-text animated fadeInDown">
+				One click is all it takes.
+			</p>
+			<div class="cta animated fadeInDown">
+				<a href="{{ url_for('demo') }}" class="button-outline">See the live demo</a>
+				<a href="{{ url_for('user.register') }}" class="button">Get Started    &#10095;</a>
+			</div>
+			<div class="img"></div>
+		</div>
+	</div>
+
+	<div id="features">
+		<div class="container">
+			<div class="row header">
+				<div class="col-md-12">
+					<h1 style="font-weight:lighter;">Metrics you can use</h1>
+					<h3 style="font-weight:lighter;">SimpleMetrics is perfect for real, actionable metrics for your SaaS.</h3>
+				</div>
+			</div>
+			<div class="divider"></div>
+			<div class="row feature" style="text-align:center">
+				<div class="col-md-12 info" style="margin-left:auto; margin-right:auto">
+					<h2 style="text-align:center; font-weight:lighter;">Get real SaaS metrics from your recurring Stripe
+						customers, including:</h2>
+					<!--<p>
+						<table width="700">
+							<tr width="100%">
+								<td style="float:left">
+								<img src="/static/images/circle-icons/full-color/mail.png" width="20" height="20"><h5>Monthly Recurring Revenue</h5>
+								</td>
+								<td>
+								<h5>Net Revenue</h5>
+								</td>
+							</tr>
+							<tr>
+								<td>
+								<h5>Average Revenue Per User</h5>
+								</td>
+								<td>
+								<h5>User Churn</h5>
+								</td>
+							</tr>
+							<tr>
+								<td>
+								<h5>Refunds</h5>
+								</td>
+								<td>
+								<h5>Number of Customers</h5>
+								</td>
+							</tr>
+							<tr>
+								<td>
+								<h5>Annual Run Rate</h5>
+								</td>
+								<td>
+								<h5>Fees</h5>
+								</td>
+							</tr>
+							<tr>
+								<td>
+								<h5>Failed Transactions</h5>
+								</td>
+								<td>
+								<h5>And More Coming Soon!</h5>
+								</td>
+							</tr>
+						</table>
+					</p>-->
+					<div class="row">
+						<div class="col-sm-5 menu">
+							<ul style="list-style: none;">
+								<li>
+									<h4>Monthly Recurring Revenue</h4>
+								</li>
+								<li>
+									<h4>Net Revenue</h4>
+								</li>
+								<li>
+									<h4>Average Revenue Per User</h4>
+								</li>
+								<li>
+									<h4>User Churn</h4>
+								</li>
+								<li>
+									<h4>Refunds</h4>
+								</li>
+							</ul>
+						</div>
+						<div class="col-sm-7 menu">
+							<ul style="list-style: none;">
+								<li>
+									<h4>Number of Customers</h4>
+								</li>
+								<li>
+									<h4>Annual Run Rate</h4>
+								</li>
+								<li>
+									<h4>Fees</h4>
+								</li>
+								<li>
+									<h4>Failed Transactions</h4>
+								</li>
+								<li>
+									<h4>And Many More Coming Soon!</h4>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<!--
+				<div class="col-md-4 image">
+					<img src="/static/images/feature1.png" class="img-responsive" alt="feature1" />
+				</div>
+			</div>
+			<div class="divider"></div>
+			<div class="row feature backwards">
+				<div class="col-md-6 info">
+					<h4>A fully featured well design template that works.</h4>
+					<p>
+						You have complete control over the look & feel of your website, we offer the best quality so you
+						take your site up and running in no time.
+					</p>
+					<p>
+						Write some text here to explain the features of your site or application, it
+						has lots of uses.
+					</p>
+				</div>
+				<div class="col-md-6 image">
+					<img src="/static/images/feature2.png" class="img-responsive" alt="feature2" />
+				</div>
+			</div>-->
+		</div>
+	</div>
+
+	<div id="pricing">
+		<div class="container">
+			<div class="row header">
+				<div class="col-md-12">
+					<h3>Different plans for different needs.</h3>
+					<!--<p>All plans include a 7-day free trial</p>-->
+				</div>
+			</div>
+			<div class="row charts">
+				<div class="col-md-4">
+					<div class="chart first">
+						<div class="plan-name">Hobby</div>
+						<div class="quantity">
+							<span class="dollar">$</span>
+							<span class="price">39</span>
+							<span class="period">/month</span>
+						</div>
+						<div class="specs">
+							<div class="spec">
+								<span class="variable">500</span>
+								customers
+							</div>
+							<div class="spec">
+								<span class="variable">Unlimited</span>
+								transactions
+							</div>
+							<div class="spec">
+								<span class="variable">Email</span>
+								support
+							</div>
+							<div class="spec">
+								<strike><span class="variable">Metrics</span>
+								monitoring</strike>
+							</div>
+							<div class="spec">
+								<strike><span class="variable">Customer</span>
+								profiles</strike>
+							</div>
+							<div class="spec">
+								<strike><span class="variable">Email</span>
+								reports</strike>
+							</div>
+						</div>
+						<a class="btn-signup button-clear" href="{{ url_for('user.register') }}">
+							<span>Sign Up</span>
+						</a>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="chart featured">
+						<div class="popular">Most Popular</div>
+						<div class="plan-name">Startup</div>
+						<div class="quantity">
+							<span class="dollar">$</span>
+							<span class="price">79</span>
+							<span class="period">/month</span>
+						</div>
+						<div class="specs">
+							<div class="spec">
+								<span class="variable">1000</span>
+								customers
+							</div>
+							<div class="spec">
+								<span class="variable">Unlimited</span>
+								Transactions
+							</div>
+							<div class="spec">
+								<span class="variable">Email</span>
+								support
+							</div>
+							<div class="spec">
+								<span class="variable">Metrics</span>
+								monitoring
+							</div>
+							<div class="spec">
+								<strike><span class="variable">Customer</span>
+								profiles</strike>
+							</div>
+							<div class="spec">
+								<strike><span class="variable">Email</span>
+								reports</strike>
+							</div>
+						</div>
+						<!--<button type="button" disabled>Coming Soon!</button>-->
+						<a class="btn-signup button-clear" href="#" disabled>
+							<span>Coming Soon!</span>
+						</a>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="chart last">
+						<div class="plan-name">Professional</div>
+						<div class="quantity">
+							<span class="dollar">$</span>
+							<span class="price">149</span>
+							<span class="period">/month</span>
+						</div>
+						<div class="specs">
+							<div class="spec">
+								<span class="variable">5000</span>
+								customers
+							</div>
+							<div class="spec">
+								<span class="variable">Unlimited</span>
+								transactions
+							</div>
+							<div class="spec">
+								<span class="variable">Email</span>
+								support
+							</div>
+							<div class="spec">
+								<span class="variable">Metrics</span>
+								monitoring
+							</div>
+							<div class="spec">
+								<span class="variable">Customer</span>
+								profiles
+							</div>
+							<div class="spec">
+								<span class="variable">Email</span>
+								reports
+							</div>
+						</div>
+						<a class="btn-signup button-clear" href="#" disabled>
+							<span>Coming Soon!</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--
+	<div id="slider">
+		<div class="container">
+			<div class="row header">
+				<div class="col-md-12">
+					<h3>Includes all pages that a complete theme should have</h3>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12 slide-wrapper">
+					<div class="slideshow">
+						<div class="btn-nav prev"></div>
+						<div class="btn-nav next"></div>
+						<div class="slide active">
+							<img src="/static/images/slider/slide3.png" alt="slide3" />
+						</div>
+						<div class="slide">
+							<img src="/static/images/slider/slide4.png" alt="slide4" />
+						</div>
+						<div class="slide">
+							<img src="/static/images/slider/slide1.png" alt="slide1" />
+						</div>
+						<div class="slide">
+							<img src="/static/images/slider/slide5.png" alt="slide5" />
+						</div>
+						<div class="slide">
+							<img src="/static/images/slider/slide2.png" alt="slide2" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="testimonials">
+		<div class="container">
+			<div class="row header">
+				<div class="col-md-12">
+					<h3>Trusted by a lot businesses around the world:</h3>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="testimonial pull-right">
+						<div class="quote">
+							I am just quoting some stuff but I am seriously happy about this product. Has a lot of powerful
+							features and is so easy to set up, I could stay customizing it day and night, it's just so much fun!
+							<div class="arrow-down">
+				                <div class="arrow"></div>
+				                <div class="arrow-border"></div>
+				            </div>
+						</div>
+						<div class="author">
+							<img src="/static/images/testimonials/testimonial1.jpg" class="pic" alt="testimonial1" />
+							<div class="name">John McClane</div>
+							<div class="company">Microsoft</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="testimonial">
+						<div class="quote">
+							This thing is one of those tools that everybody should be using. I really like it and with this ease to use, you can kickstart your projects and apps and just focus on your business!
+							<div class="arrow-down">
+				                <div class="arrow"></div>
+				                <div class="arrow-border"></div>
+				            </div>
+						</div>
+						<div class="author">
+							<img src="/static/images/testimonials/testimonial2.jpg" class="pic" alt="testimonial2" />
+							<div class="name">Karen Jones</div>
+							<div class="company">Pixar Co.</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="cta">
+		<p>
+			Get your SaaS Analytics!
+		</p>
+		<a href="{{ url_for('user.register') }}">
+			Sign up
+		</a>
+	</div>
+
+	<div id="clients">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h3>Our Customers</h3>
+					<p>
+						These are some of our customers who have helped us by using our product.
+					</p>
+					<div class="logos">
+						<img src="/static/images/logos/google.png">
+						<img src="/static/images/logos/facebook.png">
+						<img src="/static/images/logos/apple.png">
+						<img src="/static/images/logos/stripe.png">
+						<img src="/static/images/logos/yahoo.png">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+-->
+
+	</div>
+
+{% endblock %}
+</html>

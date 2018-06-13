@@ -1,0 +1,90 @@
+{% extends 'layouts/app.html' %}
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
+    <title>Dashboard - Parser</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Cabin|Gotham|Gotham|Open+Sans|Comfortaa"
+          rel="stylesheet">
+    <!-- Bootstrap Core CSS -->
+    <link href="../../../page/templates/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- chartist CSS -->
+    <link href="../../../page/templates/assets/plugins/chartist-js/dist/chartist.min.css" rel="stylesheet">
+    <link href="../../../page/templates/assets/plugins/chartist-js/dist/chartist-init.css" rel="stylesheet">
+    <link href="../../../page/templates/assets/plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.css" rel="stylesheet">
+    <!--This page css - Morris CSS -->
+    <link href="../../../page/templates/assets/plugins/c3-master/c3.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../../../page/templates/page/css/style.css" rel="stylesheet">
+    <!-- You can change the theme colors from here -->
+    <link href="../../../page/templates/page/css/colors/blue.css" id="theme" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+</head>
+
+{% block body %}
+    <body>
+    <script>
+    $(document).ready(function(){
+
+        $.ajax({
+            type: 'GET',
+            url: "{{ url_for('user.update', metrics_id=metrics_id) }}",
+            success: function() {
+                get_metrics("{{ url_for('user.update', metrics_id=metrics_id) }}");
+            },
+            error: function() {
+                alert('There was an unexpected error. Please try again.');
+            }
+        });
+
+        function get_metrics(url) {
+            $.ajax(url).done(function () {
+
+                $.getJSON(url, function(data) {
+
+                    if (data['metrics_state'] !== 'PENDING') {
+                        if ('metrics_result' in data) {
+                            // be flashy
+                            $('#metric').fadeOut(1000, function() {
+
+                                // update results
+                                $('#metric').text(JSON.stringify(data['metrics_result'])).fadeIn(1000);
+                            });
+
+                        }
+                        else {
+                            // something unexpected happened
+                            $('#metric').text("There was an error updating your data.");
+                        }
+                    }
+                    else {
+                        // give a pending message
+                        $('#metric').text('Updating...');
+
+                        // rerun every 1 second until the data is loaded
+                        setTimeout(function() {
+                            get_metrics("{{ url_for('user.update', metrics_id=metrics_id) }}");
+                        }, 1000);
+                    }
+                });
+           });
+        }
+    });
+    </script>
+    <span id="metric">{{ metrics }}</span>
+{% endblock %}
+</body>
