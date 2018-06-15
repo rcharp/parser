@@ -19,56 +19,56 @@ class Event(object):
         return stripe.Event.retrieve(event_id)
 
 
-class Coupon(object):
-    @classmethod
-    def create(cls, code=None, duration=None, amount_off=None,
-               percent_off=None, currency=None, duration_in_months=None,
-               max_redemptions=None, redeem_by=None):
-        """
-        Create a new coupon.
-
-        API Documentation:
-          https://stripe.com/docs/api#create_coupon
-
-        :param code: Coupon code
-        :param duration: How long the coupon will be in effect
-        :type duration: str
-        :param amount_off: Discount in a fixed amount
-        :type amount_off: int
-        :param percent_off: Discount based on percent off
-        :type percent_off: int
-        :param currency: 3 digit currency abbreviation
-        :type currency: str
-        :param duration_in_months: Number of months in effect
-        :type duration_in_months: int
-        :param max_redemptions: Max number of times it can be redeemed
-        :type max_redemptions: int
-        :param redeem_by: Redeemable by this date
-        :type redeem_by: date
-        :return: Stripe coupon
-        """
-        return stripe.Coupon.create(id=code,
-                                    duration=duration,
-                                    amount_off=amount_off,
-                                    percent_off=percent_off,
-                                    currency=currency,
-                                    duration_in_months=duration_in_months,
-                                    max_redemptions=max_redemptions,
-                                    redeem_by=redeem_by)
-
-    @classmethod
-    def delete(cls, id=None):
-        """
-        Delete an existing coupon.
-
-        API Documentation:
-          https://stripe.com/docs/api#delete_coupon
-
-        :param id: Coupon code
-        :return: Stripe coupon
-        """
-        coupon = stripe.Coupon.retrieve(id)
-        return coupon.delete()
+# class Coupon(object):
+#     @classmethod
+#     def create(cls, code=None, duration=None, amount_off=None,
+#                percent_off=None, currency=None, duration_in_months=None,
+#                max_redemptions=None, redeem_by=None):
+#         """
+#         Create a new coupon.
+#
+#         API Documentation:
+#           https://stripe.com/docs/api#create_coupon
+#
+#         :param code: Coupon code
+#         :param duration: How long the coupon will be in effect
+#         :type duration: str
+#         :param amount_off: Discount in a fixed amount
+#         :type amount_off: int
+#         :param percent_off: Discount based on percent off
+#         :type percent_off: int
+#         :param currency: 3 digit currency abbreviation
+#         :type currency: str
+#         :param duration_in_months: Number of months in effect
+#         :type duration_in_months: int
+#         :param max_redemptions: Max number of times it can be redeemed
+#         :type max_redemptions: int
+#         :param redeem_by: Redeemable by this date
+#         :type redeem_by: date
+#         :return: Stripe coupon
+#         """
+#         return stripe.Coupon.create(id=code,
+#                                     duration=duration,
+#                                     amount_off=amount_off,
+#                                     percent_off=percent_off,
+#                                     currency=currency,
+#                                     duration_in_months=duration_in_months,
+#                                     max_redemptions=max_redemptions,
+#                                     redeem_by=redeem_by)
+#
+#     @classmethod
+#     def delete(cls, id=None):
+#         """
+#         Delete an existing coupon.
+#
+#         API Documentation:
+#           https://stripe.com/docs/api#delete_coupon
+#
+#         :param id: Coupon code
+#         :return: Stripe coupon
+#         """
+#         coupon = stripe.Coupon.retrieve(id)
+#         return coupon.delete()
 
 
 class Card(object):

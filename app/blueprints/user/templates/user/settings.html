@@ -53,30 +53,25 @@
             <span class="text-muted" style="color:red">Delete my account</span>
           </a>
         </div>
-
-        {% if current_user.stripe_id %}
-            <br>
-            <h3>Your Stripe account</h3>
+        {% if current_user.mailbox_id %}
+            <h3>Your Parser email</h3>
             <div class="list-group">
               <div class="list-group-item">
-                  {% if email is not none %}
-                      You are currently connected to Stripe as <b>{{ email }}</b>
+                  {% if mailbox_id is not none %}
+                      Please forward all emails to <b>{{ mailbox_id }}@mg.simpleytics.com</b>
                   {% else %}
-                      You are currently connected to Stripe.
+                      You don't have an inbox yet.
                   {% endif %}
               </div>
             </div>
         {% else %}
             <br>
-            <h3>Connect your Stripe account</h3>
+            <h3>Get an inbox</h3>
             <h4 class="text-muted margin-bottom">
-              Sign in with Stripe to access your metrics
+              Get an inbox to start parsing emails
             </h4>
             <div class="list-group" style="width:220px">
               <div class="list-group-item">
-                <a href="{{ stripe_link }}">
-                    <img src="{{ url_for('static',filename='images/blue-on-light.png') }}">
-                </a>
               </div>
             </div>
         {% endif %}
@@ -104,28 +99,25 @@
         <a href="{{ url_for('billing.pricing') }}"
            class="btn btn-primary">Choose a Plan</a>
         <hr/>
-        {% if current_user.stripe_id %}
-            <h3>Your Stripe account</h3>
+        {% if current_user.mailbox_id %}
+            <h3>Your Parser email</h3>
             <div class="list-group">
               <div class="list-group-item">
-                  {% if email is not none %}
-                      You are currently connected to Stripe as <b>{{ email }}</b>
+                  {% if mailbox_id is not none %}
+                      Please forward all emails to <b>{{ mailbox_id }}@mg.simpleytics.com</b>
                   {% else %}
-                      You are currently connected to Stripe.
+                      You don't have an inbox yet.
                   {% endif %}
               </div>
             </div>
         {% else %}
             <br>
-            <h3>Connect your Stripe account</h3>
+            <h3>Get an inbox</h3>
             <h4 class="text-muted margin-bottom">
-              Sign in with Stripe to access your metrics
+              Get an inbox to start parsing emails
             </h4>
             <div class="list-group" style="width:220px">
               <div class="list-group-item">
-                <a href="{{ stripe_link }}">
-                    <img src="{{ url_for('static',filename='images/blue-on-light.png') }}">
-                </a>
               </div>
             </div>
         {% endif %}

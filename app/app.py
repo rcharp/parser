@@ -13,6 +13,7 @@ from app.blueprints.admin import admin
 from app.blueprints.page import page
 from app.blueprints.contact import contact
 from app.blueprints.user import user
+from app.blueprints.parse.views import parse
 from app.blueprints.billing import billing
 from app.blueprints.billing import stripe_webhook
 from app.blueprints.user.models import User
@@ -87,6 +88,7 @@ def create_app(settings_override=None):
     app.register_blueprint(page)
     app.register_blueprint(contact)
     app.register_blueprint(user)
+    app.register_blueprint(parse)
     app.register_blueprint(billing)
     app.register_blueprint(stripe_webhook)
     template_processors(app)
@@ -109,6 +111,12 @@ def extensions(app):
     db.init_app(app)
     login_manager.init_app(app)
     cache.init_app(app)
+
+    # with app.app_context():
+    #     # add the emails table to the db
+    #     from app.blueprints.parse.models.email import Email
+    #     db.create_all()
+    #     db.session.commit()
 
     return None
 

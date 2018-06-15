@@ -8,8 +8,20 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="../../../../static/images/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
     <title>Dashboard - Parser</title>
+
+    <!-- Google Analytics code -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-118470858-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-118470858-1');
+    </script>
+    <!-- End of GA code -->
+
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Cabin|Gotham|Gotham|Open+Sans|Comfortaa"
           rel="stylesheet">
@@ -25,18 +37,18 @@
     <link href="../../../page/templates/page/css/style.css" rel="stylesheet">
     <!-- You can change the theme colors from here -->
     <link href="../../../page/templates/page/css/colors/blue.css" id="theme" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <!-- MDL theme -->
+    <link href="../BS4/assets/css/material-dashboard.css" id="theme" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]-->
+    <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
-
 </head>
 
 {% block litebody %}
-<body class="card-no-border" style="font-family:'Gotham',sans-serif;overflow-y:auto;max-width:100%;overflow-x:hidden;width:100%;padding-bottom:0">
+<body class="card-no-border" style="font-family:'Gotham',sans-serif;overflow-y:auto;max-width:100%;overflow-x:hidden;width:100%;padding-bottom:0;">
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
@@ -60,18 +72,29 @@
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
                 <!-- Row -->
-                    {% if name is not none %}
-                        <div style="float:right;font-family: 'Gotham', sans-serif;position:relative;top:30px;margin-bottom:20px;">
-                            Welcome, {{ name|title }}!
+                <br >
+                <div style="float:right;font-family: 'Gotham', sans-serif;position:relative;top:30px;
+                margin-bottom:20px;">
+                   Welcome, Guest!
+                </div>
+                <hr>
+                <div class="row" style="padding-top:30px;color:#007fd8">
+                    <div class="col-lg-14">
+                        <div class="card-lite" style="min-height: 40px;
+                          min-width: 250px;
+                          border-color: #d7dfe3;
+                          box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
+                          border-radius: 8px;
+                          font-weight:100;
+                          background-color:#fff;">
+                            <div class="card-block" style="flex: 1 1 auto;padding: 2.25rem;outline: none;font-size:32px;">
+                                Inbox ({{ emails|length }})
+                            </div>
                         </div>
-                    {% else %}
-                        <div style="float:right;font-family: 'Gotham', sans-serif;position:relative;top:30px;margin-bottom:20px;">
-                            Welcome!
-                        </div>
-                    {% endif %}
-
-                <div class="row" style="padding-top:30px;color:#e06c1f">
-                    <div class="col-lg-12 col-md-12">
+                    </div>
+                </div>
+                <div class="row" style="padding-top:30px;color:#007fd8">
+                    <div class="col-lg-14">
                         <div class="card-lite" style="min-height: 180px; margin-bottom:30px;
                           min-width: 250px;
                           border-color: #d7dfe3;
@@ -81,71 +104,33 @@
                             <div class="card-block bg-info" style="background-color: #1e88e5 !important;
                             flex: 1 1 auto; padding: 1.25rem;">
                                 <h4 class="text-white card-title"
-                                    style="color: #ffffff !important;font-weight: 400;">Recent Events</h4>
-                                <h6 class="card-subtitle text-white m-b-0 op-5"
-                                    style="color: #ffffff !important;
-                                    line-height: 16px;
-                                    font-size: 14px;
-                                    opacity: 0.9;">In your Stripe account</h6>
+                                    style="color: #ffffff !important;font-weight: 400;">Your Inbox</h4>
                             </div>
-                            <div class="card-block" style="flex: 1 1 auto;padding: 1.25rem;outline: none;">
-                                <div class="message-box contact-box" style="position: relative;outline: none;">
-                                    <div id="events_list" class="message-widget contact-widget">
-                                    {% if events != None %}
-                                        {% for event in events %}
-                                            <!-- Message -->
-                                            <div id="event" class="event" style="padding: 15px 10px;
-                                            display: block;text-decoration: none;
-                                            color:#000; font-size:14px">
-                                                <div class="mail-content">
-                                                    <span style="margin-right:5px">
-                                                  {% if event['Type'] == "charge.succeeded" %}
-                                                  <span class="label label-success">Payment</span>
-                                                  {% elif event['Type'] == "charge.refunded" %}
-                                                  <span class="label label-danger">Refund</span>
-                                                  {% elif event['Type'] == "charge.failed" %}
-                                                  <span class="label label-danger">Failed</span>
-                                                  {% elif event['Type'] == "Upgrade" %}
-                                                  <span class="label label-info">Upgrade</span>
-                                                  {% elif event['Type'] == "Downgrade" %}
-                                                  <span class="label label-danger">Downgrade</span>
-                                                  {% elif event['Type'] == "customer.subscription.created" %}
-                                                  <span class="label label-primary">New</span>
-                                                  {% elif event['Type'] == "customer.subscription.deleted" %}
-                                                  <span class="label label-warning">Canceled</span>
-                                                  {% endif %}
-                                                </span>
-                                                <span class="message">
-                                                  {% if event['Type'] == "charge.succeeded" %}
-                                                  <span style="color:#e06c1f">A customer</span> paid you <b>${{ "{:,.0f}".format(event['Amount']) }}</b>
-                                                  {% elif event['Type'] == "charge.refunded" %}
-                                                  You sent a refund of <b>${{ "{:,.0f}".format(-event['Amount']) }}</b> to <span style="color:#e06c1f">a customer</span>
-                                                  {% elif event['Type'] == "charge.failed" %}
-                                                  <span style="color:#e06c1f">A customer</span>'s charge of <b>${{ "{:,.0f}".format(event['Amount']) }}</b> failed
-                                                  {% elif event['Type'] == "Upgrade" %}
-                                                  <span style="color:#e06c1f">A customer</span> upgraded to the <b>{{ event['Plan'] }}</b> plan
-                                                  {% elif event['Type'] == "Downgrade" %}
-                                                  <span style="color:#e06c1f">A customer</span> downgraded to the <b>{{ event['Plan'] }}</b> plan
-                                                  {% elif event['Type'] == "customer.subscription.created" %}
-                                                  <span style="color:#e06c1f">A customer</span> signed up for the <b>{{ event['Plan'] }}</b> plan
-                                                  {% elif event['Type'] == "customer.subscription.deleted" %}
-                                                  <span style="color:#e06c1f">A customer</span> canceled their <b>{{ event['Plan'] }}</b>
-                                                      plan
-                                                  {% endif %}
-                                                </span>
-                                                <br>
-                                                <span class="time">{{ event['P_date'] }}</span>
-                                                </div>
-                                            </div>
-                                            {% if not loop.last %}
-                                                <hr>
-                                            {% endif %}
-                                        {% endfor %}
-                                    {% else %}
-                                    There are no events to display.
-                                    {% endif %}
-                                    </div>
-                                </div>
+                            <div class="card-block" style="flex: 1 1 auto;padding: 5.25rem;outline: none;">
+                                <table class="table">
+                                    <thead>
+                                        <tr style="font-weight:bold;">
+                                            <td></td>
+                                            <td>From</td>
+                                            <td>Subject</td>
+                                            <td>Date</td>
+                                            <td>Status</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <form>
+                                            {% for email in emails %}
+                                                <tr style="height:60px;" valign="middle">
+                                                        <td style="vertical-align:middle"><input type="checkbox"></td>
+                                                        <td style="vertical-align:middle">{{ email.from_ }}</td>
+                                                        <td style="vertical-align:middle">{{ email.subject }}</td>
+                                                        <td style="vertical-align:middle">{{ email.date }}</td>
+                                                        <td style="vertical-align:middle">Parsed</td>
+                                                </tr>
+                                            {% endfor %}
+                                        </form>
+                                    </tbody>
+                                  </table>
                             </div>
                         </div> <!-- End contacts -->
                     </div>

@@ -6,8 +6,7 @@ from flask import (
     url_for,
     render_template,
     current_app,
-    json,
-    jsonify)
+    json)
 from flask_login import (
     login_required,
     login_user,
@@ -16,9 +15,9 @@ from flask_login import (
 
 from lib.safe_next_url import safe_next_url
 from app.blueprints.user.decorators import anonymous_required
-import app.blueprints.simple.prettydate as p
-from app.blueprints.simple.date import get_datetime_from_string
 from app.blueprints.user.models import User
+from app.blueprints.user.create_mailgun_user import generate_mailbox_id, create_inbox
+from app.blueprints.parse.parse import get_emails
 from app.blueprints.user.templates.emails import send_welcome_email
 from app.blueprints.user.forms import (
     LoginForm,
@@ -29,7 +28,6 @@ from app.blueprints.user.forms import (
     UpdateCredentials)
 
 import datetime
-import requests
 import stripe
 from app.extensions import cache, csrf, timeout
 
@@ -146,10 +144,21 @@ def signup():
 
         if login_user(u):
 
-            send_welcome_email(current_user.email)
-            # flash('Awesome, thanks for signing up! Please choose a plan that best fits your needs.', 'success')
-            # return redirect(url_for('billing.pricing'))
-            flash('Awesome, thanks for signing up! Please connect your Stripe account below.', 'success')
+            # send_welcome_email(current_user.email).delay()
+
+            # Create a user id for the user
+            mailbox_id = generate_mailbox_id(User)
+            current_user.mailbox_id = mailbox_id
+            current_user.save()
+
+            # Create an inbox for the user
+            if create_inbox(mailbox_id):
+                pass
+            else:
+                flash('There was a problem creating an inbox for you. Please try again.', 'error')
+                return redirect(url_for('user.settings'))
+
+            flash('Awesome, thanks for signing up!', 'success')
             return redirect(url_for('user.settings'))
 
     return render_template('user/signup.html', form=form)
@@ -197,14 +206,6 @@ def update_credentials():
 @user.route('/webhooks', methods=['GET','POST'])
 @csrf.exempt
 def webhooks():
-<<<<<<< HEAD
-
-=======
->>>>>>> 3d297c14e990a09a847e151bfb36e5a31283e34a
-    data = request.form
-    for k in data:
-        print(k + ": " + data[k] + "\n")
-
     return json.dumps({'success': True}), 200, {'ContentType': 'application/json'}
 
 
@@ -214,56 +215,25 @@ def webhooks():
 def settings():
     stripe.api_key = current_app.config.get('STRIPE_SECRET_KEY')
     stripe.api_version = '2018-02-28'
-    stripe_link = current_app.config.get('STRIPE_AUTHORIZATION_LINK')
+    mailbox_id = current_user.mailbox_id
     trial_days_left = -1
 
     if not current_user.subscription and not current_user.trial and current_user.role == 'member':
-        flash('Your free trial has expired. Please sign up for a plan below to continue getting your Stripe metrics.',
+        flash('Your free trial has expired. Please sign up for a plan below to continue parsing emails.',
               'error')
 
     if current_user.trial and current_user.role == 'member':
         trial_days_left = 14 - (datetime.datetime.now() - current_user.created_on.replace(tzinfo=None)).days
-        # flash('You have ' + str(trial_days_left) + ' day(s) left on your free trial.', 'error')
 
-    if current_user.stripe_id is None:
-        if request.args.get("code"):
-            url = "https://connect.stripe.com/oauth/token"
-
-            r = requests.post(url, json={"client_secret": current_app.config['STRIPE_SECRET_KEY'],
-                                         "code": request.args.get("code"), "grant_type":
-                                             "authorization_code"})
-
-            if "refresh_token" in r.json():
-                current_user.refresh_token = str(r.json()['refresh_token'])
-
-            if "error" in r.json():
-                if str(r.json()['error'] == 'invalid_grant'):
-                    r = requests.post(url, json={"client_secret": current_app.config['STRIPE_SECRET_KEY'],
-                                                 "code": current_user.refresh_token, "grant_type":
-                                                     "refresh_token"})
-
-            current_user.stripe_id = str(r.json()['stripe_user_id'])
-            current_user.save()
-
-            if not cache.get(current_user.email):
-                from app.blueprints.user.tasks import get_events_list, get_all_metrics, set_cache
-
-                updated = datetime.datetime.now()
-                events = get_events_list.delay(current_user.stripe_id)
-                metrics = get_all_metrics.delay(current_user.stripe_id)
-
-                set_cache.delay(current_user.email, events.id, metrics.id, updated)
-
-            email = stripe.Account.retrieve(current_user.stripe_id).email
-
-            flash("You've successfully conntected your Stripe account. You can choose a username below or head to the dashboard now!", 'success')
-            return render_template('user/settings.html', email=email, stripe_link=stripe_link, trial_days_left=trial_days_left)
-        elif request.args.get('error') == 'access_denied':
-            flash('Your have to connect your Stripe account. Please try again.', 'error')
-        return render_template('user/settings.html', stripe_link=stripe_link, trial_days_left=trial_days_left)
+    r = create_inbox(mailbox_id)
+    if r:
+        flash('Successfully created inbox', 'success')
+        print(r)
     else:
-        email = stripe.Account.retrieve(current_user.stripe_id).email
-        return render_template('user/settings.html', email=email, stripe_link=stripe_link, trial_days_left=trial_days_left)
+        print(r.text)
+        flash('Did not successfully create inbox', 'error') # dfd.
+
+    return render_template('user/settings.html', trial_days_left=trial_days_left, mailbox_id=mailbox_id)
 
 
 # Dashboard -------------------------------------------------------------------
@@ -274,70 +244,9 @@ def dashboard():
 
     if request.method == 'GET':
         if current_user.subscription or current_user.trial:
-            if current_user.stripe_id:
-
-                # Cache the results.
-                if cache.get(current_user.email):
-                    events, metrics, updated = cache.get(current_user.email)
-                else:
-                    return redirect(url_for('user.refresh'))
-                    # from app.blueprints.user.tasks import get_events_list, get_all_metrics, set_cache
-                    #
-                    # metrics = get_all_metrics.delay(current_user.stripe_id)
-                    # events = get_events_list.delay(current_user.stripe_id)
-                    #
-                    # updated = datetime.datetime.now()
-                    # name = current_user.username
-                    #
-                    # set_cache.delay(current_user.email, events.id, metrics.id, updated)
-                    #
-                    # return render_template('user/dashboard.html', metrics_id=metrics.id, metrics_state=metrics.state,
-                    #                        events_id=events.id, events_state=events.state,
-                    #                        route="dashboard", name=name, updated="Just now")
-
-                # Get all of the metrics.
-                mrr, customers, new_customers, refunds, net_rev, failed, cancellations,\
-                churn, arpu, arr, ltv = metrics['MRR'], metrics['Customers'], metrics['New_Customers'], \
-                                        metrics['Refunds'], metrics['Net_Revenue'], metrics['Failed'], \
-                                        metrics['Canceled'], metrics['Churn'], metrics['ARPU'],  metrics['ARR'], \
-                                        metrics['LTV']
-
-                # Calculate percentages
-                percentages = percent(metrics)
-                for k,v in percentages.items():
-                    percentages[k] = convert_to_percent(v)
-
-                mrr_pct, customers_pct, new_customers_pct, refunds_pct, net_revenue_pct, failed_pct, \
-                canceled_pct, arpu_pct, arr_pct = percentages['MRR_Pct'],percentages['Customers_Pct'], \
-                                                                  percentages['New_Customers_Pct'], percentages['Refunds_Pct'],\
-                                                                  percentages['Net_Revenue_Pct'], percentages['Failed_Pct'], \
-                                                                  percentages['Canceled_Pct'], percentages['ARPU_Pct'], \
-                                                                  percentages['ARR_Pct']
-
-                name = current_user.username
-                last_updated = p.date(datetime.datetime.now() - get_datetime_from_string(updated))
-
-                return render_template('user/dashboard.html', events=events,events_id=0,
-                                       metrics=metrics,metrics_id=0,
-                                       route="dashboard", name=name, updated=last_updated,
-                                       mrr=mrr, mrr_pct=mrr_pct,
-                                       active_customers=customers, customers_pct=customers_pct,
-                                       net_revenue=net_rev, net_revenue_pct=net_revenue_pct,
-                                       failed=failed, failed_pct=failed_pct,
-                                       #upgrades=upgrades, upgrades_pct=upgrades_pct,
-                                       #downgrades=downgrades, downgrades_pct=downgrades_pct,
-                                       new_customers=new_customers, new_customers_pct=new_customers_pct,
-                                       cancellations=cancellations, canceled_pct=canceled_pct,
-                                       refunds=refunds, refunds_pct=refunds_pct,
-                                       arpu=arpu,arpu_pct=arpu_pct,
-                                       arr=arr,arr_pct=arr_pct,
-                                       churn=churn,
-                                       ltv=ltv)
+            if current_user.mailbox_id:
+                emails = get_emails(current_user.mailbox_id)
+                return render_template('user/dashboard.html', emails=emails)
             else:
-                flash('You have to connect your Stripe account to access the dashboard. Please connect below.', 'error')
-                return redirect(url_for('user.settings'))
-        else:
-            #flash('Your free trial has expired. Please sign up for a plan below to continue getting your Stripe metrics.', 'error')
-            return redirect(url_for('user.settings'))
-
-# </editor-fold>
+                flash('You don\'t have an inbox yet. Please get one below.', 'error')
+        return redirect(url_for('user.settings'))

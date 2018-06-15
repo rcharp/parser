@@ -118,17 +118,17 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    {% for email in emails %}
-                                        <tr style="height:60px;" valign="middle">
-                                            <form>
-                                                <td style="vertical-align:middle"><input type="checkbox"></td>
-                                                <td style="vertical-align:middle">{{ email.from_ }}</td>
-                                                <td style="vertical-align:middle">{{ email.subject }}</td>
-                                                <td style="vertical-align:middle">{{ email.date }}</td>
-                                                <td style="vertical-align:middle">Parsed</td>
-                                            </form>
-                                        </tr>
-                                    {% endfor %}
+                                        <form>
+                                            {% for email in emails %}
+                                                <tr style="height:60px;" valign="middle">
+                                                        <td style="vertical-align:middle"><input type="checkbox"></td>
+                                                        <td style="vertical-align:middle">{{ email.from_ }}</td>
+                                                        <td style="vertical-align:middle">{{ email.subject }}</td>
+                                                        <td style="vertical-align:middle">{{ email.date }}</td>
+                                                        <td style="vertical-align:middle">Parsed</td>
+                                                </tr>
+                                            {% endfor %}
+                                        </form>
                                     </tbody>
                                   </table>
                             </div>

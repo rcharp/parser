@@ -28,6 +28,9 @@ def init(with_testdb):
     :return: None
     """
     db.drop_all()
+    # add the emails table to the db
+    from app.blueprints.parse.models.email import Email
+
     db.create_all()
 
     if with_testdb:

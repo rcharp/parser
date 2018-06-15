@@ -12,7 +12,7 @@ import json
 from app.blueprints.admin.models import Dashboard
 from app.blueprints.user.decorators import role_required
 from app.blueprints.billing.decorators import handle_stripe_exceptions
-from app.blueprints.billing.models.coupon import Coupon
+# from app.blueprints.billing.models.coupon import Coupon
 from app.blueprints.billing.models.subscription import Subscription
 from app.blueprints.billing.models.invoice import Invoice
 from app.blueprints.user.models import User
@@ -21,7 +21,7 @@ from app.blueprints.admin.forms import (
     BulkDeleteForm,
     UserForm,
     UserCancelSubscriptionForm,
-    CouponForm
+    #CouponForm
 )
 
 admin = Blueprint('admin', __name__,
@@ -78,8 +78,9 @@ def users_edit(id):
     invoices = Invoice.billing_history(current_user)
     if current_user.subscription:
         upcoming = Invoice.upcoming(current_user.payment_id)
-        coupon = Coupon.query \
-            .filter(Coupon.code == current_user.subscription.coupon).first()
+        # coupon = Coupon.query \
+        #     .filter(Coupon.code == current_user.subscription.coupon).first()
+        coupon = None
     else:
         upcoming = None
         coupon = None
@@ -147,71 +148,71 @@ def users_cancel_subscription():
     return redirect(url_for('admin.users'))
 
 
-# Coupons ---------------------------------------------------------------------
-@admin.route('/coupons', defaults={'page': 1})
-@admin.route('/coupons/page/<int:page>')
-def coupons(page):
-    search_form = SearchForm()
-    bulk_form = BulkDeleteForm()
-
-    sort_by = Coupon.sort_by(request.args.get('sort', 'created_on'),
-                             request.args.get('direction', 'desc'))
-    order_values = '{0} {1}'.format(sort_by[0], sort_by[1])
-
-    paginated_coupons = Coupon.query \
-        .filter(Coupon.search(request.args.get('q', ''))) \
-        .order_by(text(order_values)) \
-        .paginate(page, 50, True)
-
-    return render_template('admin/coupon/index.html',
-                           form=search_form, bulk_form=bulk_form,
-                           coupons=paginated_coupons)
-
-
-@admin.route('/coupons/new', methods=['GET', 'POST'])
-@handle_stripe_exceptions
-def coupons_new():
-    coupon = Coupon()
-    form = CouponForm(obj=coupon)
-
-    if form.validate_on_submit():
-        form.populate_obj(coupon)
-
-        params = {
-            'code': coupon.code,
-            'duration': coupon.duration,
-            'percent_off': coupon.percent_off,
-            'amount_off': coupon.amount_off,
-            'currency': coupon.currency,
-            'redeem_by': coupon.redeem_by,
-            'max_redemptions': coupon.max_redemptions,
-            'duration_in_months': coupon.duration_in_months,
-        }
-
-        if Coupon.create(params):
-            flash('Coupon has been created successfully.', 'success')
-            return redirect(url_for('admin.coupons'))
-
-    return render_template('admin/coupon/new.html', form=form, coupon=coupon)
+# # Coupons ---------------------------------------------------------------------
+# @admin.route('/coupons', defaults={'page': 1})
+# @admin.route('/coupons/page/<int:page>')
+# def coupons(page):
+#     search_form = SearchForm()
+#     bulk_form = BulkDeleteForm()
+#
+#     sort_by = Coupon.sort_by(request.args.get('sort', 'created_on'),
+#                              request.args.get('direction', 'desc'))
+#     order_values = '{0} {1}'.format(sort_by[0], sort_by[1])
+#
+#     paginated_coupons = Coupon.query \
+#         .filter(Coupon.search(request.args.get('q', ''))) \
+#         .order_by(text(order_values)) \
+#         .paginate(page, 50, True)
+#
+#     return render_template('admin/coupon/index.html',
+#                            form=search_form, bulk_form=bulk_form,
+#                            coupons=paginated_coupons)
 
 
-@admin.route('/coupons/bulk_delete', methods=['POST'])
-def coupons_bulk_delete():
-    form = BulkDeleteForm()
-
-    if form.validate_on_submit():
-        ids = Coupon.get_bulk_action_ids(request.form.get('scope'),
-                                         request.form.getlist('bulk_ids'),
-                                         query=request.args.get('q', ''))
-
-        # Prevent circular imports.
-        from app.blueprints.billing.tasks import delete_coupons
-
-        delete_coupons.delay(ids)
-
-        flash('{0} coupons(s) were scheduled to be deleted.'.format(len(ids)),
-              'success')
-    else:
-        flash('No coupons were deleted, something went wrong.', 'error')
-
-    return redirect(url_for('admin.coupons'))
+# @admin.route('/coupons/new', methods=['GET', 'POST'])
+# @handle_stripe_exceptions
+# def coupons_new():
+#     coupon = Coupon()
+#     form = CouponForm(obj=coupon)
+#
+#     if form.validate_on_submit():
+#         form.populate_obj(coupon)
+#
+#         params = {
+#             'code': coupon.code,
+#             'duration': coupon.duration,
+#             'percent_off': coupon.percent_off,
+#             'amount_off': coupon.amount_off,
+#             'currency': coupon.currency,
+#             'redeem_by': coupon.redeem_by,
+#             'max_redemptions': coupon.max_redemptions,
+#             'duration_in_months': coupon.duration_in_months,
+#         }
+#
+#         if Coupon.create(params):
+#             flash('Coupon has been created successfully.', 'success')
+#             return redirect(url_for('admin.coupons'))
+#
+#     return render_template('admin/coupon/new.html', form=form, coupon=coupon)
+#
+#
+# @admin.route('/coupons/bulk_delete', methods=['POST'])
+# def coupons_bulk_delete():
+#     form = BulkDeleteForm()
+#
+#     if form.validate_on_submit():
+#         ids = Coupon.get_bulk_action_ids(request.form.get('scope'),
+#                                          request.form.getlist('bulk_ids'),
+#                                          query=request.args.get('q', ''))
+#
+#         # Prevent circular imports.
+#         from app.blueprints.billing.tasks import delete_coupons
+#
+#         delete_coupons.delay(ids)
+#
+#         flash('{0} coupons(s) were scheduled to be deleted.'.format(len(ids)),
+#               'success')
+#     else:
+#         flash('No coupons were deleted, something went wrong.', 'error')
+#
+#     return redirect(url_for('admin.coupons'))

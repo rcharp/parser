@@ -14,7 +14,7 @@ from config import settings
 from lib.util_json import render_json
 from app.blueprints.billing.forms import CreditCardForm, \
     UpdateSubscriptionForm, CancelSubscriptionForm
-from app.blueprints.billing.models.coupon import Coupon
+# from app.blueprints.billing.models.coupon import Coupon
 from app.blueprints.billing.models.subscription import Subscription
 from app.blueprints.billing.models.invoice import Invoice
 from app.blueprints.billing.decorators import subscription_required, \
@@ -37,19 +37,19 @@ def pricing():
                            plans=settings.STRIPE_PLANS)
 
 
-@billing.route('/coupon_code', methods=['POST'])
-@login_required
-def coupon_code():
-    code = request.form.get('coupon_code')
-    if code is None:
-        return render_json(422,
-                           {'error': 'Coupon code cannot be processed.'})
-
-    coupon = Coupon.find_by_code(code)
-    if coupon is None:
-        return render_json(404, {'error': 'Coupon code not found.'})
-
-    return render_json(200, {'data': coupon.to_json()})
+# @billing.route('/coupon_code', methods=['POST'])
+# @login_required
+# def coupon_code():
+#     code = request.form.get('coupon_code')
+#     if code is None:
+#         return render_json(422,
+#                            {'error': 'Coupon code cannot be processed.'})
+#
+#     coupon = Coupon.find_by_code(code)
+#     if coupon is None:
+#         return render_json(404, {'error': 'Coupon code not found.'})
+#
+#     return render_json(200, {'data': coupon.to_json()})
 
 
 @billing.route('/create', methods=['GET', 'POST'])
@@ -213,8 +213,9 @@ def billing_details():
 
     if current_user.subscription:
         upcoming = Invoice.upcoming(current_user.payment_id)
-        coupon = Coupon.query \
-            .filter(Coupon.code == current_user.subscription.coupon).first()
+        coupon = None
+        # coupon = Coupon.query \
+        #     .filter(Coupon.code == current_user.subscription.coupon).first()
     else:
         upcoming = None
         coupon = None

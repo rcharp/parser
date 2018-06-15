@@ -6,7 +6,7 @@ from config import settings
 from lib.util_sqlalchemy import ResourceMixin
 from app.extensions import db
 from app.blueprints.billing.models.credit_card import CreditCard
-from app.blueprints.billing.models.coupon import Coupon
+# from app.blueprints.billing.models.coupon import Coupon
 from app.blueprints.billing.gateways.stripecom import Card as PaymentCard
 from app.blueprints.billing.gateways.stripecom import \
     Subscription as PaymentSubscription
@@ -100,9 +100,9 @@ class Subscription(ResourceMixin, db.Model):
         self.plan = plan
 
         # Redeem the coupon.
-        if coupon:
-            coupon = Coupon.query.filter(Coupon.code == self.coupon).first()
-            coupon.redeem()
+        # if coupon:
+        #     coupon = Coupon.query.filter(Coupon.code == self.coupon).first()
+        #     coupon.redeem()
 
         # Create the credit card.
         credit_card = CreditCard(user_id=user.id,
@@ -131,12 +131,12 @@ class Subscription(ResourceMixin, db.Model):
         PaymentSubscription.update(user.payment_id, coupon, plan)
 
         user.subscription.plan = plan
-        if coupon:
-            user.subscription.coupon = coupon
-            coupon = Coupon.query.filter(Coupon.code == coupon).first()
-
-            if coupon:
-                coupon.redeem()
+        # if coupon:
+        #     user.subscription.coupon = coupon
+        #     coupon = Coupon.query.filter(Coupon.code == coupon).first()
+        #
+        #     if coupon:
+        #         coupon.redeem()
 
         db.session.add(user.subscription)
         db.session.commit()

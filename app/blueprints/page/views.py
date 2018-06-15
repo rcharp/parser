@@ -1,10 +1,8 @@
 from flask import Blueprint, render_template
-from app.blueprints.parse.parse import get_emails, parse_email, create_user
 from app.extensions import cache, timeout
 from config import settings
 from flask import redirect, url_for
 from flask_login import current_user
-import requests
 
 page = Blueprint('page', __name__, template_folder='templates')
 

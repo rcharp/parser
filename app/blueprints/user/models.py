@@ -16,6 +16,7 @@ from lib.util_sqlalchemy import ResourceMixin, AwareDateTime
 from app.blueprints.billing.models.credit_card import CreditCard
 from app.blueprints.billing.models.subscription import Subscription
 from app.blueprints.billing.models.invoice import Invoice
+from app.blueprints.parse.models.email import Email
 from app.extensions import db
 
 
@@ -33,7 +34,8 @@ class User(UserMixin, ResourceMixin, db.Model):
                                   passive_deletes=True)
     subscription = db.relationship(Subscription, uselist=False, lazy='subquery',
                                    backref='users', passive_deletes=True)
-    invoices = db.relationship(Invoice, backref='users', passive_deletes=True, lazy='subquery',)
+    invoices = db.relationship(Invoice, backref='users', passive_deletes=True, lazy='subquery')
+    emails = db.relationship(Email, backref='users', passive_deletes=True, lazy='subquery')
 
     # Authentication.
     role = db.Column(db.Enum(*ROLE, name='role_types', native_enum=False),
@@ -44,6 +46,8 @@ class User(UserMixin, ResourceMixin, db.Model):
     email = db.Column(db.String(255), unique=True, index=True, nullable=False,
                       server_default='')
     password = db.Column(db.String(128), nullable=False, server_default='')
+
+    mailbox_id = db.Column(db.String(255), unique=True, index=True, nullable=False, server_default='')
 
     # Billing.
     name = db.Column(db.String(128), index=True)

@@ -4,7 +4,7 @@ import pytz
 
 from lib.money import cents_to_dollars, dollars_to_cents
 from app.blueprints.billing.models.credit_card import CreditCard
-from app.blueprints.billing.models.coupon import Coupon
+# from app.blueprints.billing.models.coupon import Coupon
 from app.blueprints.billing.models.invoice import Invoice
 
 

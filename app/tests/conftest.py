@@ -10,10 +10,10 @@ from lib.util_datetime import timedelta_months
 from app.extensions import db as _db
 from app.blueprints.user.models import User
 from app.blueprints.billing.models.credit_card import CreditCard
-from app.blueprints.billing.models.coupon import Coupon
+# from app.blueprints.billing.models.coupon import Coupon
 from app.blueprints.billing.models.subscription import Subscription
-from app.blueprints.billing.gateways.stripecom import \
-    Coupon as PaymentCoupon
+# from app.blueprints.billing.gateways.stripecom import \
+#     Coupon as PaymentCoupon
 from app.blueprints.billing.gateways.stripecom import \
     Event as PaymentEvent
 from app.blueprints.billing.gateways.stripecom import Card as PaymentCard
@@ -194,7 +194,7 @@ def coupons(db):
     :param db: Pytest fixture
     :return: SQLAlchemy database session
     """
-    db.session.query(Coupon).delete()
+    # db.session.query(Coupon).delete()
 
     may_29_2015 = datetime.datetime(2015, 5, 29, 0, 0, 0)
     may_29_2015 = pytz.utc.localize(may_29_2015)
@@ -216,8 +216,8 @@ def coupons(db):
         }
     ]
 
-    for coupon in coupons:
-        db.session.add(Coupon(**coupon))
+    # for coupon in coupons:
+    #     db.session.add(Coupon(**coupon))
 
     db.session.commit()
 
@@ -281,8 +281,8 @@ def mock_stripe():
 
     :return:
     """
-    PaymentCoupon.create = Mock(return_value={})
-    PaymentCoupon.delete = Mock(return_value={})
+    # PaymentCoupon.create = Mock(return_value={})
+    # PaymentCoupon.delete = Mock(return_value={})
     PaymentEvent.retrieve = Mock(return_value={})
     PaymentCard.update = Mock(return_value={})
     PaymentSubscription.create = Mock(return_value={})
