@@ -252,8 +252,8 @@ def delete_emails():
 
         from app.blueprints.parse.models.email import Email
 
-        for id in to_delete:
-            Email.query.filter(Email.id == id).delete()
+        for item in to_delete:
+            Email.query.filter(Email.id == item).delete()
 
         db.session.commit()
 
@@ -282,7 +282,6 @@ def rules():
 @login_required
 def add_rule():
     if request.method == 'POST':
-
         # Get the new rules
         new_rules = request.form.getlist('new_rule')
 
@@ -305,20 +304,56 @@ def add_rule():
     return redirect(url_for('user.rules'))
 
 
-@user.route('/delete_rule', methods=['GET', 'POST'])
+@user.route('/edit_rules', methods=['GET', 'POST'])
 @csrf.exempt
 @login_required
-def delete_rule():
+def edit_rules():
     if request.method == "POST":
-        print(request.get_json())
-        print(request.args)
-        print(request.form)
-        data = request.form['id']
-        rule_id = json.loads(data)[0]
+        if request.form['action'] == 'delete':
+            to_delete = request.form.getlist('delete')
+
+            from app.blueprints.parse.models.rule import Rule
+
+            for item in to_delete:
+                Rule.query.filter(Rule.id == item).delete()
+
+            db.session.commit()
+            flash('Rule(s) successfully deleted.', 'error')
+
+        elif request.form['action'] == 'save':
+            new_rules = request.form.getlist('new_rule')
+
+            if '' in new_rules:
+                rules = list(filter(None, new_rules))
+            else:
+                rules = new_rules
+
+            from app.blueprints.parse.models.rule import Rule
+
+            for rule in rules:
+                r = Rule()
+                r.mailbox_id = current_user.mailbox_id
+                r.rule = rule
+
+                db.session.add(r)
+            db.session.commit()
+            flash('Rules have been successfully added.', 'success')
+
+    return redirect(url_for('user.rules'))
+
+
+@user.route('/delete_rules', methods=['GET', 'POST'])
+@csrf.exempt
+@login_required
+def delete_rules():
+    if request.method == "POST":
+
+        to_delete = request.form.getlist('delete')
 
         from app.blueprints.parse.models.rule import Rule
 
-        Rule.query.filter(Rule.id == rule_id).delete()
+        for item in to_delete:
+            Rule.query.filter(Rule.id == item).delete()
 
         db.session.commit()
 

@@ -51,7 +51,7 @@ def get_emails(mailbox_id):
 
 
 def get_rules(mailbox_id):
-    return Rule.query.with_entities(Rule.rule).filter(Rule.mailbox_id == mailbox_id).all()
+    return Rule.query.with_entities(Rule.rule, Rule.id).filter(Rule.mailbox_id == mailbox_id).all()
 
 
 def parse_mail_to(mail_to):
