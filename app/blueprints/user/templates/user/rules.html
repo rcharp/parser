@@ -59,7 +59,7 @@
     <!-- ============================================================== -->
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
-    <div id="main-wrapper" style="overflow:auto;width:85%;margin:auto;">
+    <div id="main-wrapper" style="overflow:auto;width:85%;margin:auto;min-height:800px;height:1000px;">
         <!-- ============================================================== -->
         <!-- Page wrapper  -->
         <!-- ============================================================== -->
@@ -79,37 +79,21 @@
                     </div>
                 </div>
                 <hr />
-                <div class="row" style="padding-top:30px;color:#007fd8">
+                <!--<div class="row" style="padding-top:30px;color:#007fd8">
                     <div class="col-lg-14">
                         <div class="card-lite" style="min-height: 40px;
                           min-width: 250px;
                           border-color: #d7dfe3;
                           box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
-                          border-radius: 4px;
+                          border-radius: 8px;
                           font-weight:100;
                           background-color:#fff;">
                             <div class="card-block" style="flex: 1 1 auto;padding: 2.25rem;outline: none;font-size:32px;">
                                 Rules ({{ rules|length }})
-
-                                <div style="float:right">
-                                    <a href="{{ url_for('user.rules') }}" class="refresh" style="background-color: #4CAF50;
-                                                                            border: none;
-                                                                            float:none;
-                                                                            color: white;
-                                                                            padding: 15px 32px;
-                                                                            text-align: center;
-                                                                            text-decoration: none;
-                                                                            display: inline-block;
-                                                                            font-size: 16px;
-                                                                            margin: auto;
-                                                                            cursor: pointer;">
-                                       Refresh &nbsp; &#x21bb;
-                                    </a>
-                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>-->
                 <div class="row" style="padding-top:30px;color:#007fd8">
                     <div class="col-lg-14">
                         <div class="card-lite" style="min-height: 180px; margin-bottom:30px;
@@ -121,14 +105,31 @@
                             <div class="card-block bg-info" style="background-color: #1e88e5 !important;
                             flex: 1 1 auto; padding: 1.25rem;">
                                 <h4 class="text-white card-title"
-                                    style="color: #ffffff !important;font-weight: 400;">Your Rules</h4>
+                                    style="color: #ffffff !important;font-weight:400;">Your Rules ({{ rules|length }})
+                                    <a href="{{ url_for('user.rules') }}" class="refresh" style="background-color: #ffffff;
+                                                                                border: none;
+                                                                                float:none;
+                                                                                color: #007fd8;
+                                                                                padding: 15px 30px;
+                                                                                text-align: center;
+                                                                                text-decoration: none;
+                                                                                vertical-align:middle;
+                                                                                line-height:100%;
+                                                                                display: inline-block;
+                                                                                font-size: 14px;
+                                                                                margin: auto;
+                                                                                margin-left:15px;
+                                                                                height:45px;
+                                                                                cursor: pointer;">
+                                       Refresh <img src="../../../../static/images/refresh2.png" width="16px">
+                                    </a>
+                                </h4>
                             </div>
                             <form action="{{ url_for('user.add_rule') }}" method="POST" id="add_rule" name="add_rule">
                                 <div class="card-block" style="flex: 1 1 auto;padding: 5.25rem;outline: none;">
                                     <table class="table">
                                         <thead>
                                             <tr style="font-weight:bold;">
-                                                <td></td>
                                                 <td style="width:80%">Rule</td>
                                                 <td></td>
                                                 <td></td>
@@ -136,18 +137,14 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <form action="{{ url_for('user.delete_rules') }}" method="POST" id="delete_rule" name="delete_rule">
-                                                {% for rule in rules %}
-                                                    <tr style="height:40px;" valign="middle">
-                                                        <td style="vertical-align:middle">
-                                                            <input id="delete" name="delete" type="checkbox" class="checkbox" value="{{ rule.id }}" onclick="Checked()"/>
-                                                        </td>
-                                                        <td style="vertical-align:middle">{{ rule[0] }}</td>
-                                                        <td></td>
-                                                        <td></td>
-                                                    </tr>
-                                                {% endfor %}
-                                            </form>
+                                            {% for rule in rules %}
+                                                <tr style="height:40px;" valign="middle">
+                                                    <td style="vertical-align:middle">{{ rule[0] }}</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td style="vertical-align:middle"><a href="" onclick="DeleteRule({{ rule.id }})">Delete</a></td>
+                                                </tr>
+                                            {% endfor %}
                                         </tbody>
                                     </table>
                                     <a href="#" class="add-rule" style="background-color: #4CAF50;
@@ -163,31 +160,18 @@
                                                                         cursor: pointer;">
                                         Add Rule
                                     </a>
-                                    <button type="submit" form="add_rule" class="save-rule" style="background-color: #007FD8;
+                                    <button type="submit" form="add_rule" class="save-rule" name="save-rule" id="save-rule" style="background-color: #FF0000;
                                                                         border: none;
                                                                         float:none;
                                                                         color: white;
                                                                         padding: 15px 32px;
                                                                         text-align: center;
                                                                         text-decoration: none;
-                                                                        display: inline-block;
+                                                                        display: none;
                                                                         font-size: 16px;
                                                                         margin: auto;
                                                                         cursor: pointer;">
-                                        Save New Rule(s)
-                                    </button>
-                                    <button type="submit" form="delete_rule" class="delete_rule_button" name="delete_rule_button" id="delete_rule_button" style="background-color: #FF0000;
-                                                    border: none;
-                                                    float:none;
-                                                    color: white;
-                                                    padding: 15px 32px;
-                                                    text-align: center;
-                                                    text-decoration: none;
-                                                    display: inline-block;
-                                                    font-size: 16px;
-                                                    margin: auto;
-                                                    cursor: pointer;">
-                                       Delete rules
+                                        Save Rule(s)
                                     </button>
                                 </div>
                             </form>
@@ -244,18 +228,24 @@
             jQuery('a.add-rule').click(function(event){
                 event.preventDefault();
 
-                var newRow = jQuery('<tr style="height:40px;" valign="middle"><td style="vertical-align:middle">' +
-                    '<input id="delete" name="delete" type="checkbox" class="checkbox" value="" onclick="Checked()"/></td>' +
-                    '<td style="vertical-align:middle"><input type="text" id="new_rule" name="new_rule"/></td><td></td>' +
+                var newRow = jQuery('<tr style="height:40px;" valign="middle"><td><input type="text" id="new_rule" name="new_rule"/></td><td></td><td></td>' +
                     '<td style="vertical-align:middle"><a href="#" title="" class="cancel" style="text-align:center">Cancel</a></td>');
                 jQuery('table.table').append(newRow);
 
+                // Show the save button
+                document.getElementById('save-rule').style.display = 'inline-block';
+
+                // Handle the cancel click
                 jQuery('a.cancel').click(function(event){
                 event.preventDefault();
 
-                document.getElementById('delete_rule_button').innerText = 'Delete selected rules';
-
                 $(this).closest('tr').remove();
+
+                // If you cancel the final new row, hide the save button again
+                var new_rows = document.getElementsByName("new_rule");
+                if(new_rows.length === 0) {
+                    document.getElementById('save-rule').style.display = 'none';
+                }
 
                 });
             });
@@ -272,40 +262,10 @@
     </script>
 
     <script type="text/javascript">
-        $('#delete_rule').submit(function() {
-            var to_delete = document.getElementsByClassName("checkbox");
-            var count = 0;
-
-            for(var i = 0; i < to_delete.length; i++) {
-                if (to_delete[i].checked) {
-                    count++;
-                }
-            }
-
-            if (count === 0) {
-                return false;
-            }
-
-            return confirm("Are you sure? This can't be undone.");
-        });
-
-        function Checked() {
-            var to_delete = document.getElementsByClassName("checkbox");
-            var count = 0;
-
-            for(var i = 0; i < to_delete.length; i++) {
-                if (to_delete[i].checked) {
-                    count++;
-                }
-            }
-
-            if (count === 0) {
-                document.getElementById('delete_rule_button').innerText = 'Delete rules';
-            }
-            else {
-                document.getElementById('delete_rule_button').innerText = 'Delete (' + count + ') rules';
-            }
-
+        function DeleteRule(id) {
+            $.post( "/delete_rule", {
+                id: id
+            });
         }
     </script>
 </body>

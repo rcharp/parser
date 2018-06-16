@@ -258,7 +258,7 @@ def delete_emails():
         db.session.commit()
 
     flash('Email(s) successfully deleted.', 'error')
-    return redirect(url_for('user.dashboard'))
+    return redirect(url_for('user.inbox'))
 
 
 # Rules -------------------------------------------------------------------
@@ -305,30 +305,25 @@ def add_rule():
     return redirect(url_for('user.rules'))
 
 
-@user.route('/delete_rules', methods=['GET', 'POST'])
+@user.route('/delete_rule', methods=['GET', 'POST'])
 @csrf.exempt
 @login_required
-def delete_rules():
+def delete_rule():
     if request.method == "POST":
-
-        to_delete = request.form.getlist('delete')
+        print(request.get_json())
+        print(request.args)
+        print(request.form)
+        data = request.form['id']
+        rule_id = json.loads(data)[0]
 
         from app.blueprints.parse.models.rule import Rule
 
-        for id in to_delete:
-            Rule.query.filter(Rule.id == id).delete()
+        Rule.query.filter(Rule.id == rule_id).delete()
 
         db.session.commit()
 
     flash('Rule(s) successfully deleted.', 'error')
     return redirect(url_for('user.rules'))
-
-
-# Webhooks -------------------------------------------------------------------
-@user.route('/webhooks', methods=['GET','POST'])
-@csrf.exempt
-def webhooks():
-    return json.dumps({'success': True}), 200, {'ContentType': 'application/json'}
 
 
 # Settings -------------------------------------------------------------------
@@ -351,17 +346,24 @@ def settings():
     return render_template('user/settings.html', trial_days_left=trial_days_left, mailbox_id=mailbox_id)
 
 
-# Dashboard -------------------------------------------------------------------
-@user.route('/dashboard', methods=['GET', 'POST'])
+# Inbox -------------------------------------------------------------------
+@user.route('/inbox', methods=['GET', 'POST'])
 @login_required
-def dashboard():
+def inbox():
     stripe.api_version = '2018-02-28'
 
     if request.method == 'GET':
         if current_user.subscription or current_user.trial:
             if current_user.mailbox_id:
                 emails = get_emails(current_user.mailbox_id)
-                return render_template('user/dashboard.html', emails=emails)
+                return render_template('user/inbox.html', emails=emails)
             else:
                 flash('You don\'t have an inbox yet. Please get one below.', 'error')
         return redirect(url_for('user.settings'))
+
+
+# Webhooks -------------------------------------------------------------------
+@user.route('/webhooks', methods=['GET','POST'])
+@csrf.exempt
+def webhooks():
+    return json.dumps({'success': True}), 200, {'ContentType': 'application/json'}

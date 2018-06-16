@@ -19,7 +19,7 @@
         </button>
           {% if current_user.is_authenticated %}
               {% if current_user.role == 'member' %}
-                <a href="{{ url_for('user.dashboard') }}">
+                <a href="{{ url_for('user.inbox') }}">
                   <img src="{{ url_for('static', filename='images/logo-white-transparent.png') }}"
                        class="img-responsive"
                        width="229" height="50" title="Parser" alt="Parser"/>
@@ -56,7 +56,7 @@
           {% if current_user.is_authenticated %}
               {% if current_user.role == 'member' %}
                   <li><a href="{{ url_for('user.rules') }}">Rules</a></li>
-                  <li><a href="{{ url_for('user.dashboard') }}">Dashboard</a></li>
+                  <li><a href="{{ url_for('user.inbox') }}">Inbox</a></li>
               {% endif %}
                   <li><a href="{{ url_for('user.settings') }}">Settings</a></li>
                   <li><a href="{{ url_for('contact.index') }}">Contact Us</a></li>

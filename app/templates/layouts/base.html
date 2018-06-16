@@ -108,7 +108,7 @@
   <body style="font-family: 'Gotham', sans-serif;margin:auto;width:100%;max-width:100%;overflow-x:hidden;padding-bottom:0;">
     {% block header %}{% endblock %}
     {{ billing.card_expiring_warning() }}
-    {% if request.path != '/demo' and request.path != '/dashboard' %}
+    {% if request.path != '/demo' and request.path != '/inbox' and request.path != '/rules' %}
     <main class="container"style="min-height:850px;">
       {{ flash.render() }}
 
@@ -151,7 +151,7 @@
                         <h4 style="font-weight:lighter;font-family: 'Gotham', sans-serif;float:left;margin-right:20px;
                         vertical-align:middle;line-height:50%;"><a href="{{ url_for('user.rules') }}"style="color:white;">Rules</a></h4><br /><br />
                         <h4 style="font-weight:lighter;font-family: 'Gotham', sans-serif;float:left;margin-right:20px;
-                        vertical-align:middle;line-height:50%;"><a href="{{ url_for('user.dashboard') }}"style="color:white;">Dashboard</a></h4><br /><br />
+                        vertical-align:middle;line-height:50%;"><a href="{{ url_for('user.inbox') }}"style="color:white;">Inbox</a></h4><br /><br />
                         <h4 style="font-weight:lighter;font-family: 'Gotham', sans-serif;float:left;margin-right:20px;
                         vertical-align:middle;line-height:50%;"><a href="{{ url_for('user.settings') }}"style="color:white;">Settings</a></h4><br /><br />
                         <h4 style="font-weight:lighter;font-family: 'Gotham', sans-serif;float:left;margin-right:20px;

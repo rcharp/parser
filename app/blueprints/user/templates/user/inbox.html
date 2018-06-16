@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
-    <title>Dashboard - Parser</title>
+    <title>Inbox - Parser</title>
 
     <!-- Google Analytics code -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-118470858-1"></script>
@@ -81,51 +81,6 @@
                 <hr />
                 <div class="row" style="padding-top:30px;color:#007fd8">
                     <div class="col-lg-14">
-                        <div class="card-lite" style="min-height: 40px;
-                          min-width: 250px;
-                          border-color: #d7dfe3;
-                          box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
-                          border-radius: 4px;
-                          font-weight:100;
-                          background-color:#fff;">
-                            <div class="card-block" style="flex: 1 1 auto;padding: 2.25rem;outline: none;font-size:32px;">
-                                Inbox ({{ emails|length }})
-
-                                <div style="float:right">
-                                    <a href="{{ url_for('user.dashboard') }}" class="refresh" style="background-color: #4CAF50;
-                                                                            border: none;
-                                                                            float:none;
-                                                                            color: white;
-                                                                            padding: 15px 32px;
-                                                                            text-align: center;
-                                                                            text-decoration: none;
-                                                                            display: inline-block;
-                                                                            font-size: 16px;
-                                                                            margin: auto;
-                                                                            cursor: pointer;">
-                                       Refresh &nbsp; &#x21bb;
-                                    </a>
-                                    <button type="submit" form="delete_email" class="delete_email_button" name="delete_email_button" id="delete_email_button"
-                                            style="background-color: #FF0000;
-                                                    border: none;
-                                                    float:none;
-                                                    color: white;
-                                                    padding: 15px 32px;
-                                                    text-align: center;
-                                                    text-decoration: none;
-                                                    display: inline-block;
-                                                    font-size: 16px;
-                                                    margin: auto;
-                                                    cursor: pointer;">
-                                       Delete emails
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row" style="padding-top:30px;color:#007fd8">
-                    <div class="col-lg-14">
                         <div class="card-lite" style="min-height: 180px; margin-bottom:30px;
                           min-width: 250px;
                           border-color: #d7dfe3;
@@ -134,8 +89,26 @@
                           background-color:#fff;">
                             <div class="card-block bg-info" style="background-color: #1e88e5 !important;
                             flex: 1 1 auto; padding: 1.25rem;">
-                                <h4 class="text-white card-title"
-                                    style="color: #ffffff !important;font-weight: 400;">Your Inbox</h4>
+                                <h4 class="text-white card-title" style="color: #ffffff !important;font-weight: 400;">
+                                    Your Inbox
+                                    <a href="{{ url_for('user.inbox') }}" class="refresh" style="background-color: #ffffff;
+                                                                                border: none;
+                                                                                float:none;
+                                                                                color: #007fd8;
+                                                                                padding: 15px 30px;
+                                                                                text-align: center;
+                                                                                text-decoration: none;
+                                                                                vertical-align:middle;
+                                                                                line-height:100%;
+                                                                                display: inline-block;
+                                                                                font-size: 14px;
+                                                                                margin: auto;
+                                                                                margin-left:15px;
+                                                                                height:45px;
+                                                                                cursor: pointer;">
+                                       Refresh <img src="../../../../static/images/refresh2.png" width="16px">
+                                    </a>
+                                </h4>
                             </div>
                             <div class="card-block" style="flex: 1 1 auto;padding: 5.25rem;outline: none;">
                                 <table class="table">
@@ -170,6 +143,20 @@
                                         </tbody>
                                     </form>
                                 </table>
+                                <button type="submit" form="delete_email" class="delete_email_button" name="delete_email_button" id="delete_email_button"
+                                        style="background-color: #FF0000;
+                                                border: none;
+                                                float:none;
+                                                color: white;
+                                                padding: 15px 32px;
+                                                text-align: center;
+                                                text-decoration: none;
+                                                display: none;;
+                                                font-size: 16px;
+                                                margin: auto;
+                                                cursor: pointer;">
+                                   Delete emails
+                                </button>
                             </div>
                         </div> <!-- End contacts -->
                     </div>
@@ -249,14 +236,15 @@
             }
 
             if (count === 0) {
-                document.getElementById('delete_email_button').innerText = 'Delete emails';
+                document.getElementById('delete_email_button').style.display = 'none';
             }
             else {
+                // Show the save button
+                document.getElementById('delete_email_button').style.display = 'inline-block';
                 document.getElementById('delete_email_button').innerText = 'Delete (' + count + ') emails';
             }
 
         }
     </script>
-
 </body>
 {% endblock %}
