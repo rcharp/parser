@@ -112,12 +112,6 @@ def extensions(app):
     login_manager.init_app(app)
     cache.init_app(app)
 
-    # with app.app_context():
-    #     # add the emails table to the db
-    #     from app.blueprints.parse.models.email import Email
-    #     db.create_all()
-    #     db.session.commit()
-
     return None
 
 

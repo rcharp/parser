@@ -73,22 +73,53 @@
                 <!-- ============================================================== -->
                 <!-- Row -->
                 <br >
-                <div style="float:right;font-family: 'Gotham', sans-serif;position:relative;top:30px;
-                margin-bottom:20px;">
-                   Welcome, Guest!
+                <div class="row" style="padding-top:30px;color:#007fd8;margin-bottom:30px;">
+                    <div style="float:right;font-family: 'Gotham', sans-serif;">
+                       Welcome, Guest!
+                    </div>
                 </div>
-                <hr>
+                <hr />
                 <div class="row" style="padding-top:30px;color:#007fd8">
                     <div class="col-lg-14">
                         <div class="card-lite" style="min-height: 40px;
                           min-width: 250px;
                           border-color: #d7dfe3;
                           box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
-                          border-radius: 8px;
+                          border-radius: 4px;
                           font-weight:100;
                           background-color:#fff;">
                             <div class="card-block" style="flex: 1 1 auto;padding: 2.25rem;outline: none;font-size:32px;">
                                 Inbox ({{ emails|length }})
+
+                                <div style="float:right">
+                                    <a href="{{ url_for('user.dashboard') }}" class="refresh" style="background-color: #4CAF50;
+                                                                            border: none;
+                                                                            float:none;
+                                                                            color: white;
+                                                                            padding: 15px 32px;
+                                                                            text-align: center;
+                                                                            text-decoration: none;
+                                                                            display: inline-block;
+                                                                            font-size: 16px;
+                                                                            margin: auto;
+                                                                            cursor: pointer;">
+                                       Refresh &nbsp; &#x21bb;
+                                    </a>
+                                    <button type="submit" form="delete_email" class="delete_email_button" name="delete_email_button" id="delete_email_button"
+                                            style="background-color: #FF0000;
+                                                    border: none;
+                                                    float:none;
+                                                    color: white;
+                                                    padding: 15px 32px;
+                                                    text-align: center;
+                                                    text-decoration: none;
+                                                    display: inline-block;
+                                                    font-size: 16px;
+                                                    margin: auto;
+                                                    cursor: pointer;">
+                                       Delete emails
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -108,29 +139,37 @@
                             </div>
                             <div class="card-block" style="flex: 1 1 auto;padding: 5.25rem;outline: none;">
                                 <table class="table">
-                                    <thead>
-                                        <tr style="font-weight:bold;">
-                                            <td></td>
-                                            <td>From</td>
-                                            <td>Subject</td>
-                                            <td>Date</td>
-                                            <td>Status</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <form>
+                                    <form action="{{ url_for('user.delete_emails') }}" method="POST" id="delete_email" name="delete_email">
+                                        <thead>
+                                            <tr style="font-weight:bold;">
+                                                <td></td>
+                                                <td>From</td>
+                                                <td>Subject</td>
+                                                <td>Date</td>
+                                                <td>Status</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
                                             {% for email in emails %}
                                                 <tr style="height:60px;" valign="middle">
-                                                        <td style="vertical-align:middle"><input type="checkbox"></td>
-                                                        <td style="vertical-align:middle">{{ email.from_ }}</td>
-                                                        <td style="vertical-align:middle">{{ email.subject }}</td>
-                                                        <td style="vertical-align:middle">{{ email.date }}</td>
-                                                        <td style="vertical-align:middle">Parsed</td>
+                                                    <td style="vertical-align:middle">
+                                                        <input id="delete" name="delete" type="checkbox" class="checkbox" value="{{ email.id }}" onclick="Checked()"/>
+                                                    </td>
+                                                    <td style="vertical-align:middle">{{ email.sender }}</td>
+                                                    <td style="vertical-align:middle">{{ email.subject }}</td>
+                                                    <td style="vertical-align:middle">{{ email.date }}</td>
+                                                    <td style="vertical-align:middle">
+                                                        {% if email.parsed == 1 %}
+                                                            <span class="label label-success">Parsed</span>
+                                                        {% elif email.parsed == 0 %}
+                                                            <span class="label label-danger">Not Parsed</span>
+                                                        {% endif %}
+                                                    </td>
                                                 </tr>
                                             {% endfor %}
-                                        </form>
-                                    </tbody>
-                                  </table>
+                                        </tbody>
+                                    </form>
+                                </table>
                             </div>
                         </div> <!-- End contacts -->
                     </div>
@@ -180,5 +219,44 @@
     <script src="../../../page/templates/assets/plugins/c3-master/c3.min.js"></script>
     <!-- Chart JS -->
     <script src="../../../page/templates/lite/js/dashboard1.js"></script>
+
+    <script type="text/javascript">
+        $('#delete_email').submit(function() {
+            var to_delete = document.getElementsByClassName("checkbox");
+            var count = 0;
+
+            for(var i = 0; i < to_delete.length; i++) {
+                if (to_delete[i].checked) {
+                    count++;
+                }
+            }
+
+            if (count === 0) {
+                return false;
+            }
+
+            return confirm("Are you sure? This can't be undone.");
+        });
+
+        function Checked() {
+            var to_delete = document.getElementsByClassName("checkbox");
+            var count = 0;
+
+            for(var i = 0; i < to_delete.length; i++) {
+                if (to_delete[i].checked) {
+                    count++;
+                }
+            }
+
+            if (count === 0) {
+                document.getElementById('delete_email_button').innerText = 'Delete emails';
+            }
+            else {
+                document.getElementById('delete_email_button').innerText = 'Delete (' + count + ') emails';
+            }
+
+        }
+    </script>
+
 </body>
 {% endblock %}

@@ -17,7 +17,7 @@ from lib.safe_next_url import safe_next_url
 from app.blueprints.user.decorators import anonymous_required
 from app.blueprints.user.models import User
 from app.blueprints.user.create_mailgun_user import generate_mailbox_id, create_inbox
-from app.blueprints.parse.parse import get_emails
+from app.blueprints.parse.parse import get_emails, get_rules
 from app.blueprints.user.templates.emails import send_welcome_email
 from app.blueprints.user.forms import (
     LoginForm,
@@ -29,11 +29,12 @@ from app.blueprints.user.forms import (
 
 import datetime
 import stripe
-from app.extensions import cache, csrf, timeout
+from app.extensions import cache, csrf, timeout, db
 
 user = Blueprint('user', __name__, template_folder='templates')
 
 
+# Login and Credentials -------------------------------------------------------------------
 @user.route('/login', methods=['GET', 'POST'])
 @anonymous_required()
 @cache.cached(timeout=timeout)
@@ -147,18 +148,33 @@ def signup():
             # send_welcome_email(current_user.email).delay()
 
             # Create a user id for the user
-            mailbox_id = generate_mailbox_id(User)
+            mailbox_id = generate_mailbox_id()
             current_user.mailbox_id = mailbox_id
-            current_user.save()
 
             # Create an inbox for the user
             if create_inbox(mailbox_id):
-                pass
+                current_user.active_mailbox = True
+
+                from app.blueprints.parse.models.rule import Rule
+
+                # Create default rules
+                rules = ['Sender', 'To', 'Subject', 'Date']
+
+                for rule in rules:
+                    r = Rule()
+                    r.mailbox_id = mailbox_id
+                    r.rule = rule
+
+                    # Add the default rules to the database
+                    db.session.add(r)
+                db.session.commit()
+                flash('Awesome, thanks for signing up!', 'success')
             else:
                 flash('There was a problem creating an inbox for you. Please try again.', 'error')
-                return redirect(url_for('user.settings'))
+                current_user.active_mailbox = False
 
-            flash('Awesome, thanks for signing up!', 'success')
+            current_user.save()
+
             return redirect(url_for('user.settings'))
 
     return render_template('user/signup.html', form=form)
@@ -203,12 +219,119 @@ def update_credentials():
     return render_template('user/update_credentials.html', form=form)
 
 
+# Emails -------------------------------------------------------------------
+@user.route('/get_inbox', methods=['GET', 'POST'])
+@login_required
+def get_inbox():
+
+    # Create a user id for the user
+    mailbox_id = generate_mailbox_id()
+    current_user.mailbox_id = mailbox_id
+
+    # Create an inbox for the user
+    if create_inbox(mailbox_id):
+        current_user.active_mailbox = True
+        flash('Your inbox has been created.', 'success')
+    else:
+        flash('There was a problem creating an inbox for you. Please try again.', 'error')
+        current_user.active_mailbox = False
+
+    current_user.save()
+
+    flash('Your sign in settings have been updated.', 'success')
+    return redirect(url_for('user.settings'))
+
+
+@user.route('/delete_emails', methods=['GET', 'POST'])
+@csrf.exempt
+@login_required
+def delete_emails():
+    if request.method == "POST":
+
+        to_delete = request.form.getlist('delete')
+
+        from app.blueprints.parse.models.email import Email
+
+        for id in to_delete:
+            Email.query.filter(Email.id == id).delete()
+
+        db.session.commit()
+
+    flash('Email(s) successfully deleted.', 'error')
+    return redirect(url_for('user.dashboard'))
+
+
+# Rules -------------------------------------------------------------------
+@user.route('/rules', methods=['GET', 'POST'])
+@login_required
+def rules():
+    stripe.api_version = '2018-02-28'
+
+    if request.method == 'GET':
+        if current_user.subscription or current_user.trial:
+            if current_user.mailbox_id:
+                rules = get_rules(current_user.mailbox_id)
+                return render_template('user/rules.html', rules=rules)
+            else:
+                flash('You don\'t have an inbox yet. Please get one below.', 'error')
+        return redirect(url_for('user.settings'))
+
+
+@user.route('/add_rule/', methods=['GET', 'POST'])
+@csrf.exempt
+@login_required
+def add_rule():
+    if request.method == 'POST':
+
+        # Get the new rules
+        new_rules = request.form.getlist('new_rule')
+
+        if '' in new_rules:
+            rules = list(filter(None, new_rules))
+        else:
+            rules = new_rules
+
+        from app.blueprints.parse.models.rule import Rule
+
+        for rule in rules:
+            r = Rule()
+            r.mailbox_id = current_user.mailbox_id
+            r.rule = rule
+
+            db.session.add(r)
+        db.session.commit()
+
+    flash('Rules have been successfully added.', 'success')
+    return redirect(url_for('user.rules'))
+
+
+@user.route('/delete_rules', methods=['GET', 'POST'])
+@csrf.exempt
+@login_required
+def delete_rules():
+    if request.method == "POST":
+
+        to_delete = request.form.getlist('delete')
+
+        from app.blueprints.parse.models.rule import Rule
+
+        for id in to_delete:
+            Rule.query.filter(Rule.id == id).delete()
+
+        db.session.commit()
+
+    flash('Rule(s) successfully deleted.', 'error')
+    return redirect(url_for('user.rules'))
+
+
+# Webhooks -------------------------------------------------------------------
 @user.route('/webhooks', methods=['GET','POST'])
 @csrf.exempt
 def webhooks():
     return json.dumps({'success': True}), 200, {'ContentType': 'application/json'}
 
 
+# Settings -------------------------------------------------------------------
 @user.route('/settings', methods=['GET','POST'])
 @login_required
 @csrf.exempt
@@ -224,14 +347,6 @@ def settings():
 
     if current_user.trial and current_user.role == 'member':
         trial_days_left = 14 - (datetime.datetime.now() - current_user.created_on.replace(tzinfo=None)).days
-
-    r = create_inbox(mailbox_id)
-    if r:
-        flash('Successfully created inbox', 'success')
-        print(r)
-    else:
-        print(r.text)
-        flash('Did not successfully create inbox', 'error') # dfd.
 
     return render_template('user/settings.html', trial_days_left=trial_days_left, mailbox_id=mailbox_id)
 

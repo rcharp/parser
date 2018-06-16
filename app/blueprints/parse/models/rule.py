@@ -1,33 +1,20 @@
-import datetime
-from collections import OrderedDict
-from hashlib import md5
-
-import pytz
-from flask import current_app
 from sqlalchemy import or_
-from werkzeug.security import generate_password_hash, check_password_hash
 
-from flask_login import UserMixin
-
-from itsdangerous import URLSafeTimedSerializer, \
-    TimedJSONWebSignatureSerializer
-
-from lib.util_sqlalchemy import ResourceMixin, AwareDateTime
-from app.blueprints.user.models import User
-from app.blueprints.billing.models.subscription import Subscription
-from app.blueprints.billing.models.invoice import Invoice
+from lib.util_sqlalchemy import ResourceMixin
 from app.extensions import db
 
 
-class Rule(UserMixin, ResourceMixin, db.Model):
+class Rule(ResourceMixin, db.Model):
 
     __tablename__ = 'rules'
     # Relationships.
-    mailbox_id = db.Column(db.Integer, db.ForeignKey('users.id', onupdate='CASCADE', ondelete='CASCADE'),
-                        index=True, nullable=False)
+    mailbox_id = db.Column(db.String(255), db.ForeignKey('users.mailbox_id', onupdate='CASCADE', ondelete='CASCADE'),
+                           index=True, nullable=False, primary_key=False, unique=False)
 
     # Rules.
-    rules = db.Column(db.String(255), unique=False, index=True, nullable=True, server_default='')
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.Text, nullable=True, server_default='')
+    rule = db.Column(db.Text, nullable=True, default='')
 
     def __init__(self, **kwargs):
         # Call Flask-SQLAlchemy's constructor.

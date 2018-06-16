@@ -95,9 +95,8 @@
           {% endif %}
           {% if current_user.is_authenticated %}
               {% if current_user.role == 'member' %}
-                  <li>
-                  <a href="{{ url_for('user.dashboard') }}">Dashboard</a>
-                  </li>
+                  <li><a href="{{ url_for('user.rules') }}">Rules</a></li>
+                  <li><a href="{{ url_for('user.dashboard') }}">Dashboard</a></li>
               {% else %}
 
               {% endif %}

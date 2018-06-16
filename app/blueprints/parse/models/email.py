@@ -1,10 +1,6 @@
-import datetime
-
-import pytz
-from flask import current_app
 from sqlalchemy import or_
 
-from lib.util_sqlalchemy import ResourceMixin, AwareDateTime
+from lib.util_sqlalchemy import ResourceMixin
 from app.extensions import db
 
 
@@ -13,16 +9,18 @@ class Email(ResourceMixin, db.Model):
     __tablename__ = 'emails'
 
     # Relationships.
-    mailbox_id = db.Column(db.Integer, db.ForeignKey('users.id', onupdate='CASCADE', ondelete='CASCADE'),
-                        index=True, nullable=False, primary_key=True)
+    mailbox_id = db.Column(db.String(255), db.ForeignKey('users.mailbox_id', onupdate='CASCADE', ondelete='CASCADE'),
+                        index=True, nullable=False, primary_key=False, unique=False)
 
     # Parsed objects.
+    id = db.Column(db.Integer, primary_key=True)
     message_id = db.Column(db.String(255), unique=False, index=True, nullable=True, server_default='')
-    from_ = db.Column(db.String(255), unique=False, index=True, nullable=True, server_default='')
-    recipient = db.Column(db.String(255), unique=False, index=True, nullable=True, server_default='')
+    sender = db.Column(db.String(255), unique=False, index=True, nullable=True, server_default='')
+    to = db.Column(db.String(255), unique=False, index=True, nullable=True, server_default='')
     subject = db.Column(db.String(255), unique=False, index=True, nullable=True, server_default='')
     date = db.Column(db.String(255), unique=False, index=True, nullable=True, server_default='')
-    body = db.Column(db.Text(), unique=False, index=True, nullable=True, server_default='')
+    body = db.Column(db.Text, nullable=True, server_default='')
+    parsed = db.Column('parsed', db.Boolean(), nullable=False, server_default='0')
 
     def __init__(self, **kwargs):
         # Call Flask-SQLAlchemy's constructor.

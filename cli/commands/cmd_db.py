@@ -30,6 +30,7 @@ def init(with_testdb):
     db.drop_all()
     # add the emails table to the db
     from app.blueprints.parse.models.email import Email
+    from app.blueprints.parse.models.rule import Rule
 
     db.create_all()
 

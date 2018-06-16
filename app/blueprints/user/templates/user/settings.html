@@ -2,6 +2,22 @@
 
 {% block title %}My Account - Parser{% endblock %}
 {% block body %}
+ {% if current_user.mailbox_id %}
+    <div class="row" style="overflow-x:hidden">
+        <div class="col-md-12" style="overflow-x:hidden;">
+            <div class="list-group">
+              <div class="list-group-item" style="text-align:center">
+                  {% if mailbox_id is not none %}
+                      Please forward all emails to:
+                      <h1><b><span style="color:red">{{ mailbox_id }}</span>@mg.simpleytics.com</b></h1>
+                  {% else %}
+                      You don't have an inbox yet.
+                  {% endif %}
+              </div>
+            </div>
+        </div>
+    </div>
+  {% endif %}
   <div class="row" style="overflow-x:hidden">
     <div class="col-md-5" style="overflow-x:hidden">
       <h3>Settings</h3>
@@ -22,6 +38,12 @@
              class="list-group-item">
             Pick a username
           </a>
+        {% endif %}
+        {% if not current_user.mailbox_id %}
+        <a href="{{ url_for('user.update_credentials') }}"
+           class="list-group-item">
+          Get an inbox
+        </a>
         {% endif %}
       </div>
     </div>
@@ -53,28 +75,6 @@
             <span class="text-muted" style="color:red">Delete my account</span>
           </a>
         </div>
-        {% if current_user.mailbox_id %}
-            <h3>Your Parser email</h3>
-            <div class="list-group">
-              <div class="list-group-item">
-                  {% if mailbox_id is not none %}
-                      Please forward all emails to <b>{{ mailbox_id }}@mg.simpleytics.com</b>
-                  {% else %}
-                      You don't have an inbox yet.
-                  {% endif %}
-              </div>
-            </div>
-        {% else %}
-            <br>
-            <h3>Get an inbox</h3>
-            <h4 class="text-muted margin-bottom">
-              Get an inbox to start parsing emails
-            </h4>
-            <div class="list-group" style="width:220px">
-              <div class="list-group-item">
-              </div>
-            </div>
-        {% endif %}
       {% else %}
           {% if trial_days_left == -1 %}
               <h3>Your trial has <span style="color:red">expired</span>.</h3>
@@ -99,29 +99,6 @@
         <a href="{{ url_for('billing.pricing') }}"
            class="btn btn-primary">Choose a Plan</a>
         <hr/>
-        {% if current_user.mailbox_id %}
-            <h3>Your Parser email</h3>
-            <div class="list-group">
-              <div class="list-group-item">
-                  {% if mailbox_id is not none %}
-                      Please forward all emails to <b>{{ mailbox_id }}@mg.simpleytics.com</b>
-                  {% else %}
-                      You don't have an inbox yet.
-                  {% endif %}
-              </div>
-            </div>
-        {% else %}
-            <br>
-            <h3>Get an inbox</h3>
-            <h4 class="text-muted margin-bottom">
-              Get an inbox to start parsing emails
-            </h4>
-            <div class="list-group" style="width:220px">
-              <div class="list-group-item">
-              </div>
-            </div>
-        {% endif %}
-          <hr/>
           <div class="list-group">
             <a class="list-group-item" href="{{ url_for('billing.cancel') }}">
                 <span class="text-muted" style="color:red">Delete my account</span>

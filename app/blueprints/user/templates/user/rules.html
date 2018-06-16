@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
-    <title>Dashboard - Parser</title>
+    <title>Rules - Parser</title>
 
     <!-- Google Analytics code -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-118470858-1"></script>
@@ -37,6 +37,8 @@
     <link href="../../../page/templates/page/css/style.css" rel="stylesheet">
     <!-- You can change the theme colors from here -->
     <link href="../../../page/templates/page/css/colors/blue.css" id="theme" rel="stylesheet">
+    <!-- MDL theme -->
+    <link href="../BS4/assets/css/material-dashboard.css" id="theme" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -71,14 +73,45 @@
                 <!-- ============================================================== -->
                 <!-- Row -->
                 <br >
-                <div style="float:right;font-family: 'Gotham', sans-serif;position:relative;top:30px;
-                margin-bottom:20px;">
-                   Welcome, Guest!
+                <div class="row" style="padding-top:30px;color:#007fd8;margin-bottom:30px;">
+                    <div style="float:right;font-family: 'Gotham', sans-serif;">
+                       Welcome, Guest!
+                    </div>
                 </div>
-                <hr>
+                <hr />
+                <div class="row" style="padding-top:30px;color:#007fd8">
+                    <div class="col-lg-14">
+                        <div class="card-lite" style="min-height: 40px;
+                          min-width: 250px;
+                          border-color: #d7dfe3;
+                          box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
+                          border-radius: 4px;
+                          font-weight:100;
+                          background-color:#fff;">
+                            <div class="card-block" style="flex: 1 1 auto;padding: 2.25rem;outline: none;font-size:32px;">
+                                Rules ({{ rules|length }})
 
-                <div class="row" style="padding-top:30px;color:#e06c1f">
-                    <div class="col-lg-12 col-md-12">
+                                <div style="float:right">
+                                    <a href="{{ url_for('user.rules') }}" class="refresh" style="background-color: #4CAF50;
+                                                                            border: none;
+                                                                            float:none;
+                                                                            color: white;
+                                                                            padding: 15px 32px;
+                                                                            text-align: center;
+                                                                            text-decoration: none;
+                                                                            display: inline-block;
+                                                                            font-size: 16px;
+                                                                            margin: auto;
+                                                                            cursor: pointer;">
+                                       Refresh &nbsp; &#x21bb;
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="padding-top:30px;color:#007fd8">
+                    <div class="col-lg-14">
                         <div class="card-lite" style="min-height: 180px; margin-bottom:30px;
                           min-width: 250px;
                           border-color: #d7dfe3;
@@ -88,31 +121,76 @@
                             <div class="card-block bg-info" style="background-color: #1e88e5 !important;
                             flex: 1 1 auto; padding: 1.25rem;">
                                 <h4 class="text-white card-title"
-                                    style="color: #ffffff !important;font-weight: 400;">Your Inbox</h4>
+                                    style="color: #ffffff !important;font-weight: 400;">Your Rules</h4>
                             </div>
-                            <div class="card-block" style="flex: 1 1 auto;padding: 1.25rem;outline: none;">
-                                <div class="message-box contact-box" style="position: relative;outline: none;">
-                                    <div id="events_list" class="message-widget contact-widget">
-                                    {% if events != None %}
-                                        {% for event in events %}
-                                            <!-- Message -->
-                                            <div id="event" class="event" style="padding: 15px 10px;
-                                            display: block;text-decoration: none;
-                                            color:#000; font-size:14px">
-                                                <div class="mail-content">
-
-                                                </div>
-                                            </div>
-                                            {% if not loop.last %}
-                                                <hr>
-                                            {% endif %}
-                                        {% endfor %}
-                                    {% else %}
-                                    There are no events to display.
-                                    {% endif %}
-                                    </div>
+                            <form action="{{ url_for('user.add_rule') }}" method="POST" id="add_rule" name="add_rule">
+                                <div class="card-block" style="flex: 1 1 auto;padding: 5.25rem;outline: none;">
+                                    <table class="table">
+                                        <thead>
+                                            <tr style="font-weight:bold;">
+                                                <td></td>
+                                                <td style="width:80%">Rule</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <form action="{{ url_for('user.delete_rules') }}" method="POST" id="delete_rule" name="delete_rule">
+                                                {% for rule in rules %}
+                                                    <tr style="height:40px;" valign="middle">
+                                                        <td style="vertical-align:middle">
+                                                            <input id="delete" name="delete" type="checkbox" class="checkbox" value="{{ rule.id }}" onclick="Checked()"/>
+                                                        </td>
+                                                        <td style="vertical-align:middle">{{ rule[0] }}</td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                {% endfor %}
+                                            </form>
+                                        </tbody>
+                                    </table>
+                                    <a href="#" class="add-rule" style="background-color: #4CAF50;
+                                                                        border: none;
+                                                                        float:none;
+                                                                        color: white;
+                                                                        padding: 15px 32px;
+                                                                        text-align: center;
+                                                                        text-decoration: none;
+                                                                        display: inline-block;
+                                                                        font-size: 16px;
+                                                                        margin: auto;
+                                                                        cursor: pointer;">
+                                        Add Rule
+                                    </a>
+                                    <button type="submit" form="add_rule" class="save-rule" style="background-color: #007FD8;
+                                                                        border: none;
+                                                                        float:none;
+                                                                        color: white;
+                                                                        padding: 15px 32px;
+                                                                        text-align: center;
+                                                                        text-decoration: none;
+                                                                        display: inline-block;
+                                                                        font-size: 16px;
+                                                                        margin: auto;
+                                                                        cursor: pointer;">
+                                        Save New Rule(s)
+                                    </button>
+                                    <button type="submit" form="delete_rule" class="delete_rule_button" name="delete_rule_button" id="delete_rule_button" style="background-color: #FF0000;
+                                                    border: none;
+                                                    float:none;
+                                                    color: white;
+                                                    padding: 15px 32px;
+                                                    text-align: center;
+                                                    text-decoration: none;
+                                                    display: inline-block;
+                                                    font-size: 16px;
+                                                    margin: auto;
+                                                    cursor: pointer;">
+                                       Delete rules
+                                    </button>
                                 </div>
-                            </div>
+                            </form>
                         </div> <!-- End contacts -->
                     </div>
                 </div>
@@ -161,5 +239,74 @@
     <script src="../../../page/templates/assets/plugins/c3-master/c3.min.js"></script>
     <!-- Chart JS -->
     <script src="../../../page/templates/lite/js/dashboard1.js"></script>
+    <script>
+        jQuery(function(){
+            jQuery('a.add-rule').click(function(event){
+                event.preventDefault();
+
+                var newRow = jQuery('<tr style="height:40px;" valign="middle"><td style="vertical-align:middle">' +
+                    '<input id="delete" name="delete" type="checkbox" class="checkbox" value="" onclick="Checked()"/></td>' +
+                    '<td style="vertical-align:middle"><input type="text" id="new_rule" name="new_rule"/></td><td></td>' +
+                    '<td style="vertical-align:middle"><a href="#" title="" class="cancel" style="text-align:center">Cancel</a></td>');
+                jQuery('table.table').append(newRow);
+
+                jQuery('a.cancel').click(function(event){
+                event.preventDefault();
+
+                document.getElementById('delete_rule_button').innerText = 'Delete selected rules';
+
+                $(this).closest('tr').remove();
+
+                });
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        $('#add_rule').submit(function() {
+            if ($('#new_rule').length === 0 || $.trim($("#new_rule").val()) === "") {
+                alert('You can\'t submit empty rules.');
+                return false;
+            }
+        });
+    </script>
+
+    <script type="text/javascript">
+        $('#delete_rule').submit(function() {
+            var to_delete = document.getElementsByClassName("checkbox");
+            var count = 0;
+
+            for(var i = 0; i < to_delete.length; i++) {
+                if (to_delete[i].checked) {
+                    count++;
+                }
+            }
+
+            if (count === 0) {
+                return false;
+            }
+
+            return confirm("Are you sure? This can't be undone.");
+        });
+
+        function Checked() {
+            var to_delete = document.getElementsByClassName("checkbox");
+            var count = 0;
+
+            for(var i = 0; i < to_delete.length; i++) {
+                if (to_delete[i].checked) {
+                    count++;
+                }
+            }
+
+            if (count === 0) {
+                document.getElementById('delete_rule_button').innerText = 'Delete rules';
+            }
+            else {
+                document.getElementById('delete_rule_button').innerText = 'Delete (' + count + ') rules';
+            }
+
+        }
+    </script>
 </body>
 {% endblock %}

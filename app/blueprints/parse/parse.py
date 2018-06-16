@@ -1,55 +1,74 @@
-import imaplib
 import re
-import smtplib
-import requests
 from app.extensions import db
 from flanker.addresslib import address
-from flask import current_app
-from flask_login import current_user
 from app.blueprints.parse.models.email import Email
+from app.blueprints.parse.models.rule import Rule
 
 
 def parse_email(msg):
 
     # Get headers.
     message_id = msg['Message-Id']
-    mailbox_id = address.parse(msg['To']).split("@")[0]  # the user's mailgun inbox that it was sent to
-    recipient = address.parse(msg['From'])  # the original recipient (who forwarded it to mailgun)
-    subject = msg['Subject']
+    mailbox_id = str(address.parse(msg['To'])).split("@")[0].upper()  # the user's mailgun inbox that it was sent to
+    to = str(address.parse(msg['From']))  # the original recipient (who forwarded it to mailgun)
+    subject = parse_subject(msg['Subject'])
     date = msg['Date']
-    body = msg['body-plain']
+    body = msg['body-plain'].strip()
     from_ = ''
 
     # Get the original sender.
     sender = re.search('From: (.+?)\n', msg['body-plain'])
     if sender:
-        from_ = address.parse(sender.group(1))
+        from_ = parse_mail_to(str(address.parse(sender.group(1)))) if address.parse(sender.group(1))\
+            else parse_mail_to(str(sender.group(1)))
 
     # Ensure that the user exists
-    u = db.session.query(db.exists().where(current_user.mailbox_id == mailbox_id)).scalar()
+    from app.blueprints.user.models import User
+    u = db.session.query(db.exists().where(User.mailbox_id == mailbox_id)).scalar()
 
-    # If the user is found, save the email to the db
+    # If the user is found, save the email to the db.
     if u:
         # Create the email
         e = Email()
-        e.mailbox_id = u.mailbox_id
+        e.mailbox_id = mailbox_id
         e.message_id = message_id
-        e.recipient = recipient
+        e.to = to
         e.subject = subject
         e.date = date
         e.body = body
-        e.from_ = from_
+        e.sender = from_
+        e.parsed = 1
 
         # Add the email to the database
         db.session.add(e)
         db.session.commit()
 
-    # return email_obj
+    # return email_obj.
 
 
 def get_emails(mailbox_id):
-
     return Email.query.filter(Email.mailbox_id == mailbox_id).all()
+
+
+def get_rules(mailbox_id):
+    return Rule.query.with_entities(Rule.rule).filter(Rule.mailbox_id == mailbox_id).all()
+
+
+def parse_mail_to(mail_to):
+    if 'mailto' in mail_to:
+        return re.search('mailto:(.+?)]', mail_to).group(1)
+    else:
+        return mail_to
+
+
+def parse_subject(subject):
+    prefixes = ['FW: ', 'FWD: ', 'Fwd: ', 'fw: ', 'fwd: ']
+
+    for prefix in prefixes:
+        if subject.startswith(prefix):
+            return subject[len(prefix):]
+    return subject
+
 
 # <editor-fold desc="Old code">
 # def get_emails():
