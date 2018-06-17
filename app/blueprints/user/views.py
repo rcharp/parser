@@ -304,6 +304,13 @@ def add_rule():
     return redirect(url_for('user.rules'))
 
 
+@user.route('/add', methods=['GET', 'POST'])
+@csrf.exempt
+@login_required
+def add():
+    return render_template('user/add.html')
+
+
 @user.route('/edit_rules', methods=['GET', 'POST'])
 @csrf.exempt
 @login_required

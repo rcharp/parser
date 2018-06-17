@@ -1,0 +1,500 @@
+{% extends 'layouts/app.html' %}
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
+    <title>Rules - Parser</title>
+
+    <!-- Google Analytics code -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-118470858-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-118470858-1');
+    </script>
+    <!-- End of GA code -->
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Cabin|Gotham|Gotham|Open+Sans|Comfortaa"
+          rel="stylesheet">
+    <!-- Bootstrap Core CSS -->
+    <link href="../../../page/templates/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- chartist CSS --
+    <link href="../../../page/templates/assets/plugins/chartist-js/dist/chartist.min.css" rel="stylesheet">
+    <link href="../../../page/templates/assets/plugins/chartist-js/dist/chartist-init.css" rel="stylesheet">
+    <link href="../../../page/templates/assets/plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.css" rel="stylesheet">
+    <!--This page css - Morris CSS --
+    <link href="../../../page/templates/assets/plugins/c3-master/c3.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../../../page/templates/page/css/style.css" rel="stylesheet">
+    <!-- You can change the theme colors from here -->
+    <link href="../../../page/templates/page/css/colors/blue.css" id="theme" rel="stylesheet">
+    <!-- MDL theme -->
+    <link href="../BS4/assets/css/material-dashboard.css" id="theme" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+</head>
+
+{% block litebody %}
+<body class="card-no-border" style="font-family:'Gotham',sans-serif;overflow-y:auto;max-width:100%;overflow-x:hidden;width:100%;padding-bottom:0;">
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <!--<div class="preloader">
+        <svg class="circular" viewBox="25 25 50 50">
+            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> </svg>
+    </div>-->
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div id="main-wrapper" style="overflow:visible;width:85%;margin:auto;min-height:800px;height:100%;">
+        <!-- ============================================================== -->
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        <div class="page-wrapper" style="height:100%">
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid" style="height:100%">
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <!-- Row -->
+                <br >
+                <div class="row" style="padding-top:30px;color:#007fd8;margin:0 auto;margin-bottom:30px;max-width:95%;width:95%;">
+                    <div style="float:right;font-family: 'Gotham', sans-serif;">
+                       Welcome, Guest!
+                    </div>
+                </div>
+                <hr />
+                <!--<div class="row" style="padding-top:30px;color:#007fd8">
+                    <div class="col-lg-14">
+                        <div class="card-lite" style="min-height: 40px;
+                          min-width: 250px;
+                          border-color: #d7dfe3;
+                          box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
+                          border-radius: 8px;
+                          font-weight:100;
+                          background-color:#fff;">
+                            <div class="card-block" style="flex: 1 1 auto;padding: 2.25rem;outline: none;font-size:32px;">
+                                Rules ({{ rules|length }})
+                            </div>
+                        </div>
+                    </div>
+                </div>-->
+                <div class="row" style="padding-top:30px;color:#007fd8;margin:0 auto;margin-bottom:30px;max-width:95%;width:95%;">
+                    <div class="col-lg-14">
+                        <div class="card-lite" style="min-height: 180px; margin-bottom:30px;
+                          min-width: 250px;
+                          border-color: #d7dfe3;
+                          box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
+                          border-radius: 8px;
+                          background-color:#fff;">
+                            <div class="card-block bg-info" style="background-color: #1e88e5 !important;
+                            flex: 1 1 auto; padding: 1.25rem;">
+                                <h4 class="text-white card-title"
+                                    style="color: #ffffff !important;font-weight:400;">1. Choose the email section
+                                </h4>
+                            </div>
+                            <form action="{{ url_for('user.edit_rules') }}" method="POST" id="rule" name="rule">
+                            <div class="card-block" style="flex: 1 1 auto;padding: 5.25rem;outline: none;">
+                                <h5>Choose the section of the email that you want to parse from.</h5>
+                                    <div class="row" id="section_buttons" style="display: flex; flex-wrap: wrap; padding: 0 4px;">
+                                        <div class="col-md-2" style="width:300px;margin:0 auto;">
+                                            <button type="button" id="subject_button" value="subject" class="card-lite" onclick="SelectSection(this)" style="min-height: 180px;
+                                                                          margin:0 auto;
+                                                                          margin-bottom:30px;
+                                                                          width: 200px;
+                                                                          border-color: #e9e9e9;
+                                                                          box-shadow: 0 1px 4px 0 rgba(0, 0, 0, .7);
+                                                                          border-radius: 8px;
+                                                                          display:block;
+                                                                          background-color:#fff;">
+                                                <div class="card-block" style="flex: 1 1 auto;padding: 5.25rem;outline: none;">
+                                                    <h6>Subject</h6>
+                                                    <input id="subject" name="subject" type="checkbox" class="checkbox" value="subject"/>
+                                                </div>
+                                            </button>
+                                        </div>
+                                        <div class="col-md-2" style="width:300px;margin:0 auto;">
+                                            <button type="button" id="from_button" value="from" class="card-lite" onclick="SelectSection(this)" style="min-height: 180px;
+                                                                          margin:0 auto;
+                                                                          margin-bottom:30px;
+                                                                          width: 200px;
+                                                                          border-color: #e9e9e9;
+                                                                          box-shadow: 0 1px 4px 0 rgba(0, 0, 0, .7);
+                                                                          border-radius: 8px;
+                                                                          display:block;
+                                                                          background-color:#fff;">
+                                                <div class="card-block" style="flex: 1 1 auto;padding: 5.25rem;outline: none;">
+                                                    <h6>From</h6>
+                                                    <input id="from" name="from" type="checkbox" class="checkbox" value="from"/>
+                                                </div>
+                                            </button>
+                                        </div>
+                                        <div class="col-md-2" style="width:300px;margin:0 auto;">
+                                            <button type="button" id="to_button" value="to" class="card-lite" onclick="SelectSection(this)" style="min-height: 180px;
+                                                                          margin:0 auto;
+                                                                          margin-bottom:30px;
+                                                                          width: 200px;
+                                                                          border-color: #e9e9e9;
+                                                                          box-shadow: 0 1px 4px 0 rgba(0, 0, 0, .7);
+                                                                          border-radius: 8px;
+                                                                          display:block;
+                                                                          background-color:#fff;">
+                                                <div class="card-block" style="flex: 1 1 auto;padding: 5.25rem;outline: none;">
+                                                    <h6>To</h6>
+                                                    <input id="to" name="to" type="checkbox" class="checkbox" value="to"/>
+                                                </div>
+                                            </button>
+                                        </div>
+                                        <div class="col-md-2" style="width:300px;margin:0 auto;">
+                                            <button type="button" id="body_button" value="body" class="card-lite" onclick="SelectSection(this)" style="min-height: 180px;
+                                                                          margin:0 auto;
+                                                                          margin-bottom:30px;
+                                                                          width: 200px;
+                                                                          border-color: #e9e9e9;
+                                                                          box-shadow: 0 1px 4px 0 rgba(0, 0, 0, .7);
+                                                                          border-radius: 8px;
+                                                                          display:block;
+                                                                          background-color:#fff;">
+                                                <div class="card-block" style="flex: 1 1 auto;padding: 5.25rem;outline: none;">
+                                                    <h6>Body</h6>
+                                                    <input id="body" name="body" type="checkbox" class="checkbox" value="body"/>
+                                                </div>
+                                            </button>
+                                        </div>
+                                        <div class="col-md-2" style="width:300px;margin:0 auto;">
+                                            <button type="button" id="cc_button" value="cc" class="card-lite" onclick="SelectSection(this)" style="min-height: 180px;
+                                                                          margin:0 auto;
+                                                                          margin-bottom:30px;
+                                                                          width: 200px;
+                                                                          border-color: #e9e9e9;
+                                                                          box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.7);
+                                                                          border-radius: 8px;
+                                                                          display:block;
+                                                                          background-color:#fff;">
+                                                <div class="card-block" style="flex: 1 1 auto;padding: 5.25rem;outline: none;">
+                                                    <h6>CC</h6>
+                                                    <input id="cc" name="cc" type="checkbox" class="checkbox" value="cc"/>
+                                                </div>
+                                            </button>
+                                        </div>
+                                        <div class="col-md-2" style="width:300px;margin:0 auto;">
+                                            <button type="button" id="headers_button" value="headers" class="card-lite" onclick="SelectSection(this)" style="min-height: 180px;
+                                                                          margin:0 auto;
+                                                                          margin-bottom:30px;
+                                                                          width: 200px;
+                                                                          border-color: #e9e9e9;
+                                                                          box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.7);
+                                                                          border-radius: 8px;
+                                                                          display:block;
+                                                                          background-color:#fff;">
+                                                <div class="card-block" style="flex: 1 1 auto;padding: 5.25rem;outline: none;">
+                                                    <h6>Headers</h6>
+                                                    <input id="headers" name="headers" type="checkbox" class="checkbox" value="headers"/>
+                                                </div>
+                                            </button>
+                                        </div>
+                                    </div>
+                                <!--a href="#" class="add-rule" style="background-color: #4CAF50;
+                                                                    border: none;
+                                                                    float:none;
+                                                                    color: white;
+                                                                    padding: 15px 32px;
+                                                                    text-align: center;
+                                                                    text-decoration: none;
+                                                                    display: inline-block;
+                                                                    font-size: 16px;
+                                                                    margin: auto;
+                                                                    cursor: pointer;">
+                                    Add Rule
+                                </a-->
+                                </div>
+                            </form>
+                        </div> <!-- End contacts -->
+                    </div>
+                </div>
+
+                <div class="row" style="padding-top:30px;color:#007fd8;margin:0 auto;margin-bottom:30px;max-width:95%;width:95%;">
+                    <div class="col-lg-14">
+                        <div class="card-lite" style="min-height: 180px; margin-bottom:30px;
+                          min-width: 250px;
+                          border-color: #d7dfe3;
+                          box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
+                          border-radius: 8px;
+                          background-color:#fff;">
+                            <div class="card-block bg-info" style="background-color: #1e88e5 !important;
+                            flex: 1 1 auto; padding: 1.25rem;">
+                                <h4 class="text-white card-title"
+                                    style="color: #ffffff !important;font-weight:400;">2. Choose a rule
+                                </h4>
+                            </div>
+                            <form action="{{ url_for('user.edit_rules') }}" method="POST" id="rule" name="rule">
+                            <div class="card-block" style="flex: 1 1 auto;padding: 5.25rem;outline: none;">
+                                <h5>Choose the rules you want to apply to this section.</h5>
+                                <div class="row" style="padding-top:30px;color:#007fd8;margin:0 auto;margin-bottom:30px;max-width:95%;width:95%;">
+                                    <form>
+                                        <div class="col-md-4" id="start_column">
+                                            <div class="card-lite" style="min-height: 40px; margin-bottom:30px;
+                                              min-width: 250px;
+                                              padding:10px;
+                                              border-color: #d7dfe3;
+                                              box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
+                                              border-radius: 8px;
+                                              display:inline-block;
+                                              background-color:#fff;">
+                                                <h5>Choose a parsing category:</h5>
+                                                <select id="category" style="width:100%" onchange="SelectOptions(this);">
+                                                    <option disabled selected value> -- select an option -- </option>
+                                                    <option value="extract">Extract Specific Content</option>
+                                                    <option value="replace">Find & Replace</option>
+                                                    <option value="remove">Remove Content</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4" id="options_column">
+                                            <div class="card-lite" id="extract" style="min-height: 40px; margin-bottom:30px;
+                                              min-width: 250px;
+                                              padding:10px;
+                                              border-color: #d7dfe3;
+                                              box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
+                                              border-radius: 8px;
+                                              display:none;
+                                              background-color:#fff;">
+                                                <h5>Choose your parsing options:</h5>
+                                                <select id="extract_options" style="width:100%;" onchange="ShowInfo(this);">
+                                                    <option disabled selected value> -- select an option -- </option>
+                                                    <option value="rows">Find rows with certain text</option>
+                                                    <option value="email">Find all email addresses</option>
+                                                    <option value="line_number">Find by line number</option>
+                                                    <option value="text_after">Find all text after</option>
+                                                    <option value="text_before">Find all text before</option>
+                                                    <option value="url">Find all URLs</option>
+                                                </select>
+                                            </div>
+                                            <div class="card-lite" id="replace" style="min-height: 40px; margin-bottom:30px;
+                                              min-width: 250px;
+                                              padding:10px;
+                                              border-color: #d7dfe3;
+                                              box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
+                                              border-radius: 8px;
+                                              display:none;
+                                              background-color:#fff;">
+                                                <h5>Choose your parsing options:</h5>
+                                                <select id="replace_options" style="width:100%;" onchange="ShowInfo(this);">
+                                                    <option disabled selected value> -- select an option -- </option>
+                                                    <option value="replace">Find & replace</option>
+                                                </select>
+                                            </div>
+                                            <div class="card-lite" id="remove" style="min-height: 40px; margin-bottom:30px;
+                                              min-width: 250px;
+                                              padding:10px;
+                                              border-color: #d7dfe3;
+                                              box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
+                                              border-radius: 8px;
+                                              display:none;
+                                              background-color:#fff;">
+                                                <h5>Choose your parsing options:</h5>
+                                                <select id="remove_options" style="width:100%;" onchange="ShowInfo(this);">
+                                                    <option disabled selected value> -- select an option -- </option>
+                                                    <option value="remove">Remove specific content</option>
+                                                    <option value="remove_links">Remove all links</option>
+                                                    <option value="blank">Remove blank lines</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4" id="info_column">
+                                            <div class="card-lite" id="info" style="min-height: 40px; margin-bottom:30px;
+                                              min-width: 250px;
+                                              padding:1.25em;
+                                              border-color: #d7dfe3;
+                                              vertical-align:middle;
+                                              box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
+                                              border-radius: 8px;
+                                              display:none;
+                                              background-color:#fff;">
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <button type="submit" form="rule" value="save" class="save_button" name="action" id="save_button"
+                                        style="background-color: #007FD8;
+                                                border: none;
+                                                min-width:150px;
+                                                float:none;
+                                                color: white;
+                                                padding: 15px 32px;
+                                                text-align: center;
+                                                text-decoration: none;
+                                                display: none;
+                                                font-size: 16px;
+                                                margin: auto;
+                                                margin-right:10px;
+                                                cursor: pointer;">
+                                    Save Rule
+                                </button>
+                                <button type="button" value="cancel" class="cancel_button" name="action" id="cancel_button"
+                                            style="background-color: #FF0000;
+                                                    border: none;
+                                                    min-width:150px;
+                                                    float:none;
+                                                    color: white;
+                                                    padding: 15px 32px;
+                                                    text-align: center;
+                                                    text-decoration: none;
+                                                    display: none;;
+                                                    font-size: 16px;
+                                                    margin: auto;
+                                                    cursor: pointer;">
+                                    Cancel
+                                </button>
+                                </div>
+                            </form>
+                        </div> <!-- End contacts -->
+                    </div>
+                </div>
+                <!-- Row -->
+                <!-- Row -->
+                <!-- ============================================================== -->
+                <!-- End PAge Content -->
+                <!-- ============================================================== -->
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Container fluid  -->
+            <!-- ============================================================== -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page wrapper  -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+    <script src="../../../page/templates/assets/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="../../../page/templates/assets/plugins/bootstrap/js/tether.min.js"></script>
+    <script src="../../../page/templates/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="../../../page/templates/lite/js/jquery.slimscroll.js"></script>
+    <!--Wave Effects --
+    <script src="../../../page/templates/lite/js/waves.js"></script>
+    <!--Menu sidebar --
+    <script src="../../../page/templates/lite/js/sidebarmenu.js"></script>
+    <!--stickey kit --
+    <script src="../../../page/templates/assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
+    <!--Custom JavaScript -->
+    <script src="../../../page/templates/lite/js/custom.min.js"></script>
+    <!-- ============================================================== -->
+    <!-- This page plugins -->
+    <!-- ============================================================== -->
+    <!-- chartist chart --
+    <script src="../../../page/templates/assets/plugins/chartist-js/dist/chartist.min.js"></script>
+    <script src="../../../page/templates/assets/plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min.js"></script>
+    <!--c3 JavaScript --
+    <script src="../../../page/templates/assets/plugins/d3/d3.min.js"></script>
+    <script src="../../../page/templates/assets/plugins/c3-master/c3.min.js"></script>
+    <!-- Chart JS --
+    <script src="../../../page/templates/lite/js/dashboard1.js"></script>
+    <!-- End Chart JS -->
+    <script>
+
+        function SelectOptions(sel) {
+
+            document.getElementById(sel.value).style.display = 'inline-block';
+
+            $("#" + sel.value).siblings().css( "display", "none" );
+        }
+
+        function SelectSection(sel) {
+
+            $( "#" + sel.value ).prop( "checked", true );
+
+            var others = $('input[type="checkbox"]').not("#" + sel.value);
+
+            others.prop('checked', false);
+
+            var selection = document.getElementById(sel.value + '_button');
+            selection.style.border = "4px solid #007FD8";
+
+            var buttons = document.getElementsByTagName('button');
+
+            for (var i = 0; i < buttons.length; i++) {
+                var button = buttons[i];
+                if(button.id !== (sel.value + "_button" || "save_button" || "cancel_button")){
+                    button.style.borderRight = "2px solid #e9e9e9";
+                    button.style.borderBottom = "2px solid #e9e9e9";
+                    button.style.border = ".5px solid #e9e9e9";
+                    button.style.boxShadow = "0 1px 4px 0 rgba(0, 0, 0, 0.7)";
+                }
+            }
+
+        }
+
+        function ShowInfo(sel) {
+
+            // Show the buttons and the info
+            document.getElementById('save_button').style.display = 'inline-block';
+            document.getElementById('cancel_button').style.display = 'inline-block';
+            document.getElementById("info").style.display = 'inline-block';
+
+            // Set the info's text
+            var info = sel.value;
+            var text = "";
+
+            if(info === "rows") {
+                text = "Find all rows that contain specific text. This is good for getting content that is labeled, such as \"Payment:\"";
+            }
+            else if (info === "email") {
+                text = "Extract all email addresses in the selected area. This is great for getting contact info in a handy list.";
+            }
+            else if (info === "line_number") {
+                text = "Return all data on a specific line number. For example, if you know contact info is always on the third line, " +
+                    "this can help you quickly get exactly what you're looking for.";
+            }
+            else if (info === "text_after") {
+                text = "Get all of the text after a specific string. An example is extracting the signature from the end of an email.";
+            }
+            else if (info === "text_before") {
+                text = "Get all of the text before a specific string. An example would be to only get everything up to the forwarded part " +
+                    "of a forwarded email.";
+            }
+            else if (info === "url") {
+                text = "Get a list of all URL links in the selected area.";
+            }
+            else if (info === "replace") {
+                text = "Find specific text in the selected area and replace it with something else. This is useful if you want to quickly rename or tag " +
+                    "specific parts of the email.";
+            }
+            else if (info === "remove") {
+                text = "Remove certain text from the selected area. This is great for quickly removing all private info that you don't want seen.";
+            }
+            else if (info === "remove_links") {
+                text = "Remove all links from the selected area. This will help you to clean it up and only have the plain text.";
+            }
+            else if (info === "blank") {
+                text = "Remove all blank lines from the selected area. This will help to cut down on the size of the email and make it easier to read.";
+            }
+
+            document.getElementById("info").innerHTML = '<div style="min-height:40px;line-height:16px;text-align:center;">' + text + '</div>';
+        }
+    </script>
+
+</body>
+{% endblock %}

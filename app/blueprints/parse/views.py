@@ -13,34 +13,19 @@ parse = Blueprint('parse', __name__, template_folder='templates')
 @csrf.exempt
 def incoming():
     if request.form:
-        msg = request.form
-
-        # Get the original sender
-        # sender = re.search('From: (.+?)\n', data['body-plain'])
-        #
-        # if sender:
-        #     print('Sender: ' + sender.group(1))
-        #
-        # print(data)
-        # print(data['message-headers'])
-        # print('Message Id: ' + data['Message-Id'] + '\n')
-        # print('Sender: ' + data['From'] + '\n')
-        # print('User: ' + data['To'] + '\n')
-        # print('Subject: ' + data['Subject'] + '\n')
-        # print('Date: ' + data['Date'] + '\n')
-        # print('Body: ' + data['body-plain'] + '\n')
+        data = request.form
 
         from app.blueprints.parse.parse import parse_subject
 
         # Get headers.
-        message_id = msg['Message-Id']
-        mailbox_id = str(address.parse(msg['To'])).split("@")[0].upper()  # the user's mailgun inbox that it was sent to
-        subject = parse_subject(msg['Subject'])
-        date = msg['Date']
+        message_id = data['Message-Id']
+        mailbox_id = str(address.parse(data['To'])).split("@")[0].upper()  # the user's mailgun inbox that it was sent to
+        subject = parse_subject(data['Subject'])
+        date = data['Date']
         from_ = ''
 
         # Get the original sender
-        sender = re.search('From: (.+?)\n', msg['body-plain'])
+        sender = re.search('From: (.+?)\n', data['body-plain'])
         if sender:
             from_ = parse_mail_to(str(address.parse(sender.group(1)))) if address.parse(sender.group(1)) \
                 else parse_mail_to(str(sender.group(1)))
