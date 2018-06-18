@@ -4,7 +4,7 @@ from app.extensions import db
 from flanker.addresslib import address
 from flask import Blueprint, request
 from app.extensions import csrf
-from app.blueprints.parse.parse import parse_mail_to
+from app.blueprints.parse.parse import parse_from
 
 parse = Blueprint('parse', __name__, template_folder='templates')
 
@@ -20,15 +20,15 @@ def incoming():
         # Get headers.
         message_id = data['Message-Id']
         mailbox_id = str(address.parse(data['To'])).split("@")[0].upper()  # the user's mailgun inbox that it was sent to
-        subject = parse_subject(data['Subject'])
+        subject = parse_subject(data['Subject'], None)
         date = data['Date']
         from_ = ''
 
         # Get the original sender
         sender = re.search('From: (.+?)\n', data['body-plain'])
         if sender:
-            from_ = parse_mail_to(str(address.parse(sender.group(1)))) if address.parse(sender.group(1)) \
-                else parse_mail_to(str(sender.group(1)))
+            from_ = parse_from(str(address.parse(sender.group(1))), None) if address.parse(sender.group(1)) \
+                else parse_from(str(sender.group(1)), None)
 
         # Ensure that the user exists
         from app.blueprints.user.models import User

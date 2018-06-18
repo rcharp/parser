@@ -3,6 +3,7 @@ from app.extensions import db
 from flanker.addresslib import address
 from app.blueprints.parse.models.email import Email
 from app.blueprints.parse.models.rule import Rule
+from app.blueprints.user.create_mailgun_user import generate_mailbox_id
 
 
 def parse_email(msg):
@@ -11,7 +12,7 @@ def parse_email(msg):
     message_id = msg['Message-Id']
     mailbox_id = str(address.parse(msg['To'])).split("@")[0].upper()  # the user's mailgun inbox that it was sent to
     to = str(address.parse(msg['From']))  # the original recipient (who forwarded it to mailgun)
-    subject = parse_subject(msg['Subject'])
+    subject = parse_subject(msg['Subject'], None)
     date = msg['Date']
     body = msg['body-plain'].strip()
     from_ = ''
@@ -19,8 +20,8 @@ def parse_email(msg):
     # Get the original sender.
     sender = re.search('From: (.+?)\n', msg['body-plain'])
     if sender:
-        from_ = parse_mail_to(str(address.parse(sender.group(1)))) if address.parse(sender.group(1))\
-            else parse_mail_to(str(sender.group(1)))
+        from_ = parse_from(str(address.parse(sender.group(1))), None) if address.parse(sender.group(1))\
+            else parse_from(str(sender.group(1)), None)
 
     # Ensure that the user exists
     from app.blueprints.user.models import User
@@ -46,6 +47,39 @@ def parse_email(msg):
     # return email_obj.
 
 
+# Parsing rules -------------------------------------------------------------------
+def parse_from(from_, options):
+    if 'mailto' in from_:
+        from_ = re.search('mailto:(.+?)]', from_).group(1)
+    return from_
+
+
+def parse_subject(subject, options):
+    prefixes = ['FW: ', 'FWD: ', 'Fwd: ', 'fw: ', 'fwd: ']
+
+    for prefix in prefixes:
+        if subject.startswith(prefix):
+            return subject[len(prefix):]
+    return subject
+
+
+def parse_to(to, options):
+    return
+
+
+def parse_body(body, options):
+    return
+
+
+def parse_cc(cc, options):
+    return
+
+
+def parse_headers(headers, options):
+    return
+
+
+# Get emails and rules -------------------------------------------------------------------
 def get_emails(mailbox_id):
     return Email.query.filter(Email.mailbox_id == mailbox_id).all()
 
@@ -54,20 +88,32 @@ def get_rules(mailbox_id):
     return Rule.query.with_entities(Rule.rule, Rule.id).filter(Rule.mailbox_id == mailbox_id).all()
 
 
-def parse_mail_to(mail_to):
-    if 'mailto' in mail_to:
-        return re.search('mailto:(.+?)]', mail_to).group(1)
-    else:
-        return mail_to
+# Create test user and email -------------------------------------------------------------------
+def create_test_user():
+    from app.blueprints.user.models import User
+
+    u = User()
+    u.role = 'member'
+    u.mailbox_id = generate_mailbox_id()
+
+    return u
 
 
-def parse_subject(subject):
-    prefixes = ['FW: ', 'FWD: ', 'Fwd: ', 'fw: ', 'fwd: ']
+def create_test_email():
+    e = Email()
+    e.subject = "This is your first parsed email!"
+    e.id = 0
+    e.mailbox_id = 0
+    e.message_id = "testemail@simpleytics.com"
+    e.sender = "parser@simpleytics.com"
+    e.to = "you@youremail.com"
+    e.body = "This is a test email from the team over at Simpleytics.\n\nThis will give you an idea of what to expect" \
+             "when it comes to parsing an email. Just select the section of the email that you want to parse, then the" \
+             "parsing options that best fit your needs. After creating the parsing rule, you'll be able to apply it to" \
+             "any emails that come to your inbox.\n\nThank you for using the email parser!\n\nSincerely,\n\nThe team at" \
+             "Simpleytics."
 
-    for prefix in prefixes:
-        if subject.startswith(prefix):
-            return subject[len(prefix):]
-    return subject
+    return e
 
 
 # <editor-fold desc="Old code">

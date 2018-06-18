@@ -167,6 +167,7 @@ def signup():
 
                     # Add the default rules to the database
                     db.session.add(r)
+
                 db.session.commit()
                 flash('Awesome, thanks for signing up!', 'success')
             else:

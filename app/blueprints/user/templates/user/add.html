@@ -79,21 +79,7 @@
                     </div>
                 </div>
                 <hr />
-                <!--<div class="row" style="padding-top:30px;color:#007fd8">
-                    <div class="col-lg-14">
-                        <div class="card-lite" style="min-height: 40px;
-                          min-width: 250px;
-                          border-color: #d7dfe3;
-                          box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
-                          border-radius: 8px;
-                          font-weight:100;
-                          background-color:#fff;">
-                            <div class="card-block" style="flex: 1 1 auto;padding: 2.25rem;outline: none;font-size:32px;">
-                                Rules ({{ rules|length }})
-                            </div>
-                        </div>
-                    </div>
-                </div>-->
+                <form action="{{ url_for('user.edit_rules') }}" method="POST" id="rule" name="rule">
                 <div class="row" style="padding-top:30px;color:#007fd8;margin:0 auto;margin-bottom:30px;max-width:95%;width:95%;">
                     <div class="col-lg-14">
                         <div class="card-lite" style="min-height: 180px; margin-bottom:30px;
@@ -108,9 +94,8 @@
                                     style="color: #ffffff !important;font-weight:400;">1. Choose the email section
                                 </h4>
                             </div>
-                            <form action="{{ url_for('user.edit_rules') }}" method="POST" id="rule" name="rule">
                             <div class="card-block" style="flex: 1 1 auto;padding: 5.25rem;outline: none;">
-                                <h5>Choose the section of the email that you want to parse from.</h5>
+                                <h5>Choose the section of the email that you want to parse from.</h5><br />
                                     <div class="row" id="section_buttons" style="display: flex; flex-wrap: wrap; padding: 0 4px;">
                                         <div class="col-md-2" style="width:300px;margin:0 auto;">
                                             <button type="button" id="subject_button" value="subject" class="card-lite" onclick="SelectSection(this)" style="min-height: 180px;
@@ -222,13 +207,12 @@
                                                                     cursor: pointer;">
                                     Add Rule
                                 </a-->
-                                </div>
-                            </form>
+                            </div>
                         </div> <!-- End contacts -->
                     </div>
                 </div>
 
-                <div class="row" style="padding-top:30px;color:#007fd8;margin:0 auto;margin-bottom:30px;max-width:95%;width:95%;">
+                <div class="row" id="options_row" style="display:none; padding-top:30px;color:#007fd8;margin:0 auto;margin-bottom:30px;max-width:95%;width:95%;">
                     <div class="col-lg-14">
                         <div class="card-lite" style="min-height: 180px; margin-bottom:30px;
                           min-width: 250px;
@@ -239,14 +223,12 @@
                             <div class="card-block bg-info" style="background-color: #1e88e5 !important;
                             flex: 1 1 auto; padding: 1.25rem;">
                                 <h4 class="text-white card-title"
-                                    style="color: #ffffff !important;font-weight:400;">2. Choose a rule
+                                    style="color: #ffffff !important;font-weight:400;">2. Add a rule
                                 </h4>
                             </div>
-                            <form action="{{ url_for('user.edit_rules') }}" method="POST" id="rule" name="rule">
                             <div class="card-block" style="flex: 1 1 auto;padding: 5.25rem;outline: none;">
-                                <h5>Choose the rules you want to apply to this section.</h5>
+                                <h5>Choose the rule you want to apply to this section.</h5>
                                 <div class="row" style="padding-top:30px;color:#007fd8;margin:0 auto;margin-bottom:30px;max-width:95%;width:95%;">
-                                    <form>
                                         <div class="col-md-4" id="start_column">
                                             <div class="card-lite" style="min-height: 40px; margin-bottom:30px;
                                               min-width: 250px;
@@ -260,7 +242,7 @@
                                                 <select id="category" style="width:100%" onchange="SelectOptions(this);">
                                                     <option disabled selected value> -- select an option -- </option>
                                                     <option value="extract">Extract Specific Content</option>
-                                                    <option value="replace">Find & Replace</option>
+                                                    <option value="replace">Find & Replace Content</option>
                                                     <option value="remove">Remove Content</option>
                                                 </select>
                                             </div>
@@ -328,9 +310,33 @@
                                               background-color:#fff;">
                                             </div>
                                         </div>
-                                    </form>
                                 </div>
+                            </div>
+                        </div> <!-- End contacts -->
+                    </div>
+                </div>
 
+                <div class="row" id="name_rule_row" style="display:none; padding-top:30px;color:#007fd8;margin:0 auto;margin-bottom:30px;max-width:95%;width:95%;">
+                    <div class="col-lg-14">
+                        <div class="card-lite" style="min-height: 180px; margin-bottom:30px;
+                          min-width: 250px;
+                          border-color: #d7dfe3;
+                          box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
+                          border-radius: 8px;
+                          background-color:#fff;">
+                            <div class="card-block bg-info" style="background-color: #1e88e5 !important;
+                            flex: 1 1 auto; padding: 1.25rem;">
+                                <h4 class="text-white card-title"
+                                    style="color: #ffffff !important;font-weight:400;">3. Name your Rule
+                                </h4>
+                            </div>
+                            <div class="card-block" style="flex: 1 1 auto;padding: 5.25rem;outline: none;">
+                                <h5>Give your rule a name so you can find it easily.</h5>
+                                <div class="row" style="padding-top:30px;color:#007fd8;margin:0 auto;margin-bottom:30px;max-width:95%;width:95%;">
+                                    <div class="col-md-12" id="start_column">
+                                        <input id="name" name="name" type="text" class="text" value="" onclick="ShowSave()"/>
+                                    </div>
+                                </div>
                                 <button type="submit" form="rule" value="save" class="save_button" name="action" id="save_button"
                                         style="background-color: #007FD8;
                                                 border: none;
@@ -344,6 +350,7 @@
                                                 font-size: 16px;
                                                 margin: auto;
                                                 margin-right:10px;
+                                                margin-bottom:20px;
                                                 cursor: pointer;">
                                     Save Rule
                                 </button>
@@ -363,10 +370,10 @@
                                     Cancel
                                 </button>
                                 </div>
-                            </form>
                         </div> <!-- End contacts -->
                     </div>
                 </div>
+                </form>
                 <!-- Row -->
                 <!-- Row -->
                 <!-- ============================================================== -->
@@ -445,21 +452,29 @@
                 }
             }
 
+             document.getElementById('options_row').style.display = 'inline-block';
+
+        }
+
+        function ShowSave() {
+            document.getElementById('save_button').style.display = 'inline-block';
+            document.getElementById('cancel_button').style.display = 'inline-block';
         }
 
         function ShowInfo(sel) {
 
             // Show the buttons and the info
-            document.getElementById('save_button').style.display = 'inline-block';
-            document.getElementById('cancel_button').style.display = 'inline-block';
             document.getElementById("info").style.display = 'inline-block';
+            document.getElementById('name_rule_row').style.display = 'inline-block';
+
 
             // Set the info's text
             var info = sel.value;
             var text = "";
 
             if(info === "rows") {
-                text = "Find all rows that contain specific text. This is good for getting content that is labeled, such as \"Payment:\"";
+                text = "Find all rows that contain specific text. This is good for getting content that is labeled, such as an invoice that has " +
+                    "labeled rows such as Name: Your Customer \n Payment: $150 \netc etc.";
             }
             else if (info === "email") {
                 text = "Extract all email addresses in the selected area. This is great for getting contact info in a handy list.";

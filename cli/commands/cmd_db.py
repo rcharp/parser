@@ -31,6 +31,7 @@ def init(with_testdb):
     # add the emails table to the db
     from app.blueprints.parse.models.email import Email
     from app.blueprints.parse.models.rule import Rule
+    from app.blueprints.user.models import User
 
     db.create_all()
 
@@ -39,6 +40,19 @@ def init(with_testdb):
 
         if not database_exists(db_uri):
             create_database(db_uri)
+
+    # Create a test email for the db
+    from app.blueprints.parse.parse import create_test_email, create_test_user
+
+    # email = create_test_email()
+    user = create_test_user()
+    user.email = app.config['SEED_MEMBER_EMAIL']
+    user.password = User.encrypt_password(app.config['SEED_ADMIN_PASSWORD'])
+
+    user.save()
+
+    # db.session.add(user)
+    # db.session.commit()
 
     return None
 
@@ -58,6 +72,12 @@ def seed():
         'email': app.config['SEED_ADMIN_EMAIL'],
         'password': app.config['SEED_ADMIN_PASSWORD']
     }
+
+    # test = {
+    #     'role' : 'member',
+    #     'email': app.config['SEED_MEMBER_EMAIL'],
+    #     'password': app.config['SEED_ADMIN_PASSWORD']
+    # }
 
     return User(**params).save()
 
