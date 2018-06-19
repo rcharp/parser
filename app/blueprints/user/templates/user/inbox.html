@@ -128,7 +128,7 @@
                                             {% for email in emails %}
                                                 <tr style="height:60px;" valign="middle">
                                                     <td style="vertical-align:middle">
-                                                        <input id="delete" name="delete" type="checkbox" class="checkbox" value="{{ email.id }}" onclick="Checked()"/>
+                                                        <input id="delete" name="delete" type="checkbox" class="checkbox" value="{{ email.id }}" onclick="Checked(this)"/>
                                                     </td>
                                                     <td style="vertical-align:middle">{{ email.sender }}</td>
                                                     <td style="vertical-align:middle">{{ email.subject }}</td>
@@ -142,11 +142,12 @@
                                                     </td>
                                                     <td style="vertical-align:middle">
                                                         {% if email.parsed == 0 %}
-                                                            <a href="{{ url_for('user.parse_email', id=email.id) }}"
+                                                            <a href="{{ url_for('user.parse', email_id=email.id) }}"
                                                                style="border:1px solid; border-radius:4px;padding:10px;">Parse</a>
                                                         {% endif %}
                                                     </td>
                                                 </tr>
+
                                             {% endfor %}
                                         </tbody>
                                     </table>
@@ -216,6 +217,7 @@
     <script src="../../../page/templates/lite/js/dashboard1.js"></script>
     <!-- end Chart JS -->
     <script type="text/javascript">
+
         $('#delete_email').submit(function() {
             var to_delete = document.getElementsByClassName("checkbox");
             var count = 0;
@@ -233,7 +235,7 @@
             return confirm("Are you sure? This can't be undone.");
         });
 
-        function Checked() {
+        function Checked(sel) {
             var to_delete = document.getElementsByClassName("checkbox");
             var count = 0;
 
@@ -250,6 +252,15 @@
                 // Show the save button
                 document.getElementById('delete_email_button').style.display = 'inline-block';
                 document.getElementById('delete_email_button').innerText = 'Delete (' + count + ') emails';
+            }
+
+            // Show and hide the body
+            var element = document.getElementById(sel.value.toString() + '_body');
+            if (element.style.display === 'none') {
+                element.style.display = 'inline-block';
+            }
+            else {
+                element.style.display = 'none';
             }
 
         }

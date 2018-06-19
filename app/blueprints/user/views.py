@@ -29,6 +29,7 @@ from app.blueprints.user.forms import (
 
 import datetime
 import stripe
+from flask_paginate import Pagination, get_page_parameter
 from app.extensions import cache, csrf, timeout, db
 
 user = Blueprint('user', __name__, template_folder='templates')
@@ -240,11 +241,30 @@ def delete_emails():
     return redirect(url_for('user.inbox'))
 
 
-@user.route('/parse_email/id', methods=['GET', 'POST'])
+@user.route('/parse/<email_id>', methods=['GET', 'POST'])
 @csrf.exempt
 @login_required
-def parse_email(id):
+def parse(email_id):
 
+    if request.method == 'GET':
+        if current_user.subscription or current_user.trial:
+            if current_user.mailbox_id:
+                rules = get_rules(current_user.mailbox_id)
+
+                from app.blueprints.parse.models.email import Email
+                email = Email.query.filter(Email.id == email_id).first()
+
+                return render_template('user/parse.html', rules=rules, email=email)
+            else:
+                flash('You don\'t have an inbox yet. Please get one below.', 'error')
+        return redirect(url_for('user.settings'))
+
+
+@user.route('/parse_email/<email_id>', methods=['GET', 'POST'])
+@csrf.exempt
+@login_required
+def parse_email(email_id):
+    print(email_id)
     flash('Your email has been parsed.', 'error')
     return redirect(url_for('user.inbox'))
 
@@ -281,6 +301,7 @@ def add_rule():
         category = request.form.get('category')
         options = request.form.get(category + '_options')
         name = request.form['name']
+        args = request.form['args']
 
         from app.blueprints.parse.models.rule import Rule
 
@@ -290,6 +311,7 @@ def add_rule():
         r.category = category
         r.options = options
         r.name = name
+        r.args = args
 
         db.session.add(r)
         db.session.commit()

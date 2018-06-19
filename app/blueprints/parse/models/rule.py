@@ -18,6 +18,7 @@ class Rule(ResourceMixin, db.Model):
     section = db.Column(db.Text, nullable=True, default='')
     category = db.Column(db.Text, nullable=True, default='')
     options = db.Column(db.Text, nullable=True, default='')
+    args = db.Column(db.Text, nullable=True, default='')
 
     def __init__(self, **kwargs):
         # Call Flask-SQLAlchemy's constructor.

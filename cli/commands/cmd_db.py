@@ -62,7 +62,7 @@ def init(with_testdb):
         r = Rule()
         r.mailbox_id = user.mailbox_id
         r.section = rule
-        r.name = 'Parsing rule for: ' + rule
+        r.name = 'Parsing rule for section: ' + rule
         r.category = random.choice(['extract', 'replace', 'remove'])
         r.options = get_rule_options(r.category)
         r.save()

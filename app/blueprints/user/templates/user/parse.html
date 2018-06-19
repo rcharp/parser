@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
-    <title>Rules - Parser</title>
+    <title>Parse - Parser</title>
 
     <!-- Google Analytics code -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-118470858-1"></script>
@@ -87,11 +87,12 @@
                           box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
                           border-radius: 8px;
                           background-color:#fff;">
+                        <h2>Parse an email</h2>
                             <div class="card-block bg-info" style="background-color: #1e88e5 !important;
                             flex: 1 1 auto; padding: 1.25rem;">
                                 <h4 class="text-white card-title"
-                                    style="color: #ffffff !important;font-weight:400;">Your Parsing Rules ({{ rules|length }})
-                                    <a href="{{ url_for('user.rules') }}" class="refresh" style="background-color: #ffffff;
+                                    style="color: #ffffff !important;font-weight:400;">Choose a rule below or
+                                    <a href="{{ url_for('user.add') }}" class="add" style="background-color: #ffffff;
                                                                                 border: none;
                                                                                 float:none;
                                                                                 color: #007fd8;
@@ -106,11 +107,17 @@
                                                                                 margin-left:15px;
                                                                                 height:45px;
                                                                                 cursor: pointer;">
-                                       Refresh <img src="../../../../static/images/refresh2.png" width="16px">
+                                       Add a Rule
                                     </a>
                                 </h4>
                             </div>
-                            <form action="{{ url_for('user.edit_rules') }}" method="POST" id="rule" name="rule">
+                            <form action="{{ url_for('user.parse_email', email_id=email.id) }}" method="POST" id="parse" name="parse">
+                                <div class="card-block" style="flex: 1 1 auto;padding: 5.25rem;outline: none;">
+                                    <h4><b>Email to be Parsed:</b></h4>
+                                    From: {{ email.sender }}<br />
+                                    Subject: {{ email.subject }}<br />
+                                    Date: {{ email.date }}<br />
+                                </div>
                                 <div class="card-block" style="flex: 1 1 auto;padding: 5.25rem;outline: none;">
                                     <table class="table">
                                         <thead>
@@ -120,39 +127,24 @@
                                                 <td>Section</td>
                                                 <td>Category</td>
                                                 <td>Options</td>
-                                                <td>Values</td>
                                             </tr>
                                         </thead>
                                             <tbody>
                                                 {% for rule in rules %}
                                                     <tr style="height:40px;" valign="middle">
                                                         <td style="vertical-align:middle">
-                                                            <input id="delete" name="delete" type="checkbox" class="checkbox" value="{{ rule.id }}" onclick="Checked()"/>
+                                                            <input id="{{ rule.id }}" name="select" type="checkbox" class="checkbox" value="{{ rule.id }}" onclick="Checked(this)"/>
                                                         </td>
                                                         <td style="vertical-align:middle">{{ rule.name|title }}</td>
                                                         <td style="vertical-align:middle">{{ rule.section|title }}</td>
                                                         <td style="vertical-align:middle">{{ rule.category|title }}</td>
                                                         <td style="vertical-align:middle">{{ rule.options|title }}</td>
-                                                        <td style="vertical-align:middle">{{ rule.args|title }}</td>
                                                     </tr>
                                                 {% endfor %}
                                             </tbody>
                                         <!--/form-->
                                     </table>
-                                    <a href="{{ url_for('user.add') }}" class="add" style="background-color: #4CAF50;
-                                                                        border: none;
-                                                                        float:none;
-                                                                        color: white;
-                                                                        padding: 15px 32px;
-                                                                        text-align: center;
-                                                                        text-decoration: none;
-                                                                        display: inline-block;
-                                                                        font-size: 16px;
-                                                                        margin: auto;
-                                                                        cursor: pointer;">
-                                        Add Rule
-                                    </a>
-                                    <button type="submit" form="rule" value="save" class="save_button" name="action" id="save_button"
+                                    <button type="submit" form="parse" value="parse" class="parse_button" name="action" id="parse_button"
                                             style="background-color: #007FD8;
                                                                         border: none;
                                                                         float:none;
@@ -164,11 +156,12 @@
                                                                         font-size: 16px;
                                                                         margin: auto;
                                                                         cursor: pointer;">
-                                        Save Rule(s)
+                                        Parse Email
                                     </button>
-                                    <button type="submit" form="rule" value="delete" class="delete_button" name="action" id="delete_button"
+                                    <a href="{{ url_for('user.inbox') }}" type="button" value="cancel" class="cancel_button" name="action" id="cancel_button"
                                             style="background-color: #FF0000;
                                                     border: none;
+                                                    min-width:150px;
                                                     float:none;
                                                     color: white;
                                                     padding: 15px 32px;
@@ -178,11 +171,11 @@
                                                     font-size: 16px;
                                                     margin: auto;
                                                     cursor: pointer;">
-                                       Delete rules
-                                    </button>
+                                    Cancel
+                                </a>
                                 </div>
-                            </form>
-                        </div> <!-- End contacts -->
+                            </form><!-- End contacts -->
+                        </div>
                     </div>
                 </div>
                 <!-- Row -->
@@ -232,118 +225,18 @@
     <script src="../../../page/templates/lite/js/dashboard1.js"></script>
     <!-- End Chart JS -->
     <script>
-        jQuery(function(){
-            jQuery('a.add-rule').click(function(event){
-                event.preventDefault();
 
-                var newRow = jQuery('<tr style="height:40px;" valign="middle"><td></td><td><input type="text" id="new_rule" name="new_rule"/></td><td></td>' +
-                    '<td style="vertical-align:middle"><a href="#" title="" class="cancel" style="text-align:center">Cancel</a></td>');
-                jQuery('table.table').append(newRow);
+        function Checked(sel) {
+            $( "#" + sel.value ).prop( "checked", true );
 
-                // Show the save button
-                document.getElementById('save_button').style.display = 'inline-block';
+            var others = $('input[type="checkbox"]').not("#" + sel.value);
 
-                // Handle the cancel click
-                jQuery('a.cancel').click(function(event){
-                event.preventDefault();
+            others.prop('checked', false);
 
-                $(this).closest('tr').remove();
-
-                // If you cancel the final new row, hide the save button again
-                var new_rows = document.getElementsByName("new_rule");
-                if(new_rows.length === 0) {
-                    document.getElementById('save_button').style.display = 'none';
-                }
-
-                });
-            });
-        });
-
-        function Checked() {
-            var to_delete = document.getElementsByClassName("checkbox");
-            var count = 0;
-
-            for(var i = 0; i < to_delete.length; i++) {
-                if (to_delete[i].checked) {
-                    count++;
-                }
-            }
-
-            if (count === 0) {
-                document.getElementById('delete_button').style.display = 'none';
-            }
-            else {
-                // Show the save button
-                document.getElementById('delete_button').style.display = 'inline-block';
-                document.getElementById('delete_button').innerText = 'Delete (' + count + ') rules';
-            }
-
+            document.getElementById('parse_button').style.display = 'inline-block';
+            document.getElementById('cancel_button').style.display = 'inline-block';
         }
     </script>
-
-    <!--script type="text/javascript">
-        function Validate(form) {
-            var this_id = "";
-            alert(form);
-            if(this_id === 'save_button') {
-                alert("save");
-                var new_rows = document.getElementsByName("new_rule");
-                for(var row in new_rows) {
-                    if (row.length === 0 || $.trim(row).val() === "") {
-                        alert('New rules can\'t be empty.');
-                        return false;
-                    }
-                }
-            }
-            else if(this_id === 'delete_button') {
-                alert("delete");
-                var to_delete = document.getElementsByClassName("checkbox");
-                var count = 0;
-
-                for(var i = 0; i < to_delete.length; i++) {
-                    if (to_delete[i].checked) {
-                        count++;
-                    }
-                }
-
-                if (count === 0) {
-                    return false;
-                }
-            }
-
-        }
-
-        $('#rule').submit(function() {
-            jQuery(':button').click(function () {
-                if (this.id === 'save_button') {
-                    var new_rows = document.getElementsByName("new_rule");
-                    for(var row in new_rows) {
-                        if (row.length === 0 || $.trim(row).val() === "") {
-                            alert('New rules can\'t be empty.');
-                            return false;
-                        }
-                    }
-                }
-
-                else if (this.id === 'delete_button') {
-                    var to_delete = document.getElementsByClassName("checkbox");
-                    var count = 0;
-
-                    for(var i = 0; i < to_delete.length; i++) {
-                        if (to_delete[i].checked) {
-                            count++;
-                        }
-                    }
-
-                    if (count === 0) {
-                        return false;
-                    }
-
-                    return true;
-                }
-            });
-        });
-    </script-->
 
 </body>
 {% endblock %}
