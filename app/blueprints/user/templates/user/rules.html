@@ -141,7 +141,7 @@
                                                 {% for rule in rules %}
                                                     <tr style="height:40px;" valign="middle">
                                                         <td style="vertical-align:middle">
-                                                            <input id="delete" name="delete" type="checkbox" class="checkbox" value="{{ rule[1] }}" onclick="Checked()"/>
+                                                            <input id="delete" name="delete" type="checkbox" class="checkbox" value="{{ rule.id }}" onclick="Checked()"/>
                                                         </td>
                                                         <td style="vertical-align:middle">{{ rule.name|title }}</td>
                                                         <td style="vertical-align:middle">{{ rule.section|title }}</td>

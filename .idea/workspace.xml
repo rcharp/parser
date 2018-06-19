@@ -2,15 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f1637133-ccae-40ab-aec7-a4a76f8f54a9" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/app/blueprints/parse/models/rule.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/parse/models/rule.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/blueprints/parse/parse.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/parse/parse.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/blueprints/parse/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/parse/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/blueprints/user/templates/user/add.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/user/templates/user/add.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/blueprints/user/templates/user/inbox.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/user/templates/user/inbox.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/blueprints/user/templates/user/rules.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/user/templates/user/rules.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/blueprints/user/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/user/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/celerybeat-schedule" beforeDir="false" afterPath="$PROJECT_DIR$/celerybeat-schedule" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/commands/cmd_db.py" beforeDir="false" afterPath="$PROJECT_DIR$/cli/commands/cmd_db.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -45,7 +37,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="inbox.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="inbox.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/blueprints/user/templates/user/inbox.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="278">
@@ -115,11 +107,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="rules.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="rules.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/blueprints/user/templates/user/rules.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1218">
-              <caret line="148" column="111" selection-start-line="148" selection-start-column="111" selection-end-line="148" selection-end-column="111" />
+            <state relative-caret-position="319">
+              <caret line="143" column="143" selection-start-line="143" selection-start-column="143" selection-end-line="143" selection-end-column="143" />
               <folding>
                 <element signature="n#style#0;n#td#0;n#tr#0;n#thead#0;n#table#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
               </folding>
@@ -227,12 +219,12 @@
         <option value="$PROJECT_DIR$/instance/settings.py" />
         <option value="$PROJECT_DIR$/app/blueprints/parse/models/rule.py" />
         <option value="$PROJECT_DIR$/cli/commands/cmd_db.py" />
-        <option value="$PROJECT_DIR$/app/blueprints/user/templates/user/rules.html" />
         <option value="$PROJECT_DIR$/app/blueprints/parse/parse.py" />
         <option value="$PROJECT_DIR$/app/blueprints/user/templates/user/add.html" />
         <option value="$PROJECT_DIR$/app/blueprints/parse/views.py" />
         <option value="$PROJECT_DIR$/app/blueprints/user/views.py" />
         <option value="$PROJECT_DIR$/app/blueprints/user/templates/user/inbox.html" />
+        <option value="$PROJECT_DIR$/app/blueprints/user/templates/user/rules.html" />
       </list>
     </option>
   </component>
@@ -412,8 +404,8 @@
       <window_info anchor="bottom" id="Run" order="2" weight="0.3289183" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Python Console" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.49513888" visible="true" weight="0.3193658" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21794872" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" sideWeight="0.49513888" visible="true" weight="0.3193658" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21794872" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="right" id="SciView" order="3" />
@@ -754,16 +746,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/blueprints/user/templates/user/rules.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1218">
-          <caret line="148" column="111" selection-start-line="148" selection-start-column="111" selection-end-line="148" selection-end-column="111" />
-          <folding>
-            <element signature="n#style#0;n#td#0;n#tr#0;n#thead#0;n#table#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/blueprints/user/templates/user/add.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="298">
@@ -828,6 +810,16 @@
           <caret line="143" column="82" lean-forward="true" selection-start-line="143" selection-start-column="82" selection-end-line="143" selection-end-column="82" />
           <folding>
             <element signature="n#style#0;n#a#0;n#td#5;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/blueprints/user/templates/user/rules.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="319">
+          <caret line="143" column="143" selection-start-line="143" selection-start-column="143" selection-end-line="143" selection-end-column="143" />
+          <folding>
+            <element signature="n#style#0;n#td#0;n#tr#0;n#thead#0;n#table#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
