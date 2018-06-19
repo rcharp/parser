@@ -221,28 +221,6 @@ def update_credentials():
 
 
 # Emails -------------------------------------------------------------------
-@user.route('/get_inbox', methods=['GET', 'POST'])
-@login_required
-def get_inbox():
-
-    # Create a user id for the user
-    mailbox_id = generate_mailbox_id()
-    current_user.mailbox_id = mailbox_id
-
-    # Create an inbox for the user
-    if create_inbox(mailbox_id):
-        current_user.active_mailbox = True
-        flash('Your inbox has been created.', 'success')
-    else:
-        flash('There was a problem creating an inbox for you. Please try again.', 'error')
-        current_user.active_mailbox = False
-
-    current_user.save()
-
-    flash('Your sign in settings have been updated.', 'success')
-    return redirect(url_for('user.settings'))
-
-
 @user.route('/delete_emails', methods=['GET', 'POST'])
 @csrf.exempt
 @login_required
@@ -262,6 +240,15 @@ def delete_emails():
     return redirect(url_for('user.inbox'))
 
 
+@user.route('/parse_email/id', methods=['GET', 'POST'])
+@csrf.exempt
+@login_required
+def parse_email(id):
+
+    flash('Your email has been parsed.', 'error')
+    return redirect(url_for('user.inbox'))
+
+
 # Rules -------------------------------------------------------------------
 @user.route('/rules', methods=['GET', 'POST'])
 @login_required
@@ -278,30 +265,36 @@ def rules():
         return redirect(url_for('user.settings'))
 
 
-@user.route('/add_rule/', methods=['GET', 'POST'])
+@user.route('/add_rule', methods=['GET', 'POST'])
 @csrf.exempt
 @login_required
 def add_rule():
     if request.method == 'POST':
-        # Get the new rules
-        new_rules = request.form.getlist('new_rule')
 
-        if '' in new_rules:
-            rules = list(filter(None, new_rules))
-        else:
-            rules = new_rules
+        # Get the new rules
+        sections = request.form.getlist('checkbox')
+
+        if '' in sections:
+            sections = list(filter(None, sections))
+
+        section = sections[0]
+        category = request.form.get('category')
+        options = request.form.get(category + '_options')
+        name = request.form['name']
 
         from app.blueprints.parse.models.rule import Rule
 
-        for rule in rules:
-            r = Rule()
-            r.mailbox_id = current_user.mailbox_id
-            r.rule = rule
+        r = Rule()
+        r.mailbox_id = current_user.mailbox_id
+        r.section = section
+        r.category = category
+        r.options = options
+        r.name = name
 
-            db.session.add(r)
+        db.session.add(r)
         db.session.commit()
 
-    flash('Rules have been successfully added.', 'success')
+    flash('Rule has been successfully added.', 'success')
     return redirect(url_for('user.rules'))
 
 
@@ -403,6 +396,28 @@ def inbox():
             else:
                 flash('You don\'t have an inbox yet. Please get one below.', 'error')
         return redirect(url_for('user.settings'))
+
+
+@user.route('/get_inbox', methods=['GET', 'POST'])
+@login_required
+def get_inbox():
+
+    # Create a user id for the user
+    mailbox_id = generate_mailbox_id()
+    current_user.mailbox_id = mailbox_id
+
+    # Create an inbox for the user
+    if create_inbox(mailbox_id):
+        current_user.active_mailbox = True
+        flash('Your inbox has been created.', 'success')
+    else:
+        flash('There was a problem creating an inbox for you. Please try again.', 'error')
+        current_user.active_mailbox = False
+
+    current_user.save()
+
+    flash('Your sign in settings have been updated.', 'success')
+    return redirect(url_for('user.settings'))
 
 
 # Webhooks -------------------------------------------------------------------

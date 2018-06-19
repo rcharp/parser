@@ -27,6 +27,7 @@
           rel="stylesheet">
     <!-- Bootstrap Core CSS -->
     <link href="../../../page/templates/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../../../../static/simple/css/compiled/theme.css">
     <!-- chartist CSS --
     <link href="../../../page/templates/assets/plugins/chartist-js/dist/chartist.min.css" rel="stylesheet">
     <link href="../../../page/templates/assets/plugins/chartist-js/dist/chartist-init.css" rel="stylesheet">
@@ -120,6 +121,7 @@
                                                 <td>Subject</td>
                                                 <td>Date</td>
                                                 <td>Status</td>
+                                                <td>Actions</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -136,6 +138,12 @@
                                                             <span class="label label-success">Parsed</span>
                                                         {% elif email.parsed == 0 %}
                                                             <span class="label label-danger">Not Parsed</span>
+                                                        {% endif %}
+                                                    </td>
+                                                    <td style="vertical-align:middle">
+                                                        {% if email.parsed == 0 %}
+                                                            <a href="{{ url_for('user.parse_email', id=email.id) }}"
+                                                               style="border:1px solid; border-radius:4px;padding:10px;">Parse</a>
                                                         {% endif %}
                                                     </td>
                                                 </tr>

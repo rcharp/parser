@@ -131,9 +131,10 @@
                                         <thead>
                                             <tr style="font-weight:bold;">
                                                 <td style="width:40px;"></td>
-                                                <td>Rule</td>
-                                                <td></td>
-                                                <td></td>
+                                                <td>Rule Name</td>
+                                                <td>Section</td>
+                                                <td>Category</td>
+                                                <td>Options</td>
                                             </tr>
                                         </thead>
                                             <tbody>
@@ -142,9 +143,10 @@
                                                         <td style="vertical-align:middle">
                                                             <input id="delete" name="delete" type="checkbox" class="checkbox" value="{{ rule[1] }}" onclick="Checked()"/>
                                                         </td>
-                                                        <td style="vertical-align:middle">{{ rule[0] }}</td>
-                                                        <td></td>
-                                                        <td></td>
+                                                        <td style="vertical-align:middle">{{ rule.name|title }}</td>
+                                                        <td style="vertical-align:middle">{{ rule.section|title }}</td>
+                                                        <td style="vertical-align:middle">{{ rule.category|title }}</td>
+                                                        <td style="vertical-align:middle">{{ rule.options|title }}</td>
                                                     </tr>
                                                 {% endfor %}
                                             </tbody>
@@ -163,7 +165,7 @@
                                                                         cursor: pointer;">
                                         Add Rule
                                     </a-->
-                                    <a href="{{ url_for('add') }}" class="add" style="background-color: #4CAF50;
+                                    <a href="{{ url_for('user.add') }}" class="add" style="background-color: #4CAF50;
                                                                         border: none;
                                                                         float:none;
                                                                         color: white;

@@ -1,4 +1,5 @@
 import re
+import random
 from app.extensions import db
 from flanker.addresslib import address
 from app.blueprints.parse.models.email import Email
@@ -85,7 +86,18 @@ def get_emails(mailbox_id):
 
 
 def get_rules(mailbox_id):
-    return Rule.query.with_entities(Rule.rule, Rule.id).filter(Rule.mailbox_id == mailbox_id).all()
+    return Rule.query.filter(Rule.mailbox_id == mailbox_id).all()
+    # return Rule.query.with_entities(Rule.rule, Rule.id).filter(Rule.mailbox_id == mailbox_id).all()
+
+
+def get_rule_options(rule):
+    if rule == 'extract':
+        return random.choice(['Find rows with certain text', 'Find all email addresses', 'Find content by line number',
+                              'Find all text after selection', 'Find all text before selection', 'Find all URLs'])
+    elif rule == 'remove':
+        return random.choice(['Remove specific content', 'Remove all links', 'Remove blank lines'])
+    else:
+        return 'Find and replace content'
 
 
 # Create test user and email -------------------------------------------------------------------

@@ -79,7 +79,7 @@
                     </div>
                 </div>
                 <hr />
-                <form action="{{ url_for('user.edit_rules') }}" method="POST" id="rule" name="rule">
+                <form action="{{ url_for('user.add_rule') }}" method="POST" id="rule" name="rule" onsubmit="return ValidateForm()">
                 <div class="row" style="padding-top:30px;color:#007fd8;margin:0 auto;margin-bottom:30px;max-width:95%;width:95%;">
                     <div class="col-lg-14">
                         <div class="card-lite" style="min-height: 180px; margin-bottom:30px;
@@ -109,7 +109,7 @@
                                                                           background-color:#fff;">
                                                 <div class="card-block" style="flex: 1 1 auto;padding: 5.25rem;outline: none;">
                                                     <h6>Subject</h6>
-                                                    <input id="subject" name="subject" type="checkbox" class="checkbox" value="subject"/>
+                                                    <input id="subject" name="checkbox" type="checkbox" class="checkbox" value="subject"/>
                                                 </div>
                                             </button>
                                         </div>
@@ -125,7 +125,7 @@
                                                                           background-color:#fff;">
                                                 <div class="card-block" style="flex: 1 1 auto;padding: 5.25rem;outline: none;">
                                                     <h6>From</h6>
-                                                    <input id="from" name="from" type="checkbox" class="checkbox" value="from"/>
+                                                    <input id="from" name="checkbox" type="checkbox" class="checkbox" value="from"/>
                                                 </div>
                                             </button>
                                         </div>
@@ -141,7 +141,7 @@
                                                                           background-color:#fff;">
                                                 <div class="card-block" style="flex: 1 1 auto;padding: 5.25rem;outline: none;">
                                                     <h6>To</h6>
-                                                    <input id="to" name="to" type="checkbox" class="checkbox" value="to"/>
+                                                    <input id="to" name="checkbox" type="checkbox" class="checkbox" value="to"/>
                                                 </div>
                                             </button>
                                         </div>
@@ -157,7 +157,7 @@
                                                                           background-color:#fff;">
                                                 <div class="card-block" style="flex: 1 1 auto;padding: 5.25rem;outline: none;">
                                                     <h6>Body</h6>
-                                                    <input id="body" name="body" type="checkbox" class="checkbox" value="body"/>
+                                                    <input id="body" name="checkbox" type="checkbox" class="checkbox" value="body"/>
                                                 </div>
                                             </button>
                                         </div>
@@ -173,7 +173,7 @@
                                                                           background-color:#fff;">
                                                 <div class="card-block" style="flex: 1 1 auto;padding: 5.25rem;outline: none;">
                                                     <h6>CC</h6>
-                                                    <input id="cc" name="cc" type="checkbox" class="checkbox" value="cc"/>
+                                                    <input id="cc" name="checkbox" type="checkbox" class="checkbox" value="cc"/>
                                                 </div>
                                             </button>
                                         </div>
@@ -189,7 +189,7 @@
                                                                           background-color:#fff;">
                                                 <div class="card-block" style="flex: 1 1 auto;padding: 5.25rem;outline: none;">
                                                     <h6>Headers</h6>
-                                                    <input id="headers" name="headers" type="checkbox" class="checkbox" value="headers"/>
+                                                    <input id="headers" name="checkbox" type="checkbox" class="checkbox" value="headers"/>
                                                 </div>
                                             </button>
                                         </div>
@@ -239,7 +239,7 @@
                                               display:inline-block;
                                               background-color:#fff;">
                                                 <h5>Choose a parsing category:</h5>
-                                                <select id="category" style="width:100%" onchange="SelectOptions(this);">
+                                                <select id="category" name="category" style="width:100%" onchange="SelectOptions(this);">
                                                     <option disabled selected value> -- select an option -- </option>
                                                     <option value="extract">Extract Specific Content</option>
                                                     <option value="replace">Find & Replace Content</option>
@@ -257,14 +257,14 @@
                                               display:none;
                                               background-color:#fff;">
                                                 <h5>Choose your parsing options:</h5>
-                                                <select id="extract_options" style="width:100%;" onchange="ShowInfo(this);">
+                                                <select id="extract_options" name="extract_options" style="width:100%;" onchange="ShowInfo(this);">
                                                     <option disabled selected value> -- select an option -- </option>
-                                                    <option value="rows">Find rows with certain text</option>
-                                                    <option value="email">Find all email addresses</option>
-                                                    <option value="line_number">Find by line number</option>
-                                                    <option value="text_after">Find all text after</option>
-                                                    <option value="text_before">Find all text before</option>
-                                                    <option value="url">Find all URLs</option>
+                                                    <option value="Find rows with certain text">Find rows with certain text</option>
+                                                    <option value="Find all email addresses">Find all email addresses</option>
+                                                    <option value="Find content by line number">Find by line number</option>
+                                                    <option value="Find all text after selection">Find all text after</option>
+                                                    <option value="Find all text before selection">Find all text before</option>
+                                                    <option value="Find all URLs">Find all URLs</option>
                                                 </select>
                                             </div>
                                             <div class="card-lite" id="replace" style="min-height: 40px; margin-bottom:30px;
@@ -276,9 +276,9 @@
                                               display:none;
                                               background-color:#fff;">
                                                 <h5>Choose your parsing options:</h5>
-                                                <select id="replace_options" style="width:100%;" onchange="ShowInfo(this);">
+                                                <select id="replace_options" name="replace_options" style="width:100%;" onchange="ShowInfo(this);">
                                                     <option disabled selected value> -- select an option -- </option>
-                                                    <option value="replace">Find & replace</option>
+                                                    <option value="Find and replace content">Find & replace</option>
                                                 </select>
                                             </div>
                                             <div class="card-lite" id="remove" style="min-height: 40px; margin-bottom:30px;
@@ -290,11 +290,11 @@
                                               display:none;
                                               background-color:#fff;">
                                                 <h5>Choose your parsing options:</h5>
-                                                <select id="remove_options" style="width:100%;" onchange="ShowInfo(this);">
+                                                <select id="remove_options" name="remove_options" style="width:100%;" onchange="ShowInfo(this);">
                                                     <option disabled selected value> -- select an option -- </option>
-                                                    <option value="remove">Remove specific content</option>
-                                                    <option value="remove_links">Remove all links</option>
-                                                    <option value="blank">Remove blank lines</option>
+                                                    <option value="Remove specific content">Remove specific content</option>
+                                                    <option value="Remove all links">Remove all links</option>
+                                                    <option value="Remove blank lines">Remove blank lines</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -334,7 +334,9 @@
                                 <h5>Give your rule a name so you can find it easily.</h5>
                                 <div class="row" style="padding-top:30px;color:#007fd8;margin:0 auto;margin-bottom:30px;max-width:95%;width:95%;">
                                     <div class="col-md-12" id="start_column">
-                                        <input id="name" name="name" type="text" class="text" value="" onclick="ShowSave()"/>
+                                        <label for="name">Rule name: &nbsp;</label>
+                                        <input id="name" name="name" type="text" class="text" value="" style="width:40%" onclick="ShowSave()"/><br />
+                                        <p style="display:none" id="name_error"><span style="color:red">Please enter a name for this rule.</span></p>
                                     </div>
                                 </div>
                                 <button type="submit" form="rule" value="save" class="save_button" name="action" id="save_button"
@@ -422,6 +424,14 @@
     <!-- End Chart JS -->
     <script>
 
+        function ValidateForm() {
+            var name = document.getElementsByName("name");
+            if (name.length === 0 || $.trim(name).val() === "") {
+                document.getElementById('name_error').style.display = 'inline-block';
+                return false;
+            }
+        }
+
         function SelectOptions(sel) {
 
             document.getElementById(sel.value).style.display = 'inline-block';
@@ -472,42 +482,42 @@
             var info = sel.value;
             var text = "";
 
-            if(info === "rows") {
+            if(info === "Find rows with certain text") {
                 text = "Find all rows that contain specific text. This is good for getting content that is labeled, such as an invoice that has " +
-                    "labeled rows such as Name: Your Customer \n Payment: $150 \netc etc.";
+                    "labeled rows such as:<br /><br /> Name: Your Customer <br />Payment: $150 <br />Date: March 1, 2016<br /><br />";
             }
-            else if (info === "email") {
+            else if (info === "Find all email addresses") {
                 text = "Extract all email addresses in the selected area. This is great for getting contact info in a handy list.";
             }
-            else if (info === "line_number") {
+            else if (info === "Find content by line number") {
                 text = "Return all data on a specific line number. For example, if you know contact info is always on the third line, " +
                     "this can help you quickly get exactly what you're looking for.";
             }
-            else if (info === "text_after") {
+            else if (info === "Find all text after selection") {
                 text = "Get all of the text after a specific string. An example is extracting the signature from the end of an email.";
             }
-            else if (info === "text_before") {
+            else if (info === "Find all text before selection") {
                 text = "Get all of the text before a specific string. An example would be to only get everything up to the forwarded part " +
                     "of a forwarded email.";
             }
-            else if (info === "url") {
+            else if (info === "Find all URLs") {
                 text = "Get a list of all URL links in the selected area.";
             }
-            else if (info === "replace") {
+            else if (info === "Find and replace content") {
                 text = "Find specific text in the selected area and replace it with something else. This is useful if you want to quickly rename or tag " +
                     "specific parts of the email.";
             }
-            else if (info === "remove") {
+            else if (info === "Remove specific content") {
                 text = "Remove certain text from the selected area. This is great for quickly removing all private info that you don't want seen.";
             }
-            else if (info === "remove_links") {
+            else if (info === "Remove all links") {
                 text = "Remove all links from the selected area. This will help you to clean it up and only have the plain text.";
             }
-            else if (info === "blank") {
+            else if (info === "Remove blank lines") {
                 text = "Remove all blank lines from the selected area. This will help to cut down on the size of the email and make it easier to read.";
             }
 
-            document.getElementById("info").innerHTML = '<div style="min-height:40px;line-height:16px;text-align:center;">' + text + '</div>';
+            document.getElementById("info").innerHTML = '<div style="min-height:40px;line-height:16px;text-align:left;">' + text + '</div>';
         }
     </script>
 

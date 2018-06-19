@@ -1,10 +1,12 @@
 import click
+import random
 
 from sqlalchemy_utils import database_exists, create_database
 
 from app.app import create_app
 from app.extensions import db
 from app.blueprints.user.models import User
+from app.blueprints.parse.parse import get_rule_options
 
 # Create an app context for the database connection.
 app = create_app()
@@ -50,6 +52,20 @@ def init(with_testdb):
     user.password = User.encrypt_password(app.config['SEED_ADMIN_PASSWORD'])
 
     user.save()
+
+    from app.blueprints.parse.models.rule import Rule
+
+    # Create default rules
+    rules = ['From', 'To', 'Subject', 'Date']
+
+    for rule in rules:
+        r = Rule()
+        r.mailbox_id = user.mailbox_id
+        r.section = rule
+        r.name = 'Parsing rule for: ' + rule
+        r.category = random.choice(['extract', 'replace', 'remove'])
+        r.options = get_rule_options(r.category)
+        r.save()
 
     # db.session.add(user)
     # db.session.commit()
