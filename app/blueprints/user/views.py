@@ -276,9 +276,10 @@ def parse(email_id):
 def parse_email(email_id):
 
     rule_id = 1
+    print(email_id)#
 
     # parse_email(email_id,rule_id)
-    flash('Your email has been parsed.', 'error')
+    flash('Your email has been parsed.', 'success')
     return redirect(url_for('user.inbox'))
 
 

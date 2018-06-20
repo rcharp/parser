@@ -20,12 +20,12 @@ def parse_email(email_id, rule_id):
     subject = parse_subject(msg['Subject'], None)
     date = msg['Date']
     body = msg['body-plain'].strip()
-    from_ = ''
+    # from_ = ''
 
     # Get the original sender.
     sender = re.search('From: (.+?)\n', msg['body-plain'])
     if sender:
-        from_ = parse_from(str(address.parse(sender.group(1))), None) if address.parse(sender.group(1))\
+        sender = parse_from(str(address.parse(sender.group(1))), None) if address.parse(sender.group(1))\
             else parse_from(str(sender.group(1)), None)
 
     # Ensure that the user exists
@@ -42,7 +42,7 @@ def parse_email(email_id, rule_id):
         e.subject = subject
         e.date = date
         e.body = body
-        e.sender = from_
+        e.sender = sender
         e.parsed = 1
 
         # Add the email to the database
