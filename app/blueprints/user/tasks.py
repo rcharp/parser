@@ -1,6 +1,12 @@
+import time
 from lib.flask_mailplus import send_template_message
+from app.extensions import cache, db
 from app.app import create_celery_app
 from app.blueprints.user.models import User
+from app.blueprints.parse.models.email import Email
+from app.blueprints.parse.models.rule import Rule
+
+
 celery = create_celery_app()
 
 
@@ -27,3 +33,71 @@ def deliver_password_reset_email(user_id, reset_token):
                           template='user/mail/password_reset', ctx=ctx)
 
     return None
+
+
+# Emails -------------------------------------------------------------------
+@celery.task()
+def get_emails(mailbox_id):
+    emails = []
+
+    for email in Email.query.filter(Email.mailbox_id == mailbox_id).all():
+        emails.append({'id':email.id,'sender':email.sender,'subject':email.subject,'date':email.date,'body':email.body,'parsed':email.parsed})
+
+    return emails
+
+
+@celery.task()
+def delete_emails(email):
+    Email.query.filter(Email.id == email).delete()
+
+
+# Rules -------------------------------------------------------------------
+@celery.task()
+def get_rules(mailbox_id):
+    rules = []
+    for rule in Rule.query.filter(Rule.mailbox_id == mailbox_id).all():
+        rules.append({'id':rule.id,'name':rule.name,'section':rule.section,'category':rule.category,'options':rule.options,'args':rule.args})
+
+    return rules
+
+
+@celery.task()
+def add_rule(section, category, options, name, args, mailbox_id):
+
+    from app.blueprints.parse.models.rule import Rule
+
+    r = Rule()
+    r.mailbox_id = mailbox_id
+    r.section = section
+    r.category = category
+    r.options = options
+    r.name = name
+    r.args = args
+
+    db.session.add(r)
+    db.session.commit()
+
+
+@celery.task()
+def delete_rules(to_delete):
+    from app.blueprints.parse.models.rule import Rule
+
+    for item in to_delete:
+        Rule.query.filter(Rule.id == item).delete()
+
+    db.session.commit()
+
+
+# Cache -------------------------------------------------------------------
+@celery.task()
+def set_cache(mailbox_id, emails_id):
+
+    emails = get_emails.AsyncResult(emails_id)
+
+    if emails.state != 'PENDING':
+        cache.set(mailbox_id, emails)
+        print("Successfully set cache.")
+        print(emails)
+    else:
+        time.sleep(1)
+        set_cache(mailbox_id, emails_id)

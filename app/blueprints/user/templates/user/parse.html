@@ -59,15 +59,15 @@
     <!-- ============================================================== -->
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
-    <div id="main-wrapper" style="overflow:auto;width:85%;margin:auto;min-height:800px;height:1000px;">
+    <div id="main-wrapper" style="width:85%;margin:auto;min-height:800px;height:100%;overflow:hidden">
         <!-- ============================================================== -->
         <!-- Page wrapper  -->
         <!-- ============================================================== -->
-        <div class="page-wrapper">
+        <div class="page-wrapper" style="height:100%; overflow:hidden">
             <!-- ============================================================== -->
             <!-- Container fluid  -->
             <!-- ============================================================== -->
-            <div class="container-fluid">
+            <div class="container-fluid" style="height:100%; overflow:hidden">
                 <!-- ============================================================== -->
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
@@ -79,7 +79,8 @@
                     </div>
                 </div>
                 <hr />
-                <div class="row" style="padding-top:30px;color:#007fd8">
+                <h2 style="color:#007fd8">Parse an email</h2>
+                <div class="row" style="padding-top:30px;color:#007fd8;overflow-x:auto;overflow-y:hidden">
                     <div class="col-lg-14">
                         <div class="card-lite" style="min-height: 180px; margin-bottom:30px;
                           min-width: 250px;
@@ -87,11 +88,10 @@
                           box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
                           border-radius: 8px;
                           background-color:#fff;">
-                        <h2>Parse an email</h2>
                             <div class="card-block bg-info" style="background-color: #1e88e5 !important;
                             flex: 1 1 auto; padding: 1.25rem;">
-                                <h4 class="text-white card-title"
-                                    style="color: #ffffff !important;font-weight:400;">Choose a rule below or
+                                <h4 class="text-white card-title" style="color: #ffffff !important;font-weight:400;">
+                                    Choose a rule below or
                                     <a href="{{ url_for('user.add') }}" class="add" style="background-color: #ffffff;
                                                                                 border: none;
                                                                                 float:none;
@@ -127,6 +127,7 @@
                                                 <td>Section</td>
                                                 <td>Category</td>
                                                 <td>Options</td>
+                                                <td>Values</td>
                                             </tr>
                                         </thead>
                                             <tbody>
@@ -139,6 +140,7 @@
                                                         <td style="vertical-align:middle">{{ rule.section|title }}</td>
                                                         <td style="vertical-align:middle">{{ rule.category|title }}</td>
                                                         <td style="vertical-align:middle">{{ rule.options|title }}</td>
+                                                        <td style="vertical-align:middle">{{ rule.args|title }}</td>
                                                     </tr>
                                                 {% endfor %}
                                             </tbody>

@@ -79,6 +79,7 @@
                     </div>
                 </div>
                 <hr />
+                <h2 style="color:#007fd8">Add a rule</h2>
                 <form action="{{ url_for('user.add_rule') }}" method="POST" id="rule" name="rule" onsubmit="return ValidateForm()">
                 <div class="row" style="padding-top:30px;color:#007fd8;margin:0 auto;margin-bottom:30px;max-width:95%;width:95%;">
                     <div class="col-lg-14">
@@ -90,11 +91,11 @@
                           background-color:#fff;">
                             <div class="card-block bg-info" style="background-color: #1e88e5 !important;
                             flex: 1 1 auto; padding: 1.25rem;">
-                                <h4 class="text-white card-title"
-                                    style="color: #ffffff !important;font-weight:400;">1. Choose the email section
+                                <h4 class="text-white card-title" style="color: #ffffff !important;font-weight:400;">
+                                    1. Choose the email section
                                 </h4>
                             </div>
-                            <div class="card-block" style="flex: 1 1 auto;padding: 5.25rem;outline: none;">
+                            <div class="card-block" style="flex: 1 1 auto;padding: 5.25rem;outline: none;overflow-x:auto">
                                 <h5>Choose the section of the email that you want to parse from.</h5><br />
                                 <div class="row" id="section_buttons" style="display: flex; flex-wrap: wrap; padding: 0 4px;">
                                     <div class="col-md-2" style="width:300px;margin:0 auto;">
@@ -300,7 +301,7 @@
                                     <div class="col-md-12" id="arguments_column" style="display:none">
                                         <h5>Please enter specific text that you want to parse for, separated by commas.<br />
                                         If you're choosing find and replace, group find/replace values with a parentheses.<br />
-                                            For example: (<b>Text to find</b>, <b>text to replace it with</b>):</h5><br />
+                                        For example: (<b>Text to find</b>, <b>text to replace it with</b>):</h5><br />
                                         <label for="args">Specific text: &nbsp;</label>
                                         <input id="args" name="args" type="text" class="text" value="" style="width:40%" onclick="ShowSave()"/><br />
                                         <p style="display:none" id="name_error"><span style="color:red">Please enter values for this rule.</span></p>

@@ -1891,6 +1891,7 @@ Layouts
   display: none; }
 
 .single-column .page-wrapper {
+  height:100%;
   margin-left: 0px; }
 
 .fix-width {
@@ -1922,6 +1923,7 @@ File: scss
     display: none; }
 
 .page-wrapper {
+  height:100%;
   background: #eef5f9;
   padding-bottom: 60px; }
 
@@ -6569,12 +6571,14 @@ File: scss
  ============================================================== */
 @media (min-width: 1024px) {
   .page-wrapper {
+    height:100%;
     /*margin-left: 240px;*/ }
   .footer {
     left: 240px; } }
 
 @media (max-width: 1023px) {
   .page-wrapper {
+    height:100%;
     /*margin-left: 60px;*/
     -webkit-transition: 0.2s ease-in;
     -o-transition: 0.2s ease-in;

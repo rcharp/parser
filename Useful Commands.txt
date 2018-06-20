@@ -1,0 +1,76 @@
+Ngrok==============# Get ngrok to work with localhost./ngrok http -host-header=rewrite localhost:5000
+
+Importing Celery task
+=============
+Cannot import celery task globally wherever I need it.
+Must import locally in function.
+
+Docker Images
+==============
+
+# Start Docker image
+docker-compose up
+
+# Build Docker image
+docker-compose up --build
+
+# Stop Docker image
+docker-compose stop
+
+# Delete dangling images
+docker rmi -f $(docker images -qf dangling=true)
+
+# Delete Docker image
+docker-compose rm -f
+
+# List Docker containters
+docker container ls
+
+Docker DB commands
+=================
+
+# Docker db commands
+docker-compose exec website parser db
+
+# Reset db
+docker-compose exec website parser db reset --with-testdb
+
+# Show tables in db
+docker exec -it $(docker-compose ps -q postgres9 ) psql -Upostgres -c '\z'
+
+# Add fake users
+docker-compose exec website parser add all
+
+# Test coverage
+docker-compose exec website parser cov
+
+# Generate a secret key for production
+docker-compose exec website parser secret
+
+# Generate secret key 64 bytes
+docker-compose exec website parser secret 64
+
+# All website's routes
+docker-compose exec website parser routes
+
+# Count lines of code
+docker-compose exec website parser loc
+
+# List all stripe charges
+docker-compose exec website parser stripe list_charges
+
+
+Changes
+=========
+
+# Login change
+blueprints/user/views, line 58
+"Identity or password is incorrect" change to "username/email or password is incorrect"
+
+# Sign Up change
+signing up with an existing email currently says "Already exists." Change to "This email already exists"
+
+Fix Magic Number error
+====================
+In the root of the parser folder, run “find . -name \*.pyc -delete” then push to github. also, log out/in from github on heroku
+

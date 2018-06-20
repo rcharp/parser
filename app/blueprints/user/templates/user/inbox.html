@@ -50,6 +50,85 @@
 
 {% block litebody %}
 <body class="card-no-border" style="font-family:'Gotham',sans-serif;overflow-y:auto;max-width:100%;overflow-x:hidden;width:100%;padding-bottom:0;">
+
+    <script>
+    $(document).ready(function(){
+        $.ajax({
+            type: 'GET',
+            url: "{{ url_for('user.update', emails_id=emails_id, route=route) }}",
+            success: function(data) {
+                if (data['route'] === 'refresh'){
+                    get_emails("{{ url_for('user.update', emails_id=emails_id,route=route) }}");
+                }
+                else if (data['route'] === 'inbox'){ }
+            },
+            error: function(error) {
+                //alert('There was an unexpected error getting your emails. Please try again.\n' + JSON.stringify(error));
+            }
+        });
+
+        function get_emails(url) {
+            $.ajax(url).done(function () {
+
+                $.getJSON(url, function(data) {
+
+                    if (data['emails_state'] !== 'PENDING') {
+
+                        if ('emails_result' in data ) {
+                            display_emails(data['emails_result']);
+                        }
+                        else {
+                            // something unexpected happened
+                            alert("There was an error updating your data. Please try again.");
+                        }
+                    }
+                    else {
+                        // change to loader
+                        $('#emails_list').html('<img style="margin-top:-20px;margin-bottom:-20px;" src="../../../.' +
+                            './static/images/loader.svg" />').fadeIn(1000);
+
+                        // rerun every 1 second until the data is loaded
+                        setTimeout(function() {
+                            get_emails("{{ url_for('user.update', emails_id=emails_id, route=route) }}");
+                        }, 5000);
+                    }
+                });
+           });
+        }
+
+
+        function display_emails(data){
+            // Update the inbox count
+            $("#inbox_count").html('Your Inbox (' + data.length + ')').fadeIn(1000);
+
+            // Display the emails
+            var email_html = '';
+                for( var i=0; i <data.length; i++) {
+
+                    var email = data[i]['id'];
+                    var parse_url = "{{url_for('user.parse', email_id='DUMMY_VALUE') }}";
+                    var actual_parse_url = parse_url.replace(/DUMMY_VALUE/, email);
+
+                    email_html += '<tr style="height:60px;" valign="middle"><td style="vertical-align:middle">' +
+                        '<input id="delete" name="delete" type="checkbox" class="checkbox" value="' + data[i]["id"] + '" onclick="Checked(this)"/>' +
+                        '</td><td style="vertical-align:middle">' + data[i]["sender"] + '</td><td style="vertical-align:middle">' + data[i]["subject"] + '</td>' +
+                        '<td style="vertical-align:middle">' + data[i]["date"] + '</td><td style="vertical-align:middle">';
+
+                    if(data[i]["parsed"] === true){
+                        email_html += '<span class="label label-success">Parsed</span></td><td style="vertical-align:middle">';
+                    }
+                    else if(data[i]["parsed"] === false){
+                        email_html += '<span class="label label-danger">Not Parsed</span></td><td style="vertical-align:middle">' +
+                            '<a href="' + actual_parse_url + '" style="border:1px solid; border-radius:4px;padding:10px;">Parse</a>';
+                    }
+
+                 }
+                email_html += '</td></tr>';
+                $("#emails_list").html(email_html).fadeIn(1000);
+        }
+
+    });
+    </script>
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
@@ -60,15 +139,15 @@
     <!-- ============================================================== -->
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
-    <div id="main-wrapper" style="overflow:auto;width:85%;margin:auto;">
+    <div id="main-wrapper" style="overflow:auto;width:85%;height:100%;margin:auto;">
         <!-- ============================================================== -->
         <!-- Page wrapper  -->
         <!-- ============================================================== -->
-        <div class="page-wrapper">
+        <div class="page-wrapper" style="height:100%">
             <!-- ============================================================== -->
             <!-- Container fluid  -->
             <!-- ============================================================== -->
-            <div class="container-fluid">
+            <div class="container-fluid" style="height:100%">
                 <!-- ============================================================== -->
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
@@ -90,7 +169,7 @@
                           background-color:#fff;">
                             <div class="card-block bg-info" style="background-color: #1e88e5 !important;
                             flex: 1 1 auto; padding: 1.25rem;">
-                                <h4 class="text-white card-title" style="color: #ffffff !important;font-weight: 400;">
+                                <h4 class="text-white card-title" id="inbox_count" style="color: #ffffff !important;font-weight: 400;">
                                     Your Inbox ({{ emails|length }})
                                     <a href="{{ url_for('user.inbox') }}" class="refresh" style="background-color: #ffffff;
                                                                                 border: none;
@@ -112,7 +191,7 @@
                                 </h4>
                             </div>
                             <form action="{{ url_for('user.delete_emails') }}" method="POST" id="delete_email" name="delete_email">
-                                <div class="card-block" style="flex: 1 1 auto;padding: 5.25rem;outline: none;">
+                                <div class="card-block" style="flex: 1 1 auto;padding: 5.25rem;outline: none;overflow-x:auto">
                                     <table class="table">
                                         <thead>
                                             <tr style="font-weight:bold;">
@@ -124,7 +203,7 @@
                                                 <td>Actions</td>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody id="emails_list">
                                             {% for email in emails %}
                                                 <tr style="height:60px;" valign="middle">
                                                     <td style="vertical-align:middle">

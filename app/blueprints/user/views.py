@@ -6,7 +6,8 @@ from flask import (
     url_for,
     render_template,
     current_app,
-    json)
+    json,
+    jsonify)
 from flask_login import (
     login_required,
     login_user,
@@ -17,7 +18,6 @@ from lib.safe_next_url import safe_next_url
 from app.blueprints.user.decorators import anonymous_required
 from app.blueprints.user.models import User
 from app.blueprints.user.create_mailgun_user import generate_mailbox_id, create_inbox
-from app.blueprints.parse.parse import get_emails, get_rules
 from app.blueprints.user.templates.emails import send_welcome_email
 from app.blueprints.user.forms import (
     LoginForm,
@@ -29,7 +29,6 @@ from app.blueprints.user.forms import (
 
 import datetime
 import stripe
-from flask_paginate import Pagination, get_page_parameter
 from app.extensions import cache, csrf, timeout, db
 
 user = Blueprint('user', __name__, template_folder='templates')
@@ -69,6 +68,14 @@ def login():
                     return redirect(url_for('admin.dashboard'))
 
                 if current_user.role == 'member':
+
+                    if not cache.get(current_user.mailbox_id):
+                        from app.blueprints.user.tasks import get_emails, get_rules, set_cache
+
+                        emails = get_emails.delay(current_user.mailbox_id)
+
+                        set_cache.delay(current_user.mailbox_id, emails.id)
+
                     if current_user.trial:
                         trial_days_left = 14 - (datetime.datetime.now() - current_user.created_on.replace(tzinfo=None)).days
                         if trial_days_left < 0:
@@ -233,7 +240,7 @@ def delete_emails():
         from app.blueprints.parse.models.email import Email
 
         for item in to_delete:
-            Email.query.filter(Email.id == item).delete()
+            delete_emails.delay(item)
 
         db.session.commit()
 
@@ -241,7 +248,7 @@ def delete_emails():
     return redirect(url_for('user.inbox'))
 
 
-@user.route('/parse/<email_id>', methods=['GET', 'POST'])
+@user.route('/parse/<email_id>/', methods=['GET', 'POST'])
 @csrf.exempt
 @login_required
 def parse(email_id):
@@ -249,6 +256,9 @@ def parse(email_id):
     if request.method == 'GET':
         if current_user.subscription or current_user.trial:
             if current_user.mailbox_id:
+
+                from app.blueprints.user.tasks import get_rules
+
                 rules = get_rules(current_user.mailbox_id)
 
                 from app.blueprints.parse.models.email import Email
@@ -264,7 +274,10 @@ def parse(email_id):
 @csrf.exempt
 @login_required
 def parse_email(email_id):
-    print(email_id)
+
+    rule_id = 1
+
+    # parse_email(email_id,rule_id)
     flash('Your email has been parsed.', 'error')
     return redirect(url_for('user.inbox'))
 
@@ -278,7 +291,10 @@ def rules():
     if request.method == 'GET':
         if current_user.subscription or current_user.trial:
             if current_user.mailbox_id:
-                rules = get_rules(current_user.mailbox_id)
+
+                from app.blueprints.user.tasks import get_rules
+
+                rules = get_rules.delay(current_user.mailbox_id)
                 return render_template('user/rules.html', rules=rules)
             else:
                 flash('You don\'t have an inbox yet. Please get one below.', 'error')
@@ -303,18 +319,7 @@ def add_rule():
         name = request.form['name']
         args = request.form['args']
 
-        from app.blueprints.parse.models.rule import Rule
-
-        r = Rule()
-        r.mailbox_id = current_user.mailbox_id
-        r.section = section
-        r.category = category
-        r.options = options
-        r.name = name
-        r.args = args
-
-        db.session.add(r)
-        db.session.commit()
+        add_rule.delay(section, category, options, name, args, current_user.mailbox_id)
 
     flash('Rule has been successfully added.', 'success')
     return redirect(url_for('user.rules'))
@@ -327,42 +332,42 @@ def add():
     return render_template('user/add.html')
 
 
-@user.route('/edit_rules', methods=['GET', 'POST'])
-@csrf.exempt
-@login_required
-def edit_rules():
-    if request.method == "POST":
-        if request.form['action'] == 'delete':
-            to_delete = request.form.getlist('delete')
-
-            from app.blueprints.parse.models.rule import Rule
-
-            for item in to_delete:
-                Rule.query.filter(Rule.id == item).delete()
-
-            db.session.commit()
-            flash('Rule(s) successfully deleted.', 'error')
-
-        elif request.form['action'] == 'save':
-            new_rules = request.form.getlist('new_rule')
-
-            if '' in new_rules:
-                rules = list(filter(None, new_rules))
-            else:
-                rules = new_rules
-
-            from app.blueprints.parse.models.rule import Rule
-
-            for rule in rules:
-                r = Rule()
-                r.mailbox_id = current_user.mailbox_id
-                r.rule = rule
-
-                db.session.add(r)
-            db.session.commit()
-            flash('Rules have been successfully added.', 'success')
-
-    return redirect(url_for('user.rules'))
+# @user.route('/edit_rules', methods=['GET', 'POST'])
+# @csrf.exempt
+# @login_required
+# def edit_rules():
+#     if request.method == "POST":
+#         if request.form['action'] == 'delete':
+#             to_delete = request.form.getlist('delete')
+#
+#             from app.blueprints.parse.models.rule import Rule
+#
+#             for item in to_delete:
+#                 Rule.query.filter(Rule.id == item).delete()
+#
+#             db.session.commit()
+#             flash('Rule(s) successfully deleted.', 'error')
+#
+#         elif request.form['action'] == 'save':
+#             new_rules = request.form.getlist('new_rule')
+#
+#             if '' in new_rules:
+#                 rules = list(filter(None, new_rules))
+#             else:
+#                 rules = new_rules
+#
+#             from app.blueprints.parse.models.rule import Rule
+#
+#             for rule in rules:
+#                 r = Rule()
+#                 r.mailbox_id = current_user.mailbox_id
+#                 r.rule = rule
+#
+#                 db.session.add(r)
+#             db.session.commit()
+#             flash('Rules have been successfully added.', 'success')
+#
+#     return redirect(url_for('user.rules'))
 
 
 @user.route('/delete_rules', methods=['GET', 'POST'])
@@ -373,12 +378,7 @@ def delete_rules():
 
         to_delete = request.form.getlist('delete')
 
-        from app.blueprints.parse.models.rule import Rule
-
-        for item in to_delete:
-            Rule.query.filter(Rule.id == item).delete()
-
-        db.session.commit()
+        delete_rules.delay(to_delete)
 
     flash('Rule(s) successfully deleted.', 'error')
     return redirect(url_for('user.rules'))
@@ -408,16 +408,45 @@ def settings():
 @user.route('/inbox', methods=['GET', 'POST'])
 @login_required
 def inbox():
-    stripe.api_version = '2018-02-28'
-
     if request.method == 'GET':
         if current_user.subscription or current_user.trial:
             if current_user.mailbox_id:
-                emails = get_emails(current_user.mailbox_id)
+                if cache.get(current_user.mailbox_id):
+                    emails = cache.get(current_user.mailbox_id)
+                    print(emails)
+                else:
+                    return redirect(url_for('user.refresh'))
                 return render_template('user/inbox.html', emails=emails)
             else:
                 flash('You don\'t have an inbox yet. Please get one below.', 'error')
         return redirect(url_for('user.settings'))
+
+
+@user.route('/refresh', methods=['GET', 'POST'])
+@login_required
+def refresh():
+        from app.blueprints.user.tasks import get_emails, set_cache
+
+        emails = get_emails.delay(current_user.mailbox_id)
+
+        set_cache.delay(current_user.mailbox_id, emails.id)
+
+        return render_template('user/inbox.html', emails_id=emails.id, emails_state=emails.state, route="refresh")
+
+
+@user.route('/update/<emails_id>/<route>')
+@csrf.exempt
+def update(emails_id,route):
+
+    if route == "dashboard":
+        return jsonify({'route': 'dashboard'})
+    elif route == "refresh":
+        from app.blueprints.user.tasks import get_emails
+
+        # Get the results of the update of the emails
+        emails = get_emails.AsyncResult(emails_id)
+
+        return jsonify({'route':'refresh', 'emails_result': emails.result, 'emails_state':emails.state})
 
 
 @user.route('/get_inbox', methods=['GET', 'POST'])

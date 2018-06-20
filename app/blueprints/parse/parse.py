@@ -7,7 +7,11 @@ from app.blueprints.parse.models.rule import Rule
 from app.blueprints.user.create_mailgun_user import generate_mailbox_id
 
 
-def parse_email(msg):
+def parse_email(email_id, rule_id):
+
+    msg = Email.query.filter(Email.id == email_id).first()
+    rule = Rule.query.filter(Rule.id == rule_id).first()
+    section = rule.section
 
     # Get headers.
     message_id = msg['Message-Id']
@@ -81,15 +85,6 @@ def parse_headers(headers, options):
 
 
 # Get emails and rules -------------------------------------------------------------------
-def get_emails(mailbox_id):
-    return Email.query.filter(Email.mailbox_id == mailbox_id).all()
-
-
-def get_rules(mailbox_id):
-    return Rule.query.filter(Rule.mailbox_id == mailbox_id).all()
-    # return Rule.query.with_entities(Rule.rule, Rule.id).filter(Rule.mailbox_id == mailbox_id).all()
-
-
 def get_rule_options(rule):
     if rule == 'extract':
         return random.choice(['Find rows with certain text', 'Find all email addresses', 'Find content by line number',
@@ -100,7 +95,7 @@ def get_rule_options(rule):
         return 'Find and replace content'
 
 
-# Create test user and email -------------------------------------------------------------------
+# Create objects -------------------------------------------------------------------
 def create_test_user():
     from app.blueprints.user.models import User
 

@@ -59,15 +59,15 @@
     <!-- ============================================================== -->
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
-    <div id="main-wrapper" style="overflow:auto;width:85%;margin:auto;min-height:800px;height:1000px;">
+    <div id="main-wrapper" style="overflow-x:hidden;width:85%;margin:auto;min-height:800px;height:100%;">
         <!-- ============================================================== -->
         <!-- Page wrapper  -->
         <!-- ============================================================== -->
-        <div class="page-wrapper">
+        <div class="page-wrapper" style="height:100%;">
             <!-- ============================================================== -->
             <!-- Container fluid  -->
             <!-- ============================================================== -->
-            <div class="container-fluid">
+            <div class="container-fluid" style="height:100%;">
                 <!-- ============================================================== -->
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
@@ -79,7 +79,8 @@
                     </div>
                 </div>
                 <hr />
-                <div class="row" style="padding-top:30px;color:#007fd8">
+                <h2 style="color:#007fd8">Rules</h2>
+                <div class="row" style="padding-top:30px;color:#007fd8;">
                     <div class="col-lg-14">
                         <div class="card-lite" style="min-height: 180px; margin-bottom:30px;
                           min-width: 250px;
@@ -110,14 +111,14 @@
                                     </a>
                                 </h4>
                             </div>
-                            <form action="{{ url_for('user.edit_rules') }}" method="POST" id="rule" name="rule">
-                                <div class="card-block" style="flex: 1 1 auto;padding: 5.25rem;outline: none;">
+                            <form action="{{ url_for('user.delete_rules') }}" method="POST" id="rule" name="rule">
+                                <div class="card-block" style="flex: 1 1 auto;padding: 5.25rem;outline: none;overflow-x:auto">
                                     <table class="table">
                                         <thead>
                                             <tr style="font-weight:bold;">
                                                 <td style="width:40px;"></td>
                                                 <td>Rule Name</td>
-                                                <td>Section</td>
+                                                <td>Email Section</td>
                                                 <td>Category</td>
                                                 <td>Options</td>
                                                 <td>Values</td>
@@ -152,7 +153,7 @@
                                                                         cursor: pointer;">
                                         Add Rule
                                     </a>
-                                    <button type="submit" form="rule" value="save" class="save_button" name="action" id="save_button"
+                                    <!--<button type="submit" form="rule" value="save" class="save_button" name="action" id="save_button"
                                             style="background-color: #007FD8;
                                                                         border: none;
                                                                         float:none;
@@ -165,7 +166,7 @@
                                                                         margin: auto;
                                                                         cursor: pointer;">
                                         Save Rule(s)
-                                    </button>
+                                    </button>-->
                                     <button type="submit" form="rule" value="delete" class="delete_button" name="action" id="delete_button"
                                             style="background-color: #FF0000;
                                                     border: none;
@@ -250,10 +251,10 @@
                 $(this).closest('tr').remove();
 
                 // If you cancel the final new row, hide the save button again
-                var new_rows = document.getElementsByName("new_rule");
-                if(new_rows.length === 0) {
-                    document.getElementById('save_button').style.display = 'none';
-                }
+                //var new_rows = document.getElementsByName("new_rule");
+                //if(new_rows.length === 0) {
+                //    document.getElementById('save_button').style.display = 'none';
+                //}
 
                 });
             });
@@ -280,70 +281,6 @@
 
         }
     </script>
-
-    <!--script type="text/javascript">
-        function Validate(form) {
-            var this_id = "";
-            alert(form);
-            if(this_id === 'save_button') {
-                alert("save");
-                var new_rows = document.getElementsByName("new_rule");
-                for(var row in new_rows) {
-                    if (row.length === 0 || $.trim(row).val() === "") {
-                        alert('New rules can\'t be empty.');
-                        return false;
-                    }
-                }
-            }
-            else if(this_id === 'delete_button') {
-                alert("delete");
-                var to_delete = document.getElementsByClassName("checkbox");
-                var count = 0;
-
-                for(var i = 0; i < to_delete.length; i++) {
-                    if (to_delete[i].checked) {
-                        count++;
-                    }
-                }
-
-                if (count === 0) {
-                    return false;
-                }
-            }
-
-        }
-
-        $('#rule').submit(function() {
-            jQuery(':button').click(function () {
-                if (this.id === 'save_button') {
-                    var new_rows = document.getElementsByName("new_rule");
-                    for(var row in new_rows) {
-                        if (row.length === 0 || $.trim(row).val() === "") {
-                            alert('New rules can\'t be empty.');
-                            return false;
-                        }
-                    }
-                }
-
-                else if (this.id === 'delete_button') {
-                    var to_delete = document.getElementsByClassName("checkbox");
-                    var count = 0;
-
-                    for(var i = 0; i < to_delete.length; i++) {
-                        if (to_delete[i].checked) {
-                            count++;
-                        }
-                    }
-
-                    if (count === 0) {
-                        return false;
-                    }
-
-                    return true;
-                }
-            });
-        });
-    </script-->
 
 </body>
 {% endblock %}

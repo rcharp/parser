@@ -23,18 +23,13 @@ def incoming():
         subject = parse_subject(data['Subject'], None)
         date = data['Date']
         from_ = ''
+        body = data['body-plain']
 
         # Get the original sender.
         sender = re.search('From: (.+?)\n', data['body-plain'])
         if sender:
             from_ = parse_from(str(address.parse(sender.group(1))), None) if address.parse(sender.group(1)) \
                 else parse_from(str(sender.group(1)), None)
-
-        # print(message_id)
-        # print(mailbox_id)
-        # print(subject)
-        # print(date)
-        # print(from_)
 
         # Ensure that the user exists
         from app.blueprints.user.models import User
@@ -50,6 +45,7 @@ def incoming():
             e.subject = subject
             e.date = date
             e.sender = from_
+            e.body = body
 
             # Add the email to the database
             db.session.add(e)
