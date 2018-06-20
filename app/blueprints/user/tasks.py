@@ -94,10 +94,10 @@ def set_cache(mailbox_id, emails_id):
 
     emails = get_emails.AsyncResult(emails_id)
 
+    print(emails.result)
     if emails.state != 'PENDING':
+        print(emails.result)
         cache.set(mailbox_id, emails)
-        print("Successfully set cache.")
-        print(emails)
     else:
         time.sleep(1)
         set_cache(mailbox_id, emails_id)

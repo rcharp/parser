@@ -413,7 +413,6 @@ def inbox():
             if current_user.mailbox_id:
                 if cache.get(current_user.mailbox_id):
                     emails = cache.get(current_user.mailbox_id)
-                    print(emails)
                 else:
                     return redirect(url_for('user.refresh'))
                 return render_template('user/inbox.html', emails=emails)

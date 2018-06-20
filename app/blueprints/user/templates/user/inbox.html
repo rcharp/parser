@@ -98,8 +98,14 @@
 
 
         function display_emails(data){
+
+            var refresh_link = "{{ url_for('user.inbox') }}";
+            var refresh_button = '<a href="' + refresh_link + '" class="refresh" style="background-color: #ffffff;border: none;float:none;color: #007fd8;padding: 15px 30px;' +
+                'text-align: center;text-decoration: none;vertical-align:middle;line-height:100%;display: inline-block;font-size: 14px;margin: auto;margin-left:15px;' +
+                'height:45px;cursor: pointer;">Refresh <img src="../../../../static/images/refresh2.png" width="16px"></a>';
+
             // Update the inbox count
-            $("#inbox_count").html('Your Inbox (' + data.length + ')').fadeIn(1000);
+            $("#inbox_count").html('Your Inbox (' + data.length + ') ' + refresh_button).fadeIn(1000);
 
             // Display the emails
             var email_html = '';
@@ -124,7 +130,9 @@
 
                  }
                 email_html += '</td></tr>';
-                $("#emails_list").html(email_html).fadeIn(1000);
+                $('#emails_list').fadeOut(1000, function() {
+                    $("#emails_list").html(email_html).fadeIn(1000);
+                });
         }
 
     });
