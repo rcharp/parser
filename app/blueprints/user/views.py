@@ -294,7 +294,7 @@ def rules():
 
                 from app.blueprints.user.tasks import get_rules
 
-                rules = get_rules.delay(current_user.mailbox_id)
+                rules = get_rules(current_user.mailbox_id)
                 return render_template('user/rules.html', rules=rules)
             else:
                 flash('You don\'t have an inbox yet. Please get one below.', 'error')
@@ -332,44 +332,6 @@ def add():
     return render_template('user/add.html')
 
 
-# @user.route('/edit_rules', methods=['GET', 'POST'])
-# @csrf.exempt
-# @login_required
-# def edit_rules():
-#     if request.method == "POST":
-#         if request.form['action'] == 'delete':
-#             to_delete = request.form.getlist('delete')
-#
-#             from app.blueprints.parse.models.rule import Rule
-#
-#             for item in to_delete:
-#                 Rule.query.filter(Rule.id == item).delete()
-#
-#             db.session.commit()
-#             flash('Rule(s) successfully deleted.', 'error')
-#
-#         elif request.form['action'] == 'save':
-#             new_rules = request.form.getlist('new_rule')
-#
-#             if '' in new_rules:
-#                 rules = list(filter(None, new_rules))
-#             else:
-#                 rules = new_rules
-#
-#             from app.blueprints.parse.models.rule import Rule
-#
-#             for rule in rules:
-#                 r = Rule()
-#                 r.mailbox_id = current_user.mailbox_id
-#                 r.rule = rule
-#
-#                 db.session.add(r)
-#             db.session.commit()
-#             flash('Rules have been successfully added.', 'success')
-#
-#     return redirect(url_for('user.rules'))
-
-
 @user.route('/delete_rules', methods=['GET', 'POST'])
 @csrf.exempt
 @login_required
@@ -389,6 +351,8 @@ def delete_rules():
 @login_required
 @csrf.exempt
 def settings():
+    # redis.flushdb()
+    cache.clear()
     stripe.api_key = current_app.config.get('STRIPE_SECRET_KEY')
     stripe.api_version = '2018-02-28'
     mailbox_id = current_user.mailbox_id
@@ -411,11 +375,14 @@ def inbox():
     if request.method == 'GET':
         if current_user.subscription or current_user.trial:
             if current_user.mailbox_id:
+                # from app.blueprints.user.tasks import r as redis
                 if cache.get(current_user.mailbox_id):
                     emails = cache.get(current_user.mailbox_id)
+                    print("Cache getting hit")#
+                    return render_template('user/inbox.html', emails=emails, route="inbox")
                 else:
+                    print("Refresh getting hit")
                     return redirect(url_for('user.refresh'))
-                return render_template('user/inbox.html', emails=emails)
             else:
                 flash('You don\'t have an inbox yet. Please get one below.', 'error')
         return redirect(url_for('user.settings'))
@@ -430,7 +397,8 @@ def refresh():
 
         set_cache.delay(current_user.mailbox_id, emails.id)
 
-        return render_template('user/inbox.html', emails_id=emails.id, emails_state=emails.state, route="refresh")
+        return render_template('user/inbox.html', emails_id=emails.id, emails_state=emails.state,
+                               emails=[], route="refresh")
 
 
 @user.route('/update/<emails_id>/<route>')

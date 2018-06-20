@@ -108,7 +108,8 @@
   <body style="font-family: 'Gotham', sans-serif;margin:auto;width:100%;max-width:100%;overflow-x:hidden;padding-bottom:0;">
     {% block header %}{% endblock %}
     {{ billing.card_expiring_warning() }}
-    {% if request.path != '/demo' and request.path != '/inbox' and request.path != '/rules' and request.path != '/add' %}
+    {% if request.path != '/demo' and request.path != '/inbox' and request.path != '/refresh'
+    and request.path != '/rules' and request.path != '/add' %}
     <main class="container"style="min-height:850px;">
       {{ flash.render() }}
 

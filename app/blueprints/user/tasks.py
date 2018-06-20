@@ -1,4 +1,6 @@
 import time
+import redis
+from flask import current_app
 from lib.flask_mailplus import send_template_message
 from app.extensions import cache, db
 from app.app import create_celery_app
@@ -8,6 +10,7 @@ from app.blueprints.parse.models.rule import Rule
 
 
 celery = create_celery_app()
+# r = redis.StrictRedis(host=current_app.config.get('CACHE_REDIS_HOST'),password=current_app.config.get('CACHE_REDIS_PASSWORD'), port=13524, db=0)
 
 
 @celery.task()
@@ -40,8 +43,10 @@ def deliver_password_reset_email(user_id, reset_token):
 def get_emails(mailbox_id):
     emails = []
 
-    for email in Email.query.filter(Email.mailbox_id == mailbox_id).all():
-        emails.append({'id':email.id,'sender':email.sender,'subject':email.subject,'date':email.date,'body':email.body,'parsed':email.parsed})
+    for email in Email.query.with_entities(Email.id,Email.sender,Email.subject,Email.date,Email.parsed)\
+            .filter(Email.mailbox_id == mailbox_id).all():
+        emails.append({'id':email.id,'sender':email.sender,'subject':email.subject,
+                       'date':email.date,'body':'','parsed':email.parsed})
 
     return emails
 
@@ -94,10 +99,9 @@ def set_cache(mailbox_id, emails_id):
 
     emails = get_emails.AsyncResult(emails_id)
 
-    print(emails.result)
     if emails.state != 'PENDING':
-        print(emails.result)
-        cache.set(mailbox_id, emails)
+        cache.set(mailbox_id, emails.result)
+        # r.set(mailbox_id, emails.result)
     else:
         time.sleep(1)
         set_cache(mailbox_id, emails_id)
