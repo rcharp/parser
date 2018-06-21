@@ -4,7 +4,6 @@
     <list default="true" id="f1637133-ccae-40ab-aec7-a4a76f8f54a9" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/blueprints/parse/parse.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/parse/parse.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/blueprints/user/templates/user/parse.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/user/templates/user/parse.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -54,8 +53,8 @@
       <file leaf-file-name="parse.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/blueprints/parse/parse.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="181" lean-forward="true" selection-start-line="181" selection-end-line="181" />
+            <state relative-caret-position="372">
+              <caret line="230" column="21" selection-start-line="230" selection-start-column="21" selection-end-line="230" selection-end-column="21" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -840,8 +839,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/blueprints/parse/parse.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="181" lean-forward="true" selection-start-line="181" selection-end-line="181" />
+        <state relative-caret-position="372">
+          <caret line="230" column="21" selection-start-line="230" selection-start-column="21" selection-end-line="230" selection-end-column="21" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
