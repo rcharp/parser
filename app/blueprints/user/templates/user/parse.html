@@ -134,7 +134,7 @@
                                                 {% for rule in rules %}
                                                     <tr style="height:40px;" valign="middle">
                                                         <td style="vertical-align:middle">
-                                                            <input id="{{ rule.id }}" name="select" type="checkbox" class="checkbox" value="{{ rule.id }}" onclick="Checked(this)"/>
+                                                            <input id="{{ rule.id }}" name="select" type="checkbox" class="checkbox" value="{{ rule.id }}" onclick="Checked()"/>
                                                         </td>
                                                         <td style="vertical-align:middle">{{ rule.name|title }}</td>
                                                         <td style="vertical-align:middle">{{ rule.section|title }}</td>
@@ -169,7 +169,7 @@
                                                     padding: 15px 32px;
                                                     text-align: center;
                                                     text-decoration: none;
-                                                    display: none;;
+                                                    display: inline-block;
                                                     font-size: 16px;
                                                     margin: auto;
                                                     cursor: pointer;">
@@ -228,15 +228,25 @@
     <!-- End Chart JS -->
     <script>
 
-        function Checked(sel) {
-            $( "#" + sel.value ).prop( "checked", true );
+        function Checked() {
 
-            //var others = $('input[type="checkbox"]').not("#" + sel.value);
+            var to_delete = document.getElementsByClassName("checkbox");
+            var count = 0;
 
-            //others.prop('checked', false);
+            for(var i = 0; i < to_delete.length; i++) {
+                if (to_delete[i].checked) {
+                    count++;
+                }
+            }
 
-            document.getElementById('parse_button').style.display = 'inline-block';
-            document.getElementById('cancel_button').style.display = 'inline-block';
+            if (count === 0) {
+                document.getElementById('parse_button').style.display = 'none';
+            }
+            else {
+                // Show the save button
+                document.getElementById('parse_button').style.display = 'inline-block';
+            }
+
         }
     </script>
 

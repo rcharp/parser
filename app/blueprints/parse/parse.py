@@ -19,7 +19,7 @@ def parse_email(email_id, rules):
         section = rule.section
         category = rule.category
         options = rule.options
-        args = rule.args.split(',').strip()
+        args = rule.args.split(',')
 
         email = Email.query.filter(Email.id == email_id).first()
 
@@ -142,43 +142,53 @@ def replace_parsing(item, args):
 
 
 # Parsing Options -------------------------------------------------------------------
-def rows_parse(item, *args):
+def rows_parse(item, args):
     results = []
     for arg in args:
         for line in item.split('\n'):
-            if arg in line:
+            if arg.strip() in line:
                 results.append(line.strip())
 
+    results = list(set(results))
     return results
 
 
+# Works, email addresses aren't unique
 def emails_parse(item):
     match = re.findall(r'[\w\.-]+@[\w\.-]+', item)
     return match
 
 
+# Works
 def line_numbers_parse(item, args):
     results = []
-    count = 1
     for arg in args:
+        count = 1
         for line in item.split('\n'):
-            if count == arg:
+            if str(count) == arg.strip():
                 results.append(line)
+            count += 1
+
+    results = list(set(results))
     return results
 
 
+# Working
 def text_after_parse(item, args):
     results = []
     for arg in args:
-        results.append(item.split(arg,1)[1])
+        index = re.search(arg.strip(), item, re.IGNORECASE).end()
+        results.append(item[index:])
 
     return results
 
 
+# Working
 def text_before_parse(item, args):
     results = []
     for arg in args:
-        results.append(item.split(arg, 1)[0])
+        index = re.search(arg.strip(), item, re.IGNORECASE).start
+        results.append(item[:index])
 
     return results
 
