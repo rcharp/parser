@@ -46,6 +46,7 @@ asyncio==3.4.3
 aiohttp
 asyncio_stripe
 attrs
+aiopg
 
 # Date
 ago==0.0.9

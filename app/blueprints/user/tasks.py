@@ -1,6 +1,8 @@
 import time
-import redis
+import asyncio
+from aiopg.sa import create_engine
 from flask import current_app
+import sqlalchemy as sa
 from lib.flask_mailplus import send_template_message
 from app.extensions import cache, db
 from app.app import create_celery_app
@@ -39,21 +41,62 @@ def deliver_password_reset_email(user_id, reset_token):
 
 
 # Emails -------------------------------------------------------------------
-@celery.task()
-def get_emails(mailbox_id):
+
+async def email_query(mailbox_id):
     emails = []
 
-    for email in Email.query.with_entities(Email.id,Email.sender,Email.subject,Email.date,Email.parsed)\
-            .filter(Email.mailbox_id == mailbox_id).all():
-        emails.append({'id':email.id,'sender':email.sender,'subject':email.subject,
-                       'date':email.date,'body':'','parsed':email.parsed})
+    async with create_engine(user=current_app.config.get('SQLALCHEMY_USER'),
+                             database=current_app.config.get('SQLALCHEMY_DATABASE'),
+                             host=current_app.config.get('SQLALCHEMY_HOST'),
+                             password=current_app.config.get('SQLALCHEMY_PASSWORD')) as engine:
+
+        metadata = sa.MetaData()
+        tbl = sa.Table('emails', metadata,
+                       sa.Column('id', sa.Integer, primary_key=True),
+                       sa.Column('mailbox_id', sa.String(255)),
+                       sa.Column('sender', sa.String(255)),
+                       sa.Column('subject', sa.String(255)),
+                       sa.Column('date', sa.String(255)),
+                       # sa.Column('body', sa.String(255)),
+                       sa.Column('parsed', sa.Boolean),
+                       )
+
+        query = tbl.select().where(tbl.c['mailbox_id'] == mailbox_id)
+        async with engine.acquire() as conn:
+            async for row in conn.execute(query):
+                # emails.update({row['id'] : {'id':row['id'],'sender':row['sender'],'subject':row['subject'],'date':row['date'],'parsed':row['parsed']}})
+                emails.append({'id':row['id'],'sender':row['sender'],'subject':row['subject'],'date':row['date'],'parsed':row['parsed']})
+
+    return emails
+
+
+async def asynchronous(mailbox_id):
+    futures = await email_query(mailbox_id)
+
+    return futures
+
+
+def return_emails(mailbox_id):
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
+    ioloop = asyncio.get_event_loop()
+
+    emails = ioloop.run_until_complete(asynchronous(mailbox_id))
 
     return emails
 
 
 @celery.task()
+def get_emails(mailbox_id):
+    return return_emails(mailbox_id)
+
+
+@celery.task()
 def delete_emails(email):
-    Email.query.filter(Email.id == email).delete()
+    from app.blueprints.parse.models.email import Email
+    # instance = db.session.query(Email).filter_by(id=email).first()
+    # db.session.delete(instance)
+    Email.query.filter(Email.id == email).first().delete()
 
 
 # Rules -------------------------------------------------------------------
@@ -97,11 +140,12 @@ def delete_rules(to_delete):
 @celery.task()
 def set_cache(mailbox_id, emails_id):
 
+    #cache.set(mailbox_id,emails)
+
     emails = get_emails.AsyncResult(emails_id)
 
     if emails.state != 'PENDING':
         cache.set(mailbox_id, emails.result)
-        # r.set(mailbox_id, emails.result)
     else:
         time.sleep(1)
         set_cache(mailbox_id, emails_id)

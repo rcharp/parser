@@ -26,7 +26,7 @@
     <link href="https://fonts.googleapis.com/css?family=Cabin|Gotham|Gotham|Open+Sans|Comfortaa"
           rel="stylesheet">
     <!-- Bootstrap Core CSS -->
-    <link href="../../../page/templates/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!--link href="../../../page/templates/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!--<link rel="stylesheet" type="text/css" href="../../../../static/simple/css/compiled/theme.css">
     <!-- chartist CSS --
     <link href="../../../page/templates/assets/plugins/chartist-js/dist/chartist.min.css" rel="stylesheet">
@@ -35,11 +35,11 @@
     <!--This page css - Morris CSS --
     <link href="../../../page/templates/assets/plugins/c3-master/c3.min.css" rel="stylesheet">
     <!-- Custom CSS -->
-    <link href="../../../page/templates/page/css/style.css" rel="stylesheet">
+    <!--link href="../../../page/templates/page/css/style.css" rel="stylesheet">
     <!-- You can change the theme colors from here -->
     <!--<link href="../../../page/templates/page/css/colors/blue.css" id="theme" rel="stylesheet">
     <!-- MDL theme -->
-    <link href="../BS4/assets/css/material-dashboard.css" id="theme" rel="stylesheet">
+    <!--link href="../BS4/assets/css/material-dashboard.css" id="theme" rel="stylesheet">
     <!-- Loader -->
     <script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@2.1.4/dist/loadingoverlay.min.js"></script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -222,10 +222,10 @@
                                             </tr>
                                         </thead>
                                         <tbody id="emails_list">
-                                            {% for email in emails %}
+                                            {% for email in emails|sort(attribute="date",reverse = True) %}
                                                 <tr style="height:60px;" valign="middle">
                                                     <td style="vertical-align:middle">
-                                                        <input id="delete" name="delete" type="checkbox" class="checkbox" value="{{ email.id }}" onclick="Checked(this)"/>
+                                                        <input id="delete" name="delete" type="checkbox" class="checkbox" value="{{ email.id }}" onchange="Checked(this)"/>
                                                     </td>
                                                     <td style="vertical-align:middle">{{ email.sender }}</td>
                                                     <td style="vertical-align:middle">{{ email.subject }}</td>
@@ -327,6 +327,36 @@
         });
 
         function Checked(sel) {
+            var to_delete = document.getElementsByClassName("checkbox");
+            var count = 0;
+
+            for(var i = 0; i < to_delete.length; i++) {
+                if (to_delete[i].checked) {
+                    count++;
+                }
+            }
+
+            if (count === 0) {
+                document.getElementById('delete_email_button').style.display = 'none';
+            }
+            else {
+                // Show the save button
+                document.getElementById('delete_email_button').style.display = 'inline-block';
+                document.getElementById('delete_email_button').innerText = 'Delete (' + count + ') emails';
+            }
+
+            // Show and hide the body
+            var element = document.getElementById(sel.value.toString() + '_body');
+            if (element.style.display === 'none') {
+                element.style.display = 'inline-block';
+            }
+            else {
+                element.style.display = 'none';
+            }
+
+        }
+
+        function CheckAll(sel) {
             var to_delete = document.getElementsByClassName("checkbox");
             var count = 0;
 

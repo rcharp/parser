@@ -1,87 +1,221 @@
 import re
+import os
 import random
 from app.extensions import db
 from flanker.addresslib import address
+from sqlalchemy.orm import load_only
 from app.blueprints.parse.models.email import Email
 from app.blueprints.parse.models.rule import Rule
 from app.blueprints.user.create_mailgun_user import generate_mailbox_id
 
 
-def parse_email(email_id, rule_id):
+def parse_email(email_id, rules):
 
-    msg = Email.query.filter(Email.id == email_id).first()
-    rule = Rule.query.filter(Rule.id == rule_id).first()
-    section = rule.section
+    # email = Email.query.filter(Email.id == email_id).first()
 
-    # Get headers.
-    message_id = msg['Message-Id']
-    mailbox_id = str(address.parse(msg['To'])).split("@")[0].upper()  # the user's mailgun inbox that it was sent to
-    to = str(address.parse(msg['From']))  # the original recipient (who forwarded it to mailgun)
-    subject = parse_subject(msg['Subject'], None)
-    date = msg['Date']
-    body = msg['body-plain'].strip()
-    # from_ = ''
+    for rule_id in rules:
 
-    # Get the original sender.
-    sender = re.search('From: (.+?)\n', msg['body-plain'])
-    if sender:
-        sender = parse_from(str(address.parse(sender.group(1))), None) if address.parse(sender.group(1))\
-            else parse_from(str(sender.group(1)), None)
+        rule = Rule.query.filter(Rule.id == rule_id).first()
+        section = rule.section
+        category = rule.category
+        options = rule.options
+        args = rule.args.split(',').strip()
 
-    # Ensure that the user exists
-    from app.blueprints.user.models import User
-    u = db.session.query(db.exists().where(User.mailbox_id == mailbox_id)).scalar()
+        email = Email.query.filter(Email.id == email_id).first()
 
-    # If the user is found, save the email to the db.
-    if u:
-        # Create the email
-        e = Email()
-        e.mailbox_id = mailbox_id
-        e.message_id = message_id
-        e.to = to
-        e.subject = subject
-        e.date = date
-        e.body = body
-        e.sender = sender
-        e.parsed = 1
-
-        # Add the email to the database
-        db.session.add(e)
-        db.session.commit()
-
-    # return email_obj.
+        parse(email, section, category, options, args)
 
 
 # Parsing rules -------------------------------------------------------------------
-def parse_from(from_, options):
-    if 'mailto' in from_:
-        from_ = re.search('mailto:(.+?)]', from_).group(1)
-    return from_
+def parse(email, section, category, options, args):
+    if section == "from":
+        result = parse_from(email, category, options, args)
+        email.sender = result
+    elif section == "to":
+        result = parse_to(email, category, options, args)
+        email.to = result
+    elif section == "subject":
+        result = parse_subject(email, category, options, args)
+        email.subject = result
+    elif section == "date":
+        result = parse_date(email, category, options, args)
+        email.date = result
+    elif section == "body":
+        result = parse_body(email, category, options, args)
+        email.body = result#
+
+    # email.parsed = 1
+    # db.session.commit()
+
+    # elif section == "CC":##
+    #     parse_cc(email, category, options, args)
+    # elif section == "Headers":
+    #     parse_headers(email, category, options, args)
 
 
-def parse_subject(subject, options):
-    prefixes = ['FW: ', 'FWD: ', 'Fwd: ', 'fw: ', 'fwd: ']
-
-    for prefix in prefixes:
-        if subject.startswith(prefix):
-            return subject[len(prefix):]
-    return subject
-
-
-def parse_to(to, options):
-    return
-
-
-def parse_body(body, options):
-    return
+def parse_from(email, category, options, args):
+    sender = email.sender
+    if 'mailto' in sender:
+        sender = re.search('mailto:(.+?)]', sender).group(1)
+    if category == 'remove':
+        return remove_parsing(sender, options, args)
+    elif category == 'extract':
+        return extract_parsing(sender, options, args)
+    elif category == 'replace':
+        return replace_parsing(sender, args)
 
 
-def parse_cc(cc, options):
-    return
+def parse_subject(email, category, options, args):
+    subject = email.subject
+    if category == 'remove':
+        return remove_parsing(subject, options, args)
+    elif category == 'extract':
+        return extract_parsing(subject, options, args)
+    elif category == 'replace':
+        return replace_parsing(subject, args)
 
 
-def parse_headers(headers, options):
-    return
+def parse_to(email, category, options, args):
+    to = email.to
+    if category == 'remove':
+        return remove_parsing(to, options, args)
+    elif category == 'extract':
+        return extract_parsing(to, options, args)
+    elif category == 'replace':
+        return replace_parsing(to, args)
+
+
+def parse_date(email, category, options, args):
+    date = email.date
+    if category == 'remove':
+        return remove_parsing(date, options, args)
+    elif category == 'extract':
+        return extract_parsing(date, options, args)
+    elif category == 'replace':
+        return replace_parsing(date, args)
+
+
+def parse_body(email, category, options, args):
+    body = email.body
+    if category == 'remove':
+        return remove_parsing(body, options, args)
+    elif category == 'extract':
+        return extract_parsing(body, options, args)
+    elif category == 'replace':
+        return replace_parsing(body, args)
+
+# def parse_cc(email, category, options, args):
+#     cc = email.cc
+#
+#
+# def parse_headers(email, category, options, args):
+#     headers = email.headers
+
+
+# Parsing Categories -------------------------------------------------------------------
+def remove_parsing(item, options, args):
+    if options == "Remove specific content":
+        return remove_parse(item, args)
+    elif options == "Remove all links":
+        return remove_links_parse(item)
+    elif options == "Remove blank lines":
+        return remove_blank_parse(item)
+
+
+def extract_parsing(item, options, args):
+    if options == "Find rows with certain text":
+        return rows_parse(item, args)
+    elif options == "Find all email addresses":
+        return emails_parse(item)
+    elif options == "Find content by line number":
+        return line_numbers_parse(item, args)
+    if options == "Find all text after selection":
+        return text_after_parse(item, args)
+    elif options == "Find all text before selection":
+        return text_before_parse(item, args)
+    elif options == "Find all URLs":
+        return url_parse(item)
+
+
+def replace_parsing(item, args):
+    return find_replace_parse(item, args)
+
+
+# Parsing Options -------------------------------------------------------------------
+def rows_parse(item, *args):
+    results = []
+    for arg in args:
+        for line in item.split('\n'):
+            if arg in line:
+                results.append(line.strip())
+
+    return results
+
+
+def emails_parse(item):
+    match = re.findall(r'[\w\.-]+@[\w\.-]+', item)
+    return match
+
+
+def line_numbers_parse(item, args):
+    results = []
+    count = 1
+    for arg in args:
+        for line in item.split('\n'):
+            if count == arg:
+                results.append(line)
+    return results
+
+
+def text_after_parse(item, args):
+    results = []
+    for arg in args:
+        results.append(item.split(arg,1)[1])
+
+    return results
+
+
+def text_before_parse(item, args):
+    results = []
+    for arg in args:
+        results.append(item.split(arg, 1)[0])
+
+    return results
+
+
+# Needs work
+def url_parse(item):
+    result = re.findall('https?://(?:[-\w.]|(?:%[\da-fA-F]{2}))+', item)
+    print(result)##
+    return result
+
+
+# Working
+def find_replace_parse(item, *args):
+    for arg in args:
+        item = item.replace(arg[0].split('(', 1)[1].strip(), arg[1].split(')', 1)[0].strip())
+    return item
+
+
+# Working
+def remove_parse(item, args):
+    for arg in args:
+        item = item.replace(arg, "")
+    return item
+
+
+# Working
+def remove_links_parse(item):
+    result = re.sub(r"http\S+", "", item)
+    result = re.sub(r"https\S+", "", result)
+    return result
+
+
+# Needs work
+def remove_blank_parse(item):
+    item = os.linesep.join([s for s in item.splitlines() if s])
+    print(item)#
+    return item
 
 
 # Get emails and rules -------------------------------------------------------------------

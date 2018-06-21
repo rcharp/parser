@@ -124,8 +124,8 @@
                                             <tr style="font-weight:bold;">
                                                 <td style="width:40px;"></td>
                                                 <td>Rule Name</td>
-                                                <td>Section</td>
-                                                <td>Category</td>
+                                                <td>Email Section</td>
+                                                <td>Parse Category</td>
                                                 <td>Options</td>
                                                 <td>Values</td>
                                             </tr>
@@ -140,7 +140,7 @@
                                                         <td style="vertical-align:middle">{{ rule.section|title }}</td>
                                                         <td style="vertical-align:middle">{{ rule.category|title }}</td>
                                                         <td style="vertical-align:middle">{{ rule.options|title }}</td>
-                                                        <td style="vertical-align:middle">{{ rule.args|title }}</td>
+                                                        <td style="vertical-align:middle">{{ rule.args }}</td>
                                                     </tr>
                                                 {% endfor %}
                                             </tbody>
@@ -160,7 +160,7 @@
                                                                         cursor: pointer;">
                                         Parse Email
                                     </button>
-                                    <a href="{{ url_for('user.inbox') }}" type="button" value="cancel" class="cancel_button" name="action" id="cancel_button"
+                                    <a href="{{ url_for('user.inbox') }}" type="button" class="cancel_button" name="action" id="cancel_button"
                                             style="background-color: #FF0000;
                                                     border: none;
                                                     min-width:150px;
@@ -231,9 +231,9 @@
         function Checked(sel) {
             $( "#" + sel.value ).prop( "checked", true );
 
-            var others = $('input[type="checkbox"]').not("#" + sel.value);
+            //var others = $('input[type="checkbox"]').not("#" + sel.value);
 
-            others.prop('checked', false);
+            //others.prop('checked', false);
 
             document.getElementById('parse_button').style.display = 'inline-block';
             document.getElementById('cancel_button').style.display = 'inline-block';

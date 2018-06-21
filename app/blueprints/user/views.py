@@ -237,18 +237,17 @@ def delete_emails():
 
         to_delete = request.form.getlist('delete')
 
-        from app.blueprints.parse.models.email import Email
-
+        from app.blueprints.user.tasks import delete_emails
         for item in to_delete:
-            delete_emails.delay(item)
+            delete_emails(item)
 
         db.session.commit()
 
     flash('Email(s) successfully deleted.', 'error')
-    return redirect(url_for('user.inbox'))
+    return redirect(url_for('user.refresh'))
 
 
-@user.route('/parse/<email_id>/', methods=['GET', 'POST'])
+@user.route('/parse/<email_id>', methods=['GET', 'POST'])
 @csrf.exempt
 @login_required
 def parse(email_id):
@@ -275,12 +274,13 @@ def parse(email_id):
 @login_required
 def parse_email(email_id):
 
-    rule_id = 1
-    print(email_id)#
+    rules = request.form.getlist('select')
 
-    # parse_email(email_id,rule_id)
+    from app.blueprints.parse.parse import parse_email
+    parse_email(email_id,rules)
+
     flash('Your email has been parsed.', 'success')
-    return redirect(url_for('user.inbox'))
+    return redirect(url_for('user.refresh'))
 
 
 # Rules -------------------------------------------------------------------
@@ -320,7 +320,8 @@ def add_rule():
         name = request.form['name']
         args = request.form['args']
 
-        add_rule.delay(section, category, options, name, args, current_user.mailbox_id)
+        from app.blueprints.user.tasks import add_rule
+        add_rule(section, category, options, name, args, current_user.mailbox_id)
 
     flash('Rule has been successfully added.', 'success')
     return redirect(url_for('user.rules'))
@@ -341,7 +342,9 @@ def delete_rules():
 
         to_delete = request.form.getlist('delete')
 
-        delete_rules.delay(to_delete)
+        from app.blueprints.user.tasks import delete_rules
+
+        delete_rules(to_delete)
 
     flash('Rule(s) successfully deleted.', 'error')
     return redirect(url_for('user.rules'))
@@ -379,10 +382,8 @@ def inbox():
                 # from app.blueprints.user.tasks import r as redis
                 if cache.get(current_user.mailbox_id):
                     emails = cache.get(current_user.mailbox_id)
-                    print("Cache getting hit")#
                     return render_template('user/inbox.html', emails=emails, route="inbox")
                 else:
-                    print("Refresh getting hit")
                     return redirect(url_for('user.refresh'))
             else:
                 flash('You don\'t have an inbox yet. Please get one below.', 'error')
@@ -395,7 +396,6 @@ def refresh():
         from app.blueprints.user.tasks import get_emails, set_cache
 
         emails = get_emails.delay(current_user.mailbox_id)
-
         set_cache.delay(current_user.mailbox_id, emails.id)
 
         return render_template('user/inbox.html', emails_id=emails.id, emails_state=emails.state,
@@ -410,8 +410,6 @@ def update(emails_id,route):
         return jsonify({'route': 'dashboard'})
     elif route == "refresh":
         from app.blueprints.user.tasks import get_emails
-
-        # Get the results of the update of the emails
         emails = get_emails.AsyncResult(emails_id)
 
         return jsonify({'route':'refresh', 'emails_result': emails.result, 'emails_state':emails.state})

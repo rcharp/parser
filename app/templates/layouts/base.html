@@ -23,29 +23,23 @@
 
     <title>{% block title %}{% endblock %}</title>
 
-    <link
+    <!--link
       rel="stylesheet"
-      href="{{ url_for('static', filename='styles/vendor/bootstrap.min.css') }}">
+      href="{{ url_for('static', filename='styles/vendor/bootstrap.min.css') }}"-->
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='styles/main.css') }}">
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='styles/vendor/font-awesome.min.css') }}">
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='styles/vendor/eonasdan-bootstrap-datetimepicker.4.13.30.min.css') }}">
 
     <!-- Theme CSS -->
     <!-- Animation library for notifications   -->
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='styles/theme/animate.min.css') }}">
 
-    <!--  Light Bootstrap Table core CSS    -->
+    <!--  Light Bootstrap Table core CSS    --
     <link
       rel="stylesheet"
-      href="{{ url_for('static', filename='styles/theme/light-bootstrap-dashboard.css?v=1.4.0') }}">
+      href="{{ url_for('static', filename='styles/theme/light-bootstrap-dashboard.css?v=1.4.0') }}"-->
 
     <!-- Bootstrap Theme -->
     <link
@@ -73,7 +67,7 @@
     <!-- Custom CSS -->
     <link href="../../blueprints/page/templates/lite/css/style.css" rel="stylesheet">
     <!-- You can change the theme colors from here -->
-    <link href="../../blueprints/page/templates/lite/css/colors/blue.css" id="theme" rel="stylesheet">
+    <!--link href="../../blueprints/page/templates/lite/css/colors/blue.css" id="theme" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -207,9 +201,6 @@
     </script>
     <script
       src="{{ url_for('static', filename='scripts/vendor/moment.min.js') }}">
-    </script>
-    <script
-      src="{{ url_for('static', filename='scripts/vendor/eonasdan-bootstrap-datetimepicker.4.14.30.min.js') }}">
     </script>
     <script
       src="{{ url_for('static', filename='scripts/main.js') }}">
