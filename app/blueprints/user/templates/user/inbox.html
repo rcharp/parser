@@ -51,7 +51,7 @@
 </head>
 
 {% block litebody %}
-<body class="card-no-border" style="background-color:white;font-family:'Gotham',sans-serif;overflow-y:auto;max-width:100%;overflow-x:hidden;width:100%;padding-bottom:0;">
+<body class="card-no-border" style="font-family:'Gotham',sans-serif;overflow-y:auto;max-width:100%;overflow-x:hidden;width:100%;padding-bottom:0;">
     <script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@2.1.4/dist/loadingoverlay.min.js"></script>
     <script>
     $(document).ready(function(){
@@ -222,7 +222,7 @@
                                             </tr>
                                         </thead>
                                         <tbody id="emails_list">
-                                            {% for email in emails|sort(attribute="date",reverse = True) %}
+                                            {% for email in emails %}
                                                 <tr style="height:60px;" valign="middle">
                                                     <td style="vertical-align:middle">
                                                         <input id="delete" name="delete" type="checkbox" class="checkbox" value="{{ email.id }}" onchange="Checked(this)"/>

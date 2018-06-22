@@ -80,7 +80,7 @@
                 </div>
                 <hr />
                 <h2 style="color:#007fd8">Add a rule</h2>
-                <form action="{{ url_for('user.add_rule') }}" method="POST" id="rule" name="rule" onsubmit="return ValidateForm()">
+                <form action="{{ url_for('user.add_rule',email_id=email_id) }}" method="POST" id="rule" name="rule" onsubmit="return ValidateForm()">
                 <div class="row" style="padding-top:30px;color:#007fd8;margin:0 auto;margin-bottom:30px;max-width:95%;width:95%;">
                     <div class="col-lg-14">
                         <div class="card-lite" style="min-height: 180px; margin-bottom:30px;

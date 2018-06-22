@@ -1,17 +1,12 @@
 import re
-import os
 import random
 from app.extensions import db
-from flanker.addresslib import address
-from sqlalchemy.orm import load_only
 from app.blueprints.parse.models.email import Email
 from app.blueprints.parse.models.rule import Rule
 from app.blueprints.user.create_mailgun_user import generate_mailbox_id
 
 
 def parse_email(email_id, rules):
-
-    # email = Email.query.filter(Email.id == email_id).first()
 
     for rule_id in rules:
 
@@ -42,15 +37,16 @@ def parse(email, section, category, options, args):
         email.date = result
     elif section == "body":
         result = parse_body(email, category, options, args)
-        email.body = result#
+        email.body = result
+    elif section == "CC":
+        result = parse_cc(email, category, options, args)
+        email.cc = result
+    elif section == "Headers":
+        result = parse_headers(email, category, options, args)
+        email.headers = result
 
-    # email.parsed = 1
-    # db.session.commit()
-
-    # elif section == "CC":##
-    #     parse_cc(email, category, options, args)
-    # elif section == "Headers":
-    #     parse_headers(email, category, options, args)
+    email.parsed = 1
+    db.session.commit()
 
 
 def parse_from(email, category, options, args):
@@ -104,12 +100,25 @@ def parse_body(email, category, options, args):
     elif category == 'replace':
         return replace_parsing(body, args)
 
-# def parse_cc(email, category, options, args):
-#     cc = email.cc
-#
-#
-# def parse_headers(email, category, options, args):
-#     headers = email.headers
+
+def parse_cc(email, category, options, args):
+    cc = email.cc
+    if category == 'remove':
+        return remove_parsing(cc, options, args)
+    elif category == 'extract':
+        return extract_parsing(cc, options, args)
+    elif category == 'replace':
+        return replace_parsing(cc, args)
+
+
+def parse_headers(email, category, options, args):
+    headers = email.headers
+    if category == 'remove':
+        return remove_parsing(headers, options, args)
+    elif category == 'extract':
+        return extract_parsing(headers, options, args)
+    elif category == 'replace':
+        return replace_parsing(headers, args)
 
 
 # Parsing Categories -------------------------------------------------------------------

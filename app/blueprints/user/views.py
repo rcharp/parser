@@ -263,7 +263,7 @@ def parse(email_id):
                 from app.blueprints.parse.models.email import Email
                 email = Email.query.filter(Email.id == email_id).first()
 
-                return render_template('user/parse.html', rules=rules, email=email)
+                return render_template('user/parse.html', rules=rules, email=email, email_id=email_id)
             else:
                 flash('You don\'t have an inbox yet. Please get one below.', 'error')
         return redirect(url_for('user.settings'))
@@ -302,10 +302,10 @@ def rules():
         return redirect(url_for('user.settings'))
 
 
-@user.route('/add_rule', methods=['GET', 'POST'])
+@user.route('/add_rule/<email_id>', methods=['GET', 'POST'])
 @csrf.exempt
 @login_required
-def add_rule():
+def add_rule(email_id):
     if request.method == 'POST':
 
         # Get the new rules
@@ -324,14 +324,16 @@ def add_rule():
         add_rule(section, category, options, name, args, current_user.mailbox_id)
 
     flash('Rule has been successfully added.', 'success')
-    return redirect(url_for('user.rules'))
+    if email_id == 0:
+        return redirect(url_for('user.rules'))
+    return redirect(url_for('user.parse',email_id=email_id))
 
 
-@user.route('/add', methods=['GET', 'POST'])
+@user.route('/add/<email_id>', methods=['GET', 'POST'])
 @csrf.exempt
 @login_required
-def add():
-    return render_template('user/add.html')
+def add(email_id):
+    return render_template('user/add.html', email_id=email_id)
 
 
 @user.route('/delete_rules', methods=['GET', 'POST'])
@@ -379,9 +381,9 @@ def inbox():
     if request.method == 'GET':
         if current_user.subscription or current_user.trial:
             if current_user.mailbox_id:
-                # from app.blueprints.user.tasks import r as redis
                 if cache.get(current_user.mailbox_id):
                     emails = cache.get(current_user.mailbox_id)
+
                     return render_template('user/inbox.html', emails=emails, route="inbox")
                 else:
                     return redirect(url_for('user.refresh'))

@@ -83,6 +83,8 @@ def return_emails(mailbox_id):
 
     emails = ioloop.run_until_complete(asynchronous(mailbox_id))
 
+    emails = list(reversed(emails))
+
     return emails
 
 
