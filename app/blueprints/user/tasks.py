@@ -12,7 +12,6 @@ from app.blueprints.parse.models.rule import Rule
 
 
 celery = create_celery_app()
-# r = redis.StrictRedis(host=current_app.config.get('CACHE_REDIS_HOST'),password=current_app.config.get('CACHE_REDIS_PASSWORD'), port=13524, db=0)
 
 
 @celery.task()
@@ -82,7 +81,6 @@ def return_emails(mailbox_id):
     ioloop = asyncio.get_event_loop()
 
     emails = ioloop.run_until_complete(asynchronous(mailbox_id))
-
     emails = list(reversed(emails))
 
     return emails
@@ -96,9 +94,13 @@ def get_emails(mailbox_id):
 @celery.task()
 def delete_emails(email):
     from app.blueprints.parse.models.email import Email
-    # instance = db.session.query(Email).filter_by(id=email).first()
-    # db.session.delete(instance)
     Email.query.filter(Email.id == email).first().delete()
+
+
+@celery.task()
+def export_emails(mailbox_id):
+    from app.blueprints.parse.models.email import Email
+    return Email.query.filter(Email.mailbox_id == mailbox_id).filter(Email.parsed == True).all()
 
 
 # Rules -------------------------------------------------------------------
@@ -141,9 +143,6 @@ def delete_rules(to_delete):
 # Cache -------------------------------------------------------------------
 @celery.task()
 def set_cache(mailbox_id, emails_id):
-
-    #cache.set(mailbox_id,emails)
-
     emails = get_emails.AsyncResult(emails_id)
 
     if emails.state != 'PENDING':

@@ -79,7 +79,25 @@
                     </div>
                 </div>
                 <hr />
-                <h2 style="color:#007fd8">Add a rule</h2>
+                <h3 style="color:#007fd8">Add a Rule</h3>
+                <div class="row" style="padding-top:30px;color:#007fd8">
+                    <div class="col-lg-14">
+                        <div class="card-lite" style="min-height: 40px; margin-bottom:0px;
+                          min-width: 250px;
+                          border:1px solid #e9e9e9;
+                          box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
+                          border-radius: 4px;
+                          background-color:#fff;">
+                            <div class="card-block"style="flex: 1 1 auto;padding: 5.25rem;outline: none;overflow-x:auto">
+                                <img src="../../../../static/images/help.png" width="16px">
+                                This is where you add a new parsing rule. First, choose the section of the email that you want to parse from. Then, choose
+                                which parsing category you would like this rule to apply to, then finally, specific parsing options. If you choose an option
+                                that requires specific content to look for (for example, finding and replacing text), you'll enter that below. Lastly, give
+                                your rule a name and you'll be good to go.
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <form action="{{ url_for('user.add_rule',email_id=email_id) }}" method="POST" id="rule" name="rule" onsubmit="return ValidateForm()">
                 <div class="row" style="padding-top:30px;color:#007fd8;margin:0 auto;margin-bottom:30px;max-width:95%;width:95%;">
                     <div class="col-lg-14">
@@ -305,7 +323,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-12" id="arguments_column" style="display:none">
-                                        <h5>Please enter specific text that you want to parse for, separated by commas.<br />
+                                        <h5>Please enter specific text that you want to parse for, separated by commas.<br /><br />
                                         If you're choosing find and replace, group find/replace values with a parentheses.<br />
                                         For example: (<b>Text to find</b>, <b>text to replace it with</b>):</h5><br />
                                         <label for="args">Specific text: &nbsp;</label>
@@ -358,7 +376,7 @@
                                                 cursor: pointer;">
                                     Save Rule
                                 </button>
-                                <a href="{{ url_for('user.rules') }}" type="button" value="cancel" class="cancel_button" name="action" id="cancel_button"
+                                <a href="{{ url_for('user.rules') }}" type="button" class="cancel_button" name="action" id="cancel_button"
                                             style="background-color: #FF0000;
                                                     border: none;
                                                     min-width:150px;
@@ -529,7 +547,7 @@
                 document.getElementById('arguments_column').style.display = 'none';
             }
 
-            document.getElementById("info").innerHTML = '<div style="min-height:40px;line-height:16px;text-align:left;">' + text + '</div>';
+            document.getElementById("info").innerHTML = '<div style="min-height:40px;line-height:16px;text-align:left;">Info:<br /><br />' + text + '</div>';
         }
     </script>
 

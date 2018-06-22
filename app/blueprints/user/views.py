@@ -27,8 +27,9 @@ from app.blueprints.user.forms import (
     WelcomeForm,
     UpdateCredentials)
 
-import datetime
+import csv
 import stripe
+import datetime
 from app.extensions import cache, csrf, timeout, db
 
 user = Blueprint('user', __name__, template_folder='templates')
@@ -323,10 +324,11 @@ def add_rule(email_id):
         from app.blueprints.user.tasks import add_rule
         add_rule(section, category, options, name, args, current_user.mailbox_id)
 
-    flash('Rule has been successfully added.', 'success')
-    if email_id == 0:
-        return redirect(url_for('user.rules'))
-    return redirect(url_for('user.parse',email_id=email_id))
+        flash('Rule has been successfully added.', 'success')
+        if email_id == "0":
+            return redirect(url_for('user.rules'))
+        else:
+            return redirect(url_for('user.parse',email_id=email_id))
 
 
 @user.route('/add/<email_id>', methods=['GET', 'POST'])
@@ -415,6 +417,22 @@ def update(emails_id,route):
         emails = get_emails.AsyncResult(emails_id)
 
         return jsonify({'route':'refresh', 'emails_result': emails.result, 'emails_state':emails.state})
+
+
+# Utilities -------------------------------------------------------------------
+@user.route('/export', methods=['GET', 'POST'])
+@login_required
+def export():
+    from app.blueprints.user.tasks import export_emails
+
+    emails = export_emails(current_user.mailbox_id)
+    with open("Parsed_Data", 'w', newline='', encoding='utf8') as f:
+        writer = csv.writer(f)
+        for email in emails:
+            writer.writerow(email)
+
+    flash('Written to CSV', 'success')
+    return redirect(url_for('user.inbox'))
 
 
 @user.route('/get_inbox', methods=['GET', 'POST'])
