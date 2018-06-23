@@ -33,6 +33,7 @@ beautifulsoup4==4.6.0
 mailgun==0.1.1
 flanker==0.9.0
 dateparser==0.7.0
+easygui==0.98.1
 
 # Extensions.
 flask-debugtoolbar==0.10.0

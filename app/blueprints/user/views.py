@@ -370,7 +370,6 @@ def delete_rules():
 @login_required
 @csrf.exempt
 def settings():
-    # redis.flushdb()
     cache.clear()
     stripe.api_key = current_app.config.get('STRIPE_SECRET_KEY')
     stripe.api_version = '2018-02-28'
@@ -440,10 +439,14 @@ def export():
     from app.blueprints.user.tasks import export_emails
 
     emails = export_emails(current_user.mailbox_id)
-    with open("Parsed_Data", 'w', newline='', encoding='utf8') as f:
-        writer = csv.writer(f)
+    path = easygui.filesavebox()
+
+    with open(path + 'Parsed_Data.csv', 'w', newline='', encoding='utf8') as f:
+        writer = csv.DictWriter(f, fieldnames=["Message Id", "From", "Subject", "Date", "Body"])
+        writer.writeheader()
+
         for email in emails:
-            writer.writerow(email)
+            writer.writerow({"Message Id": email.message_id, "From": email.sender, "Subject": email.subject, "Date": email.date, "Body": email.body})
 
     flash('Written to CSV', 'success')
     return redirect(url_for('user.inbox'))
