@@ -127,13 +127,17 @@
                     var parse_url = "{{url_for('user.parse', email_id='DUMMY_VALUE') }}";
                     var actual_parse_url = parse_url.replace(/DUMMY_VALUE/, email);
 
+                    var view_url = "{{url_for('user.view_email', email_id='DUMMY_VALUE') }}";
+                    var actual_view_url = view_url.replace(/DUMMY_VALUE/, email);
+
                     email_html += '<tr style="height:60px;" valign="middle"><td style="vertical-align:middle">' +
                         '<input id="delete" name="delete" type="checkbox" class="checkbox" value="' + data[i]["id"] + '" onclick="Checked(this)"/>' +
                         '</td><td style="vertical-align:middle">' + data[i]["sender"] + '</td><td style="vertical-align:middle">' + data[i]["subject"] + '</td>' +
                         '<td style="vertical-align:middle">' + data[i]["date"] + '</td><td style="vertical-align:middle">';
 
                     if(data[i]["parsed"] === true){
-                        email_html += '<span class="label label-success">Parsed</span></td><td style="vertical-align:middle">';
+                        email_html += '<span class="label label-success">Parsed</span></td><td style="vertical-align:middle">' +
+                            '<a href="' + actual_view_url + '" style="border:1px solid; border-radius:4px;padding:10px;">View</a>';
                     }
                     else if(data[i]["parsed"] === false){
                         email_html += '<span class="label label-danger">Not Parsed</span></td><td style="vertical-align:middle">' +
@@ -177,7 +181,7 @@
                 <br >
                 <div class="row" style="padding-top:30px;color:#007fd8;margin-bottom:30px;">
                     <div style="float:right;font-family: 'Gotham', sans-serif;">
-                       Welcome, Guest!
+                       {{mailbox_id }}@mg.simpleytics.com
                     </div>
                 </div>
                 <hr />
@@ -279,6 +283,9 @@
                                                         {% if email.parsed == 0 %}
                                                             <a href="{{ url_for('user.parse', email_id=email.id) }}"
                                                                style="border:1px solid; border-radius:4px;padding:10px;">Parse</a>
+                                                        {% elif email.parsed == 1 %}
+                                                            <a href="{{ url_for('user.view_email', email_id=email.id) }}"
+                                                               style="border:1px solid; border-radius:4px;padding:10px;">View</a>
                                                         {% endif %}
                                                     </td>
                                                 </tr>

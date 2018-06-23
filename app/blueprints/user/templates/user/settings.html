@@ -39,8 +39,8 @@
             Pick a username
           </a>
         {% endif %}
-        {% if not current_user.mailbox_id %}
-        <a href="{{ url_for('user.update_credentials') }}"
+        {% if not current_user.active_mailbox %}
+        <a href="{{ url_for('user.get_inbox') }}"
            class="list-group-item">
           Get an inbox
         </a>

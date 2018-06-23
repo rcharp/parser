@@ -182,6 +182,7 @@ def signup():
             else:
                 flash('There was a problem creating an inbox for you. Please try again.', 'error')
                 current_user.active_mailbox = False
+                current_user.mailbox_id = None
 
             current_user.save()
 
@@ -263,8 +264,9 @@ def parse(email_id):
 
                 from app.blueprints.parse.models.email import Email
                 email = Email.query.filter(Email.id == email_id).first()
+                body = Email.query.with_entities(Email.body).filter(Email.id == email_id).first()
 
-                return render_template('user/parse.html', rules=rules, email=email, email_id=email_id)
+                return render_template('user/parse.html', rules=rules, email=email, body=body, mailbox_id=current_user.mailbox_id, email_id=email_id)
             else:
                 flash('You don\'t have an inbox yet. Please get one below.', 'error')
         return redirect(url_for('user.settings'))
@@ -284,6 +286,15 @@ def parse_email(email_id):
     return redirect(url_for('user.refresh'))
 
 
+@user.route('/view_email/<email_id>', methods=['GET', 'POST'])
+@csrf.exempt
+@login_required
+def view_email(email_id):
+    from app.blueprints.parse.models.email import Email
+    email = Email.query.filter(Email.id == email_id).first()
+    return render_template('user/view.html', mailbox_id=current_user.mailbox_id, email=email)
+
+
 # Rules -------------------------------------------------------------------
 @user.route('/rules', methods=['GET', 'POST'])
 @login_required
@@ -297,7 +308,7 @@ def rules():
                 from app.blueprints.user.tasks import get_rules
 
                 rules = get_rules(current_user.mailbox_id)
-                return render_template('user/rules.html', rules=rules)
+                return render_template('user/rules.html', mailbox_id=current_user.mailbox_id, rules=rules)
             else:
                 flash('You don\'t have an inbox yet. Please get one below.', 'error')
         return redirect(url_for('user.settings'))
@@ -373,6 +384,9 @@ def settings():
     if current_user.trial and current_user.role == 'member':
         trial_days_left = 14 - (datetime.datetime.now() - current_user.created_on.replace(tzinfo=None)).days
 
+    if not current_user.active_mailbox:
+        flash('You don\'t have an inbox yet. Please get one below.', 'error')
+
     return render_template('user/settings.html', trial_days_left=trial_days_left, mailbox_id=mailbox_id)
 
 
@@ -382,11 +396,11 @@ def settings():
 def inbox():
     if request.method == 'GET':
         if current_user.subscription or current_user.trial:
-            if current_user.mailbox_id:
+            if current_user.active_mailbox:
                 if cache.get(current_user.mailbox_id):
                     emails = cache.get(current_user.mailbox_id)
 
-                    return render_template('user/inbox.html', emails=emails, route="inbox")
+                    return render_template('user/inbox.html', emails=emails, mailbox_id=current_user.mailbox_id, route="inbox")
                 else:
                     return redirect(url_for('user.refresh'))
             else:
@@ -402,7 +416,7 @@ def refresh():
         emails = get_emails.delay(current_user.mailbox_id)
         set_cache.delay(current_user.mailbox_id, emails.id)
 
-        return render_template('user/inbox.html', emails_id=emails.id, emails_state=emails.state,
+        return render_template('user/inbox.html', emails_id=emails.id, emails_state=emails.state, mailbox_id=current_user.mailbox_id,
                                emails=[], route="refresh")
 
 
@@ -441,19 +455,19 @@ def get_inbox():
 
     # Create a user id for the user
     mailbox_id = generate_mailbox_id()
-    current_user.mailbox_id = mailbox_id
 
     # Create an inbox for the user
     if create_inbox(mailbox_id):
         current_user.active_mailbox = True
+        current_user.mailbox_id = mailbox_id
         flash('Your inbox has been created.', 'success')
     else:
         flash('There was a problem creating an inbox for you. Please try again.', 'error')
         current_user.active_mailbox = False
+        current_user.mailbox_id = None
 
     current_user.save()
 
-    flash('Your sign in settings have been updated.', 'success')
     return redirect(url_for('user.settings'))
 
 

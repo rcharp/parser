@@ -49,7 +49,7 @@ class User(UserMixin, ResourceMixin, db.Model):
                       server_default='')
     password = db.Column(db.String(128), nullable=False, server_default='')
 
-    mailbox_id = db.Column(db.String(255), unique=True, index=True, nullable=False, server_default='')
+    mailbox_id = db.Column(db.String(255), unique=True, index=True, nullable=True, server_default='')
 
     active_mailbox = db.Column('active_mailbox', db.Boolean(), nullable=False, server_default='0')
 
