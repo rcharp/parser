@@ -9,7 +9,7 @@ class Mailbox(ResourceMixin, db.Model):
     __tablename__ = 'mailboxes'
 
     # Relationships.
-    email = db.Column(db.String(255), db.ForeignKey('users.email', onupdate='CASCADE', ondelete='CASCADE'),
+    user_email = db.Column(db.String(255), db.ForeignKey('users.email', onupdate='CASCADE', ondelete='CASCADE'),
                         index=True, nullable=True, primary_key=False, unique=False)
 
     # Objects.
