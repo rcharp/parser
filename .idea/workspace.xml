@@ -1,128 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f1637133-ccae-40ab-aec7-a4a76f8f54a9" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/simpleytics.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/simpleytics.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Parsed_Data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Parsed_Data.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/blueprints/page/templates/page/welcome.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/page/templates/page/welcome.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/blueprints/parse/models/email.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/parse/models/email.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/blueprints/parse/models/rule.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/parse/models/rule.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/blueprints/parse/parse.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/parse/parse.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/blueprints/parse/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/parse/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/blueprints/user/create_mailgun_user.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/user/create_mailgun_user.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/blueprints/user/tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/user/tasks.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/blueprints/user/templates/emails.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/user/templates/emails.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/blueprints/user/templates/user/add.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/user/templates/user/add.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/blueprints/user/templates/user/inbox.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/user/templates/user/inbox.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/blueprints/user/templates/user/parse.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/user/templates/user/parse.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/blueprints/user/templates/user/rules.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/user/templates/user/rules.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/blueprints/user/templates/user/view.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/user/templates/user/view.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/blueprints/user/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/user/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/simple/css/compiled/theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/simple/css/compiled/theme.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/simple/css/custom.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/simple/css/custom.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/styles/theme/bootstrap.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/styles/theme/bootstrap.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/layouts/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/layouts/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/celerybeat-schedule" beforeDir="false" afterPath="$PROJECT_DIR$/celerybeat-schedule" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/.gitattributes" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/MANIFEST" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/README.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/developer_information/BUILD INSTRUCTIONS.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/developer_information/DEVELOPER_NOTES.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/developer_information/Git-branching-model.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/dist/easygui-0.98.0_UNRELEASED-py3.6.egg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/easygui/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/easygui/boxes/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/easygui/boxes/about.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/easygui/boxes/base_boxes.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/easygui/boxes/button_box.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/easygui/boxes/choice_box.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/easygui/boxes/demo.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/easygui/boxes/derived_boxes.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/easygui/boxes/diropen_box.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/easygui/boxes/egstore.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/easygui/boxes/fileboxsetup.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/easygui/boxes/fileopen_box.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/easygui/boxes/filesave_box.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/easygui/boxes/fillable_box.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/easygui/boxes/global_state.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/easygui/boxes/multi_fillable_box.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/easygui/boxes/text_box.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/easygui/boxes/utils.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/easygui/easygui.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/easygui/python_and_check_logo.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/easygui/python_and_check_logo.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/easygui/python_and_check_logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/easygui/zzzzz.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/setup.cfg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/setup.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/sphinx/Makefile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/sphinx/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/sphinx/_static/python-logo-master-v3-TM-flattened.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/sphinx/_static/registration_system/easygui_demo_registration_app.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/sphinx/_static/registration_system/screenshot_register_main.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/sphinx/_static/registration_system/screenshot_register_show.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/sphinx/_static/tutorial/python-logo.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/sphinx/_static/tutorial/screenshot2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/sphinx/_static/tutorial/screenshot3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/sphinx/_static/tutorial/screenshot4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/sphinx/_static/tutorial/screenshot_buttonbox-with-image.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/sphinx/_static/tutorial/screenshot_buttonbox_with_image.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/sphinx/_static/tutorial/screenshot_ccbox.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/sphinx/_static/tutorial/screenshot_choicebox.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/sphinx/_static/tutorial/screenshot_choicebox_icecream.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/sphinx/_static/tutorial/screenshot_choicebox_monofonts_and_exit_button.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/sphinx/_static/tutorial/screenshot_choicebox_with_multiple_buttons.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/sphinx/_static/tutorial/screenshot_codebox_vista.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/sphinx/_static/tutorial/screenshot_exceptionbox_vista.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/sphinx/_static/tutorial/screenshot_fileopenbox_vista.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/sphinx/_static/tutorial/screenshot_msgbox.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/sphinx/_static/tutorial/screenshot_multchoicebox.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/sphinx/_static/tutorial/screenshot_multenterbox.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/sphinx/_static/tutorial/screenshot_multenterbox_vista.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/sphinx/_static/tutorial/screenshot_passwordbox.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/sphinx/api.rst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/sphinx/conf.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/sphinx/cookbook.rst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/sphinx/faq.rst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/sphinx/index.rst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/sphinx/links.rst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/sphinx/make.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/sphinx/support.rst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/sphinx/tutorial.rst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/test_cases/SimpleCv.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/test_cases/The Pirates of the Caribean Game.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/test_cases/audio/intro.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/test_cases/audio/intro.ogg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/test_cases/books.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/test_cases/dice.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/test_cases/file_open_box.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/test_cases/flash_multiple_rb.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/test_cases/geo_quiz.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/test_cases/gps_auto_update.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/test_cases/hex_entry.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/test_cases/images/cross.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/test_cases/images/daffy duck.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/test_cases/images/dave.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/test_cases/images/globe.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/test_cases/images/mickey.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/test_cases/images/minnie.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/test_cases/images/tick.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/test_cases/multienter_backspace.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/test_cases/multiple_disney_images.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/test_cases/pi.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/test_cases/result.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/test_cases/text2binary.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/test_cases/weather_man.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/easygui/test_cases/xml_parse.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-    </list>
+    <list default="true" id="f1637133-ccae-40ab-aec7-a4a76f8f54a9" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -426,36 +305,6 @@
               <item name="parser" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="parser" type="b2602c69:ProjectViewProjectNode" />
-              <item name="parser" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="blueprints" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="parser" type="b2602c69:ProjectViewProjectNode" />
-              <item name="parser" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="blueprints" type="462c0819:PsiDirectoryNode" />
-              <item name="user" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="parser" type="b2602c69:ProjectViewProjectNode" />
-              <item name="parser" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="blueprints" type="462c0819:PsiDirectoryNode" />
-              <item name="user" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="parser" type="b2602c69:ProjectViewProjectNode" />
-              <item name="parser" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="blueprints" type="462c0819:PsiDirectoryNode" />
-              <item name="user" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="user" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -544,7 +393,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="24" width="1680" height="984" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5048611" side_tool="true" weight="0.22005208" />
