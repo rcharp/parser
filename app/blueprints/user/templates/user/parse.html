@@ -72,8 +72,9 @@
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
                 <!-- Row -->
+                {{ flash.render() }}
                 <br >
-                <div class="row" style="padding-top:30px;color:#007fd8;margin-bottom:30px;">
+                <div class="row" style="padding-top:10px;color:#007fd8;margin-bottom:30px;">
                     <div style="float:right;font-family: 'Gotham', sans-serif;">
                        {{mailbox_id }}@mg.simpleytics.com
                     </div>
@@ -117,7 +118,7 @@
                                     From: {{ email.sender }}<br />
                                     Subject: {{ email.subject }}<br />
                                     Date: {{ email.date }}<br />
-                                    Body: <a href="#" class="show_body"><img src="../../../../static/images/body_plus.png" width="16px" /></a>
+                                    Body: <a href="#" class="show_body"><img id=body_image" src="../../../../static/images/body_plus.png" width="16px" /></a><br />
                                     <div class="card-lite" id="body_div" style="min-height: 40px; margin-bottom:30px;
                                           max-width: 95%;
                                           border-color: #d7dfe3;
@@ -274,20 +275,6 @@
                 document.getElementById('body_image').src="../../../../static/images/body_plus.png";
             }
         });
-        function ShowBody() {
-
-            var body = document.getElementById('body_div');
-            if(body.style.display === 'none'){
-                body.style.display = 'inline-block';
-
-                document.getElementById('body_image').src="../../../../static/images/body_minus.png";
-            }
-            else{
-                body.style.display = 'none';
-                document.getElementById('body_image').src="../../../../static/images/body_plus.png";
-            }
-
-        }
     </script>
 
 </body>

@@ -102,8 +102,10 @@
   <body style="font-family: 'Gotham', sans-serif;margin:auto;width:100%;max-width:100%;overflow-x:hidden;padding-bottom:0;">
     {% block header %}{% endblock %}
     {{ billing.card_expiring_warning() }}
+
     {% if request.path != '/demo' and request.path != '/inbox' and request.path != '/refresh'
-    and request.path != '/rules' and request.path != '/add' and not ('/parse' in request.path) %}
+    and request.path != '/rules' and not ('/add' in request.path) and not ('/parse' in request.path)
+    and not ('/export' in request.path) %}
     <main class="container"style="min-height:850px;">
       {{ flash.render() }}
 
@@ -123,7 +125,7 @@
     </footer-->
 
 <div id="features" style="font-family: 'Gotham', sans-serif;margin-top:10px;margin-bottom:0px;
-    overflow-x:hidden;border-top:none;background:#e06c1f">
+    overflow-x:hidden;border-top:none;background:#007fd8">
 		<div class="container" style="width:90%;margin:auto;text-align:center;color:white">
             <div class="row header" style="margin-top:40px;padding-left:0;margin-left:0;">
                 <div class="col-md-3 col-md-3" style="min-width:275px;text-align:left;padding-top:40px;padding-left:0">

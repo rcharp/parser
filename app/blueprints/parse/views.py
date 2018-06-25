@@ -15,14 +15,19 @@ def incoming():
     if request.form:
         data = request.form
 
-        # Get headers.
-        message_id = data['Message-Id']
-        mailbox_id = str(address.parse(data['To'])).split("@")[0].upper()  # the user's mailgun inbox that it was sent to
-        subject = clean_subject(data['Subject'])
-        date = data['Date']
-        body = data['body-plain'].strip()
+        # print(data['message-headers'])
+        # return json.dumps({'success': True}), 200, {'ContentType': 'application/json'}
 
-        # Get the original sender.
+        # Get headers...
+        message_id = data['Message-Id'] if 'Message-Id' in data else None
+        mailbox_id = str(address.parse(data['To'])).split("@")[0].upper()  # the user's mailgun inbox that it was sent to
+        subject = clean_subject(data['Subject']) if 'Subject' in data else None
+        to = data['sender'] if 'sender' in data else None
+        date = data['Date'].split(' -')[0] if 'date' in data else None
+        cc = data['Cc'] if 'cc' in data else None
+        body = data['body-plain'].strip() if 'body-plain' in data else None
+
+        # Get the original sender..
         sender = re.search('From: (.+?)\n', data['body-plain'])
         if sender:
             sender = clean_sender(str(address.parse(sender.group(1)))) if address.parse(sender.group(1)) \
@@ -42,6 +47,8 @@ def incoming():
             e.subject = subject
             e.date = date
             e.sender = sender
+            e.to = to
+            e.cc = cc
             e.body = body
 
             # Add the email to the database

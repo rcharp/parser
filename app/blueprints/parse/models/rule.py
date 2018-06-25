@@ -9,7 +9,7 @@ class Rule(ResourceMixin, db.Model):
     __tablename__ = 'rules'
     # Relationships.
     mailbox_id = db.Column(db.String(255), db.ForeignKey('users.mailbox_id', onupdate='CASCADE', ondelete='CASCADE'),
-                           index=True, nullable=False, primary_key=False, unique=False)
+                           index=True, nullable=True, primary_key=False, unique=False)
 
     # Rules.
     id = db.Column(db.Integer, primary_key=True)

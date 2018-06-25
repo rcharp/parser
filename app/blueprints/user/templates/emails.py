@@ -67,3 +67,17 @@ def send_cancel_email(email):
     msg.html = render_template('user/mail/cancel_email.html')
 
     mail.send(msg)
+
+
+def send_export_email(email, csv):
+
+    app = Flask(__name__)
+    mail = Mail()
+    mail.init_app(app)
+    msg = Message("Your data export from Parser",
+                  sender="support@parser.com",
+                  recipients=[email])
+
+    msg.attach("Parsed_data.csv", "text/csv", csv)
+
+    mail.send(msg)

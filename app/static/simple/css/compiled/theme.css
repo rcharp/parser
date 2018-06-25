@@ -344,7 +344,8 @@ a:focus, button:focus {
   .navbar.hero .navbar-nav > li.dropdown > a .caret {
     border-top-color: #EBEBEB; }
   .navbar.hero .navbar-nav > li > a {
-    color: #fff;
+    color: #007fd8;
+    /*color: #fff;*/
     font-size: 15px;
     padding: 15px 20px;
     font-weight: 500;

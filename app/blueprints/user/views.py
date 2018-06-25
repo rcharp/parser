@@ -15,10 +15,11 @@ from flask_login import (
     logout_user)
 
 from lib.safe_next_url import safe_next_url
+from app.blueprints.parse.parse import generate_csv
 from app.blueprints.user.decorators import anonymous_required
 from app.blueprints.user.models import User
 from app.blueprints.user.create_mailgun_user import generate_mailbox_id, create_inbox
-from app.blueprints.user.templates.emails import send_welcome_email
+from app.blueprints.user.templates.emails import send_welcome_email, send_export_email
 from app.blueprints.user.forms import (
     LoginForm,
     BeginPasswordResetForm,
@@ -27,7 +28,6 @@ from app.blueprints.user.forms import (
     WelcomeForm,
     UpdateCredentials)
 
-import csv
 import stripe
 import datetime
 from app.extensions import cache, csrf, timeout, db
@@ -154,7 +154,7 @@ def signup():
 
         if login_user(u):
 
-            # send_welcome_email(current_user.email).delay()
+            send_welcome_email(current_user.email).delay()
 
             # Create a user id for the user
             mailbox_id = generate_mailbox_id()
@@ -346,7 +346,7 @@ def add_rule(email_id):
 @csrf.exempt
 @login_required
 def add(email_id):
-    return render_template('user/add.html', email_id=email_id)
+    return render_template('user/add.html', email_id=email_id, mailbox_id=current_user.mailbox_id)
 
 
 @user.route('/delete_rules', methods=['GET', 'POST'])
@@ -439,16 +439,11 @@ def export():
     from app.blueprints.user.tasks import export_emails
 
     emails = export_emails(current_user.mailbox_id)
-    path = easygui.filesavebox()
+    file = generate_csv(emails)
 
-    with open(path + 'Parsed_Data.csv', 'w', newline='', encoding='utf8') as f:
-        writer = csv.DictWriter(f, fieldnames=["Message Id", "From", "Subject", "Date", "Body"])
-        writer.writeheader()
+    send_export_email(current_user.email, file)
 
-        for email in emails:
-            writer.writerow({"Message Id": email.message_id, "From": email.sender, "Subject": email.subject, "Date": email.date, "Body": email.body})
-
-    flash('Written to CSV', 'success')
+    flash('Your CSV has been sent to your email.', 'success')
     return redirect(url_for('user.inbox'))
 
 

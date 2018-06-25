@@ -1,9 +1,13 @@
 import re
+import csv
 import random
 from app.extensions import db
 from app.blueprints.parse.models.email import Email
 from app.blueprints.parse.models.rule import Rule
-from app.blueprints.user.create_mailgun_user import generate_mailbox_id
+from werkzeug.wrappers import Response
+from flask import make_response
+from werkzeug.datastructures import Headers
+from io import StringIO
 
 
 def parse_email(email_id, rules):
@@ -51,6 +55,9 @@ def parse(email, section, category, options, args):
 
 def parse_from(email, category, options, args):
     sender = email.sender
+
+    if sender is None: return
+
     if 'mailto' in sender:
         sender = re.search('mailto:(.+?)]', sender).group(1)
     if category == 'remove':
@@ -63,6 +70,9 @@ def parse_from(email, category, options, args):
 
 def parse_subject(email, category, options, args):
     subject = email.subject
+
+    if subject is None: return
+
     if category == 'remove':
         return remove_parsing(subject, options, args)
     elif category == 'extract':
@@ -73,6 +83,9 @@ def parse_subject(email, category, options, args):
 
 def parse_to(email, category, options, args):
     to = email.to
+
+    if to is None: return
+
     if category == 'remove':
         return remove_parsing(to, options, args)
     elif category == 'extract':
@@ -83,6 +96,9 @@ def parse_to(email, category, options, args):
 
 def parse_date(email, category, options, args):
     date = email.date
+
+    if date is None: return
+
     if category == 'remove':
         return remove_parsing(date, options, args)
     elif category == 'extract':
@@ -93,6 +109,9 @@ def parse_date(email, category, options, args):
 
 def parse_body(email, category, options, args):
     body = email.body
+
+    if body is None: return
+
     if category == 'remove':
         return remove_parsing(body, options, args)
     elif category == 'extract':
@@ -103,6 +122,9 @@ def parse_body(email, category, options, args):
 
 def parse_cc(email, category, options, args):
     cc = email.cc
+
+    if cc is None: return
+
     if category == 'remove':
         return remove_parsing(cc, options, args)
     elif category == 'extract':
@@ -113,6 +135,9 @@ def parse_cc(email, category, options, args):
 
 def parse_headers(email, category, options, args):
     headers = email.headers
+
+    if headers is None: return
+
     if category == 'remove':
         return remove_parsing(headers, options, args)
     elif category == 'extract':
@@ -250,13 +275,27 @@ def get_rule_options(rule):
         return 'Find and replace content'
 
 
+# Get rule options -------------------------------------------------------------------
+def generate_csv(emails):
+
+    buffer = StringIO()
+
+    writer = csv.DictWriter(buffer, fieldnames=["Message Id", "From", "Subject", "Date", "Body"])
+    writer.writeheader()
+
+    for email in emails:
+        writer.writerow({"Message Id": email.message_id, "From": email.sender, "Subject": email.subject, "Date": email.date, "Body": email.body})
+
+    return buffer.getvalue()
+
+
 # Create objects -------------------------------------------------------------------
 def create_test_user():
     from app.blueprints.user.models import User
 
     u = User()
     u.role = 'member'
-    u.mailbox_id = generate_mailbox_id()
+    # u.mailbox_id = generate_mailbox_id()
 
     return u
 

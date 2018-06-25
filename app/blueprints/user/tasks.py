@@ -1,14 +1,14 @@
 import time
 import asyncio
 from aiopg.sa import create_engine
-from flask import current_app
+from flask import current_app, Flask
 import sqlalchemy as sa
 from lib.flask_mailplus import send_template_message
 from app.extensions import cache, db
 from app.app import create_celery_app
 from app.blueprints.user.models import User
-from app.blueprints.parse.models.email import Email
 from app.blueprints.parse.models.rule import Rule
+from flask_mail import Mail, Message
 
 
 celery = create_celery_app()
@@ -150,3 +150,4 @@ def set_cache(mailbox_id, emails_id):
     else:
         time.sleep(1)
         set_cache(mailbox_id, emails_id)
+

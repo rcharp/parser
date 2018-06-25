@@ -121,36 +121,36 @@
 
             // Display the emails
             var email_html = '';
-                for( var i=0; i <data.length; i++) {
 
-                    var email = data[i]['id'];
-                    var parse_url = "{{url_for('user.parse', email_id='DUMMY_VALUE') }}";
-                    var actual_parse_url = parse_url.replace(/DUMMY_VALUE/, email);
+            for (var i = 0; i < data.length; i++) {
 
-                    var view_url = "{{url_for('user.view_email', email_id='DUMMY_VALUE') }}";
-                    var actual_view_url = view_url.replace(/DUMMY_VALUE/, email);
+                var email = data[i]['id'];
+                var parse_url = "{{url_for('user.parse', email_id='DUMMY_VALUE') }}";
+                var actual_parse_url = parse_url.replace(/DUMMY_VALUE/, email);
 
-                    email_html += '<tr style="height:60px;" valign="middle"><td style="vertical-align:middle">' +
-                        '<input id="delete" name="delete" type="checkbox" class="checkbox" value="' + data[i]["id"] + '" onclick="Checked(this)"/>' +
-                        '</td><td style="vertical-align:middle">' + data[i]["sender"] + '</td><td style="vertical-align:middle">' + data[i]["subject"] + '</td>' +
-                        '<td style="vertical-align:middle">' + data[i]["date"] + '</td><td style="vertical-align:middle">';
+                var view_url = "{{url_for('user.view_email', email_id='DUMMY_VALUE') }}";
+                var actual_view_url = view_url.replace(/DUMMY_VALUE/, email);
 
-                    if(data[i]["parsed"] === true){
-                        email_html += '<span class="label label-success">Parsed</span></td><td style="vertical-align:middle">' +
-                            '<a href="' + actual_view_url + '" style="border:1px solid; border-radius:4px;padding:10px;">View</a>';
-                    }
-                    else if(data[i]["parsed"] === false){
-                        email_html += '<span class="label label-danger">Not Parsed</span></td><td style="vertical-align:middle">' +
-                            '<a href="' + actual_parse_url + '" style="border:1px solid; border-radius:4px;padding:10px;">Parse</a>';
-                    }
+                email_html += '<tr style="height:60px;" valign="middle"><td style="vertical-align:middle">' +
+                    '<input id="delete" name="delete" type="checkbox" class="checkbox" value="' + data[i]["id"] + '" onclick="Checked(this)"/>' +
+                    '</td><td style="vertical-align:middle">' + data[i]["sender"] + '</td><td style="vertical-align:middle">' + data[i]["subject"] + '</td>' +
+                    '<td style="vertical-align:middle">' + data[i]["date"] + '</td><td style="vertical-align:middle">';
 
-                 }
-                email_html += '</td></tr>';
-                //$('#emails_list').fadeOut(1000, function() {
-                $("#emails_table").LoadingOverlay("hide", true);
-                $("#emails_list").html(email_html).fadeIn(1000);
+                if (data[i]["parsed"] === true) {
+                    email_html += '<span class="label label-success">Parsed</span></td><td style="vertical-align:middle">' +
+                        '<a style="border:1px solid; border-radius:4px;padding:10px;opacity:0.4;display:inline-block;margin-bottom:5px;margin-right:5px;">Parse</a>' +
+                        '<a href="' + actual_view_url + '" style="border:1px solid; border-radius:4px;padding:10px;display:inline-block;">View</a>';
+                }
+                else if (data[i]["parsed"] === false) {
+                    email_html += '<span class="label label-danger">Not Parsed</span></td><td style="vertical-align:middle">' +
+                        '<a href="'+ actual_parse_url +'"style="border:1px solid; border-radius:4px;padding:10px;display:inline-block;margin-bottom:5px;margin-right:5px;">Parse</a>' +
+                        '<a href="'+ actual_view_url +'"style="border:1px solid; border-radius:4px;padding:10px;display:inline-block;">View</a>';
+                }
 
-                //});
+            }
+            email_html += '</td></tr>';
+            $("#emails_table").LoadingOverlay("hide", true);
+            $("#emails_list").html(email_html).fadeIn(1000);
         }
 
     });
@@ -178,15 +178,16 @@
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
                 <!-- Row -->
+                {{ flash.render() }}
                 <br >
-                <div class="row" style="padding-top:30px;color:#007fd8;margin-bottom:30px;">
+                <div class="row" style="color:#007fd8;margin-bottom:30px;">
                     <div style="float:right;font-family: 'Gotham', sans-serif;">
                        {{mailbox_id }}@mg.simpleytics.com
                     </div>
                 </div>
                 <hr />
                 <h3 style="color:#007fd8">Inbox</h3>
-                <div class="row" style="padding-top:30px;color:#007fd8">
+                <div class="row" style="margin-top:10px;padding-top:30px;color:#007fd8">
                     <div class="col-lg-14">
                         <div class="card-lite" style="min-height: 40px; margin-bottom:0px;
                           min-width: 250px;
@@ -257,7 +258,7 @@
                                             <tr style="font-weight:bold;">
                                                 <td></td>
                                                 <td>From</td>
-                                                <td>Subject</td>
+                                                <td style="width:35%">Subject</td>
                                                 <td>Date</td>
                                                 <td>Status</td>
                                                 <td>Actions</td>
@@ -282,14 +283,16 @@
                                                     <td style="vertical-align:middle">
                                                         {% if email.parsed == 0 %}
                                                             <a href="{{ url_for('user.parse', email_id=email.id) }}"
-                                                               style="border:1px solid; border-radius:4px;padding:10px;">Parse</a>
-                                                        {% elif email.parsed == 1 %}
+                                                               style="border:1px solid; border-radius:4px;padding:10px;display:inline-block;margin-bottom:5px;">Parse</a>
                                                             <a href="{{ url_for('user.view_email', email_id=email.id) }}"
-                                                               style="border:1px solid; border-radius:4px;padding:10px;">View</a>
+                                                               style="border:1px solid; border-radius:4px;padding:10px;display:inline-block;">View</a>
+                                                        {% elif email.parsed == 1 %}
+                                                            <a style="border:1px solid; border-radius:4px;padding:10px;opacity:0.4;display:inline-block;margin-bottom:5px;">Parse</a>
+                                                            <a href="{{ url_for('user.view_email', email_id=email.id) }}"
+                                                               style="border:1px solid; border-radius:4px;padding:10px;display:inline-block;">View</a>
                                                         {% endif %}
                                                     </td>
                                                 </tr>
-
                                             {% endfor %}
                                         </tbody>
                                     </table>

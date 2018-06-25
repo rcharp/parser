@@ -72,8 +72,9 @@
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
                 <!-- Row -->
+                {{ flash.render() }}
                 <br >
-                <div class="row" style="padding-top:30px;color:#007fd8;margin-bottom:30px;">
+                <div class="row" style="padding-top:10px;color:#007fd8;margin-bottom:30px;">
                     <div style="float:right;font-family: 'Gotham', sans-serif;">
                        {{mailbox_id }}@mg.simpleytics.com
                     </div>
@@ -130,6 +131,10 @@
                             </div>
                             <form action="{{ url_for('user.delete_rules') }}" method="POST" id="rule" name="rule">
                                 <div class="card-block" style="flex: 1 1 auto;padding: 5.25rem;outline: none;overflow-x:auto">
+                                {% if rules|length == 0 %}
+                                    You havent added any rules yet.
+                                    <br /><br />
+                                {% else %}
                                     <table class="table">
                                         <thead>
                                             <tr style="font-weight:bold;">
@@ -157,6 +162,7 @@
                                             </tbody>
                                         <!--/form-->
                                     </table>
+                                {% endif %}
                                     <a href="{{ url_for('user.add', email_id=0) }}" class="add" style="background-color: #4CAF50;
                                                                         border: none;
                                                                         float:none;

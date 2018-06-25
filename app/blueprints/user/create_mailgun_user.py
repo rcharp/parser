@@ -15,11 +15,11 @@ def generate_mailbox_id(size=8, chars=string.ascii_uppercase + string.digits):
 
     # Check to make sure there isn't already that id in the database
     if not db.session.query(exists().where(User.mailbox_id == mailbox_id)).scalar():
-        if create_inbox(mailbox_id):
-            status = "success"
+        status = create_inbox(mailbox_id)
+        if status:
+            return mailbox_id
         else:
-            status = 'failure'
-        return mailbox_id, status
+            print(status)
     else:
         generate_mailbox_id()
 

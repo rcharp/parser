@@ -2,9 +2,125 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f1637133-ccae-40ab-aec7-a4a76f8f54a9" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/simpleytics.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/simpleytics.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Parsed_Data" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parsed_Data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Parsed_Data.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/blueprints/page/templates/page/welcome.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/page/templates/page/welcome.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/blueprints/parse/models/email.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/parse/models/email.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/blueprints/parse/models/rule.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/parse/models/rule.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/blueprints/parse/parse.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/parse/parse.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/blueprints/parse/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/parse/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/blueprints/user/create_mailgun_user.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/user/create_mailgun_user.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/blueprints/user/tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/user/tasks.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/blueprints/user/templates/emails.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/user/templates/emails.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/blueprints/user/templates/user/add.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/user/templates/user/add.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/blueprints/user/templates/user/inbox.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/user/templates/user/inbox.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/blueprints/user/templates/user/parse.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/user/templates/user/parse.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/blueprints/user/templates/user/rules.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/user/templates/user/rules.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/blueprints/user/templates/user/view.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/user/templates/user/view.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/blueprints/user/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/user/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/simple/css/compiled/theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/simple/css/compiled/theme.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/simple/css/custom.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/simple/css/custom.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/styles/theme/bootstrap.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/styles/theme/bootstrap.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/layouts/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/layouts/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/celerybeat-schedule" beforeDir="false" afterPath="$PROJECT_DIR$/celerybeat-schedule" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/.gitattributes" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/MANIFEST" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/README.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/developer_information/BUILD INSTRUCTIONS.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/developer_information/DEVELOPER_NOTES.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/developer_information/Git-branching-model.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/dist/easygui-0.98.0_UNRELEASED-py3.6.egg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/easygui/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/easygui/boxes/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/easygui/boxes/about.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/easygui/boxes/base_boxes.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/easygui/boxes/button_box.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/easygui/boxes/choice_box.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/easygui/boxes/demo.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/easygui/boxes/derived_boxes.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/easygui/boxes/diropen_box.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/easygui/boxes/egstore.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/easygui/boxes/fileboxsetup.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/easygui/boxes/fileopen_box.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/easygui/boxes/filesave_box.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/easygui/boxes/fillable_box.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/easygui/boxes/global_state.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/easygui/boxes/multi_fillable_box.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/easygui/boxes/text_box.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/easygui/boxes/utils.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/easygui/easygui.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/easygui/python_and_check_logo.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/easygui/python_and_check_logo.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/easygui/python_and_check_logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/easygui/zzzzz.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/setup.cfg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/setup.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/sphinx/Makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/sphinx/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/sphinx/_static/python-logo-master-v3-TM-flattened.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/sphinx/_static/registration_system/easygui_demo_registration_app.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/sphinx/_static/registration_system/screenshot_register_main.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/sphinx/_static/registration_system/screenshot_register_show.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/sphinx/_static/tutorial/python-logo.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/sphinx/_static/tutorial/screenshot2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/sphinx/_static/tutorial/screenshot3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/sphinx/_static/tutorial/screenshot4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/sphinx/_static/tutorial/screenshot_buttonbox-with-image.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/sphinx/_static/tutorial/screenshot_buttonbox_with_image.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/sphinx/_static/tutorial/screenshot_ccbox.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/sphinx/_static/tutorial/screenshot_choicebox.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/sphinx/_static/tutorial/screenshot_choicebox_icecream.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/sphinx/_static/tutorial/screenshot_choicebox_monofonts_and_exit_button.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/sphinx/_static/tutorial/screenshot_choicebox_with_multiple_buttons.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/sphinx/_static/tutorial/screenshot_codebox_vista.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/sphinx/_static/tutorial/screenshot_exceptionbox_vista.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/sphinx/_static/tutorial/screenshot_fileopenbox_vista.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/sphinx/_static/tutorial/screenshot_msgbox.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/sphinx/_static/tutorial/screenshot_multchoicebox.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/sphinx/_static/tutorial/screenshot_multenterbox.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/sphinx/_static/tutorial/screenshot_multenterbox_vista.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/sphinx/_static/tutorial/screenshot_passwordbox.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/sphinx/api.rst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/sphinx/conf.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/sphinx/cookbook.rst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/sphinx/faq.rst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/sphinx/index.rst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/sphinx/links.rst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/sphinx/make.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/sphinx/support.rst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/sphinx/tutorial.rst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/test_cases/SimpleCv.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/test_cases/The Pirates of the Caribean Game.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/test_cases/audio/intro.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/test_cases/audio/intro.ogg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/test_cases/books.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/test_cases/dice.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/test_cases/file_open_box.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/test_cases/flash_multiple_rb.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/test_cases/geo_quiz.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/test_cases/gps_auto_update.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/test_cases/hex_entry.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/test_cases/images/cross.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/test_cases/images/daffy duck.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/test_cases/images/dave.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/test_cases/images/globe.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/test_cases/images/mickey.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/test_cases/images/minnie.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/test_cases/images/tick.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/test_cases/multienter_backspace.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/test_cases/multiple_disney_images.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/test_cases/pi.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/test_cases/result.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/test_cases/text2binary.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/test_cases/weather_man.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/easygui/test_cases/xml_parse.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -22,26 +138,47 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/blueprints/user/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="30" column="13" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
+            <state relative-caret-position="269">
+              <caret line="443" column="21" selection-start-line="443" selection-start-column="21" selection-end-line="443" selection-end-column="21" />
+              <folding>
+                <element signature="e#0#171#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="requirements.txt" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/requirements.txt">
+      <file leaf-file-name="tasks.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/blueprints/user/tasks.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="329">
-              <caret line="34" column="17" lean-forward="true" selection-start-line="34" selection-start-column="17" selection-end-line="34" selection-end-column="17" />
+            <state relative-caret-position="2280">
+              <caret line="152" lean-forward="true" selection-start-line="152" selection-end-line="152" />
+              <folding>
+                <element signature="e#0#11#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="app.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/templates/layouts/app.html">
+      <file leaf-file-name="emails.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/blueprints/user/templates/emails.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="68" selection-start-line="4" selection-start-column="68" selection-end-line="4" selection-end-column="68" />
+            <state relative-caret-position="398">
+              <caret line="82" column="18" selection-start-line="82" selection-start-column="18" selection-end-line="82" selection-end-column="18" />
+              <folding>
+                <element signature="e#21#61#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="parse.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/blueprints/parse/parse.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="275">
+              <caret line="287" lean-forward="true" selection-start-line="287" selection-end-line="287" />
+              <folding>
+                <element signature="e#0#9#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -49,41 +186,8 @@
       <file leaf-file-name="parse.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/blueprints/user/templates/user/parse.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="417">
-              <caret line="127" column="158" selection-start-line="127" selection-start-column="158" selection-end-line="127" selection-end-column="158" />
-              <folding>
-                <element signature="n#style#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="base.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/templates/layouts/base.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-916">
-              <caret line="26" column="22" selection-start-line="26" selection-start-column="22" selection-end-line="26" selection-end-column="22" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="add.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/blueprints/user/templates/user/add.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="141">
-              <caret line="77" column="57" selection-start-line="77" selection-start-column="57" selection-end-line="77" selection-end-column="57" />
-              <folding>
-                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#div#0;n#button#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#div#0;n#button#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#div#0;n#button#0;n#div#2;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#div#0;n#button#0;n#div#3;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#div#0;n#button#0;n#div#4;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#div#0;n#button#0;n#div#5;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
-              </folding>
+            <state relative-caret-position="304">
+              <caret line="76" column="54" selection-start-line="76" selection-start-column="52" selection-end-line="76" selection-end-column="54" />
             </state>
           </provider>
         </entry>
@@ -91,12 +195,26 @@
       <file leaf-file-name="rules.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/blueprints/user/templates/user/rules.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="159" column="36" selection-start-line="159" selection-start-column="36" selection-end-line="171" selection-end-column="40" />
-              <folding>
-                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#a#0;n#h4#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
-              </folding>
+            <state relative-caret-position="286">
+              <caret line="76" column="54" selection-start-line="76" selection-start-column="54" selection-end-line="76" selection-end-column="54" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="settings.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/blueprints/user/templates/user/settings.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="464">
+              <caret line="42" column="43" selection-start-line="42" selection-start-column="43" selection-end-line="42" selection-end-column="43" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="view.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/blueprints/user/templates/user/view.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="339">
+              <caret line="81" column="54" selection-start-line="81" selection-start-column="54" selection-end-line="81" selection-end-column="54" />
             </state>
           </provider>
         </entry>
@@ -104,28 +222,26 @@
       <file leaf-file-name="inbox.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/blueprints/user/templates/user/inbox.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="406">
-              <caret line="132" column="94" selection-start-line="132" selection-start-column="94" selection-end-line="132" selection-end-column="94" />
+            <state relative-caret-position="214">
+              <caret line="189" column="40" selection-start-line="189" selection-start-column="40" selection-end-line="189" selection-end-column="56" />
               <folding>
-                <element signature="n#style#0;n#body#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
-                <element signature="e#12802#12808#0#HTML" expanded="true" />
-                <element signature="e#14466#14472#0#HTML" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#2;n#tr#0;n#thead#0;n#table#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#a#0;n#td#5;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#a#1;n#td#5;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#a#2;n#td#5;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#a#3;n#td#5;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="view.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/blueprints/user/templates/user/view.html">
+      <file leaf-file-name="add.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/blueprints/user/templates/user/add.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="443">
-              <caret line="121" column="60" selection-start-line="121" selection-start-column="60" selection-end-line="121" selection-end-column="60" />
-              <folding>
-                <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#a#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
-              </folding>
+            <state relative-caret-position="202">
+              <caret line="76" column="54" selection-start-line="76" selection-start-column="54" selection-end-line="76" selection-end-column="54" />
             </state>
           </provider>
         </entry>
@@ -141,21 +257,12 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>page-wrapper</find>
-      <find>edit_rules</find>
-      <find>get_email</find>
-      <find>delete_rule</find>
-      <find>generate</find>
-      <find>create_in</find>
-      <find>celery.task</find>
-      <find>from app.blueprints.user.tasks import</find>
       <find>asyncres</find>
       <find>set_cache</find>
       <find>stringify</find>
       <find>alert</find>
       <find>mailbox</find>
       <find>with_en</find>
-      <find>app.config</find>
       <find>celery</find>
       <find>add_rule</find>
       <find>with_enti</find>
@@ -171,6 +278,15 @@
       <find>please e</find>
       <find>navbar-right</find>
       <find>filedi</find>
+      <find>app.config</find>
+      <find>color:#fff</find>
+      <find>color:red</find>
+      <find>.navbar-nav&gt;li&gt;a{c</find>
+      <find>navbar-nav</find>
+      <find>e06c1f</find>
+      <find>007fd8</find>
+      <find>background</find>
+      <find>send_wel</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -182,11 +298,8 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/parser/__init__.py" />
-        <option value="$PROJECT_DIR$/parse2.py" />
         <option value="$PROJECT_DIR$/parse.py" />
         <option value="$PROJECT_DIR$/app/blueprints/parse/email_object.py" />
-        <option value="$PROJECT_DIR$/docker-compose.yml" />
         <option value="$PROJECT_DIR$/.env" />
         <option value="$PROJECT_DIR$/app/blueprints/parse/models.py" />
         <option value="$PROJECT_DIR$/app/blueprints/user2/__init__.py" />
@@ -201,35 +314,41 @@
         <option value="$PROJECT_DIR$/app/tests/conftest.py" />
         <option value="$PROJECT_DIR$/app/blueprints/page/templates/page/demo.html" />
         <option value="$PROJECT_DIR$/app/blueprints/user/generator.py" />
-        <option value="$PROJECT_DIR$/app/blueprints/user/templates/emails.py" />
         <option value="$PROJECT_DIR$/app/blueprints/page/views.py" />
         <option value="$PROJECT_DIR$/app/app.py" />
         <option value="$PROJECT_DIR$/app/blueprints/admin/templates/admin/_menu.html" />
         <option value="$PROJECT_DIR$/app/blueprints/user/templates/user/dashboard.html" />
         <option value="$PROJECT_DIR$/app/templates/layouts/login.html" />
-        <option value="$PROJECT_DIR$/config/settings.py" />
         <option value="$PROJECT_DIR$/app/blueprints/page/templates/page/css/style.css" />
         <option value="$PROJECT_DIR$/cli/commands/cmd_db.py" />
-        <option value="$PROJECT_DIR$/app/blueprints/parse/models/rule.py" />
         <option value="$PROJECT_DIR$/app/extensions.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/instance/settings.py" />
-        <option value="$PROJECT_DIR$/app/blueprints/parse/models/email.py" />
-        <option value="$PROJECT_DIR$/app/blueprints/parse/views.py" />
-        <option value="$PROJECT_DIR$/app/templates/layouts/base.html" />
-        <option value="$PROJECT_DIR$/app/blueprints/parse/parse.py" />
-        <option value="$PROJECT_DIR$/app/blueprints/user/tasks.py" />
         <option value="$PROJECT_DIR$/app/blueprints/user/templates/user/settings.html" />
-        <option value="$PROJECT_DIR$/app/blueprints/user/create_mailgun_user.py" />
         <option value="$PROJECT_DIR$/app/blueprints/user/models.py" />
-        <option value="$PROJECT_DIR$/app/blueprints/user/templates/user/add.html" />
-        <option value="$PROJECT_DIR$/app/blueprints/user/templates/user/parse.html" />
+        <option value="$PROJECT_DIR$/app/blueprints/parse/models/rule.py" />
+        <option value="$PROJECT_DIR$/app/blueprints/user/create_mailgun_user.py" />
+        <option value="$PROJECT_DIR$/docker-compose.yml" />
+        <option value="$PROJECT_DIR$/requirements.txt" />
+        <option value="$PROJECT_DIR$/config/settings.py" />
+        <option value="$PROJECT_DIR$/app/blueprints/parse/models/email.py" />
+        <option value="$PROJECT_DIR$/app/blueprints/page/templates/page/welcome.html" />
+        <option value="$PROJECT_DIR$/app/static/simple/css/custom.min.css" />
+        <option value="$PROJECT_DIR$/app/templates/layouts/app.html" />
+        <option value="$PROJECT_DIR$/app/static/simple/css/custom.css" />
+        <option value="$PROJECT_DIR$/easygui/sphinx/conf.py" />
+        <option value="$PROJECT_DIR$/app/static/styles/theme/bootstrap.min.css" />
+        <option value="$PROJECT_DIR$/app/blueprints/parse/views.py" />
+        <option value="$PROJECT_DIR$/instance/settings.py" />
+        <option value="$PROJECT_DIR$/app/blueprints/parse/parse.py" />
+        <option value="$PROJECT_DIR$/app/templates/layouts/base.html" />
+        <option value="$PROJECT_DIR$/app/blueprints/user/templates/emails.py" />
+        <option value="$PROJECT_DIR$/app/blueprints/user/tasks.py" />
+        <option value="$PROJECT_DIR$/app/blueprints/user/views.py" />
         <option value="$PROJECT_DIR$/app/blueprints/user/templates/user/inbox.html" />
+        <option value="$PROJECT_DIR$/app/blueprints/user/templates/user/parse.html" />
+        <option value="$PROJECT_DIR$/app/blueprints/user/templates/user/add.html" />
         <option value="$PROJECT_DIR$/app/blueprints/user/templates/user/rules.html" />
         <option value="$PROJECT_DIR$/app/blueprints/user/templates/user/view.html" />
-        <option value="$PROJECT_DIR$/app/templates/layouts/app.html" />
-        <option value="$PROJECT_DIR$/requirements.txt" />
-        <option value="$PROJECT_DIR$/app/blueprints/user/views.py" />
       </list>
     </option>
   </component>
@@ -282,10 +401,10 @@
       <path value="$PROJECT_DIR$/node_modules/uuid/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
-    <option name="y" value="22" />
-    <option name="width" value="1920" />
-    <option name="height" value="1129" />
+  <component name="ProjectFrameBounds">
+    <option name="y" value="24" />
+    <option name="width" value="1680" />
+    <option name="height" value="984" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="Add" />
@@ -295,7 +414,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -318,46 +436,58 @@
               <item name="parser" type="b2602c69:ProjectViewProjectNode" />
               <item name="parser" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="blueprints" type="462c0819:PsiDirectoryNode" />
+              <item name="user" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="parser" type="b2602c69:ProjectViewProjectNode" />
+              <item name="parser" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="blueprints" type="462c0819:PsiDirectoryNode" />
+              <item name="user" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="parser" type="b2602c69:ProjectViewProjectNode" />
               <item name="parser" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="blueprints" type="462c0819:PsiDirectoryNode" />
+              <item name="user" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="layouts" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="parser" type="b2602c69:ProjectViewProjectNode" />
-              <item name="parser" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="parser" type="b2602c69:ProjectViewProjectNode" />
-              <item name="parser" type="462c0819:PsiDirectoryNode" />
-              <item name="instance" type="462c0819:PsiDirectoryNode" />
+              <item name="user" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+  </component>
+  <component name="PyConsoleOptionsProvider">
+    <option name="myPythonConsoleState">
+      <console-settings module-name="simpleytics" is-module-sdk="true">
+        <option name="myUseModuleSdk" value="true" />
+        <option name="myModuleName" value="simpleytics" />
+      </console-settings>
+    </option>
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/app/blueprints/parse/models" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/app/blueprints/user/templates/user" />
       <recent name="$PROJECT_DIR$/app/blueprints/billing/models" />
       <recent name="$PROJECT_DIR$/app/blueprints/parse" />
       <recent name="$PROJECT_DIR$/app/blueprints" />
+      <recent name="$PROJECT_DIR$/app/blueprints/parse/models" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/instance" />
       <recent name="$PROJECT_DIR$/app/blueprints/parse/models" />
     </key>
   </component>
@@ -413,29 +543,30 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="22" width="1920" height="1129" extended-state="1" />
+    <frame x="0" y="24" width="1680" height="984" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5048611" side_tool="true" weight="0.22005208" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3289183" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.329235" />
       <window_info anchor="bottom" id="Python Console" order="7" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" sideWeight="0.49513888" visible="true" weight="0.30717054" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19169329" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3289183" />
+      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.49513888" visible="true" weight="0.41488162" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22466423" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3372093" />
       <window_info anchor="right" id="SciView" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39955848" />
       <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39955848" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Message" order="0" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -460,90 +591,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask_login.py" />
-    <entry file="file://$PROJECT_DIR$/app/blueprints/billing/models/email.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="25" column="4" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/blueprints/billing/models/subscription.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="98">
-          <caret line="19" column="4" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="4" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cli/commands/cmd_add.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="116">
-          <caret line="179" column="17" selection-start-line="179" selection-start-column="17" selection-end-line="179" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/blueprints/billing/tasks.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="3" column="50" selection-start-line="3" selection-start-column="50" selection-end-line="3" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/blueprints/billing/models/credit_card.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="291">
-          <caret line="57" lean-forward="true" selection-start-line="57" selection-end-line="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/blueprints/admin/templates/admin/_menu.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="57" selection-start-line="2" selection-start-column="57" selection-end-line="2" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/blueprints/admin/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="45" column="39" selection-start-line="45" selection-start-column="39" selection-end-line="45" selection-end-column="39" />
-          <folding>
-            <element signature="e#0#106#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/layouts/login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
-          <caret line="27" column="54" selection-start-line="27" selection-start-column="45" selection-end-line="27" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/blueprints/user/templates/user/begin_password_reset.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="9" selection-start-column="9" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/blueprints/user/templates/user/login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="9" selection-start-column="9" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/blueprints/user/templates/user/password_reset.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="9" selection-start-column="9" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/blueprints/user/templates/user/signup.html">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -562,13 +609,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="178">
           <caret line="24" column="53" selection-start-line="24" selection-start-column="48" selection-end-line="24" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/blueprints/user/templates/emails.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
-          <caret line="24" column="57" selection-start-line="24" selection-start-column="57" selection-end-line="24" selection-end-column="57" />
         </state>
       </provider>
     </entry>
@@ -600,27 +640,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/blueprints/page/templates/page/welcome.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="141">
-          <caret line="524" column="36" selection-start-line="523" selection-start-column="24" selection-end-line="524" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/blueprints/page/templates/page/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="286">
           <caret line="123" column="24" lean-forward="true" selection-start-line="123" selection-start-column="24" selection-end-line="123" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cli/commands/cmd_db.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="64" column="42" selection-start-line="64" selection-start-column="42" selection-end-line="64" selection-end-column="42" />
-          <folding>
-            <element signature="e#0#12#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -633,17 +656,64 @@
         </state>
       </provider>
     </entry>
-    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/redis/client.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="393" column="8" selection-start-line="393" selection-start-column="8" selection-end-line="393" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/redis/client.py" />
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
           <caret line="2" column="20" selection-start-line="2" selection-start-column="20" selection-end-line="2" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/sqlalchemy/sql/schema.py" />
+    <entry file="file://$USER_HOME$/Library/Caches/PyCharm2018.1/python_stubs/-1199943127/builtins.py" />
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/tkinter/__init__.py" />
+    <entry file="file://$PROJECT_DIR$/easygui/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Parsed_Data.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-7" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.env">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-114" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/blueprints/parse/models/rule.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="11" column="52" selection-start-line="11" selection-start-column="52" selection-end-line="11" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/blueprints/user/create_mailgun_user.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="241">
+          <caret line="21" column="25" lean-forward="true" selection-start-line="21" selection-start-column="25" selection-end-line="21" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/blueprints/user/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="388">
+          <caret line="51" column="81" selection-start-line="51" selection-start-column="81" selection-end-line="51" selection-end-column="81" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cli/commands/cmd_db.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="159">
+          <caret line="49" column="22" selection-start-line="49" selection-start-column="22" selection-end-line="49" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -654,9 +724,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/config/gunicorn_dev.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/gunicorn.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Dockerfile">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/app.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-366">
+        <state relative-caret-position="-468">
           <caret line="39" column="4" selection-start-line="39" selection-start-column="4" selection-end-line="39" selection-end-column="4" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
@@ -664,205 +743,201 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/requirements.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="73">
+          <caret line="15" column="15" selection-start-line="15" selection-start-column="15" selection-end-line="15" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/blueprints/contact/tasks.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docker-compose.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="104">
+          <caret line="8" column="19" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/config/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-282">
-          <caret line="19" column="7" selection-start-line="19" selection-start-column="7" selection-end-line="19" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/instance/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="159">
-          <caret line="11" column="34" lean-forward="true" selection-start-line="11" selection-start-column="34" selection-end-line="11" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/sqlalchemy/sql/schema.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-258">
-          <caret line="3544" column="8" selection-start-line="3544" selection-start-column="8" selection-end-line="3544" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/blueprints/parse/models/rule.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Library/Caches/PyCharm2018.1/python_stubs/-1199943127/builtins.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="167" column="4" selection-start-line="167" selection-start-column="4" selection-end-line="167" selection-end-column="4" />
+        <state relative-caret-position="155">
+          <caret line="49" column="65" selection-start-line="49" selection-start-column="65" selection-end-line="49" selection-end-column="65" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/blueprints/parse/models/email.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="158">
-          <caret line="26" column="45" selection-start-line="26" selection-start-column="45" selection-end-line="26" selection-end-column="45" />
+        <state relative-caret-position="269">
+          <caret line="24" selection-start-line="24" selection-end-line="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/static/simple/css/custom.min.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret column="1618" selection-start-column="1618" selection-end-column="1618" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/blueprints/page/templates/page/welcome.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1845">
+          <caret line="123" column="20" selection-start-line="123" selection-start-column="20" selection-end-line="123" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/layouts/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="178">
+          <caret line="27" column="54" selection-start-line="27" selection-start-column="45" selection-end-line="27" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/layouts/app.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="58" selection-start-line="8" selection-start-column="58" selection-end-line="8" selection-end-column="58" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#nav#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/static/simple/css/custom.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="246">
+          <caret line="432" column="16" selection-start-line="432" selection-start-column="16" selection-end-line="432" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/easygui/sphinx/conf.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="291">
+          <caret line="279" lean-forward="true" selection-start-line="279" selection-end-line="279" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/static/styles/theme/bootstrap.min.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="4" column="73423" lean-forward="true" selection-start-line="4" selection-start-column="73423" selection-end-line="4" selection-end-column="73423" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/instance/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="29" selection-start-line="3" selection-start-column="29" selection-end-line="3" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/layouts/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="108" column="53" lean-forward="true" selection-start-line="108" selection-start-column="53" selection-end-line="108" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/blueprints/parse/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="30" column="63" lean-forward="true" selection-start-line="30" selection-start-column="63" selection-end-line="30" selection-end-column="63" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/blueprints/parse/parse.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="275">
+          <caret line="287" lean-forward="true" selection-start-line="287" selection-end-line="287" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/blueprints/user/tasks.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="484">
-          <caret line="102" column="46" selection-start-line="102" selection-start-column="46" selection-end-line="102" selection-end-column="46" />
+        <state relative-caret-position="2280">
+          <caret line="152" lean-forward="true" selection-start-line="152" selection-end-line="152" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/blueprints/user/create_mailgun_user.py">
+    <entry file="file://$PROJECT_DIR$/app/blueprints/user/templates/emails.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="12" selection-start-line="17" selection-start-column="12" selection-end-line="17" selection-end-column="12" />
+        <state relative-caret-position="398">
+          <caret line="82" column="18" selection-start-line="82" selection-start-column="18" selection-end-line="82" selection-end-column="18" />
           <folding>
-            <element signature="e#0#13#0" expanded="true" />
+            <element signature="e#21#61#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/blueprints/user/models.py">
+    <entry file="file://$PROJECT_DIR$/app/blueprints/user/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="506">
-          <caret line="51" column="81" selection-start-line="51" selection-start-column="81" selection-end-line="51" selection-end-column="81" />
+        <state relative-caret-position="269">
+          <caret line="443" column="21" selection-start-line="443" selection-start-column="21" selection-end-line="443" selection-end-column="21" />
           <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/blueprints/user/templates/user/settings.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="505">
-          <caret line="42" column="43" selection-start-line="42" selection-start-column="43" selection-end-line="42" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/blueprints/parse/parse.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3750">
-          <caret line="278" lean-forward="true" selection-start-line="278" selection-end-line="278" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/blueprints/parse/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="22" column="41" selection-start-line="22" selection-start-column="41" selection-end-line="22" selection-end-column="41" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/blueprints/user/templates/user/add.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="141">
-          <caret line="77" column="57" selection-start-line="77" selection-start-column="57" selection-end-line="77" selection-end-column="57" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#div#0;n#button#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#div#0;n#button#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#div#0;n#button#0;n#div#2;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#div#0;n#button#0;n#div#3;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#div#0;n#button#0;n#div#4;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#div#0;n#button#0;n#div#5;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/blueprints/user/templates/user/parse.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="417">
-          <caret line="127" column="158" selection-start-line="127" selection-start-column="158" selection-end-line="127" selection-end-column="158" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
+            <element signature="e#0#171#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/blueprints/user/templates/user/inbox.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="406">
-          <caret line="132" column="94" selection-start-line="132" selection-start-column="94" selection-end-line="132" selection-end-column="94" />
+        <state relative-caret-position="214">
+          <caret line="189" column="40" selection-start-line="189" selection-start-column="40" selection-end-line="189" selection-end-column="56" />
           <folding>
-            <element signature="n#style#0;n#body#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
-            <element signature="e#12802#12808#0#HTML" expanded="true" />
-            <element signature="e#14466#14472#0#HTML" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#2;n#tr#0;n#thead#0;n#table#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#td#5;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#1;n#td#5;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#2;n#td#5;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#3;n#td#5;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/blueprints/user/templates/user/add.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="202">
+          <caret line="76" column="54" selection-start-line="76" selection-start-column="54" selection-end-line="76" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/blueprints/user/templates/user/parse.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="76" column="54" selection-start-line="76" selection-start-column="52" selection-end-line="76" selection-end-column="54" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/blueprints/user/templates/user/rules.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="159" column="36" selection-start-line="159" selection-start-column="36" selection-end-line="171" selection-end-column="40" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#0;n#h4#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
-          </folding>
+        <state relative-caret-position="286">
+          <caret line="76" column="54" selection-start-line="76" selection-start-column="54" selection-end-line="76" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/blueprints/user/templates/user/settings.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="464">
+          <caret line="42" column="43" selection-start-line="42" selection-start-column="43" selection-end-line="42" selection-end-column="43" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/blueprints/user/templates/user/view.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="443">
-          <caret line="121" column="60" selection-start-line="121" selection-start-column="60" selection-end-line="121" selection-end-column="60" />
-          <folding>
-            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/layouts/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-916">
-          <caret line="26" column="22" selection-start-line="26" selection-start-column="22" selection-end-line="26" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/layouts/app.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="68" selection-start-line="4" selection-start-column="68" selection-end-line="4" selection-end-column="68" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/tkinter/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
-          <caret line="790" column="15" selection-start-line="790" selection-start-column="15" selection-end-line="790" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/easygui/__init__.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/blueprints/user/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="30" column="13" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/requirements.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="329">
-          <caret line="34" column="17" lean-forward="true" selection-start-line="34" selection-start-column="17" selection-end-line="34" selection-end-column="17" />
+        <state relative-caret-position="339">
+          <caret line="81" column="54" selection-start-line="81" selection-start-column="54" selection-end-line="81" selection-end-column="54" />
         </state>
       </provider>
     </entry>

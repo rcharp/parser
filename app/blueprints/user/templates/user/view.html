@@ -77,8 +77,9 @@
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
                 <!-- Row -->
+                {{ flash.render() }}
                 <br >
-                <div class="row" style="padding-top:30px;color:#007fd8;margin-bottom:30px;">
+                <div class="row" style="padding-top:10px;color:#007fd8;margin-bottom:30px;">
                     <div style="float:right;font-family: 'Gotham', sans-serif;">
                        {{mailbox_id }}@mg.simpleytics.com
                     </div>
@@ -120,6 +121,9 @@
                                 From: {{ email.sender }}<br />
                                 Subject: {{ email.subject }}<br />
                                 Date: {{ email.date }}<br />
+                                {% if email.cc is not none %}
+                                    Cc: {{ email.cc }}
+                                {% endif %}
                                 <div style="word-wrap:break-word;white-space:pre-line">
                                     {{ email.body }}
                                 </div><br />

@@ -323,7 +323,9 @@ body .container.body .right_col {
   padding: 0
 }
 .navbar-nav>li>a, .navbar-brand, .navbar-nav>li>a {
-  color: #fff !important;
+  /*Navbar links color*/
+  /*color:#fff !important;*/
+  color: #007fd8 !important;
 }
 .top_nav .nav>li>a:focus, .top_nav .nav>li>a:hover, .top_nav .nav .open>a, .top_nav .nav .open>a:focus, .top_nav .nav .open>a:hover {
   background: #D9DEE4;
@@ -428,7 +430,7 @@ table.no-margin .progress {
 }
 
 .col-md-live {
-  display:block
+  display:block;
   position: fixed;
   min-height: 1px;
   height:100px;
@@ -594,7 +596,8 @@ a:hover, a:focus {
 }
 .navbar-brand, .navbar-nav>li>a {
   font-weight: 500;
-  color: #ECF0F1 !important;
+  color:#007fd8 !important;
+  /*color: #ECF0F1 !important;*/
   margin-left: 0 !important;
   line-height: 32px;
 }

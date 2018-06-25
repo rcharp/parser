@@ -31,7 +31,7 @@ services:
 
   celery:
     build: .
-    command: celery worker -B -l info -A app.blueprints.contact.tasks
+    command: celery worker -B -l info -A app.blueprints.user.tasks
     env_file:
       - '.env'
     volumes:
