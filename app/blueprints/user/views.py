@@ -18,7 +18,7 @@ from lib.safe_next_url import safe_next_url
 from app.blueprints.parse.parse import generate_csv
 from app.blueprints.user.decorators import anonymous_required
 from app.blueprints.user.models import User
-from app.blueprints.user.create_mailgun_user import generate_mailbox_id, create_inbox
+from app.blueprints.user.create_mailgun_user import generate_mailbox_id, create_inbox, get_mailboxes
 from app.blueprints.user.templates.emails import send_welcome_email, send_export_email
 from app.blueprints.user.forms import (
     LoginForm,
@@ -158,11 +158,19 @@ def signup():
 
             # Create a user id for the user
             mailbox_id = generate_mailbox_id()
-            current_user.mailbox_id = mailbox_id
+            # current_user.mailbox_id = mailbox_id
 
             # Create an inbox for the user
             if create_inbox(mailbox_id):
+                current_user.mailbox_count += 1
                 current_user.active_mailbox = True
+
+                from app.blueprints.parse.models.mailbox import Mailbox
+
+                m = Mailbox()
+                m.mailbox_id = mailbox_id
+                m.email = current_user.email
+                db.session.add(m)
 
                 from app.blueprints.parse.models.rule import Rule
 
@@ -376,6 +384,9 @@ def settings():
     mailbox_id = current_user.mailbox_id
     trial_days_left = -1
 
+    mailbox_count, mailbox_limit = current_user.mailbox_count, current_user.mailbox_limit
+    mailboxes = get_mailboxes(current_user.email)
+
     if not current_user.subscription and not current_user.trial and current_user.role == 'member':
         flash('Your free trial has expired. Please sign up for a plan below to continue parsing emails.',
               'error')
@@ -386,7 +397,8 @@ def settings():
     if not current_user.active_mailbox:
         flash('You don\'t have an inbox yet. Please get one below.', 'error')
 
-    return render_template('user/settings.html', trial_days_left=trial_days_left, mailbox_id=mailbox_id)
+    return render_template('user/settings.html', trial_days_left=trial_days_left, mailbox_id=mailbox_id,
+                           mailbox_count=mailbox_count, mailbox_limit=mailbox_limit, mailboxes=mailboxes)
 
 
 # Inbox -------------------------------------------------------------------
@@ -451,19 +463,48 @@ def export():
 @login_required
 def get_inbox():
 
-    # Create a user id for the user
-    mailbox_id = generate_mailbox_id()
+    count, limit = current_user.mailbox_count, current_user.mailbox_limit
+    if count < limit:
 
-    # Create an inbox for the user
-    if create_inbox(mailbox_id):
-        current_user.active_mailbox = True
+        # Create a user id for the user
+        mailbox_id = generate_mailbox_id()
         current_user.mailbox_id = mailbox_id
-        flash('Your inbox has been created.', 'success')
-    else:
-        flash('There was a problem creating an inbox for you. Please try again.', 'error')
-        current_user.active_mailbox = False
-        current_user.mailbox_id = None
 
+        # Create an inbox for the user
+        if create_inbox(mailbox_id):
+            current_user.active_mailbox = True
+            current_user.mailbox_count += 1
+
+            from app.blueprints.parse.models.mailbox import Mailbox
+
+            m = Mailbox()
+            m.mailbox_id = mailbox_id
+            m.email = current_user.email
+
+            db.session.add(m)
+            db.session.commit()
+
+            flash('Your inbox has been created.', 'success')
+        else:
+            flash('There was a problem creating an inbox for you. Please try again.', 'error')
+            current_user.active_mailbox = False
+            current_user.mailbox_id = None
+
+        current_user.save()
+    else:
+        flash('You\'ve reached your limit for mailboxes. Please upgrade to get more.', 'error')
+
+    return redirect(url_for('user.settings'))
+
+
+@user.route('/switch_mailboxes', methods=['GET', 'POST'])
+@csrf.exempt
+def switch_mailboxes():
+
+    mailbox_id = request.form.get('mailboxes')
+
+    print(mailbox_id)
+    current_user.mailbox_id = mailbox_id
     current_user.save()
 
     return redirect(url_for('user.settings'))

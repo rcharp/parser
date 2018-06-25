@@ -22,7 +22,6 @@
     <div class="col-md-5" style="overflow-x:hidden">
       <h3>Settings</h3>
       <h4 class="text-muted margin-bottom">{{ current_user.email }}</h4>
-
       <div class="list-group">
         <a href="{{ url_for('user.update_credentials') }}"
            class="list-group-item">
@@ -39,13 +38,30 @@
             Pick a username
           </a>
         {% endif %}
-        {% if not current_user.active_mailbox %}
-        <a href="{{ url_for('user.get_inbox') }}"
-           class="list-group-item">
-          Get an inbox
-        </a>
-        {% endif %}
-      </div>
+      </div><hr />
+        <h3>Your Inboxes</h3>
+        <h4 class="text-muted margin-bottom">{{ mailbox_count }} of {{ mailbox_limit }} mailboxes used</h4>
+        <div class="list-group">
+            <a href="{{ url_for('user.get_inbox') }}" class="list-group-item">
+              Get an inbox
+            </a>
+            {% if mailboxes|length > 0 %}
+            <form action="{{ url_for('user.switch_mailboxes') }}" method="POST" id="mailbox" name="mailbox">
+                <div class="list-group-item">
+                    Choose an inbox:<br /><br />
+                    <select id="mailboxes" name="mailboxes" onchange="this.form.submit()">
+                        {% for mailbox in mailboxes %}
+                            {% if mailbox[0] == current_user.mailbox_id %}
+                                <option value="{{ mailbox[0] }}" id="mailbox_id" name="mailbox_id" selected>{{ mailbox[0] }}</option>
+                            {% else %}
+                                <option value="{{ mailbox[0] }}" id="mailbox_id" name="mailbox_id">{{ mailbox[0] }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                </div>
+            </form>
+            {% endif %}
+        </div>
     </div>
     <div class="col-md-5 col-md-push-1 col-md-offset-1">
       {% if current_user.subscription %}

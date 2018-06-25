@@ -77,7 +77,7 @@ STRIPE_PLANS = {
     '0': {
         'id': 'hobby',
         'name': 'Hobby',
-        'amount': 900,
+        'amount': 2500,
         'currency': 'usd',
         'interval': 'month',
         'interval_count': 1,
@@ -88,7 +88,7 @@ STRIPE_PLANS = {
     '1': {
         'id': 'startup',
         'name': 'Startup',
-        'amount': 3900,
+        'amount': 7500,
         'currency': 'usd',
         'interval': 'month',
         'interval_count': 1,
@@ -101,7 +101,7 @@ STRIPE_PLANS = {
     '2': {
         'id': 'professional',
         'name': 'Professional',
-        'amount': 9900,
+        'amount': 14900,
         'currency': 'usd',
         'interval': 'month',
         'interval_count': 1,

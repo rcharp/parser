@@ -17,6 +17,7 @@ from app.blueprints.billing.models.credit_card import CreditCard
 from app.blueprints.billing.models.subscription import Subscription
 from app.blueprints.billing.models.invoice import Invoice
 from app.blueprints.parse.models.email import Email
+from app.blueprints.parse.models.mailbox import Mailbox
 from app.blueprints.parse.models.rule import Rule
 from app.extensions import db
 
@@ -38,6 +39,7 @@ class User(UserMixin, ResourceMixin, db.Model):
     invoices = db.relationship(Invoice, backref='users', passive_deletes=True, lazy='subquery')
     emails = db.relationship(Email, backref='users', passive_deletes=True, lazy='subquery')
     rules = db.relationship(Rule, backref='users', passive_deletes=True, lazy='subquery')
+    mailboxes = db.relationship(Mailbox, backref='users', passive_deletes=True, lazy='subquery')
 
     # Authentication.
     role = db.Column(db.Enum(*ROLE, name='role_types', native_enum=False),
@@ -50,6 +52,9 @@ class User(UserMixin, ResourceMixin, db.Model):
     password = db.Column(db.String(128), nullable=False, server_default='')
 
     mailbox_id = db.Column(db.String(255), unique=True, index=True, nullable=True, server_default='')
+
+    mailbox_limit = db.Column(db.Integer, nullable=False, default=5)
+    mailbox_count = db.Column(db.Integer, nullable=False, default=0)
 
     active_mailbox = db.Column('active_mailbox', db.Boolean(), nullable=False, server_default='0')
 

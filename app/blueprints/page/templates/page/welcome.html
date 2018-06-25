@@ -105,7 +105,8 @@
                   <li><a href="{{ url_for('user.logout') }}">Log out</a></li>
           {% else %}
             <li><a href="{{ url_for('billing.pricing') }}">Pricing</a></li>
-            <li><a href="{{ url_for('page.demo') }}">Demo</a></li>
+            <li><a href="{{ url_for('contact.index') }}">Contact Us</a></li>
+            <!--<li><a href="{{ url_for('page.demo') }}">Demo</a></li>-->
             <li><a href="{{ url_for('user.login') }}">Log in</a></li>
             <li><a href="{{ url_for('user.signup') }}">Sign up</a></li>
           {% endif %}

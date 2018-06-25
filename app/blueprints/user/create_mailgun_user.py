@@ -30,3 +30,8 @@ def create_inbox(mailbox_id):
 
         return requests.post(url, auth=("api", current_app.config.get('MAILGUN_API_KEY')),
                           data={"login": mailbox_id, "password": current_app.config.get('MAILGUN_PASSWORD')})
+
+
+def get_mailboxes(email):
+    from app.blueprints.parse.models.mailbox import Mailbox
+    return Mailbox.query.with_entities(Mailbox.mailbox_id).filter(Mailbox.email == email).all()
