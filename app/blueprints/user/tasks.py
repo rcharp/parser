@@ -1,5 +1,8 @@
 import time
 import asyncio
+from operator import itemgetter
+from itertools import groupby
+from heapq import merge
 from aiopg.sa import create_engine
 from flask import current_app
 import sqlalchemy as sa
@@ -69,8 +72,24 @@ def adjust_mailboxes(email, mailbox_id, mailbox_limit, email_limit):
 
 @celery.task()
 def get_mailboxes(email):
+    from sqlalchemy import func
     from app.blueprints.parse.models.mailbox import Mailbox
-    return Mailbox.query.with_entities(Mailbox.mailbox_id).filter(Mailbox.user_email == email).all()
+    from app.blueprints.parse.models.email import Email
+
+    mailboxes = Mailbox.query.with_entities(Mailbox.mailbox_id).filter(Mailbox.user_email == email).all()
+    emails_count = db.session.query(Email.mailbox_id, func.count(Email.id)).group_by(Email.mailbox_id).all()
+
+    return list(inner_join(mailboxes,emails_count))
+
+
+def inner_join(a, b):
+    key = itemgetter(0)
+    for _, group in groupby(merge(a, b, key=key), key):
+        row_a, row_b = next(group), next(group, None)
+        if row_b is not None:
+            yield row_a + row_b[1:]
+        else:
+            yield row_a + (0,0)[1:]
 
 
 # Emails -------------------------------------------------------------------

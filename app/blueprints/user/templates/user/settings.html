@@ -59,9 +59,9 @@
                     <select id="mailboxes" name="mailboxes" onchange="this.form.submit()">
                         {% for mailbox in mailboxes %}
                             {% if mailbox[0] == current_user.mailbox_id %}
-                                <option value="{{ mailbox[0] }}" id="mailbox_id" name="mailbox_id" selected>{{ mailbox[0] }}</option>
+                                <option value="{{ mailbox[0] }}" id="mailbox_id" name="mailbox_id" selected>{{ mailbox[0] }} - {{ mailbox[1] }} emails</option>
                             {% else %}
-                                <option value="{{ mailbox[0] }}" id="mailbox_id" name="mailbox_id">{{ mailbox[0] }}</option>
+                                <option value="{{ mailbox[0] }}" id="mailbox_id" name="mailbox_id">{{ mailbox[0] }} - {{ mailbox[1] }} emails</option>
                             {% endif %}
                         {% endfor %}
                     </select>
