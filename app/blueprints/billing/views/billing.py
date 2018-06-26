@@ -37,25 +37,11 @@ def pricing():
                            plans=settings.STRIPE_PLANS)
 
 
-# @billing.route('/coupon_code', methods=['POST'])
-# @login_required
-# def coupon_code():
-#     code = request.form.get('coupon_code')
-#     if code is None:
-#         return render_json(422,
-#                            {'error': 'Coupon code cannot be processed.'})
-#
-#     coupon = Coupon.find_by_code(code)
-#     if coupon is None:
-#         return render_json(404, {'error': 'Coupon code not found.'})
-#
-#     return render_json(200, {'data': coupon.to_json()})
-
-
 @billing.route('/create', methods=['GET', 'POST'])
 @handle_stripe_exceptions
 @login_required
 def create():
+
     if current_user.subscription:
         flash('You already have an active subscription.', 'info')
         return redirect(url_for('user.settings'))
@@ -63,7 +49,7 @@ def create():
     plan = request.args.get('plan')
     subscription_plan = Subscription.get_plan_by_id(plan)
 
-    # Guard against an invalid or missing plan.
+    # Guard against an invalid or missing plan.#
     if subscription_plan is None and request.method == 'GET':
         flash('Sorry, that plan did not exist.', 'error')
         return redirect(url_for('billing.pricing'))
@@ -80,7 +66,15 @@ def create():
                                       token=request.form.get('stripe_token'))
 
         if created:
-            flash('Awesome, thanks for subscribing!', 'success')
+            if request.form.get('plan') is not None:
+                plan = request.form.get('plan')
+
+                # Set the mailbox and email limits accordingly##
+                current_user.mailbox_limit = 1 if plan == 'hobby' else 10 if plan == 'startup' else 40 if plan == 'professional' else 100 if plan == 'enterprise' else 0
+                current_user.email_limit = 400 if plan == 'hobby' else 2000 if plan == 'startup' else 5000 if plan == 'professional' else 15000 if plan == 'enterprise' else 0
+                current_user.save()
+
+            flash('Your account has been upgraded!', 'success')
         else:
             flash('You must enable JavaScript for this request.', 'warning')
 
@@ -116,7 +110,15 @@ def update():
                                       plan=plan.get('id'))
 
         if updated:
-            flash('Your subscription has been updated.', 'success')
+            if new_plan is not None:
+                plan = new_plan
+
+                # Set the mailbox and email limits accordingly##
+                current_user.mailbox_limit = 1 if plan == 'hobby' else 10 if plan == 'startup' else 40 if plan == 'professional' else 100 if plan == 'enterprise' else 0
+                current_user.email_limit = 400 if plan == 'hobby' else 2000 if plan == 'startup' else 5000 if plan == 'professional' else 15000 if plan == 'enterprise' else 0
+                current_user.save()
+
+            flash('Your plan has been updated. Changes will take effect immediately.', 'success')
             return redirect(url_for('user.settings'))
 
     return render_template('billing/pricing.html',

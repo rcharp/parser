@@ -154,7 +154,7 @@ def signup():
 
         if login_user(u):
 
-            #send_welcome_email.delay(current_user.email)
+            # send_welcome_email.delay(current_user.email)
 
             # Create a user id for the user
             mailbox_id = generate_mailbox_id()
@@ -163,6 +163,9 @@ def signup():
             if create_inbox(mailbox_id):
                 current_user.mailbox_count += 1
                 current_user.active_mailbox = True
+                current_user.mailbox_id = mailbox_id
+
+                current_user.save()
 
                 from app.blueprints.parse.models.mailbox import Mailbox
 
@@ -189,9 +192,10 @@ def signup():
             else:
                 flash('There was a problem creating an inbox for you. Please try again.', 'error')
                 current_user.active_mailbox = False
+                current_user.mailbox_count = 0
                 current_user.mailbox_id = None
 
-            current_user.save()
+                current_user.save()
 
             return redirect(url_for('user.settings'))
 
