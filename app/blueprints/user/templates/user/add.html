@@ -117,7 +117,7 @@
                             <div class="card-block" style="flex: 1 1 auto;padding: 5.25rem;outline: none;overflow-x:auto">
                                 <h5>Choose the section of the email that you want to parse from.</h5><br />
                                 <div class="row" id="section_buttons" style="display: flex; flex-wrap: wrap; padding: 0 4px;">
-                                    <div class="col-md-2" style="width:300px;margin:0 auto;">
+                                    <div class="col-md-2" style="width:33%;min-width:250px;margin:0 auto;">
                                         <button type="button" id="subject_button" value="subject" class="card-lite" onclick="SelectSection(this)" style="min-height: 180px;
                                                                       margin:0 auto;
                                                                       margin-bottom:30px;
@@ -134,7 +134,7 @@
                                             </div>
                                         </button>
                                     </div>
-                                    <div class="col-md-2" style="width:300px;margin:0 auto;">
+                                    <div class="col-md-2" style="width:33%;min-width:250px;margin:0 auto;">
                                         <button type="button" id="from_button" value="from" class="card-lite" onclick="SelectSection(this)" style="min-height: 180px;
                                                                       margin:0 auto;
                                                                       margin-bottom:30px;
@@ -151,7 +151,7 @@
                                             </div>
                                         </button>
                                     </div>
-                                    <div class="col-md-2" style="width:300px;margin:0 auto;">
+                                    <div class="col-md-2" style="width:33%;min-width:250px;margin:0 auto;">
                                         <button type="button" id="to_button" value="to" class="card-lite" onclick="SelectSection(this)" style="min-height: 180px;
                                                                       margin:0 auto;
                                                                       margin-bottom:30px;
@@ -168,7 +168,7 @@
                                             </div>
                                         </button>
                                     </div>
-                                    <div class="col-md-2" style="width:300px;margin:0 auto;">
+                                    <div class="col-md-2" style="width:33%;min-width:250px;margin:0 auto;">
                                         <button type="button" id="body_button" value="body" class="card-lite" onclick="SelectSection(this)" style="min-height: 180px;
                                                                       margin:0 auto;
                                                                       margin-bottom:30px;
@@ -185,7 +185,7 @@
                                             </div>
                                         </button>
                                     </div>
-                                    <div class="col-md-2" style="width:300px;margin:0 auto;">
+                                    <div class="col-md-2" style="width:33%;min-width:250px;margin:0 auto;">
                                         <button type="button" id="cc_button" value="cc" class="card-lite" onclick="SelectSection(this)" style="min-height: 180px;
                                                                       margin:0 auto;
                                                                       margin-bottom:30px;
@@ -202,7 +202,7 @@
                                             </div>
                                         </button>
                                     </div>
-                                    <div class="col-md-2" style="width:300px;margin:0 auto;">
+                                    <div class="col-md-2" style="width:33%;min-width:250px;margin:0 auto;">
                                         <button type="button" id="headers_button" value="headers" class="card-lite" disabled onclick="SelectSection(this)" style="min-height: 180px;
                                                                       margin:0 auto;
                                                                       margin-bottom:30px;
@@ -307,6 +307,9 @@
                                             <select id="remove_options" name="remove_options" style="width:100%;" onchange="ShowInfo(this);">
                                                 <option disabled selected value> -- select an option -- </option>
                                                 <option value="Remove specific content">Remove specific content</option>
+                                                <option value="Remove rows with specific content">Remove rows with specific content</option>
+                                                <option value="Remove rows that start with specific content">Remove rows that start with specific content</option>
+                                                <option value="Remove whitespace">Remove whitespace</option>
                                                 <option value="Remove all links">Remove all links</option>
                                                 <option value="Remove blank lines">Remove blank lines</option>
                                             </select>
@@ -325,8 +328,8 @@
                                         </div>
                                     </div>
                                     <div class="col-md-12" id="arguments_column" style="display:none">
-                                        <h5>Please enter specific text that you want to parse for, separated by commas.<br /><br />
-                                        If you're choosing find and replace, group find/replace values with a parentheses.<br />
+                                        <h5>Please enter specific text that you want to parse, separated by commas.<br /><br />
+                                        If you're doing a Find & Replace, group find/replace values with a parentheses.<br />
                                         For example: (<b>Text to find</b>, <b>text to replace it with</b>):</h5><br />
                                         <label for="args">Specific text: &nbsp;</label>
                                         <input id="args" name="args" type="text" class="text" value="" style="width:40%" onclick="ShowSave()"/><br />
@@ -539,6 +542,20 @@
             else if (info === "Remove specific content") {
                 text = "Remove certain text from the selected area. This is great for quickly removing all private info that you don't want seen.";
                 document.getElementById('arguments_column').style.display = 'inline-block';
+            }
+            else if (info === "Remove rows with specific content") {
+                text = "Remove entire rows that contain specific content. This is great for quickly cutting unnecessary content out of the email " +
+                    "and shrinking it down.";
+                document.getElementById('arguments_column').style.display = 'inline-block';
+            }
+            else if (info === "Remove rows that start with specific content") {
+                text = "Remove entire rows that start with specific content. This is great for quickly cutting unnecessary content out of the email " +
+                    "and shrinking it down.";
+                document.getElementById('arguments_column').style.display = 'inline-block';
+            }
+            else if (info === "Remove whitespace") {
+                text = "Remove all extra whitespace from the email. This will help you to clean it up and only have the plain text.";
+                document.getElementById('arguments_column').style.display = 'none';
             }
             else if (info === "Remove all links") {
                 text = "Remove all links from the selected area. This will help you to clean it up and only have the plain text.";

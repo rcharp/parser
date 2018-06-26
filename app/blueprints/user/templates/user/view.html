@@ -124,7 +124,7 @@
                                 {% if email.cc is not none %}
                                     Cc: {{ email.cc }}
                                 {% endif %}
-                                <div style="word-wrap:break-word;white-space:pre-line">
+                                <div style="word-wrap:break-word;white-space:pre-wrap">
                                     {{ email.body }}
                                 </div><br />
                                 <a href="{{ url_for('user.inbox') }}" style="background-color: #007fd8;

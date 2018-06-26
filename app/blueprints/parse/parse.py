@@ -147,6 +147,12 @@ def parse_headers(email, category, options, args):
 def remove_parsing(item, options, args):
     if options == "Remove specific content":
         return remove_parse(item, args)
+    elif options == "Remove rows with specific content":
+        return remove_rows_with_content_parse(item, args)
+    elif options == "Remove rows that start with specific content":
+        return remove_rows_start_with_content_parse(item, args)
+    elif options == "Remove whitespace":
+        return remove_whitespace_parse(item)
     elif options == "Remove all links":
         return remove_links_parse(item)
     elif options == "Remove blank lines":
@@ -226,7 +232,6 @@ def text_before_parse(item, args):
 # Needs work
 def url_parse(item):
     result = re.findall('https?://(?:[-\w.]|(?:%[\da-fA-F]{2}))+', item)
-    print(result)##
     return result
 
 
@@ -242,6 +247,37 @@ def remove_parse(item, args):
     for arg in args:
         item = item.replace(arg, "")
     return item
+
+
+# Working
+def remove_rows_with_content_parse(item, args):
+    result = ''
+    for line in item.split('\n'):
+        for arg in args:
+            if arg in line:
+                pass
+            else:
+                result += line + '\n'
+    return result
+
+
+# Working
+def remove_rows_start_with_content_parse(item, args):
+    result = ''
+    for line in item.split('\n'):
+        for arg in args:
+            if not line.startswith(arg):
+                result += line + '\n'
+    return result
+
+
+# Working
+def remove_whitespace_parse(item):
+    result = ''
+    for line in item.split('\n'):
+        result += " ".join(line.split())
+        result += '\n'
+    return result
 
 
 # Working

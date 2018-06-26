@@ -293,7 +293,7 @@ def parse_email(email_id):
     from app.blueprints.parse.parse import parse_email
     parse_email(email_id,rules)
 
-    flash('Your email has been parsed.', 'success')
+    flash('Your email has been parsed. Check it out below!', 'success')
     return redirect(url_for('user.refresh'))
 
 

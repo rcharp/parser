@@ -138,8 +138,8 @@
 
                 if (data[i]["parsed"] === true) {
                     email_html += '<span class="label label-success">Parsed</span></td><td style="vertical-align:middle">' +
-                        '<a style="border:1px solid; border-radius:4px;padding:10px;opacity:0.4;display:inline-block;margin-bottom:5px;margin-right:5px;">Parse</a>' +
-                        '<a href="' + actual_view_url + '" style="border:1px solid; border-radius:4px;padding:10px;display:inline-block;">View</a>';
+                        '<a href="'+ actual_parse_url +'"style="border:1px solid; border-radius:4px;padding:10px;display:inline-block;margin-bottom:5px;margin-right:5px;">Parse</a>' +
+                        '<a href="'+ actual_view_url +'"style="border:1px solid; border-radius:4px;padding:10px;display:inline-block;">View</a>';
                 }
                 else if (data[i]["parsed"] === false) {
                     email_html += '<span class="label label-danger">Not Parsed</span></td><td style="vertical-align:middle">' +
