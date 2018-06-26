@@ -18,7 +18,7 @@ from lib.safe_next_url import safe_next_url
 from app.blueprints.parse.parse import generate_csv
 from app.blueprints.user.decorators import anonymous_required
 from app.blueprints.user.models import User
-from app.blueprints.user.create_mailgun_user import generate_mailbox_id, create_inbox, get_mailboxes
+from app.blueprints.user.create_mailgun_user import generate_mailbox_id, create_inbox
 from app.blueprints.user.templates.emails import send_welcome_email, send_export_email
 from app.blueprints.user.forms import (
     LoginForm,
@@ -381,11 +381,11 @@ def delete_rules():
 @login_required
 @csrf.exempt
 def settings():
-    cache.clear()
-    stripe.api_key = current_app.config.get('STRIPE_SECRET_KEY')
-    stripe.api_version = '2018-02-28'
+    # cache.clear()
     mailbox_id = current_user.mailbox_id
     trial_days_left = -1
+
+    from app.blueprints.user.tasks import get_mailboxes
 
     mailbox_count, mailbox_limit = current_user.mailbox_count, current_user.mailbox_limit
     email_count, email_limit = current_user.email_count, current_user.email_limit
@@ -415,7 +415,6 @@ def inbox():
             if current_user.active_mailbox:
                 if cache.get(current_user.mailbox_id):
                     emails = cache.get(current_user.mailbox_id)
-
                     return render_template('user/inbox.html', emails=emails, mailbox_id=current_user.mailbox_id, route="inbox")
                 else:
                     return redirect(url_for('user.refresh'))
@@ -432,8 +431,8 @@ def refresh():
         emails = get_emails.delay(current_user.mailbox_id)
         set_cache.delay(current_user.mailbox_id, emails.id)
 
-        return render_template('user/inbox.html', emails_id=emails.id, emails_state=emails.state, mailbox_id=current_user.mailbox_id,
-                               emails=[], route="refresh")
+        return render_template('user/inbox.html', emails_id=emails.id, emails_state=emails.state,
+                               mailbox_id=current_user.mailbox_id, emails=[], route="refresh")
 
 
 @user.route('/update/<emails_id>/<route>')

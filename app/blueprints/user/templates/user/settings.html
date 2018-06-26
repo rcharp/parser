@@ -43,7 +43,11 @@
         <h4 class="text-muted margin-bottom">{{ mailbox_count }} of {{ mailbox_limit }} mailboxes used</h4>
         <div class="list-group">
             <div class="list-group-item">
-                Your are currently using {{ email_count }} emails of your <span style="color:red">{{ email_limit }}</span> email limit.
+                {% if email_count == 1 %}
+                    You are currently using {{ email_count }} email of your <span style="color:red">{{ email_limit }}</span> email limit.
+                {% else %}
+                    You are currently using {{ email_count }} emails of your <span style="color:red">{{ email_limit }}</span> email limit.
+                {% endif %}
             </div>
             <a href="{{ url_for('user.get_inbox') }}" class="list-group-item">
               Create an inbox

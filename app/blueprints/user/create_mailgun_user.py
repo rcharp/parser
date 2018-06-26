@@ -38,7 +38,3 @@ def delete_inbox(mailbox_id):
     return requests.delete(url, auth=("api", current_app.config.get('MAILGUN_API_KEY')))
 
 
-def get_mailboxes(email):
-    from app.blueprints.parse.models.mailbox import Mailbox
-    return Mailbox.query.with_entities(Mailbox.mailbox_id).filter(Mailbox.user_email == email).all()
-

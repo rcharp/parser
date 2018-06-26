@@ -11,6 +11,4 @@ csrf = CsrfProtect()
 db = SQLAlchemy()
 login_manager = LoginManager()
 cache = Cache()
-
-
 timeout = 9999999999999999

@@ -9,9 +9,7 @@ from flask import (
 )
 
 from flask_login import login_required, current_user
-
 from config import settings
-from lib.util_json import render_json
 from app.blueprints.billing.forms import CreditCardForm, \
     UpdateSubscriptionForm, CancelSubscriptionForm
 from app.blueprints.user.create_mailgun_user import delete_inbox
@@ -112,24 +110,28 @@ def update():
         if updated:
             if new_plan is not None:
 
-                # Set the user's current mailbox to the oldest
+                # Set the user's current mailbox to the oldest mailbox
                 from app.blueprints.parse.models.mailbox import Mailbox
                 mailbox = Mailbox.query.filter(Mailbox.user_email == current_user.email).order_by(Mailbox.created_on.asc()).first()
                 current_user.mailbox_id = mailbox.mailbox_id
 
                 # Set the mailbox and email limits accordingly
-                current_user.mailbox_limit = 1 if new_plan == 'hobby' else 10 if new_plan == 'startup'\
+                mailbox_limit = 1 if new_plan == 'hobby' else 10 if new_plan == 'startup'\
                     else 40 if new_plan == 'professional' else 100 if new_plan == 'enterprise' else 0
-                current_user.email_limit = 1 if new_plan == 'hobby' else 2000 if new_plan == 'startup'\
+                email_limit = 400 if new_plan == 'hobby' else 2000 if new_plan == 'startup'\
                     else 5000 if new_plan == 'professional' else 15000 if new_plan == 'enterprise' else 0
-
-                current_user.save()
 
                 # Adjust the mailboxes by deleting
                 # the most recent mailboxes and emails
                 from app.blueprints.user.tasks import adjust_mailboxes
                 if plan['amount'] < active_plan['amount']:
-                    adjust_mailboxes(current_user.email, current_user.mailbox_limit, current_user.email_limit)
+                    current_user.email_count, current_user.mailbox_count = adjust_mailboxes(current_user.email,
+                                                                                            current_user.mailbox_id,
+                                                                                            mailbox_limit,
+                                                                                            email_limit)
+
+                current_user.mailbox_limit, current_user.email_limit = mailbox_limit, email_limit
+                current_user.save()
 
             flash('Your plan has been updated. Changes will take effect immediately.', 'success')
             return redirect(url_for('user.settings'))
@@ -144,9 +146,6 @@ def update():
 @handle_stripe_exceptions
 @login_required
 def cancel():
-    # if not current_user.subscription:
-    #     flash('You do not have an active subscription.', 'error')
-    #     return redirect(url_for('user.settings'))
 
     form = CancelSubscriptionForm()
 

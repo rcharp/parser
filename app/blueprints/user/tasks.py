@@ -38,9 +38,9 @@ def deliver_password_reset_email(user_id, reset_token):
     return None
 
 
-# User -------------------------------------------------------------------
+# Mailboxes -------------------------------------------------------------------
 @celery.task()
-def adjust_mailboxes(email, mailbox_limit, email_limit):
+def adjust_mailboxes(email, mailbox_id, mailbox_limit, email_limit):
     from app.blueprints.parse.models.mailbox import Mailbox
     from app.blueprints.parse.models.email import Email
 
@@ -50,19 +50,27 @@ def adjust_mailboxes(email, mailbox_limit, email_limit):
 
     # Get the list of mailboxes and emails to be deleted that are over the new limit
     # Set order_by to 'asc' for oldest mailboxes/emails and 'desc' for most recent
-    mailboxes_to_delete = [m[0] for m in Mailbox.query.with_entities(Mailbox.id).filter(Mailbox.user_email == email).order_by(Mailbox.created_on.desc()).limit(mailbox_count - mailbox_limit).all()]
+    mailboxes_to_delete = Mailbox.query.with_entities(Mailbox.id, Mailbox.mailbox_id).filter(Mailbox.user_email == email).order_by(Mailbox.created_on.desc()).limit(mailbox_count - mailbox_limit).all()
     emails_to_delete = [e[0] for e in Email.query.with_entities(Email.id).filter(Email.user_email == email).order_by(Email.created_on.desc()).limit(email_count - email_limit).all()]
 
     # Delete the extra emails first
-    Email.bulk_delete(emails_to_delete)
+    emails_deleted = Email.bulk_delete(emails_to_delete)
 
     # Move leftover emails from mailboxes to be deleted to oldest mailbox
     for mailbox in mailboxes_to_delete:
-        print(mailbox)
+        Email.query.filter(Email.mailbox_id == mailbox[1]).update({'mailbox_id':mailbox_id})
 
     # Delete the extra mailboxes
-    Mailbox.bulk_delete(mailboxes_to_delete)
+    mailboxes_deleted = Mailbox.bulk_delete([m[0] for m in mailboxes_to_delete])
 
+    # Return the number of emails and mailboxes remaining
+    return email_count - emails_deleted, mailbox_count - mailboxes_deleted
+
+
+@celery.task()
+def get_mailboxes(email):
+    from app.blueprints.parse.models.mailbox import Mailbox
+    return Mailbox.query.with_entities(Mailbox.mailbox_id).filter(Mailbox.user_email == email).all()
 
 
 # Emails -------------------------------------------------------------------
@@ -88,7 +96,6 @@ async def email_query(mailbox_id):
         query = tbl.select().where(tbl.c['mailbox_id'] == mailbox_id)
         async with engine.acquire() as conn:
             async for row in conn.execute(query):
-                # emails.update({row['id'] : {'id':row['id'],'sender':row['sender'],'subject':row['subject'],'date':row['date'],'parsed':row['parsed']}})
                 emails.append({'id':row['id'],'sender':row['sender'],'subject':row['subject'],'date':row['date'],'parsed':row['parsed']})
 
     return emails
