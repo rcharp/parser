@@ -12,7 +12,7 @@ page = Blueprint('page', __name__, template_folder='templates')
 def home():
     if current_user.is_authenticated:
         return redirect(url_for('user.settings'))
-    return render_template('/page/welcome.html',
+    return render_template('/page/index.html',
                            plans=settings.STRIPE_PLANS)
 
 

@@ -147,10 +147,22 @@ def cancel():
 
         if cancelled:
 
-            # Clear the cache.
+            # Get the user's email
             email = current_user.email
-            if cache.get(email):
-                cache.delete(email)
+
+            # Clear the cache.
+            mailbox_id = current_user.mailbox_id
+            if cache.get(mailbox_id):
+                cache.delete(mailbox_id)
+
+            # Delete the emails, rules and mailboxes belonging to the user.
+            from app.blueprints.parse.models.email import Email
+            from app.blueprints.parse.models.mailbox import Mailbox
+            from app.blueprints.parse.models.rule import Rule
+
+            Email.query.filter_by(user_email=email).delete()
+            Mailbox.query.filter_by(user_email=email).delete()
+            Rule.query.filter_by(mailbox_id=mailbox_id).delete()
 
             # Delete the user.
             from app.blueprints.billing.tasks import delete_users

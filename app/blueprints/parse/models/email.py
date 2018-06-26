@@ -9,12 +9,12 @@ class Email(ResourceMixin, db.Model):
     __tablename__ = 'emails'
 
     # Relationships.
-    user = db.Column(db.String(255), db.ForeignKey('users.email', onupdate='CASCADE', ondelete='CASCADE'),
+    user_email = db.Column(db.String(255), db.ForeignKey('users.email', onupdate='CASCADE', ondelete='CASCADE'),
                       index=True, nullable=True, primary_key=False, unique=False)
 
     # Parsed objects.
     id = db.Column(db.Integer, primary_key=True)
-    mailbox_id = db.Column(db.String(255), unique=True, index=True, nullable=True, server_default='')
+    mailbox_id = db.Column(db.String(255), unique=False, index=True, nullable=True, server_default='')
     message_id = db.Column(db.String(255), unique=False, index=True, nullable=True, server_default='')
     sender = db.Column(db.String(255), unique=False, index=True, nullable=True, server_default='')
     to = db.Column(db.String(255), unique=False, index=True, nullable=True, server_default='')

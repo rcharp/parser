@@ -7,7 +7,7 @@
   <div class="row">
     <div class="col-md-4 col-md-offset-4 well" style="width:90%;max-width:500px;">
       {% call f.form_tag('billing.cancel') %}
-        <legend>Cancel subscription</legend>
+        <legend>Delete your account</legend>
         <p class="sm-margin-bottom" style="font-size:16px">
           {% if current_user.name %}
             <strong>Hi {{ current_user.name }}</strong>,<br/>
@@ -17,13 +17,16 @@
           Before you cancel your account, please read the following:
         </p>
           <br/>
-        <ul class="md-margin-bottom"style="font-size:18px">
-          <li>You will lose access to the dashboard <br/> and all of your metrics</li>
+        <ul class="md-margin-bottom" style="font-size:18px">
+          <li>You won't be able to parse emails anymore!</li>
+          <li>This will delete all of your emails, rules, and inboxes<br />
+              (There's no way to undo this)
+          </li>
           <li>You will no longer be billed</li>
           <li>Your account <strong>will</strong> be deleted immediately</li>
-          <li>You can subscribe again in the future</li>
+          <li>You can sign up again in the future</li>
             <br />
-          <li style="list-style-type:none">Are you sure you want to cancel?</li>
+            <li style="list-style-type:none"><b>Are you sure you want to cancel?</b></li>
         </ul>
         <div class="row">
           <div class="col-md-6">
@@ -31,14 +34,14 @@
               <img src="{{ url_for('static', filename='images/spinner.gif') }}"
                    class="spinner"
                    width="16" height="11" alt="Spinner"/>
-              Yes, Cancel my account
+              Yes, delete my account
             </button>
           </div>
           <div class="col-md-6">
             <div class="visible-xs visible-sm sm-margin-top"></div>
             <a href="{{ url_for('user.settings') }}"
                class="btn btn-default btn-block">
-              Don't Cancel
+              Don't Delete
             </a>
           </div>
         </div>

@@ -2,9 +2,8 @@ import re
 import json
 from app.extensions import db
 from flanker.addresslib import address
-from flask import Blueprint, request, redirect, flash
+from flask import Blueprint, request
 from app.extensions import csrf
-from app.blueprints.parse.parse import parse_from
 
 parse = Blueprint('parse', __name__, template_folder='templates')
 
@@ -27,11 +26,11 @@ def incoming():
 
         if count < limit:
 
-            # Get headers...
+            # Get headers.
             message_id = data['Message-Id'] if 'Message-Id' in data else None
             subject = clean_subject(data['Subject']) if 'Subject' in data else None
-            to = data['sender'] if 'sender' in data else None
-            date = data['Date'].split(' -')[0] if 'date' in data else None
+            to = data['Sender'] if 'Sender' in data else None
+            date = data['Date'].split(' -')[0] if 'Date' in data else None
             cc = data['Cc'] if 'cc' in data else None
             body = data['body-plain'].strip() if 'body-plain' in data else None
 
@@ -52,6 +51,7 @@ def incoming():
                 e = Email()
                 e.mailbox_id = mailbox_id
                 e.message_id = message_id
+                e.user_email = user.email
                 e.subject = subject
                 e.date = date
                 e.sender = sender

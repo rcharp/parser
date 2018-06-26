@@ -154,7 +154,7 @@ def signup():
 
         if login_user(u):
 
-            send_welcome_email(current_user.email).delay()
+            #send_welcome_email.delay(current_user.email)
 
             # Create a user id for the user
             mailbox_id = generate_mailbox_id()
