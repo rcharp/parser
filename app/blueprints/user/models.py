@@ -55,6 +55,8 @@ class User(UserMixin, ResourceMixin, db.Model):
 
     mailbox_limit = db.Column(db.Integer, nullable=False, default=5)
     mailbox_count = db.Column(db.Integer, nullable=False, default=0)
+    email_limit = db.Column(db.Integer, nullable=False, default=5)
+    email_count = db.Column(db.Integer, nullable=False, default=0)
 
     active_mailbox = db.Column('active_mailbox', db.Boolean(), nullable=False, server_default='0')
 

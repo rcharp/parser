@@ -34,4 +34,4 @@ def create_inbox(mailbox_id):
 
 def get_mailboxes(email):
     from app.blueprints.parse.models.mailbox import Mailbox
-    return Mailbox.query.with_entities(Mailbox.mailbox_id).filter(Mailbox.email == email).all()
+    return Mailbox.query.with_entities(Mailbox.mailbox_id).filter(Mailbox.user_email == email).all()

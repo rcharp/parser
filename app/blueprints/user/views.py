@@ -158,7 +158,6 @@ def signup():
 
             # Create a user id for the user
             mailbox_id = generate_mailbox_id()
-            # current_user.mailbox_id = mailbox_id
 
             # Create an inbox for the user
             if create_inbox(mailbox_id):
@@ -169,7 +168,7 @@ def signup():
 
                 m = Mailbox()
                 m.mailbox_id = mailbox_id
-                m.email = current_user.email
+                m.user_email = current_user.email
                 db.session.add(m)
 
                 from app.blueprints.parse.models.rule import Rule
@@ -385,6 +384,7 @@ def settings():
     trial_days_left = -1
 
     mailbox_count, mailbox_limit = current_user.mailbox_count, current_user.mailbox_limit
+    email_count, email_limit = current_user.email_count, current_user.email_limit
     mailboxes = get_mailboxes(current_user.email)
 
     if not current_user.subscription and not current_user.trial and current_user.role == 'member':
@@ -398,7 +398,8 @@ def settings():
         flash('You don\'t have an inbox yet. Please get one below.', 'error')
 
     return render_template('user/settings.html', trial_days_left=trial_days_left, mailbox_id=mailbox_id,
-                           mailbox_count=mailbox_count, mailbox_limit=mailbox_limit, mailboxes=mailboxes)
+                           mailbox_count=mailbox_count, mailbox_limit=mailbox_limit,
+                           email_count=email_count, email_limit=email_limit, mailboxes=mailboxes)
 
 
 # Inbox -------------------------------------------------------------------
@@ -479,7 +480,7 @@ def get_inbox():
 
             m = Mailbox()
             m.mailbox_id = mailbox_id
-            m.email = current_user.email
+            m.user_email = current_user.email
 
             db.session.add(m)
             db.session.commit()
@@ -503,7 +504,6 @@ def switch_mailboxes():
 
     mailbox_id = request.form.get('mailboxes')
 
-    print(mailbox_id)
     current_user.mailbox_id = mailbox_id
     current_user.save()
 

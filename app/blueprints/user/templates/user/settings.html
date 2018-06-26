@@ -43,12 +43,12 @@
         <h4 class="text-muted margin-bottom">{{ mailbox_count }} of {{ mailbox_limit }} mailboxes used</h4>
         <div class="list-group">
             <a href="{{ url_for('user.get_inbox') }}" class="list-group-item">
-              Get an inbox
+              Create an inbox
             </a>
             {% if mailboxes|length > 0 %}
             <form action="{{ url_for('user.switch_mailboxes') }}" method="POST" id="mailbox" name="mailbox">
                 <div class="list-group-item">
-                    Choose an inbox:<br /><br />
+                    Choose an inbox:<br />
                     <select id="mailboxes" name="mailboxes" onchange="this.form.submit()">
                         {% for mailbox in mailboxes %}
                             {% if mailbox[0] == current_user.mailbox_id %}
@@ -61,6 +61,9 @@
                 </div>
             </form>
             {% endif %}
+            <div class="list-group-item">
+              You have used {{ email_count }} of {{ email_limit }} emails.
+            </div>
         </div>
     </div>
     <div class="col-md-5 col-md-push-1 col-md-offset-1">

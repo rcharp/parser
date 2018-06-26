@@ -2,7 +2,7 @@ import re
 import json
 from app.extensions import db
 from flanker.addresslib import address
-from flask import Blueprint, request
+from flask import Blueprint, request, redirect, flash
 from app.extensions import csrf
 from app.blueprints.parse.parse import parse_from
 
@@ -13,47 +13,60 @@ parse = Blueprint('parse', __name__, template_folder='templates')
 @csrf.exempt
 def incoming():
     if request.form:
+
+        # Get the mailbox id from the email
         data = request.form
-
-        # print(data['message-headers'])
-        # return json.dumps({'success': True}), 200, {'ContentType': 'application/json'}
-
-        # Get headers...
-        message_id = data['Message-Id'] if 'Message-Id' in data else None
         mailbox_id = str(address.parse(data['To'])).split("@")[0].upper()  # the user's mailgun inbox that it was sent to
-        subject = clean_subject(data['Subject']) if 'Subject' in data else None
-        to = data['sender'] if 'sender' in data else None
-        date = data['Date'].split(' -')[0] if 'date' in data else None
-        cc = data['Cc'] if 'cc' in data else None
-        body = data['body-plain'].strip() if 'body-plain' in data else None
 
-        # Get the original sender..
-        sender = re.search('From: (.+?)\n', data['body-plain'])
-        if sender:
-            sender = clean_sender(str(address.parse(sender.group(1)))) if address.parse(sender.group(1)) \
-                else clean_sender(str(sender.group(1)))
-
-        # Ensure that the user exists
+        # Get the user and their email limits
         from app.blueprints.user.models import User
-        u = db.session.query(db.exists().where(User.mailbox_id == mailbox_id)).scalar()
+        from app.blueprints.parse.models.mailbox import Mailbox
+        user = Mailbox.query.with_entities(Mailbox.user_email).filter(Mailbox.mailbox_id == mailbox_id).first()
+        count = User.query.with_entities(User.email_count).filter(User.email == user).first()[0]
+        limit = User.query.with_entities(User.email_limit).filter(User.email == user).first()[0]
 
-        # If the user is found, save the email to the db.
-        if u:
-            from app.blueprints.parse.models.email import Email
-            # Create the email
-            e = Email()
-            e.mailbox_id = mailbox_id
-            e.message_id = message_id
-            e.subject = subject
-            e.date = date
-            e.sender = sender
-            e.to = to
-            e.cc = cc
-            e.body = body
+        if count < limit:
 
-            # Add the email to the database
-            db.session.add(e)
-            db.session.commit()
+            # Get headers...
+            message_id = data['Message-Id'] if 'Message-Id' in data else None
+            subject = clean_subject(data['Subject']) if 'Subject' in data else None
+            to = data['sender'] if 'sender' in data else None
+            date = data['Date'].split(' -')[0] if 'date' in data else None
+            cc = data['Cc'] if 'cc' in data else None
+            body = data['body-plain'].strip() if 'body-plain' in data else None
+
+            # Get the original sender..
+            sender = re.search('From: (.+?)\n', data['body-plain'])
+            if sender:
+                sender = clean_sender(str(address.parse(sender.group(1)))) if address.parse(sender.group(1)) \
+                    else clean_sender(str(sender.group(1)))
+
+            # Ensure that the user exists
+
+            u = db.session.query(db.exists().where(User.mailbox_id == mailbox_id)).scalar()
+
+            # If the user is found, save the email to the db.
+            if u:
+                from app.blueprints.parse.models.email import Email
+                # Create the email
+                e = Email()
+                e.mailbox_id = mailbox_id
+                e.message_id = message_id
+                e.subject = subject
+                e.date = date
+                e.sender = sender
+                e.to = to
+                e.cc = cc
+                e.body = body
+
+                # Add the email to the database
+                db.session.add(e)
+                db.session.commit()
+
+                # Update the user's email count
+                user = User.query.filter(User.mailbox_id == mailbox_id).first()
+                user.email_count += 1
+                user.save()
 
         return json.dumps({'success': True}), 200, {'ContentType': 'application/json'}
 
