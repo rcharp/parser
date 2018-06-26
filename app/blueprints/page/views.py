@@ -16,12 +16,6 @@ def home():
                            plans=settings.STRIPE_PLANS)
 
 
-@page.route('/table')
-@cache.cached(timeout=timeout)
-def table():
-    return render_template('page/table.html')
-
-
 @page.route('/terms')
 @cache.cached(timeout=timeout)
 def terms():
@@ -32,22 +26,6 @@ def terms():
 @cache.cached(timeout=timeout)
 def privacy():
     return render_template('page/privacy.html')
-
-
-@page.route('/demo', methods=['GET','POST'])
-@cache.cached(timeout=timeout)
-def demo():
-    email_list = []
-    # emails = get_emails()
-
-    # for email in emails:
-    #     parse_email(email, email_list)
-
-    # email_list.append(parse_email(get_emails()))
-
-    # create_user()
-
-    return render_template('page/demo.html', emails=email_list)
 
 
 @page.route('/index')

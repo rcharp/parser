@@ -26,10 +26,16 @@ def generate_mailbox_id(size=8, chars=string.ascii_uppercase + string.digits):
 
 # Creates login credentials for users' inboxes
 def create_inbox(mailbox_id):
-        url = "https://api.mailgun.net/v3/domains/" + current_app.config.get('MAILGUN_DOMAIN') + "/credentials"
+    url = "https://api.mailgun.net/v3/domains/" + current_app.config.get('MAILGUN_DOMAIN') + "/credentials"
 
-        return requests.post(url, auth=("api", current_app.config.get('MAILGUN_API_KEY')),
-                          data={"login": mailbox_id, "password": current_app.config.get('MAILGUN_PASSWORD')})
+    return requests.post(url, auth=("api", current_app.config.get('MAILGUN_API_KEY')),
+                      data={"login": mailbox_id, "password": current_app.config.get('MAILGUN_PASSWORD')})
+
+
+def delete_inbox(mailbox_id):
+    url = "https://api.mailgun.net/v3/domains/" + current_app.config.get('MAILGUN_DOMAIN') + "/credentials/" + mailbox_id
+
+    return requests.delete(url, auth=("api", current_app.config.get('MAILGUN_API_KEY')))
 
 
 def get_mailboxes(email):

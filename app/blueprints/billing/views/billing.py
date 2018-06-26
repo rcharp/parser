@@ -14,7 +14,7 @@ from config import settings
 from lib.util_json import render_json
 from app.blueprints.billing.forms import CreditCardForm, \
     UpdateSubscriptionForm, CancelSubscriptionForm
-# from app.blueprints.billing.models.coupon import Coupon
+from app.blueprints.user.create_mailgun_user import delete_inbox
 from app.blueprints.billing.models.subscription import Subscription
 from app.blueprints.billing.models.invoice import Invoice
 from app.blueprints.billing.decorators import subscription_required, \
@@ -140,12 +140,12 @@ def cancel():
         # Cancel the user's subscription
         if current_user.subscription:
             subscription = Subscription()
-            cancelled = subscription.cancel(user=current_user)
+            canceled = subscription.cancel(user=current_user)
         else:
             # If there is no subscription, then delete the user
-            cancelled = True
+            canceled = True
 
-        if cancelled:
+        if canceled:
 
             # Get the user's email
             email = current_user.email
@@ -155,11 +155,15 @@ def cancel():
             if cache.get(mailbox_id):
                 cache.delete(mailbox_id)
 
-            # Delete the emails, rules and mailboxes belonging to the user.
             from app.blueprints.parse.models.email import Email
             from app.blueprints.parse.models.mailbox import Mailbox
             from app.blueprints.parse.models.rule import Rule
 
+            # Delete the credentials from MG
+            for mailbox in Mailbox.query.filter_by(user_email=email).all():
+                delete_inbox(mailbox.mailbox_id)
+
+            # Delete the emails, rules and mailboxes belonging to the user.
             Email.query.filter_by(user_email=email).delete()
             Mailbox.query.filter_by(user_email=email).delete()
             Rule.query.filter_by(mailbox_id=mailbox_id).delete()

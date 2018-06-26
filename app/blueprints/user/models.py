@@ -53,7 +53,7 @@ class User(UserMixin, ResourceMixin, db.Model):
 
     mailbox_id = db.Column(db.String(255), unique=True, index=True, nullable=True, server_default='')
 
-    mailbox_limit = db.Column(db.Integer, nullable=False, default=5)
+    mailbox_limit = db.Column(db.Integer, nullable=False, default=1)
     mailbox_count = db.Column(db.Integer, nullable=False, default=0)
     email_limit = db.Column(db.Integer, nullable=False, default=5)
     email_count = db.Column(db.Integer, nullable=False, default=0)

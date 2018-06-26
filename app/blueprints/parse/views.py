@@ -40,9 +40,9 @@ def incoming():
                 sender = clean_sender(str(address.parse(sender.group(1)))) if address.parse(sender.group(1)) \
                     else clean_sender(str(sender.group(1)))
 
-            # Ensure that the user exists
-
+            # Ensure that the user exists and get the user
             u = db.session.query(db.exists().where(User.mailbox_id == mailbox_id)).scalar()
+            user = User.query.filter(User.mailbox_id == mailbox_id).first()
 
             # If the user is found, save the email to the db.
             if u:
@@ -64,7 +64,6 @@ def incoming():
                 db.session.commit()
 
                 # Update the user's email count
-                user = User.query.filter(User.mailbox_id == mailbox_id).first()
                 user.email_count += 1
                 user.save()
 
