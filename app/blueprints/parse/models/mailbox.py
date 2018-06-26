@@ -19,3 +19,27 @@ class Mailbox(ResourceMixin, db.Model):
     def __init__(self, **kwargs):
         # Call Flask-SQLAlchemy's constructor.
         super(Mailbox, self).__init__(**kwargs)
+
+    @classmethod
+    def bulk_delete(cls, ids):
+        """
+        Override the general bulk_delete method because we need to delete them
+        one at a time while also deleting them on Stripe.
+
+        :param ids: List of ids to be deleted
+        :type ids: list
+        :return: int
+        """
+        delete_count = 0
+
+        for id in ids:
+            mailbox = Mailbox.query.get(id)
+
+            if mailbox is None:
+                continue
+
+            mailbox.delete()
+
+            delete_count += 1
+
+        return delete_count

@@ -39,11 +39,33 @@ def deliver_password_reset_email(user_id, reset_token):
 
 
 # User -------------------------------------------------------------------
+@celery.task()
+def adjust_mailboxes(email, mailbox_limit, email_limit):
+    from app.blueprints.parse.models.mailbox import Mailbox
+    from app.blueprints.parse.models.email import Email
+
+    # Get the total count of mailboxes and emails
+    mailbox_count = Mailbox.query.filter(Mailbox.user_email == email).count()
+    email_count = Email.query.filter(Email.user_email == email).count()
+
+    # Get the list of mailboxes and emails to be deleted that are over the new limit
+    # Set order_by to 'asc' for oldest mailboxes/emails and 'desc' for most recent
+    mailboxes_to_delete = [m[0] for m in Mailbox.query.with_entities(Mailbox.id).filter(Mailbox.user_email == email).order_by(Mailbox.created_on.desc()).limit(mailbox_count - mailbox_limit).all()]
+    emails_to_delete = [e[0] for e in Email.query.with_entities(Email.id).filter(Email.user_email == email).order_by(Email.created_on.desc()).limit(email_count - email_limit).all()]
+
+    # Delete the extra emails first
+    Email.bulk_delete(emails_to_delete)
+
+    # Move leftover emails from mailboxes to be deleted to oldest mailbox
+    for mailbox in mailboxes_to_delete:
+        print(mailbox)
+
+    # Delete the extra mailboxes
+    Mailbox.bulk_delete(mailboxes_to_delete)
 
 
 
 # Emails -------------------------------------------------------------------
-
 async def email_query(mailbox_id):
     emails = []
 

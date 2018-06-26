@@ -49,7 +49,7 @@ def create():
     plan = request.args.get('plan')
     subscription_plan = Subscription.get_plan_by_id(plan)
 
-    # Guard against an invalid or missing plan.#
+    # Guard against an invalid or missing plan.
     if subscription_plan is None and request.method == 'GET':
         flash('Sorry, that plan did not exist.', 'error')
         return redirect(url_for('billing.pricing'))
@@ -111,13 +111,25 @@ def update():
 
         if updated:
             if new_plan is not None:
-                plan = new_plan
+
+                # Set the user's current mailbox to the oldest
+                from app.blueprints.parse.models.mailbox import Mailbox
+                mailbox = Mailbox.query.filter(Mailbox.user_email == current_user.email).order_by(Mailbox.created_on.asc()).first()
+                current_user.mailbox_id = mailbox.mailbox_id
 
                 # Set the mailbox and email limits accordingly
-                current_user.mailbox_limit = 1 if plan == 'hobby' else 10 if plan == 'startup' else 40 if plan == 'professional' else 100 if plan == 'enterprise' else 0
-                current_user.email_limit = 400 if plan == 'hobby' else 2000 if plan == 'startup' else 5000 if plan == 'professional' else 15000 if plan == 'enterprise' else 0
+                current_user.mailbox_limit = 1 if new_plan == 'hobby' else 10 if new_plan == 'startup'\
+                    else 40 if new_plan == 'professional' else 100 if new_plan == 'enterprise' else 0
+                current_user.email_limit = 1 if new_plan == 'hobby' else 2000 if new_plan == 'startup'\
+                    else 5000 if new_plan == 'professional' else 15000 if new_plan == 'enterprise' else 0
 
                 current_user.save()
+
+                # Adjust the mailboxes by deleting
+                # the most recent mailboxes and emails
+                from app.blueprints.user.tasks import adjust_mailboxes
+                if plan['amount'] < active_plan['amount']:
+                    adjust_mailboxes(current_user.email, current_user.mailbox_limit, current_user.email_limit)
 
             flash('Your plan has been updated. Changes will take effect immediately.', 'success')
             return redirect(url_for('user.settings'))

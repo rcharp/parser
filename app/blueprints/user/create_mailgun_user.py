@@ -6,7 +6,7 @@ from sqlalchemy import exists
 from flask_login import current_app
 
 
-def generate_mailbox_id(size=8, chars=string.ascii_uppercase + string.digits):
+def generate_mailbox_id(size=8, chars=string.ascii_uppercase.replace('O', '') + string.digits.replace('0', '')):
 
     # Generate a random 8-character user id
     mailbox_id = ''.join(random.choice(chars) for _ in range(size))
@@ -41,3 +41,4 @@ def delete_inbox(mailbox_id):
 def get_mailboxes(email):
     from app.blueprints.parse.models.mailbox import Mailbox
     return Mailbox.query.with_entities(Mailbox.mailbox_id).filter(Mailbox.user_email == email).all()
+
