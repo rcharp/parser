@@ -52,4 +52,4 @@ def demo():
 
 @page.route('/index')
 def index():
-    return render_template('page/index.html')
+    return render_template('page/index.html', plans=settings.STRIPE_PLANS)
