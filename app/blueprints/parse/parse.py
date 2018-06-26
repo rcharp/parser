@@ -4,9 +4,6 @@ import random
 from app.extensions import db
 from app.blueprints.parse.models.email import Email
 from app.blueprints.parse.models.rule import Rule
-from werkzeug.wrappers import Response
-from flask import make_response
-from werkzeug.datastructures import Headers
 from io import StringIO
 
 

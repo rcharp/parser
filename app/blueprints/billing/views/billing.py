@@ -69,7 +69,7 @@ def create():
             if request.form.get('plan') is not None:
                 plan = request.form.get('plan')
 
-                # Set the mailbox and email limits accordingly##
+                # Set the mailbox and email limits accordingly
                 current_user.mailbox_limit = 1 if plan == 'hobby' else 10 if plan == 'startup' else 40 if plan == 'professional' else 100 if plan == 'enterprise' else 0
                 current_user.email_limit = 400 if plan == 'hobby' else 2000 if plan == 'startup' else 5000 if plan == 'professional' else 15000 if plan == 'enterprise' else 0
                 current_user.save()
@@ -113,9 +113,10 @@ def update():
             if new_plan is not None:
                 plan = new_plan
 
-                # Set the mailbox and email limits accordingly##
+                # Set the mailbox and email limits accordingly
                 current_user.mailbox_limit = 1 if plan == 'hobby' else 10 if plan == 'startup' else 40 if plan == 'professional' else 100 if plan == 'enterprise' else 0
                 current_user.email_limit = 400 if plan == 'hobby' else 2000 if plan == 'startup' else 5000 if plan == 'professional' else 15000 if plan == 'enterprise' else 0
+
                 current_user.save()
 
             flash('Your plan has been updated. Changes will take effect immediately.', 'success')
