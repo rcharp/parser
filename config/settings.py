@@ -17,6 +17,12 @@ MAIL_PORT = 465
 MAIL_USE_TLS = False
 MAIL_USE_SSL = True
 
+CARD_NAME = ''
+CARD_NUMBER = ''
+CARD_MONTH = ''
+CARD_YEAR = ''
+CARD_CVV = ''
+
 # Cache
 CACHE_TYPE = 'redis'
 CACHE_REDIS_HOST = os.environ.get('CACHE_REDIS_HOST', None)

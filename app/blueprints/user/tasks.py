@@ -51,10 +51,14 @@ def adjust_mailboxes(email, mailbox_id, mailbox_limit, email_limit):
     mailbox_count = Mailbox.query.filter(Mailbox.user_email == email).count()
     email_count = Email.query.filter(Email.user_email == email).count()
 
+    # Get the counts of how many emails and mailboxes will be deleted
+    email_delete_count = email_count - email_limit if email_count > email_limit else 0
+    mailbox_delete_count = mailbox_count - mailbox_limit if mailbox_count > mailbox_limit else 0
+
     # Get the list of mailboxes and emails to be deleted that are over the new limit
     # Set order_by to 'asc' for oldest mailboxes/emails and 'desc' for most recent
-    mailboxes_to_delete = Mailbox.query.with_entities(Mailbox.id, Mailbox.mailbox_id).filter(Mailbox.user_email == email).order_by(Mailbox.created_on.desc()).limit(mailbox_count - mailbox_limit).all()
-    emails_to_delete = [e[0] for e in Email.query.with_entities(Email.id).filter(Email.user_email == email).order_by(Email.created_on.desc()).limit(email_count - email_limit).all()]
+    mailboxes_to_delete = Mailbox.query.with_entities(Mailbox.id, Mailbox.mailbox_id).filter(Mailbox.user_email == email).order_by(Mailbox.created_on.desc()).limit(mailbox_delete_count).all()
+    emails_to_delete = [e[0] for e in Email.query.with_entities(Email.id).filter(Email.user_email == email).order_by(Email.created_on.desc()).limit(email_delete_count).all()]
 
     # Delete the extra emails first
     emails_deleted = Email.bulk_delete(emails_to_delete)
@@ -65,6 +69,8 @@ def adjust_mailboxes(email, mailbox_id, mailbox_limit, email_limit):
 
     # Delete the extra mailboxes
     mailboxes_deleted = Mailbox.bulk_delete([m[0] for m in mailboxes_to_delete])
+    print(mailbox_delete_count)#
+    print(mailboxes_to_delete)#
 
     # Return the number of emails and mailboxes remaining
     return email_count - emails_deleted, mailbox_count - mailboxes_deleted
@@ -84,6 +90,8 @@ def get_mailboxes(email):
 
 def inner_join(a, b):
     key = itemgetter(0)
+    a.sort(key=lambda x: (x, key))
+    b.sort(key=lambda x: (x, key))
     for _, group in groupby(merge(a, b, key=key), key):
         row_a, row_b = next(group), next(group, None)
         if row_b is not None:
