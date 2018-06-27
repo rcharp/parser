@@ -1,4 +1,4 @@
 
         [console_scripts]
-        parser=cli.cli:cli
+        parsavvy=cli.cli:cli
     

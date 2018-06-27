@@ -56,7 +56,8 @@
                                   <li style="font-family: 'Gotham', sans-serif;"><a href="{{ url_for('contact.index') }}">Contact Us</a></li>
                                   <li style="font-family: 'Gotham', sans-serif;"><a href="{{ url_for('user.logout') }}">Log out</a></li>
                           {% else %}
-                            <li style="font-family: 'Gotham', sans-serif;"><a href="{{ url_for('billing.pricing') }}">Pricing</a></li>
+                            <li style="font-family: 'Gotham', sans-serif;"><a href="#feature">Features</a></li>
+                            <li style="font-family: 'Gotham', sans-serif;"><a href="#pricing">Pricing</a></li>
                             <li style="font-family: 'Gotham', sans-serif;"><a href="{{ url_for('contact.index') }}">Contact Us</a></li>
                             <li style="font-family: 'Gotham', sans-serif;"><a href="{{ url_for('user.login') }}">Log in</a></li>
                             <li style="font-family: 'Gotham', sans-serif;"><a class="ticker-btn" href="{{ url_for('user.signup') }}">Sign up</a></li>
@@ -288,9 +289,11 @@
 					<div class="row d-flex justify-content-center">
 						<div class="menu-content col-lg-9">
 							<div class="title text-center">
-								<h1 class="mb-10 text-white">Got Impressed to our features</h1>
-								<p class="text-white">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore  et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
-								<a class="primary-btn" href="#">Request Free Demo</a>
+								<h1 class="mb-10 text-white" style="font-family:'Gotham', sans-serif !important; font-weight:500">Organize your mailbox.</h1>
+								<h3 style="color:white; font-family:'Gotham', sans-serif !important; font-weight:200;">
+                                    With plans that include multiple inboxes, you can
+                                </h3>
+								<a class="primary-btn" href="{{ url_for('user.signup') }}">Get Started</a>
 							</div>
 						</div>
 					</div>	
@@ -299,7 +302,7 @@
 			<!-- End calto-action Area -->
 		
 			<!-- Start price Area -->
-			<section class="price-area section-gap" id="price">
+			<section class="price-area section-gap" id="pricing">
 				<div class="container">
 					<div class="row d-flex justify-content-center">
 						<div class="menu-content pb-60 col-lg-8">

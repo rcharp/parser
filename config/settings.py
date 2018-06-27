@@ -64,11 +64,11 @@ SEED_MEMBER_EMAIL = ''
 REMEMBER_COOKIE_DURATION = timedelta(days=90)
 
 # Mailgun.
-MAILGUN_LOGIN = ''
-MAILGUN_PASSWORD = ''
-MAILGUN_HOST = ''
-MAILGUN_DOMAIN = ''
-MAILGUN_API_KEY = ''
+MAILGUN_LOGIN = os.environ.get('MAILGUN_LOGIN', None)
+MAILGUN_PASSWORD = os.environ.get('MAILGUN_PASSWORD', None)
+MAILGUN_HOST = os.environ.get('MAILGUN_HOST', None)
+MAILGUN_DOMAIN = os.environ.get('MAILGUN_DOMAIN', None)
+MAILGUN_API_KEY = os.environ.get('MAILGUN_API_KEY', None)
 
 # Turn off debug intercepts
 DEBUG_TB_INTERCEPT_REDIRECTS = False
@@ -87,7 +87,7 @@ STRIPE_PLANS = {
         'currency': 'usd',
         'interval': 'month',
         'interval_count': 1,
-        'trial_period_days': 14,
+        'trial_period_days': 0,
         'statement_descriptor': 'HOBBY',
         'metadata': {}
     },
@@ -98,7 +98,7 @@ STRIPE_PLANS = {
         'currency': 'usd',
         'interval': 'month',
         'interval_count': 1,
-        'trial_period_days': 14,
+        'trial_period_days': 0,
         'statement_descriptor': 'STARTUP',
         'metadata': {
             'recommended': True
@@ -111,7 +111,7 @@ STRIPE_PLANS = {
         'currency': 'usd',
         'interval': 'month',
         'interval_count': 1,
-        'trial_period_days': 14,
+        'trial_period_days': 0,
         'statement_descriptor': 'PROFESSIONAL',
         'metadata': {}
     },
@@ -122,7 +122,7 @@ STRIPE_PLANS = {
         'currency': 'usd',
         'interval': 'month',
         'interval_count': 1,
-        'trial_period_days': 14,
+        'trial_period_days': 0,
         'statement_descriptor': 'ENTERPRISE',
         'metadata': {}
     },
