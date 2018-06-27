@@ -1,6 +1,6 @@
 {% extends 'layouts/app.html' %}
 
-{% block title %}My Account - Parser{% endblock %}
+{% block title %}My Settings - Parsavvy{% endblock %}
 {% block body %}
  {% if current_user.mailbox_id %}
     <div class="row" style="overflow-x:hidden">
@@ -9,7 +9,7 @@
               <div class="list-group-item" style="text-align:center">
                   {% if mailbox_id is not none %}
                       Please forward all emails to:
-                      <h1><b><span style="color:red">{{ mailbox_id }}</span>@mg.simpleytics.com</b></h1>
+                      <h1><b><span style="color:red">{{ mailbox_id }}</span>@mg.parsavvy.com</b></h1>
                   {% else %}
                       You don't have an inbox yet.
                   {% endif %}
@@ -72,7 +72,7 @@
     </div>
     <div class="col-md-5 col-md-push-1 col-md-offset-1">
       {% if current_user.subscription %}
-        <h3> Parser {{ current_user.subscription.plan | title }}
+        <h3> Parsavvy {{ current_user.subscription.plan | title }}
           Plan</h3>
         <h4 class="text-muted margin-bottom">
           {{ current_user.credit_card.brand }}

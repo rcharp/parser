@@ -11,7 +11,7 @@ MAIL_PASSWORD = 'thebestpasswordyouevermade'
 CELERY_BROKER_URL = 'redis://:amuchmoresecurepassword@redis:6379/0'
 CELERY_RESULT_BACKEND = 'redis://:amuchmoresecurepassword@redis:6379/0'
 
-db_uri = 'postgresql://parser:themostsecurepasswordevercreated@postgres:5432/parser'
+db_uri = 'postgresql://parsavvy:themostsecurepasswordevercreated@postgres:5432/parsavvy'
 SQLALCHEMY_DATABASE_URI = db_uri
 
 SEED_ADMIN_EMAIL = 'you@realemailaccount.com'

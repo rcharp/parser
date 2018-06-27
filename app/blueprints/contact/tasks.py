@@ -18,7 +18,7 @@ def deliver_contact_email(email, message):
     # """
     # ctx = {'email': email, 'message': message}
     #
-    # send_template_message(subject='[Parser] Contact',
+    # send_template_message(subject='[Parsavvy] Contact',
     #                       sender=email,
     #                       recipients=[celery.conf.get('MAIL_USERNAME')],
     #                       reply_to=email,

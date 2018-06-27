@@ -5,7 +5,7 @@ import click
 
 
 @click.command()
-@click.argument('path', default=os.path.join('parser', 'tests'))
+@click.argument('path', default=os.path.join('parsavvy', 'tests'))
 def cli(path):
     """
     Run tests with Pytest.

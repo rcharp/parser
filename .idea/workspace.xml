@@ -2,13 +2,40 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f1637133-ccae-40ab-aec7-a4a76f8f54a9" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/blueprints/billing/templates/billing/pricing.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/billing/templates/billing/pricing.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/blueprints/contact/tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/contact/tasks.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/blueprints/contact/templates/contact/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/contact/templates/contact/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/blueprints/page/templates/page/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/page/templates/page/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/blueprints/parse/parse.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/parse/parse.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/blueprints/user/tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/user/tasks.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/blueprints/user/templates/emails.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/user/templates/emails.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/blueprints/user/templates/user/add.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/user/templates/user/add.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/blueprints/user/templates/user/inbox.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/user/templates/user/inbox.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/blueprints/user/templates/user/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/user/templates/user/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/blueprints/user/templates/user/mail/cancel_email.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/user/templates/user/mail/cancel_email.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/blueprints/user/templates/user/mail/contact_email.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/user/templates/user/mail/contact_email.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/blueprints/user/templates/user/mail/password_reset.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/user/templates/user/mail/password_reset.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/blueprints/user/templates/user/mail/plan_change_email.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/user/templates/user/mail/plan_change_email.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/blueprints/user/templates/user/mail/welcome_email.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/user/templates/user/mail/welcome_email.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/blueprints/user/templates/user/parse.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/user/templates/user/parse.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/blueprints/user/templates/user/rules.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/user/templates/user/rules.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/blueprints/user/templates/user/settings.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/user/templates/user/settings.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/blueprints/user/templates/user/signup.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/user/templates/user/signup.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/blueprints/user/templates/user/view.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/user/templates/user/view.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/errors/404.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/errors/404.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/errors/500.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/errors/500.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/layouts/app.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/layouts/app.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/templates/layouts/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/layouts/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/layouts/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/layouts/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/tests/contact/test_tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/tests/contact/test_tasks.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/tests/contact/test_views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/tests/contact/test_views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/commands/cmd_cov.py" beforeDir="false" afterPath="$PROJECT_DIR$/cli/commands/cmd_cov.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/commands/cmd_flake8.py" beforeDir="false" afterPath="$PROJECT_DIR$/cli/commands/cmd_flake8.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/commands/cmd_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/cli/commands/cmd_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/instance/settings.py.production_example" beforeDir="false" afterPath="$PROJECT_DIR$/instance/settings.py.production_example" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -97,11 +124,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="view.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="view.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/blueprints/user/templates/user/view.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="196">
-              <caret line="87" column="40" selection-start-line="87" selection-start-column="40" selection-end-line="87" selection-end-column="40" />
+            <state relative-caret-position="76">
+              <caret line="79" column="36" lean-forward="true" selection-start-line="79" selection-start-column="36" selection-end-line="79" selection-end-column="36" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
@@ -113,23 +140,20 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="plan_change_email.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/blueprints/user/templates/user/mail/plan_change_email.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="20" column="1" lean-forward="true" selection-start-line="20" selection-start-column="1" selection-end-line="20" selection-end-column="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="base.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/templates/layouts/base.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="292">
               <caret line="107" column="61" selection-start-line="107" selection-start-column="61" selection-end-line="107" selection-end-column="61" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="parse.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/blueprints/parse/parse.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="227">
-              <caret line="263" column="9" selection-start-line="263" selection-start-column="9" selection-end-line="263" selection-end-column="9" />
-              <folding>
-                <element signature="e#0#9#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -145,16 +169,11 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>invoice(</find>
-      <find>metrics</find>
-      <find>/simple</find>
-      <find>page.demo</find>
       <find>demo</find>
       <find>there's no way to</find>
       <find>.all</find>
       <find>continue getting</find>
       <find>don't delete</find>
-      <find>simpleytics</find>
       <find>you're about to change</find>
       <find>gotham</find>
       <find>your plan will</find>
@@ -174,10 +193,17 @@
       <find>inbox</find>
       <find>007fd8</find>
       <find>#007fd8</find>
+      <find>simpleytics</find>
+      <find>Simpleytics</find>
       <find>#000</find>
+      <find>SimpleMetrics</find>
+      <find>metrics</find>
+      <find>parser</find>
     </findStrings>
     <replaceStrings>
       <replace />
+      <replace>parsavvy</replace>
+      <replace>Parsavvy</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -186,7 +212,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/blueprints/admin/forms.py" />
         <option value="$PROJECT_DIR$/app/blueprints/billing/gateways/stripecom.py" />
         <option value="$PROJECT_DIR$/app/blueprints/billing/models/coupon.py" />
         <option value="$PROJECT_DIR$/app/tests/conftest.py" />
@@ -237,6 +262,7 @@
         <option value="$PROJECT_DIR$/app/blueprints/user/templates/user/add.html" />
         <option value="$PROJECT_DIR$/app/blueprints/user/templates/user/parse.html" />
         <option value="$PROJECT_DIR$/app/blueprints/user/templates/user/view.html" />
+        <option value="$PROJECT_DIR$/app/blueprints/user/templates/user/mail/plan_change_email.html" />
       </list>
     </option>
   </component>
@@ -440,8 +466,8 @@
       <window_info anchor="bottom" id="Run" order="2" weight="0.3289183" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.329235" />
       <window_info anchor="bottom" id="Python Console" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.49513888" visible="true" weight="0.35992748" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17864583" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" sideWeight="0.49513888" visible="true" weight="0.35992748" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17864583" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.33508542" />
@@ -479,13 +505,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/blueprints/parse/models/rule.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="11" column="52" selection-start-line="11" selection-start-column="52" selection-end-line="11" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/requirements.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="73">
@@ -494,7 +513,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/blueprints/contact/tasks.py">
-      <provider selected="true" editor-type-id="text-editor" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#52#0" />
+          </folding>
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/docker-compose.yml">
       <provider selected="true" editor-type-id="text-editor">
@@ -824,8 +849,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/blueprints/user/templates/user/view.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="87" column="40" selection-start-line="87" selection-start-column="40" selection-end-line="87" selection-end-column="40" />
+        <state relative-caret-position="76">
+          <caret line="79" column="36" lean-forward="true" selection-start-line="79" selection-start-column="36" selection-end-line="79" selection-end-column="36" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
@@ -833,6 +858,13 @@
             <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/blueprints/user/templates/user/mail/plan_change_email.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="1" lean-forward="true" selection-start-line="20" selection-start-column="1" selection-end-line="20" selection-end-column="1" />
         </state>
       </provider>
     </entry>

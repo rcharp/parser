@@ -4,7 +4,7 @@ import click
 
 
 @click.command()
-@click.argument('path', default='parser')
+@click.argument('path', default='parsavvy')
 def cli(path):
     """
     Run a test coverage report.

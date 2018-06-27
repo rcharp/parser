@@ -7,8 +7,8 @@ def send_welcome_email(email):
     app = Flask(__name__)
     mail = Mail()
     mail.init_app(app)
-    msg = Message("You've successfully signed up for Parser!",
-                  sender="support@parser.com",
+    msg = Message("You've successfully signed up for Parsavvy!",
+                  sender="support@Parsavvy.com",
                   recipients=[email])
 
     msg.html = render_template('user/mail/welcome_email.html')
@@ -22,8 +22,8 @@ def send_plan_change_email(email, plan):
     app = Flask(__name__)
     mail = Mail()
     mail.init_app(app)
-    msg = Message("Your plan with Parser has been changed.",
-                  sender="support@parser.com",
+    msg = Message("Your plan with Parsavvy has been changed.",
+                  sender="support@Parsavvy.com",
                   recipients=[email])
     if plan == 'Startup':
         amount = 39
@@ -40,15 +40,15 @@ def contact_us_email(email, message):
     app = Flask(__name__)
     mail = Mail()
     mail.init_app(app)
-    msg = Message("[Parser Contact] Support request from " + email,
-                  recipients=["support@parser.com"],
-                  sender="donotreply@parser.com",
+    msg = Message("[Parsavvy Contact] Support request from " + email,
+                  recipients=["support@parsavvy.com"],
+                  sender="donotreply@parsavvy.com",
                   reply_to=email)
     msg.body = email + " sent you a message:\n\n" + message
 
-    response = Message("Your email to Parser has been received.",
+    response = Message("Your email to Parsavvy has been received.",
                        recipients=[email],
-                       sender="donotreply@parser.com")
+                       sender="donotreply@parsavvy.com")
 
     response.html = render_template('user/mail/contact_email.html',email=email, message=message)
 
@@ -60,8 +60,8 @@ def send_cancel_email(email):
     app = Flask(__name__)
     mail = Mail()
     mail.init_app(app)
-    msg = Message("Goodbye from Parser",
-                  sender="support@parser.com",
+    msg = Message("Goodbye from Parsavvy",
+                  sender="support@parsavvy.com",
                   recipients=[email])
 
     msg.html = render_template('user/mail/cancel_email.html')
@@ -74,8 +74,8 @@ def send_export_email(email, csv):
     app = Flask(__name__)
     mail = Mail()
     mail.init_app(app)
-    msg = Message("Your data export from Parser",
-                  sender="support@parser.com",
+    msg = Message("Your data export from Parsavvy",
+                  sender="support@parsavvy.com",
                   recipients=[email])
 
     msg.attach("Parsed_data.csv", "text/csv", csv)

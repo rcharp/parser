@@ -4,7 +4,7 @@ MAINTAINER Nick Janetakis <nick.janetakis@gmail.com>
 RUN apt-get update && apt-get install -qq -y \
   build-essential libpq-dev --no-install-recommends
 
-ENV INSTALL_PATH /parser
+ENV INSTALL_PATH /parsavvy
 RUN mkdir -p $INSTALL_PATH
 
 WORKDIR $INSTALL_PATH
