@@ -8,12 +8,10 @@ page = Blueprint('page', __name__, template_folder='templates')
 
 
 @page.route('/')
-@cache.cached(timeout=timeout)
 def home():
     if current_user.is_authenticated:
         return redirect(url_for('user.settings'))
-    return render_template('/page/index.html',
-                           plans=settings.STRIPE_PLANS)
+    return render_template('page/index.html', plans=settings.STRIPE_PLANS)
 
 
 @page.route('/terms')

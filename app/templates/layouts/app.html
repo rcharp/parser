@@ -15,20 +15,20 @@
           {% if current_user.is_authenticated %}
               {% if current_user.role == 'member' %}
                 <a href="{{ url_for('user.inbox') }}">
-                  <img src="{{ url_for('static', filename='images/logo-white-transparent.png') }}"
+                  <img src="{{ url_for('static', filename='images/logo1-light.png') }}"
                        class="img-responsive"
                        width="229" height="50" title="Parsavvy" alt="Parsavvy"/>
                 </a>
               {% else %}
                   <a href="{{ url_for('admin.dashboard') }}">
-                    <img src="{{ url_for('static', filename='images/logo-white-transparent.png') }}"
+                    <img src="{{ url_for('static', filename='images/logo1-light.png') }}"
                         class="img-responsive"
                         width="229" height="50" title="Parsavvy" alt="Parsavvy"/>
                     </a>
               {% endif %}
           {% else %}
           <a href="{{ url_for('page.home') }}">
-          <img src="{{ url_for('static', filename='images/logo-white-transparent.png') }}"
+          <img src="{{ url_for('static', filename='images/logo1-light.png') }}"
                class="img-responsive"
                width="229" height="50" title="Parsavvy" alt="Parsavvy"/>
         </a>

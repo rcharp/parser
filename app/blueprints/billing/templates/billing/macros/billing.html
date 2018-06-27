@@ -14,7 +14,7 @@
 
 
 {% macro plan(plan) -%}
-  {% if request.path == '/index' %}
+  {% if request.path == '/' %}
   <div class="col-md-12{{ ' scale-up' if plan.metadata.recommended }} {{ ' quarter-faded' if not plan.metadata
   .recommended }}" {{ 'style=margin-top:30px;' if not plan.metadata.recommended }}>
        <div class="panel panel-default{{ ' panel-success' if plan.metadata.recommended else ' panel-info'}}">

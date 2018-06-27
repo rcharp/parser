@@ -14,7 +14,7 @@
 		<!-- meta character set -->
 		<meta charset="UTF-8">
 		<!-- Site Title -->
-		<title>Saas</title>
+		<title>Email Parser and Data Automation - Parsavvy</title>
 
 		<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Cabin|Gotham|Gotham|Open+Sans|Comfortaa" rel="stylesheet">
@@ -36,7 +36,7 @@
 			    <div class="container">
 			    	<div class="row align-items-center justify-content-between d-flex">
 				      <div id="logo">
-				        <a href="index.html"><img src="../../../../static/saas/img/logo.png" alt="" title="" /></a>
+				        <a href="index.html"><img id=logo_image" src="../../../../static/images/logo1-white.png" alt="" title="" /></a>
 				      </div>
 				      <nav id="nav-menu-container" style="font-family: 'Gotham', sans-serif !important;">
 				        <ul class="nav-menu" style="font-family: 'Gotham', sans-serif !important;">
@@ -47,19 +47,19 @@
                           {% endif %}
                           {% if current_user.is_authenticated %}
                               {% if current_user.role == 'member' %}
-                                  <li><a href="{{ url_for('user.rules') }}">Rules</a></li>
-                                  <li><a href="{{ url_for('user.inbox') }}">Inbox</a></li>
+                                  <li style="font-family: 'Gotham', sans-serif;"><a href="{{ url_for('user.rules') }}">Rules</a></li>
+                                  <li style="font-family: 'Gotham', sans-serif;"><a href="{{ url_for('user.inbox') }}">Inbox</a></li>
                               {% else %}
 
                               {% endif %}
-                                  <li><a href="{{ url_for('user.settings') }}">Settings</a></li>
-                                  <li><a href="{{ url_for('contact.index') }}">Contact Us</a></li>
-                                  <li><a href="{{ url_for('user.logout') }}">Log out</a></li>
+                                  <li style="font-family: 'Gotham', sans-serif;"><a href="{{ url_for('user.settings') }}">Settings</a></li>
+                                  <li style="font-family: 'Gotham', sans-serif;"><a href="{{ url_for('contact.index') }}">Contact Us</a></li>
+                                  <li style="font-family: 'Gotham', sans-serif;"><a href="{{ url_for('user.logout') }}">Log out</a></li>
                           {% else %}
-                            <li><a href="{{ url_for('billing.pricing') }}">Pricing</a></li>
-                            <li><a href="{{ url_for('contact.index') }}">Contact Us</a></li>
-                            <li><a href="{{ url_for('user.login') }}">Log in</a></li>
-                            <li><a class="ticker-btn" href="{{ url_for('user.signup') }}">Sign up</a></li>
+                            <li style="font-family: 'Gotham', sans-serif;"><a href="{{ url_for('billing.pricing') }}">Pricing</a></li>
+                            <li style="font-family: 'Gotham', sans-serif;"><a href="{{ url_for('contact.index') }}">Contact Us</a></li>
+                            <li style="font-family: 'Gotham', sans-serif;"><a href="{{ url_for('user.login') }}">Log in</a></li>
+                            <li style="font-family: 'Gotham', sans-serif;"><a class="ticker-btn" href="{{ url_for('user.signup') }}">Sign up</a></li>
                           {% endif %}
 				        </ul>
 				      </nav><!-- #nav-menu-container -->		    		
@@ -97,7 +97,7 @@
 					<div class="row d-flex justify-content-center">
 						<div class="menu-content pt-100 pb-60 col-lg-10">
 							<div class="title text-center">
-								<h1 class="mb-10" style="font-family:'Gotham', sans-serif !important; font-weight:500">Save precious time by automating processes.</h1>
+								<h1 class="mb-10" style="font-family:'Gotham', sans-serif !important; font-weight:500">Save precious time by automating your processes.</h1>
 								<h4 style="font-family:'Gotham', sans-serif !important; font-weight:200">We know that your time is extremely valuable as a business owner.<br /><br />Every day you get dozens or hundreds of emails
                                     and you don't have the time to go through each of them one-by-one to get the data you need.
                                     Let us do that for you.
