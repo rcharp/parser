@@ -3,14 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="f1637133-ccae-40ab-aec7-a4a76f8f54a9" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Parser_CLI.egg-info/PKG-INFO" beforeDir="false" afterPath="$PROJECT_DIR$/Parsavvy_CLI.egg-info/PKG-INFO" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Parser_CLI.egg-info/SOURCES.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Parsavvy_CLI.egg-info/SOURCES.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Parser_CLI.egg-info/dependency_links.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Parsavvy_CLI.egg-info/dependency_links.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Parser_CLI.egg-info/entry_points.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Parsavvy_CLI.egg-info/entry_points.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Parser_CLI.egg-info/requires.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Parsavvy_CLI.egg-info/requires.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Parser_CLI.egg-info/top_level.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Parsavvy_CLI.egg-info/top_level.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/blueprints/page/templates/page/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/page/templates/page/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/instance/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/instance/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/saas/img/laptop.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/saas/img/laptop.png" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -24,29 +18,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="billing.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/blueprints/billing/templates/billing/macros/billing.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="465">
-              <caret line="31" column="45" selection-start-line="31" selection-start-column="45" selection-end-line="31" selection-end-column="45" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="base.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/templates/layouts/base.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1605">
-              <caret line="107" column="61" selection-start-line="107" selection-start-column="61" selection-end-line="107" selection-end-column="61" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/blueprints/page/templates/page/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="290" column="8" selection-start-line="290" selection-start-column="8" selection-end-line="290" selection-end-column="8" />
+            <state relative-caret-position="108">
+              <caret line="160" column="75" selection-start-line="160" selection-start-column="75" selection-end-line="160" selection-end-column="75" />
               <folding>
                 <element signature="e#19573#19579#0#HTML" expanded="true" />
                 <element signature="e#22921#22927#0#HTML" expanded="true" />
@@ -55,20 +31,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="settings.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/instance/settings.py">
+      <file leaf-file-name="linearicons.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/static/saas/css/linearicons.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="395">
-              <caret line="48" lean-forward="true" selection-start-line="48" selection-end-line="48" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="main.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/static/saas/js/main.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1995">
-              <caret line="133" selection-start-line="133" selection-end-line="133" />
+            <state relative-caret-position="2562">
+              <caret line="344" column="1" selection-start-line="344" selection-start-column="1" selection-end-line="344" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -103,7 +70,6 @@
       <find>#000</find>
       <find>SimpleMetrics</find>
       <find>metrics</find>
-      <find>parser</find>
       <find>metric</find>
       <find>automating</find>
       <find>logo-white</find>
@@ -114,6 +80,7 @@
       <find>header-scrol</find>
       <find>saas</find>
       <find>header-scrolled</find>
+      <find>parser</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -128,7 +95,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/blueprints/admin/templates/admin/_menu.html" />
         <option value="$PROJECT_DIR$/app/blueprints/user/templates/user/dashboard.html" />
         <option value="$PROJECT_DIR$/app/blueprints/page/templates/page/css/style.css" />
         <option value="$PROJECT_DIR$/.gitignore" />
@@ -158,7 +124,6 @@
         <option value="$PROJECT_DIR$/app/blueprints/parse/parse.py" />
         <option value="$PROJECT_DIR$/app/blueprints/user/views.py" />
         <option value="$PROJECT_DIR$/app/blueprints/user/templates/user/settings.html" />
-        <option value="$PROJECT_DIR$/config/settings.py" />
         <option value="$PROJECT_DIR$/app/blueprints/billing/templates/billing/payment_method.html" />
         <option value="$PROJECT_DIR$/app/blueprints/billing/views/billing.py" />
         <option value="$PROJECT_DIR$/app/blueprints/user/tasks.py" />
@@ -175,10 +140,12 @@
         <option value="$PROJECT_DIR$/app/templates/layouts/app.html" />
         <option value="$PROJECT_DIR$/app/templates/layouts/login.html" />
         <option value="$PROJECT_DIR$/app/static/saas/js/main.js" />
-        <option value="$PROJECT_DIR$/app/blueprints/page/templates/page/index.html" />
         <option value="$PROJECT_DIR$/Parsavvy_CLI.egg-info/entry_points.txt" />
         <option value="$PROJECT_DIR$/Parsavvy_CLI.egg-info/SOURCES.txt" />
         <option value="$PROJECT_DIR$/instance/settings.py" />
+        <option value="$PROJECT_DIR$/.env" />
+        <option value="$PROJECT_DIR$/config/settings.py" />
+        <option value="$PROJECT_DIR$/app/blueprints/page/templates/page/index.html" />
       </list>
     </option>
   </component>
@@ -230,6 +197,11 @@
             <path>
               <item name="parser" type="b2602c69:ProjectViewProjectNode" />
               <item name="parser" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="parser" type="b2602c69:ProjectViewProjectNode" />
+              <item name="parser" type="462c0819:PsiDirectoryNode" />
+              <item name="config" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="parser" type="b2602c69:ProjectViewProjectNode" />
@@ -338,10 +310,11 @@
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.329235" />
       <window_info anchor="bottom" id="Python Console" order="7" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.3289183" />
-      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.49513888" visible="true" weight="0.26458037" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26796874" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" sideWeight="0.49513888" visible="true" weight="0.26458037" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26796874" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.33454216" />
       <window_info anchor="right" id="SciView" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
@@ -352,7 +325,6 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.33454216" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -377,14 +349,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/static/styles/theme/bootstrap.min.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="4" column="73423" lean-forward="true" selection-start-line="4" selection-start-column="73423" selection-end-line="4" selection-end-column="73423" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/blueprints/page/templates/page/welcome.html" />
     <entry file="file://$PROJECT_DIR$/app/blueprints/user/templates/emails.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
@@ -533,13 +497,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="278">
-          <caret line="27" column="20" selection-start-line="27" selection-start-column="20" selection-end-line="27" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/blueprints/parse/parse.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="227">
@@ -658,17 +615,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/blueprints/page/templates/page/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="290" column="8" selection-start-line="290" selection-start-column="8" selection-end-line="290" selection-end-column="8" />
-          <folding>
-            <element signature="e#19573#19579#0#HTML" expanded="true" />
-            <element signature="e#22921#22927#0#HTML" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Parsavvy_CLI.egg-info/top_level.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -694,8 +640,40 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/instance/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="395">
+        <state relative-caret-position="520">
           <caret line="48" lean-forward="true" selection-start-line="48" selection-end-line="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.env">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="78" column="41" selection-start-line="78" selection-start-column="41" selection-end-line="78" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="70" column="49" selection-start-line="70" selection-start-column="49" selection-end-line="70" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/static/saas/css/linearicons.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2562">
+          <caret line="344" column="1" selection-start-line="344" selection-start-column="1" selection-end-line="344" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/blueprints/page/templates/page/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="160" column="75" selection-start-line="160" selection-start-column="75" selection-end-line="160" selection-end-column="75" />
+          <folding>
+            <element signature="e#19573#19579#0#HTML" expanded="true" />
+            <element signature="e#22921#22927#0#HTML" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
