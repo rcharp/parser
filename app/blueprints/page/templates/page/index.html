@@ -90,7 +90,7 @@
 			<!-- End banner Area -->	
 
 			<!-- Start feature Area -->
-			<section class="feature-area pb-100" id="service">
+			<section class="feature-area pb-100" id="info">
 				<div class="container">
 					<div class="row mockup-container">
 						<img class="mx-auto d-block img-fluid" src="../../../../static/saas/img/laptop.png" alt="">
@@ -98,15 +98,18 @@
 					<div class="row d-flex justify-content-center">
 						<div class="menu-content pt-100 pb-60 col-lg-10">
 							<div class="title text-center">
-								<h1 class="mb-10" style="font-family:'Gotham', sans-serif !important; font-weight:500">Save precious time by automating your processes.</h1>
-								<h4 style="font-family:'Gotham', sans-serif !important; font-weight:200">We know that your time is extremely valuable as a business owner.<br /><br />Every day you get dozens or hundreds of emails
-                                    and you don't have the time to go through each of them one-by-one to get the data you need.
-                                    Let us do that for you.
+								<h1 class="mb-10" style="font-family:'Gotham', sans-serif !important; font-weight:500">Save precious time by automating data extraction.</h1>
+								<h4 style="font-family:'Gotham', sans-serif !important; font-weight:200">We know that your time is extremely valuable.<br /><br />
+                                    Every day you get dozens or hundreds of emails (or more) and you don't have the time to go through each of them one-by-one to get the data you need.
+                                    Let us do that for you.<br /><br />
+                                    Parsavvy will take any email that you forward to us and extract important info from it, based on rules that you set. Just choose the section of the
+                                    email, what type of parse you want to do, and what data<br /> you want to look for and we'll take care of the rest.<br /><br />
+                                    That way, you can spend less time doing manual data extraction and more time growing your business.
                                 </h4>
 							</div>
 						</div>
 					</div>						
-					<div class="row">
+					<!--<div class="row">
 						<div class="col-lg-4">
 							<div class="single-feature">
 								<span class="lnr lnr-inbox"></span>
@@ -120,18 +123,18 @@
 						</div>
 						<div class="col-lg-4">
 							<div class="single-feature">
-								<span class="lnr lnr-spell-check"></span>
+								<span class="lnr lnr-list"></span>
 								<h4>
-									Clean Code
+									Parse by your rules
 								</h4>
 								<p>
-									Here, I focus on a range of items and features that we use in life without giving them a second thought such as Coca Cola.
-								</p>
+									Set up your own parsing rules to extract the data that best fits your needs. Extract, remove or replace the content that you choose.
+                                </p>
 							</div>
 						</div>
 						<div class="col-lg-4">
 							<div class="single-feature">
-								<span class="lnr lnr-cloud-download"></span>
+								<span class="lnr lnr-exit-up"></span>
 								<h4>
 									Export your data
 								</h4>
@@ -140,18 +143,80 @@
                                 </p>
 							</div>
 						</div>												
-					</div>
+					</div>-->
 				</div>	
 			</section>
 			<!-- End feature Area -->
-			
+
+
+            <!-- Start callto-action Area -->
+			<section class="callto-action-area relative section-gap">
+				<div class="overlay overlay-bg"></div>
+				<div class="container">
+					<div class="row d-flex justify-content-center">
+						<div class="menu-content col-lg-10">
+							<div class="title text-center">
+								<h1 class="mb-10 text-white" style="font-family:'Gotham', sans-serif !important; font-weight:500">
+                                    How does it work?
+                                </h1>
+								<h3 style="color:white; font-family:'Gotham', sans-serif !important; font-weight:200;">
+                                    Save time and money with a simple, time-saving process.
+                                </h3><br /><br />
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <div class="single-feature">
+                                            <span class="lnr lnr-inbox"></span>
+                                            <h4>
+                                                Send us your emails
+                                            </h4>
+                                            <p>
+                                                We'll give you a virtual inbox, and you simply forward the emails you want parsed to that inbox.
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="single-feature">
+                                            <span class="lnr lnr-list"></span>
+                                            <h4>
+                                                Parse by your rules
+                                            </h4>
+                                            <p>
+                                                Set up your own parsing rules to get the data that you need.
+                                                Extract, remove or replace content that you choose.
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="single-feature">
+                                            <span class="lnr lnr-exit-up"></span>
+                                            <h4>
+                                                Export your data
+                                            </h4>
+                                            <p>
+                                                After you've parsed your emails to your needs, you can export your data
+                                                to a CSV that will be sent directly to you via email.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br /><br /><br />
+								<a class="primary-btn" href="{{ url_for('user.signup') }}" style="transform:scale(1.5)">
+                                    Start your free trial
+                                </a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<!-- End calto-action Area -->
+
 			<!-- Start about Area -->
 			<section class="about-area section-gap">
 				<div class="container">
 					<div class="row d-flex justify-content-center">
 						<div class="menu-content pb-60 col-lg-10">
 							<div class="title text-center">
-								<h1 class="mb-10" style="font-family:'Gotham', sans-serif !important; font-weight:500">A simple, clean interface.</h1>
+								<h1 class="mb-10" style="font-family:'Gotham', sans-serif !important; font-weight:500">A simple and clean interface.</h1>
 
 							</div>
 						</div>
@@ -169,7 +234,7 @@
 								</span>
 							</p>-->
 							<h3 style="font-family:'Gotham', sans-serif !important; font-weight:200">
-                                We've made our UI easy to navigate to you don't have to waste time getting going.</h3><br />
+                                We've made our UI easy to navigate to you don't have to waste time getting up and running.</h3><br />
 							<a class="primary-btn" href="#" style="font-family:'Gotham', sans-serif !important; font-weight:200">Get Started Now</a>
 						</div>
 						<div class="col-lg-6 about-right">
@@ -196,7 +261,7 @@
 					<div class="row d-flex justify-content-center">
 						<div class="menu-content pb-60 col-lg-10">
 							<div class="title text-center">
-								<h1 class="mb-10" style="font-family:'Gotham', sans-serif !important; font-weight:500">Features you can look forward to.</h1>
+								<h1 class="mb-10" style="font-family:'Gotham', sans-serif !important; font-weight:500">What Parsavvy can do for you</h1>
 							</div>
 						</div>
 					</div>					
@@ -280,26 +345,9 @@
 				</div>	
 			</section>
 			<!-- End service Area -->
-				
 
-			<!-- Start callto-action Area -->
-			<section class="callto-action-area relative section-gap">
-				<div class="overlay overlay-bg"></div>	
-				<div class="container">
-					<div class="row d-flex justify-content-center">
-						<div class="menu-content col-lg-9">
-							<div class="title text-center">
-								<h1 class="mb-10 text-white" style="font-family:'Gotham', sans-serif !important; font-weight:500">Organize your mailbox.</h1>
-								<h3 style="color:white; font-family:'Gotham', sans-serif !important; font-weight:200;">
-                                    With plans that include multiple inboxes, you can
-                                </h3>
-								<a class="primary-btn" href="{{ url_for('user.signup') }}">Get Started</a>
-							</div>
-						</div>
-					</div>	
-				</div>	
-			</section>
-			<!-- End calto-action Area -->
+
+
 		
 			<!-- Start price Area -->
 			<section class="price-area section-gap" id="pricing">
@@ -402,7 +450,7 @@
 							<div class="single-footer-widget">
 								<div class="col-md-3 col-md-3" style="min-width:275px;text-align:right;padding-top:40px;">
                                     <h4 style="font-weight:lighter;font-family: 'Gotham', sans-serif;float:left;margin-right:20px;
-                                    vertical-align:middle;line-height:50%;"><a href="{{ url_for('billing.pricing') }}"style="color:white;">Pricing</a></h4><br /><br />
+                                    vertical-align:middle;line-height:50%;"><a href="#pricing"style="color:white;">Pricing</a></h4><br /><br />
                                     <h4 style="font-weight:lighter;font-family: 'Gotham', sans-serif;float:left;margin-right:20px;
                                     vertical-align:middle;line-height:50%;"><a href="#feature" style="color:white;">Features</a></h4><br /><br />
                                     <h4 style="font-weight:lighter;font-family: 'Gotham', sans-serif;float:left;margin-right:20px;
