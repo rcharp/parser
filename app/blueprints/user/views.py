@@ -5,7 +5,6 @@ from flask import (
     flash,
     url_for,
     render_template,
-    current_app,
     json,
     jsonify)
 from flask_login import (
@@ -78,7 +77,7 @@ def login():
                         set_cache.delay(current_user.mailbox_id, emails.id)
 
                     if current_user.trial:
-                        trial_days_left = 14 - (datetime.datetime.now() - current_user.created_on.replace(tzinfo=None)).days
+                        trial_days_left = -1 - (datetime.datetime.now() - current_user.created_on.replace(tzinfo=None)).days
                         if trial_days_left < 0:
                             current_user.trial = False
                             current_user.save()
@@ -275,11 +274,12 @@ def parse(email_id):
 
                 from app.blueprints.parse.models.email import Email
                 email = Email.query.filter(Email.id == email_id).first()
+
                 body = Email.query.with_entities(Email.body).filter(Email.id == email_id).first()
 
                 return render_template('user/parse.html', rules=rules, email=email, body=body, mailbox_id=current_user.mailbox_id, email_id=email_id)
             else:
-                flash('You don\'t have an inbox yet. Please get one below.', 'error')
+                flash('You don\'t have an inbox yet. Please create one below.', 'error')
         return redirect(url_for('user.settings'))
 
 
@@ -321,7 +321,7 @@ def rules():
                 rules = get_rules(current_user.mailbox_id)
                 return render_template('user/rules.html', mailbox_id=current_user.mailbox_id, rules=rules)
             else:
-                flash('You don\'t have an inbox yet. Please get one below.', 'error')
+                flash('You don\'t have an inbox yet. Please create one below.', 'error')
         return redirect(url_for('user.settings'))
 
 
@@ -399,7 +399,7 @@ def settings():
         trial_days_left = 14 - (datetime.datetime.now() - current_user.created_on.replace(tzinfo=None)).days
 
     if not current_user.active_mailbox:
-        flash('You don\'t have an inbox yet. Please get one below.', 'error')
+        flash('You don\'t have an inbox yet. Please create one below.', 'error')
 
     return render_template('user/settings.html', trial_days_left=trial_days_left, mailbox_id=mailbox_id,
                            mailbox_count=mailbox_count, mailbox_limit=mailbox_limit,
@@ -419,7 +419,7 @@ def inbox():
                 else:
                     return redirect(url_for('user.refresh'))
             else:
-                flash('You don\'t have an inbox yet. Please get one below.', 'error')
+                flash('You don\'t have an inbox yet. Please create one below.', 'error')
         return redirect(url_for('user.settings'))
 
 

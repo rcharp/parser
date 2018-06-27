@@ -26,25 +26,60 @@ def parse_email(email_id, rules):
 def parse(email, section, category, options, args):
     if section == "from":
         result = parse_from(email, category, options, args)
-        email.sender = result
+        if result is not None:
+            if category == 'extract':
+                for item in result:
+                    email.extracted_data += item + '\n'
+            else:
+                email.sender = result
     elif section == "to":
         result = parse_to(email, category, options, args)
-        email.to = result
+        if result is not None:
+            if category == 'extract':
+                for item in result:
+                    email.extracted_data += item + '\n'
+            else:
+                email.to = result
     elif section == "subject":
         result = parse_subject(email, category, options, args)
-        email.subject = result
+        if result is not None:
+            if category == 'extract':
+                for item in result:
+                    email.extracted_data += item + '\n'
+            else:
+                email.subject = result
     elif section == "date":
         result = parse_date(email, category, options, args)
-        email.date = result
+        if result is not None:
+            if category == 'extract':
+                for item in result:
+                    email.extracted_data += item + '\n'
+            else:
+                email.date = result
     elif section == "body":
         result = parse_body(email, category, options, args)
-        email.body = result
+        if result is not None:
+            if category == 'extract':
+                for item in result:
+                    email.extracted_data += item + '\n'
+            else:
+                email.body = result
     elif section == "CC":
         result = parse_cc(email, category, options, args)
-        email.cc = result
+        if result is not None:
+            if category == 'extract':
+                for item in result:
+                    email.extracted_data += item + '\n'
+            else:
+                email.cc = result
     elif section == "Headers":
         result = parse_headers(email, category, options, args)
-        email.headers = result
+        if result is not None:
+            if category == 'extract':
+                for item in result:
+                    email.extracted_data += item + '\n'
+            else:
+                email.headers = result
 
     email.parsed = 1
     db.session.commit()
@@ -184,7 +219,7 @@ def rows_parse(item, args):
     results = []
     for arg in args:
         for line in item.split('\n'):
-            if arg.strip() in line:
+            if arg.lower().strip() in line.lower():
                 results.append(line.strip())
 
     return list(set(results))
@@ -313,11 +348,12 @@ def generate_csv(emails):
 
     buffer = StringIO()
 
-    writer = csv.DictWriter(buffer, fieldnames=["Message Id", "From", "Subject", "Date", "Body"])
+    writer = csv.DictWriter(buffer, fieldnames=["Message Id", "From", "Cc" "Subject", "Date", "Body", "Extracted Data"])
     writer.writeheader()
 
     for email in emails:
-        writer.writerow({"Message Id": email.message_id, "From": email.sender, "Subject": email.subject, "Date": email.date, "Body": email.body})
+        writer.writerow({"Message Id": email.message_id, "From": email.sender, "Cc": email.cc, "Subject": email.subject,
+                         "Date": email.date, "Body": email.body, "Extracted Data": email.extracted_data})
 
     return buffer.getvalue()
 

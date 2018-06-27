@@ -8,7 +8,7 @@ def send_welcome_email(email):
     mail = Mail()
     mail.init_app(app)
     msg = Message("You've successfully signed up for Parsavvy!",
-                  sender="support@Parsavvy.com",
+                  sender="support@parsavvy.com",
                   recipients=[email])
 
     msg.html = render_template('user/mail/welcome_email.html')
