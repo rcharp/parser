@@ -105,7 +105,7 @@
 
     {% if request.path != '/demo' and request.path != '/inbox' and request.path != '/refresh'
     and request.path != '/rules' and not ('/add' in request.path) and not ('/parse' in request.path)
-    and not ('/export' in request.path) %}
+    and not ('/export' in request.path) and not ('/view_email' in request.path) %}
     <main class="container"style="min-height:850px;">
       {{ flash.render() }}
 
