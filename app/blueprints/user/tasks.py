@@ -10,7 +10,6 @@ from lib.flask_mailplus import send_template_message
 from app.extensions import cache, db
 from app.app import create_celery_app
 from app.blueprints.user.models import User
-from app.blueprints.parse.models.rule import Rule
 
 
 celery = create_celery_app()
@@ -166,6 +165,8 @@ def export_emails(mailbox_id):
 @celery.task()
 def get_rules(mailbox_id):
     rules = []
+    from app.blueprints.parse.models.rule import Rule
+
     for rule in Rule.query.filter(Rule.mailbox_id == mailbox_id).all():
         rules.append({'id':rule.id,'name':rule.name,'section':rule.section,'category':rule.category,'options':rule.options,'args':rule.args})
 
@@ -199,6 +200,16 @@ def delete_rules(to_delete):
     db.session.commit()
 
 
+@celery.task()
+def delete_all(email, mailbox_id):
+    from app.blueprints.parse.models.email import Email
+    from app.blueprints.parse.models.mailbox import Mailbox
+    from app.blueprints.parse.models.rule import Rule
+
+    Email.query.filter_by(user_email=email).delete()
+    Mailbox.query.filter_by(user_email=email).delete()
+    Rule.query.filter_by(mailbox_id=mailbox_id).delete()
+
 # Cache -------------------------------------------------------------------
 @celery.task()
 def set_cache(mailbox_id, emails_id):
@@ -209,4 +220,36 @@ def set_cache(mailbox_id, emails_id):
     else:
         time.sleep(1)
         set_cache(mailbox_id, emails_id)
+
+
+# Sending emails -------------------------------------------------------------------
+@celery.task()
+def send_welcome_email(email):
+    from app.blueprints.user.templates.emails import send_welcome_email
+    send_welcome_email(email)
+
+
+@celery.task()
+def send_plan_change_email(email, plan):
+    from app.blueprints.user.templates.emails import send_plan_change_email
+    send_plan_change_email(email, plan)
+
+
+@celery.task()
+def send_contact_us_email(email, message):
+    from app.blueprints.user.templates.emails import contact_us_email
+    contact_us_email(email, message)
+
+
+@celery.task()
+def send_cancel_email(email):
+    from app.blueprints.user.templates.emails import send_cancel_email
+    send_cancel_email(email)
+
+
+@celery.task()
+def send_export_email(email, csv):
+    from app.blueprints.user.templates.emails import send_export_email
+    send_export_email(email, csv)
+
 

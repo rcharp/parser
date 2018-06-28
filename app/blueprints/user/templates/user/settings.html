@@ -44,9 +44,12 @@
         <div class="list-group">
             <div class="list-group-item">
                 {% if email_count == 1 %}
-                    You are currently using {{ email_count }} email of your <span style="color:red">{{ email_limit }}</span> email limit.
+                    You have used {{ email_count }} email of your <span style="color:red">{{ email_limit }}</span> email limit.
                 {% else %}
-                    You are currently using {{ email_count }} emails of your <span style="color:red">{{ email_limit }}</span> email limit.
+                    You have used {{ email_count }} emails of your <span style="color:red">{{ email_limit }}</span> email limit.
+                    {% if email_count == email_limit %}
+                        Please <a href="{{ url_for('billing.update') }}">upgrade</a> to get more.
+                    {% endif %}
                 {% endif %}
             </div>
             <a href="{{ url_for('user.get_inbox') }}" class="list-group-item">

@@ -169,18 +169,15 @@ def cancel():
             if cache.get(mailbox_id):
                 cache.delete(mailbox_id)
 
-            from app.blueprints.parse.models.email import Email
             from app.blueprints.parse.models.mailbox import Mailbox
-            from app.blueprints.parse.models.rule import Rule
 
             # Delete the credentials from MG
             for mailbox in Mailbox.query.filter_by(user_email=email).all():
                 delete_inbox(mailbox.mailbox_id)
 
-            # Delete the emails, rules and mailboxes belonging to the user.
-            Email.query.filter_by(user_email=email).delete()
-            Mailbox.query.filter_by(user_email=email).delete()
-            Rule.query.filter_by(mailbox_id=mailbox_id).delete()
+            # Delete all emails, rules and mailboxes belonging to the user.
+            from app.blueprints.user.tasks import delete_all
+            delete_all.delay(email, mailbox_id)
 
             # Delete the user.
             from app.blueprints.billing.tasks import delete_users
@@ -188,8 +185,8 @@ def cancel():
             delete_users(ids)
 
             # Send a cancellation email.
-            from app.blueprints.user.templates.emails import send_cancel_email
-            send_cancel_email(email)
+            from app.blueprints.user.tasks import send_cancel_email
+            send_cancel_email.delay(email)
 
             flash('Sorry to see you go! Your subscription has been canceled.',
                   'success')

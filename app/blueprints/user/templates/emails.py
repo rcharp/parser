@@ -1,6 +1,9 @@
 __author__ = 'Ricky'
 from flask import Flask, render_template
 from flask_mail import Mail, Message
+from app.app import create_celery_app
+
+celery = create_celery_app()
 
 
 def send_welcome_email(email):
@@ -42,13 +45,13 @@ def contact_us_email(email, message):
     mail.init_app(app)
     msg = Message("[Parsavvy Contact] Support request from " + email,
                   recipients=["support@parsavvy.com"],
-                  sender="donotreply@parsavvy.com",
+                  sender="support@parsavvy.com",
                   reply_to=email)
     msg.body = email + " sent you a message:\n\n" + message
 
     response = Message("Your email to Parsavvy has been received.",
                        recipients=[email],
-                       sender="donotreply@parsavvy.com")
+                       sender="support@parsavvy.com")
 
     response.html = render_template('user/mail/contact_email.html',email=email, message=message)
 

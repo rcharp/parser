@@ -18,7 +18,6 @@ from app.blueprints.parse.parse import generate_csv
 from app.blueprints.user.decorators import anonymous_required
 from app.blueprints.user.models import User
 from app.blueprints.user.create_mailgun_user import generate_mailbox_id, create_inbox
-from app.blueprints.user.templates.emails import send_welcome_email, send_export_email
 from app.blueprints.user.forms import (
     LoginForm,
     BeginPasswordResetForm,
@@ -77,7 +76,7 @@ def login():
                         set_cache.delay(current_user.mailbox_id, emails.id)
 
                     if current_user.trial:
-                        trial_days_left = -1 - (datetime.datetime.now() - current_user.created_on.replace(tzinfo=None)).days
+                        trial_days_left = 14 - (datetime.datetime.now() - current_user.created_on.replace(tzinfo=None)).days
                         if trial_days_left < 0:
                             current_user.trial = False
                             current_user.save()
@@ -153,7 +152,8 @@ def signup():
 
         if login_user(u):
 
-            # send_welcome_email.delay(current_user.email)
+            from app.blueprints.user.tasks import send_welcome_email
+            send_welcome_email.delay(current_user.email)
 
             # Create a user id for the user
             mailbox_id = generate_mailbox_id()
@@ -457,7 +457,8 @@ def export():
     emails = export_emails(current_user.mailbox_id)
     file = generate_csv(emails)
 
-    send_export_email(current_user.email, file)
+    from app.blueprints.user.tasks import send_export_email
+    send_export_email.delay(current_user.email, file)
 
     flash('Your CSV has been sent to your email.', 'success')
     return redirect(url_for('user.inbox'))
@@ -510,7 +511,7 @@ def switch_mailboxes():
     current_user.mailbox_id = mailbox_id
     current_user.save()
 
-    return redirect(url_for('user.settings'))
+    return redirect(url_for('user.refresh'))
 
 
 # Webhooks -------------------------------------------------------------------
