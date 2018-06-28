@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f1637133-ccae-40ab-aec7-a4a76f8f54a9" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/app/blueprints/parse/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/parse/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/blueprints/user/templates/user/settings.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/user/templates/user/settings.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/blueprints/billing/templates/billing/pricing.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/billing/templates/billing/pricing.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/blueprints/page/templates/page/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/page/templates/page/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/settings.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -17,30 +19,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="tasks.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/blueprints/user/tasks.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="44" column="40" selection-start-line="44" selection-start-column="40" selection-end-line="44" selection-end-column="40" />
-              <folding>
-                <element signature="e#0#11#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="billing.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/blueprints/billing/views/billing.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="193">
-              <caret line="120" column="64" selection-start-line="120" selection-start-column="64" selection-end-line="120" selection-end-column="64" />
-              <folding>
-                <element signature="e#0#111#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="tasks.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/blueprints/billing/tasks.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -65,37 +43,69 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="parse.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/blueprints/user/templates/user/parse.html">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/blueprints/page/templates/page/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="132" column="42" lean-forward="true" selection-start-line="132" selection-start-column="42" selection-end-line="132" selection-end-column="42" />
+            <state relative-caret-position="603">
+              <caret line="256" column="38" selection-start-line="256" selection-start-column="38" selection-end-line="256" selection-end-column="38" />
               <folding>
-                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#1;n#div#0;n#section#3;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#div#0;n#div#1;n#div#1;n#div#0;n#section#3;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="view.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/blueprints/user/templates/user/view.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="335">
-              <caret line="140" column="85" selection-start-line="140" selection-start-column="85" selection-end-line="140" selection-end-column="85" />
-              <folding>
-                <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#a#1;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="settings.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="settings.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/blueprints/user/templates/user/settings.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="457">
+            <state relative-caret-position="419">
               <caret line="72" column="18" selection-start-line="72" selection-start-column="18" selection-end-line="72" selection-end-column="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="billing_details.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/blueprints/billing/templates/billing/billing_details.html">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config/settings.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="673">
+              <caret line="120" column="21" selection-start-line="120" selection-start-column="21" selection-end-line="120" selection-end-column="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/instance/settings.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="8" column="58" selection-start-line="8" selection-start-column="58" selection-end-line="8" selection-end-column="58" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="stripecom.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/blueprints/billing/gateways/stripecom.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="183">
+              <caret line="250" column="39" lean-forward="true" selection-start-line="250" selection-start-column="39" selection-end-line="250" selection-end-column="39" />
+              <folding>
+                <element signature="e#0#13#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pricing.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/blueprints/billing/templates/billing/pricing.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="345">
+              <caret line="56" column="53" lean-forward="true" selection-start-line="56" selection-start-column="53" selection-end-line="56" selection-end-column="53" />
             </state>
           </provider>
         </entry>
@@ -105,18 +115,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="307">
               <caret line="74" lean-forward="true" selection-start-line="74" selection-end-line="74" />
-              <folding>
-                <element signature="e#0#9#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="parse.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/blueprints/parse/parse.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="143">
-              <caret line="360" column="50" selection-start-line="360" selection-start-column="50" selection-end-line="360" selection-end-column="50" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -135,7 +133,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>your inboxes</find>
       <find>inbox</find>
       <find>007fd8</find>
       <find>#007fd8</find>
@@ -165,6 +162,7 @@
       <find>this can't</find>
       <find>func.count</find>
       <find>you are curr</find>
+      <find>400 em</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -198,7 +196,6 @@
         <option value="$PROJECT_DIR$/app/blueprints/billing/tasks.py" />
         <option value="$PROJECT_DIR$/app/blueprints/page/date.py" />
         <option value="$PROJECT_DIR$/app/blueprints/billing/templates/billing/payment_method.html" />
-        <option value="$PROJECT_DIR$/app/blueprints/billing/templates/billing/pricing.html" />
         <option value="$PROJECT_DIR$/app/templates/layouts/base.html" />
         <option value="$PROJECT_DIR$/app/blueprints/user/templates/user/rules.html" />
         <option value="$PROJECT_DIR$/app/blueprints/user/templates/user/add.html" />
@@ -210,7 +207,6 @@
         <option value="$PROJECT_DIR$/app/static/saas/js/main.js" />
         <option value="$PROJECT_DIR$/Parsavvy_CLI.egg-info/entry_points.txt" />
         <option value="$PROJECT_DIR$/Parsavvy_CLI.egg-info/SOURCES.txt" />
-        <option value="$PROJECT_DIR$/config/settings.py" />
         <option value="$PROJECT_DIR$/app/static/saas/css/main.css" />
         <option value="$PROJECT_DIR$/app/blueprints/page/templates/page/privacy.html" />
         <option value="$PROJECT_DIR$/app/blueprints/parse/models/email.py" />
@@ -218,10 +214,8 @@
         <option value="$PROJECT_DIR$/app/blueprints/parse/parse.py" />
         <option value="$PROJECT_DIR$/app/blueprints/contact/views.py" />
         <option value="$PROJECT_DIR$/app/tests/contact/test_tasks.py" />
-        <option value="$PROJECT_DIR$/instance/settings.py" />
         <option value="$PROJECT_DIR$/.env" />
         <option value="$PROJECT_DIR$/app/blueprints/user/templates/emails.py" />
-        <option value="$PROJECT_DIR$/app/blueprints/page/templates/page/index.html" />
         <option value="$PROJECT_DIR$/app/blueprints/user/templates/user/inbox.html" />
         <option value="$PROJECT_DIR$/app/blueprints/user/templates/user/view.html" />
         <option value="$PROJECT_DIR$/app/blueprints/user/templates/user/parse.html" />
@@ -230,6 +224,10 @@
         <option value="$PROJECT_DIR$/app/blueprints/billing/views/billing.py" />
         <option value="$PROJECT_DIR$/app/blueprints/parse/views.py" />
         <option value="$PROJECT_DIR$/app/blueprints/user/templates/user/settings.html" />
+        <option value="$PROJECT_DIR$/config/settings.py" />
+        <option value="$PROJECT_DIR$/instance/settings.py" />
+        <option value="$PROJECT_DIR$/app/blueprints/billing/templates/billing/pricing.html" />
+        <option value="$PROJECT_DIR$/app/blueprints/page/templates/page/index.html" />
       </list>
     </option>
   </component>
@@ -281,56 +279,6 @@
             <path>
               <item name="parser" type="b2602c69:ProjectViewProjectNode" />
               <item name="parser" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="parser" type="b2602c69:ProjectViewProjectNode" />
-              <item name="parser" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="parser" type="b2602c69:ProjectViewProjectNode" />
-              <item name="parser" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="blueprints" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="parser" type="b2602c69:ProjectViewProjectNode" />
-              <item name="parser" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="blueprints" type="462c0819:PsiDirectoryNode" />
-              <item name="billing" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="parser" type="b2602c69:ProjectViewProjectNode" />
-              <item name="parser" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="blueprints" type="462c0819:PsiDirectoryNode" />
-              <item name="billing" type="462c0819:PsiDirectoryNode" />
-              <item name="gateways" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="parser" type="b2602c69:ProjectViewProjectNode" />
-              <item name="parser" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="blueprints" type="462c0819:PsiDirectoryNode" />
-              <item name="user" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="parser" type="b2602c69:ProjectViewProjectNode" />
-              <item name="parser" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="blueprints" type="462c0819:PsiDirectoryNode" />
-              <item name="user" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="parser" type="b2602c69:ProjectViewProjectNode" />
-              <item name="parser" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="blueprints" type="462c0819:PsiDirectoryNode" />
-              <item name="user" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="user" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="parser" type="b2602c69:ProjectViewProjectNode" />
@@ -444,8 +392,8 @@
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.329235" />
       <window_info anchor="bottom" id="Python Console" order="7" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.3289183" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" sideWeight="0.49513888" visible="true" weight="0.45998073" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1826411" />
+      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.49513888" weight="0.45998073" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1826411" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.34136933" />
@@ -460,6 +408,29 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
     </layout>
+    <layout-to-restore>
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.329235" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1826411" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Database Changes" order="12" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3289183" />
+      <window_info anchor="bottom" id="Python Console" order="9" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.34136933" />
+      <window_info anchor="right" id="Database" order="3" />
+      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49513888" visible="true" weight="0.45998073" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5048611" side_tool="true" weight="0.22005208" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" id="SciView" order="4" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39955848" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -526,9 +497,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/blueprints/billing/templates/billing/billing_details.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/blueprints/billing/models/subscription.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2551">
@@ -543,13 +511,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="4" column="12" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/blueprints/billing/templates/billing/pricing.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -617,13 +578,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Parsavvy_CLI.egg-info/dependency_links.txt">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="70" column="49" selection-start-line="70" selection-start-column="49" selection-end-line="70" selection-end-column="49" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/static/saas/css/linearicons.css">
       <provider selected="true" editor-type-id="text-editor">
@@ -701,20 +655,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/instance/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="27" selection-start-line="1" selection-start-column="27" selection-end-line="1" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.env">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/blueprints/contact/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
@@ -738,16 +678,6 @@
           <caret line="125" column="70" lean-forward="true" selection-start-line="125" selection-start-column="70" selection-end-line="126" selection-end-column="89" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/blueprints/page/templates/page/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="326">
-          <caret line="245" column="45" lean-forward="true" selection-start-line="245" selection-start-column="45" selection-end-line="245" selection-end-column="45" />
-          <folding>
-            <element signature="n#style#0;n#a#0;n#div#0;n#div#1;n#div#0;n#section#3;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -808,15 +738,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/blueprints/billing/gateways/stripecom.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1734">
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/blueprints/billing/views/billing.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="193">
@@ -866,8 +787,61 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/blueprints/user/templates/user/settings.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="457">
+        <state relative-caret-position="419">
           <caret line="72" column="18" selection-start-line="72" selection-start-column="18" selection-end-line="72" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/blueprints/billing/templates/billing/billing_details.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.env">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-626">
+          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/blueprints/billing/gateways/stripecom.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="183">
+          <caret line="250" column="39" lean-forward="true" selection-start-line="250" selection-start-column="39" selection-end-line="250" selection-end-column="39" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/instance/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="58" selection-start-line="8" selection-start-column="58" selection-end-line="8" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/blueprints/billing/templates/billing/pricing.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="56" column="53" lean-forward="true" selection-start-line="56" selection-start-column="53" selection-end-line="56" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="673">
+          <caret line="120" column="21" selection-start-line="120" selection-start-column="21" selection-end-line="120" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/blueprints/page/templates/page/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="603">
+          <caret line="256" column="38" selection-start-line="256" selection-start-column="38" selection-end-line="256" selection-end-column="38" />
+          <folding>
+            <element signature="n#style#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#1;n#div#0;n#section#3;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#0;n#div#1;n#div#1;n#div#0;n#section#3;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

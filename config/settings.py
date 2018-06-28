@@ -107,7 +107,7 @@ STRIPE_PLANS = {
     '2': {
         'id': 'professional',
         'name': 'Professional',
-        'amount': 14900,
+        'amount': 15000,
         'currency': 'usd',
         'interval': 'month',
         'interval_count': 1,
@@ -118,7 +118,7 @@ STRIPE_PLANS = {
     '3': {
         'id': 'enterprise',
         'name': 'Enterprise',
-        'amount': 24900,
+        'amount': 25000,
         'currency': 'usd',
         'interval': 'month',
         'interval_count': 1,
