@@ -24,8 +24,8 @@ def incoming():
         user = Mailbox.query.with_entities(Mailbox.user_email).filter(Mailbox.mailbox_id == mailbox_id).first()
 
         if user:
-            count = User.query.with_entities(User.email_count).filter(User.email == user).scalar()
-            limit = User.query.with_entities(User.email_limit).filter(User.email == user).scalar()
+            count = User.query.with_entities(User.email_count).filter(User.email == user[0]).scalar()
+            limit = User.query.with_entities(User.email_limit).filter(User.email == user[0]).scalar()
 
             if count is not None and limit is not None:
                 if count < limit:
@@ -69,7 +69,9 @@ def incoming():
 
                         # Update the user's email count
                         user.email_count += 1
-                        user.save()#
+                        user.save()
+
+                        return json.dumps({'success': True}), 200, {'ContentType': 'application/json'}
 
     return json.dumps({'success': False}), 500, {'ContentType': 'application/json'}
 

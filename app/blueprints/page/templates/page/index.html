@@ -70,12 +70,12 @@
 
 
 			<!-- start banner Area -->
-			<section class="banner-area relative" id="home" style="margin-bottom:50px;">
+			<section class="banner-area relative" id="home">
 				<div class="overlay overlay-bg"></div>	
 				<div class="container">
 					<div class="row fullscreen d-flex align-items-center justify-content-center">
 						<div class="banner-content col-lg-12">
-							<h1 class="text-white" style="font-family:'Gotham', sans-serif !important; font-weight:500">
+							<h1 class="text-white" style="text-align:center; font-family:'Gotham', sans-serif !important; font-weight:500">
 								Extract important data from emails.<br />
                                 Automate your business.<br />
 							</h1><br />
@@ -93,7 +93,8 @@
 			<section class="feature-area pb-100" id="info">
 				<div class="container">
 					<div class="row mockup-container">
-						<img class="mx-auto d-block img-fluid" src="../../../../static/saas/img/laptop.png" alt="">
+						<img class="mx-auto d-block img-fluid" src="../../../../static/saas/img/laptop.png"
+                             style="display:block;max-width:100%;max-height:90%;object-fit:contain;" alt="">
 					</div>
 					<div class="row d-flex justify-content-center">
 						<div class="menu-content pt-100 pb-60 col-lg-10">
@@ -108,42 +109,7 @@
                                 </h4>
 							</div>
 						</div>
-					</div>						
-					<!--<div class="row">
-						<div class="col-lg-4">
-							<div class="single-feature">
-								<span class="lnr lnr-inbox"></span>
-								<h4>
-									Multiple inboxes
-								</h4>
-								<p>
-									Need multiple inboxes for your emails? We've got you covered. You can get up to 100 inboxes to keep your data organized.
-                                </p>
-							</div>
-						</div>
-						<div class="col-lg-4">
-							<div class="single-feature">
-								<span class="lnr lnr-list"></span>
-								<h4>
-									Parse by your rules
-								</h4>
-								<p>
-									Set up your own parsing rules to extract the data that best fits your needs. Extract, remove or replace the content that you choose.
-                                </p>
-							</div>
-						</div>
-						<div class="col-lg-4">
-							<div class="single-feature">
-								<span class="lnr lnr-exit-up"></span>
-								<h4>
-									Export your data
-								</h4>
-								<p>
-                                    After you've parsed your emails to your needs, you can export your data to a CSV that will be sent directly to your email.
-                                </p>
-							</div>
-						</div>												
-					</div>-->
+					</div>
 				</div>	
 			</section>
 			<!-- End feature Area -->
@@ -217,12 +183,11 @@
 						<div class="menu-content pb-60 col-lg-10">
 							<div class="title text-center">
 								<h1 class="mb-10" style="font-family:'Gotham', sans-serif !important; font-weight:500">A simple and clean interface.</h1>
-
 							</div>
 						</div>
 					</div>						
 					<div class="row align-items-center">
-						<div class="col-lg-6 about-left">
+						<div class="col-lg-6 about-left" style="margin-bottom:20px;">
 							<!--<h6>Brand new app to blow your mind</h6>-->
 							<h1 style="font-family:'Gotham', sans-serif !important; font-weight:500">
 								We're here to make <br>
@@ -238,25 +203,13 @@
 							<a class="primary-btn" href="{{ url_for('user.signup') }}" style="font-family:'Gotham', sans-serif !important; font-weight:200">Get Started Now</a>
 						</div>
 						<div class="col-lg-6 about-right">
-							<div class="active-about-carusel">
-								<div class="single-carusel item" style="min-height: 40px; margin-bottom:0px;
-                                                                  min-width: 250px;
-                                                                  border:2px solid #e9e9e9;
-                                                                  box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.7);
-                                                                  border-radius: 4px;
-                                                                  background-color:#fff;">
-									<img class="img-fluid" src="../../../../static/images/ui3.png" alt="">
-								</div>
-								<div class="single-carusel item" style="min-height: 40px; margin-bottom:0px;
-                                                                  min-width: 250px;
-                                                                  border:2px solid #e9e9e9;
-                                                                  box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.7);
-                                                                  border-radius: 4px;
-                                                                  background-color:#fff;">
-									<img class="img-fluid" src="../../../../static/images/ui4.png" alt="">
-								</div>
-							</div>
-						</div>
+                            <img class="img-fluid" src="../../../../static/images/ui3.png" alt=""
+                                 style="transform:scale(1.25);margin-left:70px;margin-top:40px;
+                                        display:block;
+                                        max-width:80%;border-color: #e9e9e9;
+                                        box-shadow: 0 8px 8px 0 rgba(0, 0, 0, .7);
+                                        border-radius: 2px;" />
+                        </div>
 					</div>
 				</div>	
 			</section>
