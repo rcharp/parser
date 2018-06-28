@@ -27,7 +27,7 @@ def incoming():
             count = User.query.with_entities(User.email_count).filter(User.email == user).scalar()
             limit = User.query.with_entities(User.email_limit).filter(User.email == user).scalar()
 
-            if count and limit:
+            if count is not None and limit is not None:
                 if count < limit:
 
                     # Get headers.
@@ -69,9 +69,9 @@ def incoming():
 
                         # Update the user's email count
                         user.email_count += 1
-                        user.save()
+                        user.save()#
 
-        return json.dumps({'success': True}), 200, {'ContentType': 'application/json'}
+    return json.dumps({'success': False}), 500, {'ContentType': 'application/json'}
 
 
 def clean_subject(subject):

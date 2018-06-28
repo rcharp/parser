@@ -42,16 +42,6 @@
         <h3>Your Inboxes</h3>
         <h4 class="text-muted margin-bottom">{{ mailbox_count }} of {{ mailbox_limit }} mailboxes used</h4>
         <div class="list-group">
-            <div class="list-group-item">
-                {% if email_count == 1 %}
-                    You have used {{ email_count }} email of your <span style="color:red">{{ email_limit }}</span> email limit.
-                {% else %}
-                    You have used {{ email_count }} emails of your <span style="color:red">{{ email_limit }}</span> email limit.
-                    {% if email_count == email_limit %}
-                        Please <a href="{{ url_for('billing.update') }}">upgrade</a> to get more.
-                    {% endif %}
-                {% endif %}
-            </div>
             <a href="{{ url_for('user.get_inbox') }}" class="list-group-item">
               Create an inbox
             </a>
@@ -71,6 +61,16 @@
                 </div>
             </form>
             {% endif %}
+            <div class="list-group-item">
+                {% if email_count == 1 %}
+                    You have used {{ email_count }} email of your <span style="color:red">{{ email_limit }}</span> email limit for the month.
+                {% else %}
+                    You have used {{ email_count }} emails of your <span style="color:red">{{ email_limit }}</span> email limit for the month.
+                    {% if email_count == email_limit %}
+                        Please <a href="{{ url_for('billing.update') }}">upgrade</a> to get more.
+                    {% endif %}
+                {% endif %}
+            </div>
         </div>
     </div>
     <div class="col-md-5 col-md-push-1 col-md-offset-1">
