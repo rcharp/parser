@@ -113,7 +113,9 @@ def update():
                 # Set the user's current mailbox to the oldest mailbox
                 from app.blueprints.parse.models.mailbox import Mailbox
                 mailbox = Mailbox.query.filter(Mailbox.user_email == current_user.email).order_by(Mailbox.created_on.asc()).first()
-                current_user.mailbox_id = mailbox.mailbox_id
+
+                if mailbox:
+                    current_user.mailbox_id = mailbox.mailbox_id
 
                 # Set the mailbox and email limits accordingly
                 mailbox_limit = 1 if new_plan == 'hobby' else 10 if new_plan == 'startup'\
@@ -127,6 +129,7 @@ def update():
                 if plan['amount'] < active_plan['amount']:
                     current_user.email_count, current_user.mailbox_count = adjust_mailboxes(current_user.email,
                                                                                             current_user.mailbox_id,
+                                                                                            current_user.email_count,
                                                                                             mailbox_limit,
                                                                                             email_limit)
 

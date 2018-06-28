@@ -42,13 +42,13 @@ def deliver_password_reset_email(user_id, reset_token):
 
 # Mailboxes -------------------------------------------------------------------
 @celery.task()
-def adjust_mailboxes(email, mailbox_id, mailbox_limit, email_limit):
+def adjust_mailboxes(email, mailbox_id, email_count, mailbox_limit, email_limit):
     from app.blueprints.parse.models.mailbox import Mailbox
     from app.blueprints.parse.models.email import Email
 
-    # Get the total count of mailboxes and emails
+    # Get the current count of mailboxes and emails
     mailbox_count = Mailbox.query.filter(Mailbox.user_email == email).count()
-    email_count = Email.query.filter(Email.user_email == email).count()
+    # email_count = Email.query.filter(Email.user_email == email).count()
 
     # Get the counts of how many emails and mailboxes will be deleted
     email_delete_count = email_count - email_limit if email_count > email_limit else 0
@@ -68,11 +68,21 @@ def adjust_mailboxes(email, mailbox_id, mailbox_limit, email_limit):
 
     # Delete the extra mailboxes
     mailboxes_deleted = Mailbox.bulk_delete([m[0] for m in mailboxes_to_delete])
-    print(mailbox_delete_count)#
-    print(mailboxes_to_delete)#
+
+    # If emails or mailboxes are at or past the limit,
+    # then cap out the remaining emails and mailboxes
+    if email_count >= email_limit:
+        emails_remaining = email_limit
+    else:
+        emails_remaining = email_count - emails_deleted
+
+    if mailbox_count >= mailbox_limit:
+        mailboxes_remaining = mailbox_limit
+    else:
+        mailboxes_remaining = mailbox_count - mailboxes_deleted
 
     # Return the number of emails and mailboxes remaining
-    return email_count - emails_deleted, mailbox_count - mailboxes_deleted
+    return emails_remaining, mailboxes_remaining
 
 
 @celery.task()

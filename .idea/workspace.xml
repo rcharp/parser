@@ -2,21 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f1637133-ccae-40ab-aec7-a4a76f8f54a9" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/blueprints/billing/views/billing.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/billing/views/billing.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/blueprints/contact/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/contact/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/blueprints/page/templates/page/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/page/templates/page/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/blueprints/parse/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/parse/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/blueprints/user/tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/user/tasks.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/blueprints/user/templates/emails.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/user/templates/emails.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/blueprints/user/templates/user/inbox.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/user/templates/user/inbox.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/blueprints/user/templates/user/parse.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/user/templates/user/parse.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/blueprints/user/templates/user/settings.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/user/templates/user/settings.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/blueprints/user/templates/user/view.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/user/templates/user/view.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/blueprints/user/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/user/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/images/ui.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/images/ui.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/images/ui2.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/images/ui2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/tests/contact/test_tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/tests/contact/test_tasks.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -33,8 +20,8 @@
       <file leaf-file-name="tasks.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/blueprints/user/tasks.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="260">
-              <caret line="84" column="30" lean-forward="true" selection-start-line="84" selection-start-column="4" selection-end-line="84" selection-end-column="108" />
+            <state relative-caret-position="68">
+              <caret line="44" column="40" selection-start-line="44" selection-start-column="40" selection-end-line="44" selection-end-column="40" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -42,10 +29,43 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="billing.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/blueprints/billing/views/billing.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="193">
+              <caret line="120" column="64" selection-start-line="120" selection-start-column="64" selection-end-line="120" selection-end-column="64" />
+              <folding>
+                <element signature="e#0#111#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="tasks.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/blueprints/billing/tasks.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="225">
+              <caret line="15" column="25" lean-forward="true" selection-start-line="15" selection-start-column="25" selection-end-line="15" selection-end-column="25" />
+              <folding>
+                <element signature="e#0#37#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="credit_card.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/blueprints/billing/models/credit_card.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="373">
+              <caret line="44" column="8" selection-start-line="44" selection-start-column="8" selection-end-line="44" selection-end-column="8" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/blueprints/user/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="303">
+            <state relative-caret-position="1493">
               <caret line="513" column="41" selection-start-line="513" selection-start-column="41" selection-end-line="513" selection-end-column="41" />
               <folding>
                 <element signature="e#0#129#0" expanded="true" />
@@ -83,20 +103,8 @@
       <file leaf-file-name="settings.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/blueprints/user/templates/user/settings.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="51" column="20" selection-start-line="51" selection-start-column="20" selection-end-line="51" selection-end-column="20" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="billing.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/blueprints/billing/views/billing.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1469">
-              <caret line="177" column="24" selection-start-line="177" selection-start-column="24" selection-end-line="177" selection-end-column="24" />
-              <folding>
-                <element signature="e#0#111#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="242">
+              <caret line="69" column="29" lean-forward="true" selection-start-line="61" selection-start-column="20" selection-end-line="69" selection-end-column="29" />
             </state>
           </provider>
         </entry>
@@ -109,15 +117,6 @@
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="inbox.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/blueprints/user/templates/user/inbox.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="162">
-              <caret line="374" column="72" selection-start-line="374" selection-start-column="72" selection-end-line="374" selection-end-column="72" />
             </state>
           </provider>
         </entry>
@@ -228,8 +227,6 @@
         <option value="$PROJECT_DIR$/app/blueprints/parse/parse.py" />
         <option value="$PROJECT_DIR$/app/blueprints/contact/views.py" />
         <option value="$PROJECT_DIR$/app/tests/contact/test_tasks.py" />
-        <option value="$PROJECT_DIR$/app/blueprints/user/tasks.py" />
-        <option value="$PROJECT_DIR$/app/blueprints/billing/views/billing.py" />
         <option value="$PROJECT_DIR$/instance/settings.py" />
         <option value="$PROJECT_DIR$/.env" />
         <option value="$PROJECT_DIR$/app/blueprints/user/templates/emails.py" />
@@ -240,6 +237,8 @@
         <option value="$PROJECT_DIR$/app/blueprints/user/templates/user/parse.html" />
         <option value="$PROJECT_DIR$/app/blueprints/parse/views.py" />
         <option value="$PROJECT_DIR$/app/blueprints/user/views.py" />
+        <option value="$PROJECT_DIR$/app/blueprints/user/tasks.py" />
+        <option value="$PROJECT_DIR$/app/blueprints/billing/views/billing.py" />
       </list>
     </option>
   </component>
@@ -271,7 +270,8 @@
     </packageJsonPaths>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="y" value="23" />
+    <option name="x" value="67" />
+    <option name="y" value="61" />
     <option name="width" value="1280" />
     <option name="height" value="777" />
   </component>
@@ -308,6 +308,14 @@
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="blueprints" type="462c0819:PsiDirectoryNode" />
               <item name="billing" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="parser" type="b2602c69:ProjectViewProjectNode" />
+              <item name="parser" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="blueprints" type="462c0819:PsiDirectoryNode" />
+              <item name="billing" type="462c0819:PsiDirectoryNode" />
+              <item name="gateways" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="parser" type="b2602c69:ProjectViewProjectNode" />
@@ -445,8 +453,8 @@
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.329235" />
       <window_info anchor="bottom" id="Python Console" order="7" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.3289183" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" sideWeight="0.49513888" visible="true" weight="0.45998073" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1826411" />
+      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.49513888" visible="true" weight="0.45998073" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1826411" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.34136933" />
@@ -484,19 +492,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/blueprints/user/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="355">
-          <caret line="57" column="66" selection-start-line="57" selection-start-column="66" selection-end-line="57" selection-end-column="66" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/__init__.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/blueprints/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -715,16 +710,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/blueprints/billing/tasks.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="33" selection-start-line="33" selection-end-line="33" />
-          <folding>
-            <element signature="e#0#37#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/instance/settings.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
@@ -800,26 +785,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/blueprints/billing/views/billing.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1469">
-          <caret line="177" column="24" selection-start-line="177" selection-start-column="24" selection-end-line="177" selection-end-column="24" />
-          <folding>
-            <element signature="e#0#111#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/blueprints/user/tasks.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="84" column="30" lean-forward="true" selection-start-line="84" selection-start-column="4" selection-end-line="84" selection-end-column="108" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/blueprints/user/templates/user/view.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="335">
@@ -842,13 +807,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/blueprints/user/templates/user/settings.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="51" column="20" selection-start-line="51" selection-start-column="20" selection-end-line="51" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/blueprints/parse/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-370">
@@ -859,13 +817,66 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/blueprints/user/templates/user/settings.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="69" column="29" lean-forward="true" selection-start-line="61" selection-start-column="20" selection-end-line="69" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/blueprints/user/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="303">
+        <state relative-caret-position="1493">
           <caret line="513" column="41" selection-start-line="513" selection-start-column="41" selection-end-line="513" selection-end-column="41" />
           <folding>
             <element signature="e#0#129#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/blueprints/user/tasks.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="44" column="40" selection-start-line="44" selection-start-column="40" selection-end-line="44" selection-end-column="40" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/blueprints/billing/gateways/stripecom.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1734">
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/blueprints/billing/views/billing.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="193">
+          <caret line="120" column="64" selection-start-line="120" selection-start-column="64" selection-end-line="120" selection-end-column="64" />
+          <folding>
+            <element signature="e#0#111#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/blueprints/billing/tasks.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="25" lean-forward="true" selection-start-line="15" selection-start-column="25" selection-end-line="15" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/blueprints/billing/models/credit_card.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="373">
+          <caret line="44" column="8" selection-start-line="44" selection-start-column="8" selection-end-line="44" selection-end-column="8" />
         </state>
       </provider>
     </entry>
