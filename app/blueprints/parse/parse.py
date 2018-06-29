@@ -317,8 +317,8 @@ def remove_whitespace_parse(item):
 
 # Working
 def remove_links_parse(item):
-    result = re.sub(r"http\S+", "", item)
-    result = re.sub(r"https\S+", "", result)
+    result = re.sub(r"<http\S+", "", item)
+    result = re.sub(r"<https\S+", "", result)
     return result
 
 
