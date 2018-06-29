@@ -17,7 +17,7 @@
 		<title>Email Parser and Data Automation - Parsavvy</title>
 
 		<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Cabin|Gotham Thin|Gotham Thin|Open+Sans|Comfortaa" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Cabin|Gotham|Gotham|Open+Sans|Comfortaa" rel="stylesheet">
 			<!--
 			CSS
 			============================================= -->
@@ -30,16 +30,16 @@
 			<link rel="stylesheet" href="../../../../static/saas/css/owl.carousel.css">
 			<link rel="stylesheet" href="../../../../static/saas/css/main.css">
 		</head>
-		<body style="font-family: 'Gotham Thin', sans-serif !important;">
+		<body style="font-family: 'Gotham', sans-serif !important;">
 
-			  <header id="header" id="home" style="font-family: 'Gotham Thin', sans-serif !important;">
+			  <header id="header" id="home" style="font-family: 'Gotham', sans-serif !important;">
 			    <div class="container">
 			    	<div class="row align-items-center justify-content-between d-flex">
 				      <div id="logo">
 				        <a href="{{ url_for('page.home') }}"><img id=logo_image" src="../../../../static/images/logo1-white.png" alt="" title="" /></a>
 				      </div>
-				      <nav id="nav-menu-container" style="font-family: 'Gotham Thin', sans-serif !important;">
-				        <ul class="nav-menu" style="font-family: 'Gotham Thin', sans-serif !important;">
+				      <nav id="nav-menu-container" style="font-family: 'Gotham', sans-serif !important;">
+				        <ul class="nav-menu" style="font-family: 'Gotham', sans-serif !important;">
 				          {% if current_user.role == 'admin' %}
                             <li>
                               {% include 'admin/_menu.html' %}
@@ -47,20 +47,20 @@
                           {% endif %}
                           {% if current_user.is_authenticated %}
                               {% if current_user.role == 'member' %}
-                                  <li style="font-family: 'Gotham Thin', sans-serif;"><a href="{{ url_for('user.rules') }}">Rules</a></li>
-                                  <li style="font-family: 'Gotham Thin', sans-serif;"><a href="{{ url_for('user.inbox') }}">Inbox</a></li>
+                                  <li style="font-family: 'Gotham', sans-serif;"><a href="{{ url_for('user.rules') }}">Rules</a></li>
+                                  <li style="font-family: 'Gotham', sans-serif;"><a href="{{ url_for('user.inbox') }}">Inbox</a></li>
                               {% else %}
 
                               {% endif %}
-                                  <li style="font-family: 'Gotham Thin', sans-serif;"><a href="{{ url_for('user.settings') }}">Settings</a></li>
-                                  <li style="font-family: 'Gotham Thin', sans-serif;"><a href="{{ url_for('contact.index') }}">Contact Us</a></li>
-                                  <li style="font-family: 'Gotham Thin', sans-serif;"><a href="{{ url_for('user.logout') }}">Log out</a></li>
+                                  <li style="font-family: 'Gotham', sans-serif;"><a href="{{ url_for('user.settings') }}">Settings</a></li>
+                                  <li style="font-family: 'Gotham', sans-serif;"><a href="{{ url_for('contact.index') }}">Contact Us</a></li>
+                                  <li style="font-family: 'Gotham', sans-serif;"><a href="{{ url_for('user.logout') }}">Log out</a></li>
                           {% else %}
-                            <li style="font-family: 'Gotham Thin', sans-serif;"><a href="#feature">Features</a></li>
-                            <li style="font-family: 'Gotham Thin', sans-serif;"><a href="#pricing">Pricing</a></li>
-                            <li style="font-family: 'Gotham Thin', sans-serif;"><a href="{{ url_for('contact.index') }}">Contact Us</a></li>
-                            <li style="font-family: 'Gotham Thin', sans-serif;"><a href="{{ url_for('user.login') }}">Log in</a></li>
-                            <li style="font-family: 'Gotham Thin', sans-serif;"><a class="ticker-btn" href="{{ url_for('user.signup') }}">Sign up</a></li>
+                            <li style="font-family: 'Gotham', sans-serif;"><a href="#feature">Features</a></li>
+                            <li style="font-family: 'Gotham', sans-serif;"><a href="#pricing">Pricing</a></li>
+                            <li style="font-family: 'Gotham', sans-serif;"><a href="{{ url_for('contact.index') }}">Contact Us</a></li>
+                            <li style="font-family: 'Gotham', sans-serif;"><a href="{{ url_for('user.login') }}">Log in</a></li>
+                            <li style="font-family: 'Gotham', sans-serif;"><a class="ticker-btn" href="{{ url_for('user.signup') }}">Sign up</a></li>
                           {% endif %}
 				        </ul>
 				      </nav><!-- #nav-menu-container -->		    		
@@ -75,11 +75,11 @@
 				<div class="container">
 					<div class="row fullscreen d-flex align-items-center justify-content-center">
 						<div class="banner-content col-lg-12">
-							<h1 class="text-white" style="text-align:center; font-family:'Gotham Thin', sans-serif !important; font-weight:500">
+							<h1 class="text-white" style="text-align:center; font-family:'Gotham', sans-serif !important; font-weight:500">
 								Extract important data from emails.<br />
                                 Automate your business.<br />
 							</h1><br />
-							<h3 style="color:white; font-family:'Gotham Thin', sans-serif !important; font-weight:200;">
+							<h3 style="color:white; font-family:'Gotham', sans-serif !important; font-weight:200;">
                                 Forward your emails to us and we'll save you the hassle of getting important data from them.<br />
                                 You'll save countless hours on manual data extraction, which will save you money.
                             </h3>
@@ -99,8 +99,8 @@
 					<div class="row d-flex justify-content-center">
 						<div class="menu-content pt-100 pb-60 col-lg-10">
 							<div class="title text-center">
-								<h1 class="mb-10" style="font-family:'Gotham Thin', sans-serif !important; font-weight:500">Save precious time by automating data extraction.</h1>
-								<h4 style="font-family:'Gotham Thin', sans-serif !important; font-weight:200">We know that your time is extremely valuable.<br /><br />
+								<h1 class="mb-10" style="font-family:'Gotham', sans-serif !important; font-weight:500">Save precious time by automating data extraction.</h1>
+								<h4 style="font-family:'Gotham', sans-serif !important; font-weight:200">We know that your time is extremely valuable.<br /><br />
                                     Every day you get dozens or hundreds of emails (or more) and you don't have the time to go through each of them one-by-one to get the data you need.
                                     Let us do that for you.<br /><br />
                                     Parsavvy will take any email that you forward to us and extract important info from it, based on rules that you set. Just choose the section of the
@@ -122,10 +122,10 @@
 					<div class="row d-flex justify-content-center">
 						<div class="menu-content col-lg-10">
 							<div class="title text-center">
-								<h1 class="mb-10 text-white" style="font-family:'Gotham Thin', sans-serif !important; font-weight:500">
+								<h1 class="mb-10 text-white" style="font-family:'Gotham', sans-serif !important; font-weight:500">
                                     How does it work?
                                 </h1>
-								<h3 style="color:white; font-family:'Gotham Thin', sans-serif !important; font-weight:200;">
+								<h3 style="color:white; font-family:'Gotham', sans-serif !important; font-weight:200;">
                                     Save time and money with a simple, time-saving data extraction process.
                                 </h3><br /><br />
                                 <div class="row">
@@ -182,14 +182,14 @@
 					<div class="row d-flex justify-content-center">
 						<div class="menu-content pb-60 col-lg-10">
 							<div class="title text-center">
-								<h1 class="mb-10" style="font-family:'Gotham Thin', sans-serif !important; font-weight:500">A simple and clean interface.</h1>
+								<h1 class="mb-10" style="font-family:'Gotham', sans-serif !important; font-weight:500">A simple and clean interface.</h1>
 							</div>
 						</div>
 					</div>						
 					<div class="row align-items-center">
 						<div class="col-lg-6 about-left" style="margin-bottom:20px;">
 							<!--<h6>Brand new app to blow your mind</h6>-->
-							<h1 style="font-family:'Gotham Thin', sans-serif !important; font-weight:500">
+							<h1 style="font-family:'Gotham', sans-serif !important; font-weight:500">
 								We're here to make <br>
 								your life easier.
 							</h1>
@@ -198,9 +198,9 @@
 									We are here to listen from you deliver exellence
 								</span>
 							</p>-->
-							<h3 style="font-family:'Gotham Thin', sans-serif !important; font-weight:200">
+							<h3 style="font-family:'Gotham', sans-serif !important; font-weight:200">
                                 We've made our UI easy to navigate to you don't have to waste time getting up and running.</h3><br />
-							<a class="primary-btn" href="{{ url_for('user.signup') }}" style="font-family:'Gotham Thin', sans-serif !important; font-weight:200">Get Started Now</a>
+							<a class="primary-btn" href="{{ url_for('user.signup') }}" style="font-family:'Gotham', sans-serif !important; font-weight:200">Get Started Now</a>
 						</div>
 						<div class="col-lg-6 about-right">
                             <img class="img-fluid" src="../../../../static/images/ui3.png" alt=""
@@ -221,7 +221,7 @@
 					<div class="row d-flex justify-content-center">
 						<div class="menu-content pb-60 col-lg-10">
 							<div class="title text-center">
-								<h1 class="mb-10" style="font-family:'Gotham Thin', sans-serif !important; font-weight:500">What Parsavvy can do for you</h1>
+								<h1 class="mb-10" style="font-family:'Gotham', sans-serif !important; font-weight:500">What Parsavvy can do for you</h1>
 							</div>
 						</div>
 					</div>					
@@ -232,8 +232,8 @@
 									<img src="../../../../static/saas/img/clock.png" width="40px" />
 								</div>
 								<div class="desc">
-									<h2 style="font-family:'Gotham Thin', sans-serif !important; font-weight:200">Get started in minutes</h2>
-									<h5 style="font-family:'Gotham Thin', sans-serif !important; font-weight:200">We can have you up and running and extracting data in just a few minutes.
+									<h2 style="font-family:'Gotham', sans-serif !important; font-weight:200">Get started in minutes</h2>
+									<h5 style="font-family:'Gotham', sans-serif !important; font-weight:200">We can have you up and running and extracting data in just a few minutes.
                                         <br /><br />Our service is designed to take all of the hassle out of getting started so you can
                                         spend more time on the things that really matter to your business.
                                     </h5>
@@ -244,8 +244,8 @@
 									<img src="../../../../static/saas/img/list.png" width="40px" />
 								</div>
 								<div class="desc">
-									<h2 style="font-family:'Gotham Thin', sans-serif !important; font-weight:200">Create custom parsing rules</h2>
-									<h5 style="font-family:'Gotham Thin', sans-serif !important; font-weight:200">You're in control. Choose what parts of the email you want to get data from,
+									<h2 style="font-family:'Gotham', sans-serif !important; font-weight:200">Create custom parsing rules</h2>
+									<h5 style="font-family:'Gotham', sans-serif !important; font-weight:200">You're in control. Choose what parts of the email you want to get data from,
                                         what specific data you're looking for, and what you want to do with it. <br /><br />Only
                                         want billing info from a recurring email? We can get that for you. Want to remove
                                         or fine specific data in the email? We can do that for you too.
@@ -257,8 +257,8 @@
 									<img src="../../../../static/saas/img/excel.png" width="40px" />
 								</div>
 								<div class="desc">
-									<h2 style="font-family:'Gotham Thin', sans-serif !important; font-weight:200">Export Data</h2>
-									<h5 style="font-family:'Gotham Thin', sans-serif !important; font-weight:200">
+									<h2 style="font-family:'Gotham', sans-serif !important; font-weight:200">Export Data</h2>
+									<h5 style="font-family:'Gotham', sans-serif !important; font-weight:200">
                                         After you've gotten the data you need from your emails, we'll put it all in a CSV for
                                         you and email it to you. That way, you can bring your data wherever you need it.
                                     </h5>
@@ -271,8 +271,8 @@
 									<img src="../../../../static/saas/img/data.png" width="40px" />
 								</div>
 								<div class="desc">
-									<h2 style="font-family:'Gotham Thin', sans-serif !important; font-weight:200">Capture Important Data</h2>
-									<h5 style="font-family:'Gotham Thin', sans-serif !important; font-weight:200">Our parser grabs important content and data from emails that you
+									<h2 style="font-family:'Gotham', sans-serif !important; font-weight:200">Capture Important Data</h2>
+									<h5 style="font-family:'Gotham', sans-serif !important; font-weight:200">Our parser grabs important content and data from emails that you
                                         forward to us, based on your own custom parsing rules. <br /><br />Once you get the data you need, we'll send it to you in an easy-to-use
                                         CSV format.
                                     </h5>
@@ -283,8 +283,8 @@
 									<img src="../../../../static/saas/img/inbox.png" width="40px" />
 								</div>
 								<div class="desc">
-									<h2 style="font-family:'Gotham Thin', sans-serif !important; font-weight:200">Multiple Inboxes</h2>
-									<h5 style="font-family:'Gotham Thin', sans-serif !important; font-weight:200">Why stop at one inbox?<br /><br />Segment your business by having multiple inboxes.
+									<h2 style="font-family:'Gotham', sans-serif !important; font-weight:200">Multiple Inboxes</h2>
+									<h5 style="font-family:'Gotham', sans-serif !important; font-weight:200">Why stop at one inbox?<br /><br />Segment your business by having multiple inboxes.
                                         That way, you can keep specific emails separate and keep track of all of your emails.
                                     </h5>
 								</div>
@@ -294,8 +294,8 @@
 									<img src="../../../../static/saas/img/calendar.png" width="40px" />
 								</div>
 								<div class="desc">
-									<h2 style="font-family:'Gotham Thin', sans-serif !important; font-weight:200">Set it and forget it</h2>
-									<h5 style="font-family:'Gotham Thin', sans-serif !important; font-weight:200">Set your mailbox to automatically forward important emails to us and they'll be <br />
+									<h2 style="font-family:'Gotham', sans-serif !important; font-weight:200">Set it and forget it</h2>
+									<h5 style="font-family:'Gotham', sans-serif !important; font-weight:200">Set your mailbox to automatically forward important emails to us and they'll be <br />
                                         here waiting for you.
                                     </h5>
 								</div>
@@ -315,21 +315,21 @@
 					<div class="row d-flex justify-content-center">
 						<div class="menu-content pb-60 col-lg-8">
 							<div class="title text-center">
-								<h1 style="font-family:'Gotham Thin', sans-serif !important; font-weight:200;">Pricing plans for all sizes of business.</h1>
-                                <h3 style="font-family:'Gotham Thin', sans-serif !important; font-weight:200;">No credit card required.</h3>
-                                <h5 style="font-family:'Gotham Thin', sans-serif !important; font-weight:200;opacity: 0.7;">All plans include a 14-day free trial.</h5>
+								<h1 style="font-family:'Gotham', sans-serif !important; font-weight:200;">Pricing plans for all sizes of business.</h1>
+                                <h3 style="font-family:'Gotham', sans-serif !important; font-weight:200;">No credit card required.</h3>
+                                <h5 style="font-family:'Gotham', sans-serif !important; font-weight:200;opacity: 0.7;">All plans include a 14-day free trial.</h5>
 							</div>
 						</div>
 					</div>
                     {% import 'billing/macros/billing.html' as billing with context %}
 					<div class="row">
 						<div class="col-md-3">
-							<div class="single-price no-padding" style="font-family:'Gotham Thin', sans-serif !important; font-weight:200;padding-bottom:23px;">
+							<div class="single-price no-padding" style="font-family:'Gotham', sans-serif !important; font-weight:200;padding-bottom:23px;">
                                 <!--<div class="price-top">
 									<h4>Real basic</h4>
 								</div>-->
                                 {% call billing.plan(plans['0']) %}
-								<ul class="lists" style="font-family:'Gotham Thin', sans-serif !important; font-weight:200;">
+								<ul class="lists" style="font-family:'Gotham', sans-serif !important; font-weight:200;">
 									<li>Unlimited Parsing Rules</li>
                                     <li>400 emails per month</li>
                                     <li>1 inbox</li>
@@ -340,12 +340,12 @@
 							</div>
 						</div>
 						<div class="col-md-3">
-							<div class="single-price no-padding" style="font-family:'Gotham Thin', sans-serif !important; font-weight:200;padding-top:10px;padding-bottom:20px;">
+							<div class="single-price no-padding" style="font-family:'Gotham', sans-serif !important; font-weight:200;padding-top:10px;padding-bottom:20px;">
 								<!--<div class="price-top">
 									<h4>Real basic</h4>
 								</div>-->
                                 {% call billing.plan(plans['1']) %}
-								<ul class="lists" style="font-family:'Gotham Thin', sans-serif !important; font-weight:200;">
+								<ul class="lists" style="font-family:'Gotham', sans-serif !important; font-weight:200;">
 									<li>Unlimited Parsing Rules</li>
                                     <li>2,000 emails per month</li>
                                     <li>10 inboxes</li>
@@ -356,12 +356,12 @@
 							</div>
 						</div>
 						<div class="col-md-3">
-							<div class="single-price no-padding" style="font-family:'Gotham Thin', sans-serif !important; font-weight:200;padding-bottom:23px;">
+							<div class="single-price no-padding" style="font-family:'Gotham', sans-serif !important; font-weight:200;padding-bottom:23px;">
 								<!--<div class="price-top">
 									<h4>Real basic</h4>
 								</div>-->
                                 {% call billing.plan(plans['2']) %}
-								<ul class="lists" style="font-family:'Gotham Thin', sans-serif !important; font-weight:200;">
+								<ul class="lists" style="font-family:'Gotham', sans-serif !important; font-weight:200;">
 									<li>Unlimited Parsing Rules</li>
                                     <li>5,000 emails per month</li>
                                     <li>40 inboxes</li>
@@ -372,12 +372,12 @@
 							</div>
 						</div>
                         <div class="col-md-3">
-							<div class="single-price no-padding"  style="font-family:'Gotham Thin', sans-serif !important; font-weight:200;padding-bottom:23px;">
+							<div class="single-price no-padding"  style="font-family:'Gotham', sans-serif !important; font-weight:200;padding-bottom:23px;">
 								<!--<div class="price-top">
 									<h4>Real basic</h4>
 								</div>-->
                                 {% call billing.plan(plans['3']) %}
-								<ul class="lists" style="font-family:'Gotham Thin', sans-serif !important; font-weight:200;">
+								<ul class="lists" style="font-family:'Gotham', sans-serif !important; font-weight:200;">
 									<li>Unlimited Parsing Rules</li>
                                     <li>15,000 emails per month</li>
                                     <li>100 inboxes</li>
@@ -400,11 +400,11 @@
 						<div class="col-lg-5 col-md-6 col-sm-6">
 							<div class="single-footer-widget">
 								<div class="col-md-3 col-md-3" style="min-width:275px;text-align:right;padding-top:40px;">
-                                    <h4 style="font-weight:lighter;font-family: 'Gotham Thin', sans-serif;float:left;
+                                    <h4 style="font-weight:lighter;font-family: 'Gotham', sans-serif;float:left;
                                     margin-right:20px; vertical-align:middle;line-height:50%; color:white">Parsavvy &copy; {{ current_year() }}</h4><br /><br />
-                                    <h4 style="font-weight:lighter;font-family: 'Gotham Thin', sans-serif;float:left;margin-right:20px;
+                                    <h4 style="font-weight:lighter;font-family: 'Gotham', sans-serif;float:left;margin-right:20px;
                                     vertical-align:middle;line-height:50%;"><a href="{{ url_for('user.login') }}"style="color:white;">Log in</a></h4><br /><br />
-                                    <h4 style="font-weight:lighter;font-family: 'Gotham Thin', sans-serif;float:left;margin-right:20px;
+                                    <h4 style="font-weight:lighter;font-family: 'Gotham', sans-serif;float:left;margin-right:20px;
                                     vertical-align:middle;line-height:50%;"><a href="{{ url_for('user.signup') }}"style="color:white;">Sign up</a></h4><br /><br />
                                 </div><!-- End of column 1 -->
                                 <!-- Column 2 -->
@@ -413,11 +413,11 @@
 						<div class="col-lg-5  col-md-6 col-sm-6">
 							<div class="single-footer-widget">
 								<div class="col-md-3 col-md-3" style="min-width:275px;text-align:right;padding-top:40px;">
-                                    <h4 style="font-weight:lighter;font-family: 'Gotham Thin', sans-serif;float:left;margin-right:20px;
+                                    <h4 style="font-weight:lighter;font-family: 'Gotham', sans-serif;float:left;margin-right:20px;
                                     vertical-align:middle;line-height:50%;"><a href="#pricing"style="color:white;">Pricing</a></h4><br /><br />
-                                    <h4 style="font-weight:lighter;font-family: 'Gotham Thin', sans-serif;float:left;margin-right:20px;
+                                    <h4 style="font-weight:lighter;font-family: 'Gotham', sans-serif;float:left;margin-right:20px;
                                     vertical-align:middle;line-height:50%;"><a href="#feature" style="color:white;">Features</a></h4><br /><br />
-                                    <h4 style="font-weight:lighter;font-family: 'Gotham Thin', sans-serif;float:left;margin-right:20px;
+                                    <h4 style="font-weight:lighter;font-family: 'Gotham', sans-serif;float:left;margin-right:20px;
                                     vertical-align:middle;line-height:50%;"><a href="#info"style="color:white;">What is Parsavvy?</a></h4><br /><br />
                                 </div><!-- End of column 2 -->
 							</div>
@@ -426,11 +426,11 @@
 							<div class="single-footer-widget">
 								<!-- Column 3-->
                                 <div class="col-md-3 col-md-3" style="min-width:275px;text-align:right;padding-top:40px;">
-                                    <h4 style="font-weight:lighter;font-family: 'Gotham Thin', sans-serif;float:left;margin-right:20px;
+                                    <h4 style="font-weight:lighter;font-family: 'Gotham', sans-serif;float:left;margin-right:20px;
                                     vertical-align:middle;line-height:50%;"><a href="{{ url_for('contact.index') }}"style="color:white;">Contact</a></h4><br /><br />
-                                    <h4 style="font-weight:lighter;font-family: 'Gotham Thin', sans-serif;float:left;margin-right:20px;
+                                    <h4 style="font-weight:lighter;font-family: 'Gotham', sans-serif;float:left;margin-right:20px;
                                     vertical-align:middle;line-height:50%;"><a href="{{ url_for('page.privacy') }}"style="color:white;">Privacy Policy</a></h4><br /><br />
-                                    <h4 style="font-weight:lighter;font-family: 'Gotham Thin', sans-serif;float:left;margin-right:20px;
+                                    <h4 style="font-weight:lighter;font-family: 'Gotham', sans-serif;float:left;margin-right:20px;
                                     vertical-align:middle;line-height:50%;"><a href="{{ url_for('page.terms') }}"style="color:white;">Terms of Service</a></h4><br /><br />
                                 </div><!-- End of column 3 -->
 							</div>

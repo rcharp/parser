@@ -1538,7 +1538,7 @@ Checkbox
     outline: none; }
   .checkbox input[type="checkbox"]:checked + label::after {
     content: "\f00c";
-    font-family: 'FontAwesome'; }
+    font-family: 'Gotham', sans-serif; }
   .checkbox input[type="checkbox"]:disabled + label::before {
     background-color: #f2f4f8;
     cursor: not-allowed; }

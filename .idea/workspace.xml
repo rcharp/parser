@@ -2,7 +2,35 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f1637133-ccae-40ab-aec7-a4a76f8f54a9" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/app/blueprints/page/templates/BS4/assets/scss/core/plugins/_datatables.net.scss" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/page/templates/BS4/assets/scss/core/plugins/_datatables.net.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/blueprints/page/templates/lite/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/page/templates/lite/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/blueprints/page/templates/lite/scss/app.scss" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/page/templates/lite/scss/app.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/blueprints/page/templates/lite/scss/icons/font-awesome/css/font-awesome.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/page/templates/lite/scss/icons/font-awesome/css/font-awesome.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/blueprints/page/templates/lite/scss/icons/font-awesome/less/path.less" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/page/templates/lite/scss/icons/font-awesome/less/path.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/blueprints/page/templates/lite/scss/icons/font-awesome/old/css/font-awesome.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/page/templates/lite/scss/icons/font-awesome/old/css/font-awesome.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/blueprints/page/templates/lite/scss/icons/font-awesome/old/less/path.less" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/page/templates/lite/scss/icons/font-awesome/old/less/path.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/blueprints/page/templates/lite/scss/icons/font-awesome/old/scss/_path.scss" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/page/templates/lite/scss/icons/font-awesome/old/scss/_path.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/blueprints/page/templates/lite/scss/icons/font-awesome/scss/_path.scss" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/page/templates/lite/scss/icons/font-awesome/scss/_path.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/blueprints/page/templates/page/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/page/templates/page/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/blueprints/page/templates/page/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/page/templates/page/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/blueprints/page/templates/page/scss/app.scss" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/page/templates/page/scss/app.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/blueprints/page/templates/page/scss/icons/font-awesome/css/font-awesome.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/page/templates/page/scss/icons/font-awesome/css/font-awesome.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/blueprints/page/templates/page/scss/icons/font-awesome/less/path.less" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/page/templates/page/scss/icons/font-awesome/less/path.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/blueprints/page/templates/page/scss/icons/font-awesome/old/css/font-awesome.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/page/templates/page/scss/icons/font-awesome/old/css/font-awesome.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/blueprints/page/templates/page/scss/icons/font-awesome/old/less/path.less" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/page/templates/page/scss/icons/font-awesome/old/less/path.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/blueprints/page/templates/page/scss/icons/font-awesome/old/scss/_path.scss" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/page/templates/page/scss/icons/font-awesome/old/scss/_path.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/blueprints/page/templates/page/scss/icons/font-awesome/scss/_path.scss" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/page/templates/page/scss/icons/font-awesome/scss/_path.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/styles/theme/light-bootstrap-dashboard.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/styles/theme/light-bootstrap-dashboard.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/styles/theme/sass/lbd/_checkbox-radio-switch.scss" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/styles/theme/sass/lbd/_checkbox-radio-switch.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/material/lite/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/material/lite/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/material/lite/scss/app.scss" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/material/lite/scss/app.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/material/lite/scss/icons/font-awesome/css/font-awesome.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/material/lite/scss/icons/font-awesome/css/font-awesome.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/material/lite/scss/icons/font-awesome/less/path.less" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/material/lite/scss/icons/font-awesome/less/path.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/material/lite/scss/icons/font-awesome/old/css/font-awesome.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/material/lite/scss/icons/font-awesome/old/css/font-awesome.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/material/lite/scss/icons/font-awesome/old/less/path.less" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/material/lite/scss/icons/font-awesome/old/less/path.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/material/lite/scss/icons/font-awesome/old/scss/_path.scss" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/material/lite/scss/icons/font-awesome/old/scss/_path.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/material/lite/scss/icons/font-awesome/scss/_path.scss" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/material/lite/scss/icons/font-awesome/scss/_path.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/mdl/BS4/assets/scss/core/plugins/_datatables.net.scss" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/mdl/BS4/assets/scss/core/plugins/_datatables.net.scss" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -31,8 +59,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/blueprints/page/templates/page/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="114">
-              <caret line="412" column="65" lean-forward="true" selection-start-line="412" selection-start-column="65" selection-end-line="412" selection-end-column="65" />
+            <state relative-caret-position="202">
+              <caret line="406" column="88" selection-start-line="406" selection-start-column="88" selection-end-line="406" selection-end-column="88" />
               <folding>
                 <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#header#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -87,7 +115,6 @@
                 <element signature="n#style#0;n#ul#0;n#div#0;n#div#3;n#div#1;n#div#0;n#section#5;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#h4#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#footer#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#h4#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#footer#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#h4#2;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#footer#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#h4#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#footer#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#h4#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#footer#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#h4#2;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#footer#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -102,8 +129,8 @@
       <file leaf-file-name="main.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/static/saas/css/main.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="145">
-              <caret column="23480" selection-start-column="23480" selection-end-column="23480" />
+            <state relative-caret-position="172">
+              <caret column="27873" selection-start-column="27873" selection-end-column="27873" />
             </state>
           </provider>
         </entry>
@@ -152,10 +179,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>#000</find>
-      <find>SimpleMetrics</find>
-      <find>metrics</find>
-      <find>metric</find>
       <find>automating</find>
       <find>logo-white</find>
       <find>logo-white-transparent</find>
@@ -180,14 +203,20 @@
       <find>you can sa</find>
       <find>header-scroll</find>
       <find>sans-serif</find>
-      <find>uppercase</find>
       <find>Gotham</find>
+      <find>fontawesome</find>
+      <find>font-family: 'FontAwesome';</find>
+      <find>font-family: 'FontAwesome'</find>
+      <find>uppercase</find>
+      <find>Gotham Thin</find>
     </findStrings>
     <replaceStrings>
       <replace />
       <replace>parsavvy</replace>
       <replace>Parsavvy</replace>
       <replace>logo1-light</replace>
+      <replace>font-family: 'Gotham' sans-serif;</replace>
+      <replace>font-family: 'Gotham', sans-serif</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -278,10 +307,9 @@
     </packageJsonPaths>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="67" />
     <option name="y" value="23" />
-    <option name="width" value="1280" />
-    <option name="height" value="777" />
+    <option name="width" value="1920" />
+    <option name="height" value="1134" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="Add" />
@@ -448,7 +476,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="67" y="23" width="1280" height="777" extended-state="0" />
+    <frame x="0" y="23" width="1920" height="1134" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -457,11 +485,11 @@
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.329235" />
       <window_info anchor="bottom" id="Python Console" order="7" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.3289183" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" sideWeight="0.49513888" visible="true" weight="0.27794117" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21082391" />
+      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.49513888" weight="0.1822565" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13897763" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.34136933" />
+      <window_info active="true" anchor="bottom" id="Find" order="1" visible="true" weight="0.34136933" />
       <window_info anchor="right" id="SciView" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
@@ -894,15 +922,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/static/saas/css/main.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="145">
-          <caret column="23480" selection-start-column="23480" selection-end-column="23480" />
+        <state relative-caret-position="172">
+          <caret column="27873" selection-start-column="27873" selection-end-column="27873" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/blueprints/page/templates/page/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="412" column="65" lean-forward="true" selection-start-line="412" selection-start-column="65" selection-end-line="412" selection-end-column="65" />
+        <state relative-caret-position="202">
+          <caret line="406" column="88" selection-start-line="406" selection-start-column="88" selection-end-line="406" selection-end-column="88" />
           <folding>
             <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#header#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -957,7 +985,6 @@
             <element signature="n#style#0;n#ul#0;n#div#0;n#div#3;n#div#1;n#div#0;n#section#5;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#h4#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#footer#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#h4#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#footer#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#h4#2;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#footer#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#h4#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#footer#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#h4#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#footer#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#h4#2;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#footer#0;n#body#0;n#html#0;n#!!top" expanded="true" />

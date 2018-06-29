@@ -1299,7 +1299,7 @@ fieldset[disabled] .btn-neutral.active {
 
 .checkbox label::before,
 .checkbox label::after {
-    font-family: 'FontAwesome';
+    font-family: 'Gotham', sans-serif;
     content: "\f096";
     display: inline-block;
     position: absolute;
@@ -1332,7 +1332,7 @@ fieldset[disabled] .btn-neutral.active {
 }
 
 .checkbox input[type="checkbox"]:checked + label::after {
-    font-family: 'FontAwesome';
+    font-family: 'Gotham', sans-serif;
     content: "\f046";
 }
 
@@ -1415,7 +1415,7 @@ fieldset[disabled] .btn-neutral.active {
 
 .radio label::before,
 .radio label::after {
-    font-family: 'FontAwesome';
+    font-family: 'Gotham', sans-serif;
     content: "\f10c";
     font-size: 20px;
     height: 20px;
@@ -1433,7 +1433,7 @@ fieldset[disabled] .btn-neutral.active {
 }
 
 .radio input[type="radio"]:checked + label::after {
-    font-family: 'FontAwesome';
+    font-family: 'Gotham', sans-serif;
     content: "\f192";
     color: #DDDDDD;
 }
