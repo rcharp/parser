@@ -217,7 +217,7 @@ def welcome():
         flash('Your username has been set.', 'success')
         return redirect(url_for('user.settings'))
 
-    return render_template('user/welcome.html', form=form)
+    return render_template('user/welcome.html', form=form, payment=current_user.payment_id)
 
 
 @user.route('/settings/update_credentials', methods=['GET', 'POST'])
