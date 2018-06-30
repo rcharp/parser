@@ -111,7 +111,7 @@
             var export_link = "{{ url_for('user.export') }}";
             var refresh_button = '<a href="' + refresh_link + '" class="refresh" style="background-color: #ffffff;border: none;float:none;color: #007fd8;padding: 15px 30px;' +
                 'text-align: center;text-decoration: none;vertical-align:middle;line-height:100%;display: inline-block;font-size: 14px;margin: auto;margin-left:15px;' +
-                'height:45px;cursor: pointer;">Refresh <img src="../../../../static/images/refresh.png" width="20px"></a>';
+                'margin-bottom:10px;height:45px;cursor: pointer;">Refresh <img src="../../../../static/images/refresh.png" width="20px"></a>';
             var export_button = '<a href="' + export_link + '" class="export" style="background-color: #ffffff;border: none;float:none;color: #007fd8;padding: 15px 30px;' +
                 'text-align: center;text-decoration: none;vertical-align:middle;line-height:100%;display: inline-block;font-size: 14px;margin: auto;margin-left:15px;' +
                 'height:45px;cursor: pointer;">Export to CSV <img src="../../../../static/images/download.png" width="20px"></a>';
@@ -228,6 +228,7 @@
                                                                                 font-size: 14px;
                                                                                 margin: auto;
                                                                                 margin-left:15px;
+                                                                                margin-bottom:10px;
                                                                                 height:45px;
                                                                                 cursor: pointer;">
                                        Refresh &nbsp;<img src="../../../../static/images/refresh.png" width="20px">
@@ -252,7 +253,7 @@
                                 </h4>
                             </div>
                             <form action="{{ url_for('user.delete_emails') }}" method="POST" id="delete_email" name="delete_email">
-                                <div class="card-block" id="emails_table" style="flex: 1 1 auto;padding: 5.25rem;outline: none;overflow-x:auto">
+                                <div class="card-block" id="emails_table" style="flex: 1 1 auto;padding: 5.25rem;outline: none;overflow-x:scroll">
                                     <table class="table">
                                         <thead>
                                             <tr style="font-weight:bold;">
