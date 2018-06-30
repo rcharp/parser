@@ -40,12 +40,12 @@ def before_request():
 @admin.route('')
 def dashboard():
     group_and_count_plans = Dashboard.group_and_count_plans()
-    group_and_count_coupons = Dashboard.group_and_count_coupons()
+    # group_and_count_coupons = Dashboard.group_and_count_coupons()
     group_and_count_users = Dashboard.group_and_count_users()
 
     return render_template('admin/page/dashboard.html',
                            group_and_count_plans=group_and_count_plans,
-                           group_and_count_coupons=group_and_count_coupons,
+                           # group_and_count_coupons=group_and_count_coupons,
                            group_and_count_users=group_and_count_users)
 
 
@@ -62,8 +62,8 @@ def users(page):
 
     paginated_users = User.query \
         .filter(User.search(request.args.get('q', ''))) \
-        .order_by(User.role.asc(), User.payment_id, text(order_values)) \
-        .paginate(page, 50, True)
+        .order_by(User.role.asc(), User.payment_id, User.created_on).paginate(page, 50, True)#text(order_values)) \
+        #.paginate(page, 50, True)
 
     return render_template('admin/user/index.html',
                            form=search_form, bulk_form=bulk_form,
