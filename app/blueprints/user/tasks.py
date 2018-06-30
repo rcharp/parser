@@ -134,7 +134,7 @@ async def email_query(mailbox_id):
             async for row in conn.execute(query):
                 emails.append({'id':row['id'],'sender':row['sender'],'subject':row['subject'],'date':row['date'],'parsed':row['parsed']})
 
-    return emails
+    return list(reversed(emails))
 
 
 async def asynchronous(mailbox_id):
