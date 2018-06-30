@@ -348,7 +348,7 @@ def generate_csv(emails):
 
     buffer = StringIO()
 
-    writer = csv.DictWriter(buffer, fieldnames=["Message Id", "From", "Cc" "Subject", "Date", "Body", "Extracted Data"])
+    writer = csv.DictWriter(buffer, fieldnames=["Message Id", "From", "Cc", "Subject", "Date", "Body", "Extracted Data"])
     writer.writeheader()
 
     for email in emails:
