@@ -220,6 +220,7 @@ def delete_all(email, mailbox_id):
     Mailbox.query.filter_by(user_email=email).delete()
     Rule.query.filter_by(mailbox_id=mailbox_id).delete()
 
+
 # Cache -------------------------------------------------------------------
 @celery.task()
 def set_cache(mailbox_id, emails_id):

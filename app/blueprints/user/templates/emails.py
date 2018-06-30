@@ -26,14 +26,16 @@ def send_plan_change_email(email, plan):
     mail = Mail()
     mail.init_app(app)
     msg = Message("Your plan with Parsavvy has been changed.",
-                  sender="support@Parsavvy.com",
+                  sender="support@parsavvy.com",
                   recipients=[email])
-    if plan == 'Startup':
-        amount = 39
+    if plan == 'Hobby':
+        amount = 25
+    elif plan == 'Startup':
+        amount = 50
     elif plan == 'Professional':
-        amount = 99
+        amount = 150
     else:
-        amount = 249
+        amount = 250
     msg.html = render_template('user/mail/plan_change_email.html', plan=plan, amount=amount)
 
     mail.send(msg)
