@@ -93,7 +93,7 @@
                             <div class="card-block bg-info" style="background-color: #1e88e5 !important;
                             flex: 1 1 auto; padding: 1.25rem;">
                                 <h4 class="text-white card-title" style="color: #ffffff !important;font-weight:400;">
-                                    Choose a rule below or
+                                    Choose parsing rule(s) below or
                                     <a href="{{ url_for('user.add', email_id=email_id) }}" class="add" style="background-color: #ffffff;
                                                                                 border: none;
                                                                                 float:none;
@@ -159,7 +159,11 @@
                                                 {% endfor %}
                                             </tbody>
                                         <!--/form-->
-                                    </table>
+                                    </table><br /><br />
+                                    <label for="autoparse" style="vertical-align:middle">Automatically parse emails from this sender with these rules:
+                                        <input id="autoparse" name="autoparse" type="checkbox" class="" value="true"/>
+                                    </label>
+                                    <br /><br />
                                     <button type="submit" form="parse" value="parse" class="parse_button" name="action" id="parse_button"
                                             style="background-color: #007FD8;
                                                                         border: none;

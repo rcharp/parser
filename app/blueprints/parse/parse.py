@@ -7,7 +7,13 @@ from app.blueprints.parse.models.rule import Rule
 from io import StringIO
 
 
-def parse_email(email_id, rules):
+def parse_email(email_id, rules, autoparse):
+
+    # Remove nulls from rules
+    rules = list(filter(None, rules))
+
+    # Get the email to be parsed
+    email = Email.query.filter(Email.id == email_id).first()
 
     for rule_id in rules:
 
@@ -17,13 +23,16 @@ def parse_email(email_id, rules):
         options = rule.options
         args = rule.args.split(',')
 
-        email = Email.query.filter(Email.id == email_id).first()
+        # Add the autoparse rules to this email if autoparse is true
+        if autoparse:
+            email.autoparse_rules += str(rule_id) + '\n'
 
-        parse(email, section, category, options, args)
+        # Finally, parse the email
+        parse(email, section, category, options, args, autoparse)
 
 
 # Parsing rules -------------------------------------------------------------------
-def parse(email, section, category, options, args):
+def parse(email, section, category, options, args, autoparse):
     if section == "from":
         result = parse_from(email, category, options, args)
         if result is not None:
@@ -82,6 +91,7 @@ def parse(email, section, category, options, args):
                 email.headers = result
 
     email.parsed = 1
+    email.autoparsed = autoparse
     db.session.commit()
 
 

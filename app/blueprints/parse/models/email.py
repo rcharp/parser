@@ -24,6 +24,8 @@ class Email(ResourceMixin, db.Model):
     body = db.Column(db.Text, nullable=True, server_default='')
     extracted_data = db.Column(db.Text, nullable=True, server_default='')
     parsed = db.Column('parsed', db.Boolean(), nullable=False, server_default='0')
+    autoparsed = db.Column('autoparsed', db.Boolean(), nullable=False, server_default='0')
+    autoparse_rules = db.Column(db.Text, nullable=False, server_default='')
 
     def __init__(self, **kwargs):
         # Call Flask-SQLAlchemy's constructor.

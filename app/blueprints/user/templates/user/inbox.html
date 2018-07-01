@@ -111,10 +111,10 @@
             var export_link = "{{ url_for('user.export') }}";
             var refresh_button = '<a href="' + refresh_link + '" class="refresh" style="background-color: #ffffff;border: none;float:none;color: #007fd8;padding: 15px 30px;' +
                 'text-align: center;text-decoration: none;vertical-align:middle;line-height:100%;display: inline-block;font-size: 14px;margin: auto;margin-left:15px;' +
-                'height:45px;cursor: pointer;">Refresh <img src="../../../../static/images/refresh.png" width="20px"></a>';
+                'height:45px;cursor: pointer;">Refresh <img src="../../../../static/images/refresh.png" width="16px"></a>';
             var export_button = '<a href="' + export_link + '" class="export" style="background-color: #ffffff;border: none;float:none;color: #007fd8;padding: 15px 30px;' +
                 'text-align: center;text-decoration: none;vertical-align:middle;line-height:100%;display: inline-block;font-size: 14px;margin: auto;margin-left:15px;' +
-                'height:45px;cursor: pointer;">Export to CSV <img src="../../../../static/images/download.png" width="20px"></a>';
+                'height:45px;cursor: pointer;">Export to CSV <img src="../../../../static/images/download.png" width="16px"></a>';
 
             // Update the inbox count
             $("#inbox_count").html('Your Inbox (' + data.length + ') ' + refresh_button + export_button).fadeIn(1000);
@@ -136,6 +136,7 @@
                     '</td><td style="vertical-align:middle">' + data[i]["sender"] + '</td><td style="vertical-align:middle">' + data[i]["subject"] + '</td>' +
                     '<td style="vertical-align:middle">' + data[i]["date"] + '</td><td style="vertical-align:middle">';
 
+                // add parsed column
                 if (data[i]["parsed"] === true) {
                     email_html += '<span class="label label-success">Parsed</span></td><td style="vertical-align:middle">' +
                         '<a href="'+ actual_parse_url +'"style="border:1px solid; border-radius:4px;padding:10px;display:inline-block;margin-bottom:5px;margin-right:5px;">Parse</a>' +
@@ -145,6 +146,14 @@
                     email_html += '<span class="label label-danger">Not Parsed</span></td><td style="vertical-align:middle">' +
                         '<a href="'+ actual_parse_url +'"style="border:1px solid; border-radius:4px;padding:10px;display:inline-block;margin-bottom:5px;margin-right:5px;">Parse</a>' +
                         '<a href="'+ actual_view_url +'"style="border:1px solid; border-radius:4px;padding:10px;display:inline-block;">View</a>';
+                }
+
+                // add auto parse column
+                if (data[i]["autoparsed"] === true) {
+                    email_html += '</td><td style="vertical-align:middle"><img id=auto_image" src="../../../../static/images/green_check.png" />';
+                }
+                else if (data[i]["autoparsed"] === false) {
+                    email_html += '</td><td style="vertical-align:middle">';
                 }
 
             }
@@ -230,7 +239,7 @@
                                                                                 margin-left:15px;
                                                                                 height:45px;
                                                                                 cursor: pointer;">
-                                       Refresh &nbsp;<img src="../../../../static/images/refresh.png" width="20px">
+                                       Refresh &nbsp;<img src="../../../../static/images/refresh.png" width="16px">
                                     </a>
                                     <a href="{{ url_for('user.export') }}" class="export" style="background-color: #ffffff;
                                                                                 border: none;
@@ -247,7 +256,7 @@
                                                                                 margin-left:15px;
                                                                                 height:45px;
                                                                                 cursor: pointer;">
-                                       Export to CSV &nbsp;<img src="../../../../static/images/download.png" width="20px">
+                                       Export to CSV &nbsp;<img src="../../../../static/images/download.png" width="16px">
                                     </a>
                                 </h4>
                             </div>
@@ -261,7 +270,8 @@
                                                 <td style="max-width:35%;">Subject</td>
                                                 <td>Date</td>
                                                 <td>Status</td>
-                                                <td style="width:15%;min-width:15%">Actions</td>
+                                                <td style="width:12%;min-width:12%">Actions</td>
+                                                <td style="width:5%;min-width:5%">Auto?</td>
                                             </tr>
                                         </thead>
                                         <tbody id="emails_list">
@@ -291,6 +301,11 @@
                                                                style="border:1px solid; border-radius:4px;padding:10px;display:inline-block;margin-bottom:5px;">Parse</a>
                                                             <a href="{{ url_for('user.view_email', email_id=email.id) }}"
                                                                style="border:1px solid; border-radius:4px;padding:10px;display:inline-block;">View</a>
+                                                        {% endif %}
+                                                    </td>
+                                                    <td style="vertical-align:middle">
+                                                        {% if email.autoparsed == 1 %}
+                                                            <img id=auto_image" src="../../../../static/images/green_check.png" />
                                                         {% endif %}
                                                     </td>
                                                 </tr>

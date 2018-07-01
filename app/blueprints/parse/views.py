@@ -51,6 +51,7 @@ def incoming():
                     # If the user is found, save the email to the db.
                     if u:
                         from app.blueprints.parse.models.email import Email
+
                         # Create the email
                         e = Email()
                         e.mailbox_id = mailbox_id
@@ -70,6 +71,13 @@ def incoming():
                         # Update the user's email count
                         user.email_count += 1
                         user.save()
+
+                        # Autoparse the email if necessary
+                        autoparse = db.session.query(db.exists().where(Email.sender == sender and Email.autoparsed is True)).scalar()
+                        if autoparse:
+                            from app.blueprints.parse.parse import parse_email
+
+                            parse_email(e.id, autoparse.autoparse_rules, True)
 
                         return json.dumps({'success': True}), 200, {'ContentType': 'application/json'}
 

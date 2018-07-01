@@ -289,9 +289,15 @@ def parse(email_id):
 def parse_email(email_id):
 
     rules = request.form.getlist('select')
+    autoparse = request.form.get('autoparse')
+
+    if autoparse == "true":
+        autoparse = 1
+    else:
+        autoparse = 0
 
     from app.blueprints.parse.parse import parse_email
-    parse_email(email_id,rules)
+    parse_email(email_id,rules,autoparse)
 
     flash('Your email has been parsed. Check it out below!', 'success')
     return redirect(url_for('user.refresh'))
@@ -381,7 +387,7 @@ def delete_rules():
 @login_required
 @csrf.exempt
 def settings():
-    # cache.clear()
+    cache.clear()
     mailbox_id = current_user.mailbox_id
     trial_days_left = -1
 

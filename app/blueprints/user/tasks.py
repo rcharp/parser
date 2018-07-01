@@ -127,12 +127,13 @@ async def email_query(mailbox_id):
                        sa.Column('date', sa.String(255)),
                        # sa.Column('body', sa.String(255)),
                        sa.Column('parsed', sa.Boolean),
+                       sa.Column('autoparsed', sa.Boolean)
                        )
 
         query = tbl.select().where(tbl.c['mailbox_id'] == mailbox_id)
         async with engine.acquire() as conn:
             async for row in conn.execute(query):
-                emails.append({'id':row['id'],'sender':row['sender'],'subject':row['subject'],'date':row['date'],'parsed':row['parsed']})
+                emails.append({'id':row['id'],'sender':row['sender'],'subject':row['subject'],'date':row['date'],'parsed':row['parsed'],'autoparsed':row['autoparsed']})
 
     return list(reversed(emails))
 
