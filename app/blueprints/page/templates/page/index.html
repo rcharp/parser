@@ -33,7 +33,7 @@
 			<link rel="stylesheet" href="../../../../static/saas/css/owl.carousel.css">
 			<link rel="stylesheet" href="../../../../static/saas/css/main.css">
 		</head>
-		<body style="font-family: 'Gotham', sans-serif !important;">
+		<body style="font-family: 'Gotham', sans-serif !important;overflow-x:hidden">
 
 			  <header id="header" id="home" style="font-family: 'Gotham', sans-serif !important;">
 			    <div class="container">
@@ -348,10 +348,12 @@
                     {% import 'billing/macros/billing.html' as billing with context %}
 					<div class="row">
 						<div class="col-md-3">
-							<div class="single-price no-padding" style="font-family:'Gotham', sans-serif !important; font-weight:200;padding-bottom:23px;">
-                                <!--<div class="price-top">
-									<h4>Real basic</h4>
-								</div>-->
+							<div class="single-price no-padding" style="
+							            padding-bottom:23px;
+                                        display:block;
+                                        border-color: #e9e9e9;
+                                        box-shadow: 0 8px 8px 0 rgba(0, 0, 0, .7);
+                                        border-radius: 2px;"> <!--style="font-family:'Gotham', sans-serif !important; font-weight:200;padding-bottom:23px;"-->
                                 {% call billing.plan(plans['0']) %}
 								<ul class="lists" style="font-family:'Gotham', sans-serif !important; font-weight:200;">
 									<li>Unlimited Parsing Rules</li>
@@ -364,10 +366,13 @@
 							</div>
 						</div>
 						<div class="col-md-3">
-							<div class="single-price no-padding" style="font-family:'Gotham', sans-serif !important; font-weight:200;padding-top:10px;padding-bottom:20px;">
-								<!--<div class="price-top">
-									<h4>Real basic</h4>
-								</div>-->
+							<div class="single-price no-padding" style="
+							            transform:scale(1.075);
+							            padding-bottom:23px;
+                                        display:block;
+                                        border-color: #e9e9e9;
+                                        box-shadow: 0 8px 8px 0 rgba(0, 0, 0, .7);
+                                        border-radius: 2px;"> <!--style="font-family:'Gotham', sans-serif !important; font-weight:200;padding-bottom:23px;"-->
                                 {% call billing.plan(plans['1']) %}
 								<ul class="lists" style="font-family:'Gotham', sans-serif !important; font-weight:200;">
 									<li>Unlimited Parsing Rules</li>
@@ -380,10 +385,12 @@
 							</div>
 						</div>
 						<div class="col-md-3">
-							<div class="single-price no-padding" style="font-family:'Gotham', sans-serif !important; font-weight:200;padding-bottom:23px;">
-								<!--<div class="price-top">
-									<h4>Real basic</h4>
-								</div>-->
+							<div class="single-price no-padding" style="
+							            padding-bottom:23px;
+                                        display:block;
+                                        border-color: #e9e9e9;
+                                        box-shadow: 0 8px 8px 0 rgba(0, 0, 0, .7);
+                                        border-radius: 2px;"> <!--style="font-family:'Gotham', sans-serif !important; font-weight:200;padding-bottom:23px;"-->
                                 {% call billing.plan(plans['2']) %}
 								<ul class="lists" style="font-family:'Gotham', sans-serif !important; font-weight:200;">
 									<li>Unlimited Parsing Rules</li>
@@ -396,10 +403,12 @@
 							</div>
 						</div>
                         <div class="col-md-3">
-							<div class="single-price no-padding"  style="font-family:'Gotham', sans-serif !important; font-weight:200;padding-bottom:23px;">
-								<!--<div class="price-top">
-									<h4>Real basic</h4>
-								</div>-->
+							<div class="single-price no-padding" style="
+							            padding-bottom:23px;
+                                        display:block;
+                                        border-color: #e9e9e9;
+                                        box-shadow: 0 8px 8px 0 rgba(0, 0, 0, .7);
+                                        border-radius: 2px;"> <!--style="font-family:'Gotham', sans-serif !important; font-weight:200;padding-bottom:23px;"-->
                                 {% call billing.plan(plans['3']) %}
 								<ul class="lists" style="font-family:'Gotham', sans-serif !important; font-weight:200;">
 									<li>Unlimited Parsing Rules</li>

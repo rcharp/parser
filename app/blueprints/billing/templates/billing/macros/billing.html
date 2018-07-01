@@ -18,17 +18,17 @@
   <div class="col-md-12{{ ' scale-up' if plan.metadata.recommended }} {{ ' quarter-faded' if not plan.metadata
   .recommended }}" {{ 'style=margin-top:30px;' if not plan.metadata.recommended }}>
        <div class="panel panel-default{{ ' panel-success' if plan.metadata.recommended else ' panel-info'}}">
-        <div class="panel-heading text-center" style="font-family:'Gotham', sans-serif !important; font-weight:200"><h4 style="top:10px;"><i>
-            <span style="font-family:'Gotham', sans-serif !important; font-weight:200;font-size:16px;margin-bottom:-20px;padding-top:20px;">
-                {{ 'Recommended' if plan.metadata.recommended }}</span></i></h4><h2 style="font-family:'Gotham', sans-serif !important; font-weight:500">{{ plan.name }}</h2>
-            <h1 style="font-family:'Gotham', sans-serif !important; font-weight:200">${{ plan.amount|format_currency|int }}
-            <span style="font-size:16px;font-family:'Gotham', sans-serif !important; font-weight:200">/ {{plan.interval }}</span> </h1></div>
+        <div class="panel-heading text-center" style="font-family:'Gotham', sans-serif !important; font-weight:200">{%  if plan.metadata.recommended %}<br />{% endif %}<h4 style="top:10px;"><i>
+            <span style="font-family:'Gotham-Thin', sans-serif !important; font-weight:200;font-size:14px;margin-top:20px;padding-top:20px;">
+                {{ 'Most Popular' if plan.metadata.recommended }}</span></i></h4><h2 style="font-family:'Gotham-Thin', sans-serif !important; font-weight:500">{{ plan.name }}</h2>
+            <h1 style="font-family:'Gotham0thin', sans-serif !important; font-weight:200">${{ plan.amount|format_currency|int }}
+            <span style="font-size:16px;font-family:'Gotham-Thin', sans-serif !important; font-weight:200">/ {{plan.interval }}</span> </h1></div>
   {% else %}
   <div class="col-md-3{{ ' scale-up' if plan.metadata.recommended }} {{ ' quarter-faded' if not plan.metadata
   .recommended }}" {{ 'style=margin-top:30px;' if not plan.metadata.recommended }}>
 
     <div class="panel panel-default{{ ' panel-success' if plan.metadata.recommended else ' panel-info'}}">
-        <div class="panel-heading text-center"><h4 style="top:10px;"><i><span style="font-size:16px;margin-bottom:-20px;">{{ 'Recommended' if plan.metadata.recommended
+        <div class="panel-heading text-center"><h4 style="top:10px;"><i><span style="font-size:14px;margin-top:20px;">{{ 'Most Popular' if plan.metadata.recommended
                 }}</span></i></h4><h2>{{ plan
         .name
                 }}</h2><h1>${{ plan
