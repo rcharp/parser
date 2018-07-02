@@ -383,7 +383,6 @@ def create_test_user():
 def create_test_email():
     e = Email()
     e.subject = "This is your first parsed email!"
-    e.id = 0
     e.mailbox_id = 0
     e.message_id = "testemail@parsavvy.com"
     e.sender = "team@parsavvy.com"
@@ -391,7 +390,7 @@ def create_test_email():
     e.body = "This is a test email from the team over at Parsavvy.\n\nThis will give you an idea of what to expect" \
              "when it comes to parsing an email. Just select the section of the email that you want to parse, then the" \
              "parsing options that best fit your needs. After creating the parsing rule, you'll be able to apply it to" \
-             "any emails that come to your inbox.\n\nThank you for using Parsavvy!\n\nSincerely,\n\nThe team at" \
+             "any emails that come to your inbox.\n\nThank you for using Parsavvy!\n\nSincerely,\n\nThe team at " \
              "Parsavvy."
 
     return e

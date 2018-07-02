@@ -99,6 +99,16 @@ def seed():
 
 
 @click.command()
+def populate():
+    from app.blueprints.parse.parse import create_test_email
+    for x in range(2000):
+        email = create_test_email()
+        email.mailbox_id = 'TFT54UXK'
+
+        email.save()
+
+
+@click.command()
 @click.option('--with-testdb/--no-with-testdb', default=False,
               help='Create a test db too?')
 @click.pass_context
@@ -118,3 +128,4 @@ def reset(ctx, with_testdb):
 cli.add_command(init)
 cli.add_command(seed)
 cli.add_command(reset)
+cli.add_command(populate)
