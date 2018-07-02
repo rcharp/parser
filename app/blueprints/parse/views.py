@@ -82,9 +82,7 @@ def incoming():
 
                             parse_email(e.id, rules, True)
 
-                        return json.dumps({'success': True}), 200, {'ContentType': 'application/json'}
-
-    return json.dumps({'success': False}), 500, {'ContentType': 'application/json'}
+    return json.dumps({'success': True}), 200, {'ContentType': 'application/json'}
 
 
 def clean_subject(subject):
