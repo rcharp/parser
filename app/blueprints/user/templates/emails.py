@@ -83,6 +83,7 @@ def send_export_email(email, csv):
                   sender="support@parsavvy.com",
                   recipients=[email])
 
+    msg.html = render_template('user/mail/export_email.html')
     msg.attach("Parsed_data.csv", "text/csv", csv)
 
     mail.send(msg)
