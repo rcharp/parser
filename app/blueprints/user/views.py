@@ -381,7 +381,7 @@ def delete_rules():
 @login_required
 @csrf.exempt
 def settings():
-    # cache.clear()
+    cache.clear()
     mailbox_id = current_user.mailbox_id
     trial_days_left = -1
 
