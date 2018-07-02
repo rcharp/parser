@@ -175,16 +175,16 @@ def signup():
 
                 from app.blueprints.parse.models.rule import Rule
 
-                # Create default rules
-                rules = ['Sender', 'To', 'Subject', 'Date']
-
-                for rule in rules:
-                    r = Rule()
-                    r.mailbox_id = mailbox_id
-                    r.rule = rule
-
-                    # Add the default rules to the database
-                    db.session.add(r)
+                # # Create default rules
+                # rules = ['Sender', 'To', 'Subject', 'Date']
+                #
+                # for rule in rules:
+                #     r = Rule()
+                #     r.mailbox_id = mailbox_id
+                #     r.rule = rule
+                #
+                #     # Add the default rules to the database
+                #     db.session.add(r)
 
                 db.session.commit()
                 flash('Awesome, thanks for signing up!', 'success')
