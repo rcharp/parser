@@ -478,7 +478,7 @@ def export():
     from app.blueprints.user.tasks import send_export_email
     send_export_email.delay(current_user.email, file)
 
-    flash('Your CSV has been sent to your email.', 'success')
+    flash('Your parsed data has been sent to your email in a CSV.', 'success')
     return redirect(url_for('user.inbox'))
 
 
