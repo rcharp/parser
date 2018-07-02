@@ -92,7 +92,7 @@ def get_mailboxes(email):
     from app.blueprints.parse.models.email import Email
 
     mailboxes = Mailbox.query.with_entities(Mailbox.mailbox_id).filter(Mailbox.user_email == email).all()
-    emails_count = db.session.query(Email.mailbox_id, func.count(Email.id)).group_by(Email.mailbox_id).all()
+    emails_count = db.session.query(Email.mailbox_id, func.count(Email.id)).filter(Email.user_email == email).group_by(Email.mailbox_id).all()
 
     return list(inner_join(mailboxes,emails_count))
 
