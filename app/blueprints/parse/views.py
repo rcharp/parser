@@ -63,6 +63,7 @@ def incoming():
                         e.to = to
                         e.cc = cc
                         e.body = body
+                        e.autoparse_rules = ''
 
                         # Add the email to the database
                         db.session.add(e)
@@ -72,12 +73,14 @@ def incoming():
                         user.email_count += 1
                         user.save()
 
-                        # Autoparse the email if necessary
+                        # Autoparse the email if one with same sender exists with autoparse rules
                         autoparse = db.session.query(db.exists().where(Email.sender == sender and Email.autoparsed is True)).scalar()
                         if autoparse:
                             from app.blueprints.parse.parse import parse_email
 
-                            parse_email(e.id, autoparse.autoparse_rules, True)
+                            rules = Email.query.with_entities(Email.autoparse_rules).filter(Email.sender == sender).filter(Email.autoparsed == True).first()
+
+                            parse_email(e.id, rules, True)
 
                         return json.dumps({'success': True}), 200, {'ContentType': 'application/json'}
 

@@ -6,13 +6,9 @@ from flask import (
     url_for,
     render_template)
 from flask_login import login_required, current_user
-from sqlalchemy import text
-import json
 
 from app.blueprints.admin.models import Dashboard
 from app.blueprints.user.decorators import role_required
-from app.blueprints.billing.decorators import handle_stripe_exceptions
-# from app.blueprints.billing.models.coupon import Coupon
 from app.blueprints.billing.models.subscription import Subscription
 from app.blueprints.billing.models.invoice import Invoice
 from app.blueprints.user.models import User
@@ -21,7 +17,6 @@ from app.blueprints.admin.forms import (
     BulkDeleteForm,
     UserForm,
     UserCancelSubscriptionForm,
-    #CouponForm
 )
 
 admin = Blueprint('admin', __name__,

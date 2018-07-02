@@ -309,7 +309,18 @@ def parse_email(email_id):
 def view_email(email_id):
     from app.blueprints.parse.models.email import Email
     email = Email.query.filter(Email.id == email_id).first()
-    return render_template('user/view.html', mailbox_id=current_user.mailbox_id, email=email)
+
+    if email.autoparsed:
+        autoparse_rules = filter(None, email.autoparse_rules.split('\n'))
+        rules = []
+
+        for rule in autoparse_rules:
+            from app.blueprints.parse.models.rule import Rule
+            rules.append(Rule.query.filter(Rule.id == rule).first())
+    else:
+        rules = []
+
+    return render_template('user/view.html', mailbox_id=current_user.mailbox_id, email=email, rules=rules)
 
 
 # Rules -------------------------------------------------------------------
@@ -432,13 +443,14 @@ def inbox():
 @user.route('/refresh', methods=['GET', 'POST'])
 @login_required
 def refresh():
-        from app.blueprints.user.tasks import get_emails, set_cache
 
-        emails = get_emails.delay(current_user.mailbox_id)
-        set_cache.delay(current_user.mailbox_id, emails.id)
+    from app.blueprints.user.tasks import get_emails, set_cache
 
-        return render_template('user/inbox.html', emails_id=emails.id, emails_state=emails.state,
-                               mailbox_id=current_user.mailbox_id, emails=[], route="refresh")
+    emails = get_emails.delay(current_user.mailbox_id)
+    set_cache.delay(current_user.mailbox_id, emails.id)
+
+    return render_template('user/inbox.html', emails_id=emails.id, emails_state=emails.state,
+                           mailbox_id=current_user.mailbox_id, emails=[], route="refresh")
 
 
 @user.route('/update/<emails_id>/<route>')

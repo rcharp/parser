@@ -9,15 +9,15 @@ from io import StringIO
 
 def parse_email(email_id, rules, autoparse):
 
-    # Remove nulls from rules
-    rules = list(filter(None, rules))
+    # Change the autoparse rules into a list, remove any null values
+    rules = list(filter(None, rules[0].split('\n')))
 
     # Get the email to be parsed
     email = Email.query.filter(Email.id == email_id).first()
 
     for rule_id in rules:
 
-        rule = Rule.query.filter(Rule.id == rule_id).first()
+        rule = Rule.query.filter(Rule.id == int(rule_id)).first()
         section = rule.section
         category = rule.category
         options = rule.options
@@ -25,7 +25,8 @@ def parse_email(email_id, rules, autoparse):
 
         # Add the autoparse rules to this email if autoparse is true
         if autoparse:
-            email.autoparse_rules += str(rule_id) + '\n'
+            if str(rule_id) not in email.autoparse_rules.split('\n'): # Only add the autoparse rule if it isn't added already
+                email.autoparse_rules += str(rule_id) + '\n' # Add the autoparse rule
 
         # Finally, parse the email
         parse(email, section, category, options, args, autoparse)

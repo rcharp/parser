@@ -130,7 +130,7 @@ async def email_query(mailbox_id):
                        sa.Column('autoparsed', sa.Boolean)
                        )
 
-        query = tbl.select().where(tbl.c['mailbox_id'] == mailbox_id)
+        query = tbl.select().where(tbl.c['mailbox_id'] == mailbox_id).order_by(tbl.c['date'])
         async with engine.acquire() as conn:
             async for row in conn.execute(query):
                 emails.append({'id':row['id'],'sender':row['sender'],'subject':row['subject'],'date':row['date'],'parsed':row['parsed'],'autoparsed':row['autoparsed']})
@@ -150,7 +150,7 @@ def return_emails(mailbox_id):
     ioloop = asyncio.get_event_loop()
 
     emails = ioloop.run_until_complete(asynchronous(mailbox_id))
-    emails = list(reversed(emails))
+    emails = emails
 
     return emails
 
