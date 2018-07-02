@@ -10,7 +10,6 @@ from lib.flask_mailplus import send_template_message
 from app.extensions import cache, db
 from app.app import create_celery_app
 from app.blueprints.user.models import User
-from app.blueprints.parse.models.rule import Rule
 
 
 celery = create_celery_app()
@@ -43,13 +42,13 @@ def deliver_password_reset_email(user_id, reset_token):
 
 # Mailboxes -------------------------------------------------------------------
 @celery.task()
-def adjust_mailboxes(email, mailbox_id, mailbox_limit, email_limit):
+def adjust_mailboxes(email, mailbox_id, email_count, mailbox_limit, email_limit):
     from app.blueprints.parse.models.mailbox import Mailbox
     from app.blueprints.parse.models.email import Email
 
-    # Get the total count of mailboxes and emails
+    # Get the current count of mailboxes and emails
     mailbox_count = Mailbox.query.filter(Mailbox.user_email == email).count()
-    email_count = Email.query.filter(Email.user_email == email).count()
+    # email_count = Email.query.filter(Email.user_email == email).count()
 
     # Get the counts of how many emails and mailboxes will be deleted
     email_delete_count = email_count - email_limit if email_count > email_limit else 0
@@ -69,11 +68,21 @@ def adjust_mailboxes(email, mailbox_id, mailbox_limit, email_limit):
 
     # Delete the extra mailboxes
     mailboxes_deleted = Mailbox.bulk_delete([m[0] for m in mailboxes_to_delete])
-    print(mailbox_delete_count)#
-    print(mailboxes_to_delete)#
+
+    # If emails or mailboxes are at or past the limit,
+    # then cap out the remaining emails and mailboxes
+    if email_count >= email_limit:
+        emails_remaining = email_limit
+    else:
+        emails_remaining = email_count - emails_deleted
+
+    if mailbox_count >= mailbox_limit:
+        mailboxes_remaining = mailbox_limit
+    else:
+        mailboxes_remaining = mailbox_count - mailboxes_deleted
 
     # Return the number of emails and mailboxes remaining
-    return email_count - emails_deleted, mailbox_count - mailboxes_deleted
+    return emails_remaining, mailboxes_remaining
 
 
 @celery.task()
@@ -118,14 +127,15 @@ async def email_query(mailbox_id):
                        sa.Column('date', sa.String(255)),
                        # sa.Column('body', sa.String(255)),
                        sa.Column('parsed', sa.Boolean),
+                       sa.Column('autoparsed', sa.Boolean)
                        )
 
-        query = tbl.select().where(tbl.c['mailbox_id'] == mailbox_id)
+        query = tbl.select().where(tbl.c['mailbox_id'] == mailbox_id).order_by(tbl.c['date'])
         async with engine.acquire() as conn:
             async for row in conn.execute(query):
-                emails.append({'id':row['id'],'sender':row['sender'],'subject':row['subject'],'date':row['date'],'parsed':row['parsed']})
+                emails.append({'id':row['id'],'sender':row['sender'],'subject':row['subject'],'date':row['date'],'parsed':row['parsed'],'autoparsed':row['autoparsed']})
 
-    return emails
+    return list(reversed(emails))
 
 
 async def asynchronous(mailbox_id):
@@ -140,7 +150,7 @@ def return_emails(mailbox_id):
     ioloop = asyncio.get_event_loop()
 
     emails = ioloop.run_until_complete(asynchronous(mailbox_id))
-    emails = list(reversed(emails))
+    emails = emails
 
     return emails
 
@@ -166,6 +176,8 @@ def export_emails(mailbox_id):
 @celery.task()
 def get_rules(mailbox_id):
     rules = []
+    from app.blueprints.parse.models.rule import Rule
+
     for rule in Rule.query.filter(Rule.mailbox_id == mailbox_id).all():
         rules.append({'id':rule.id,'name':rule.name,'section':rule.section,'category':rule.category,'options':rule.options,'args':rule.args})
 
@@ -199,6 +211,17 @@ def delete_rules(to_delete):
     db.session.commit()
 
 
+@celery.task()
+def delete_all(email, mailbox_id):
+    from app.blueprints.parse.models.email import Email
+    from app.blueprints.parse.models.mailbox import Mailbox
+    from app.blueprints.parse.models.rule import Rule
+
+    Email.query.filter_by(user_email=email).delete()
+    Mailbox.query.filter_by(user_email=email).delete()
+    Rule.query.filter_by(mailbox_id=mailbox_id).delete()
+
+
 # Cache -------------------------------------------------------------------
 @celery.task()
 def set_cache(mailbox_id, emails_id):
@@ -209,4 +232,36 @@ def set_cache(mailbox_id, emails_id):
     else:
         time.sleep(1)
         set_cache(mailbox_id, emails_id)
+
+
+# Sending emails -------------------------------------------------------------------
+@celery.task()
+def send_welcome_email(email):
+    from app.blueprints.user.templates.emails import send_welcome_email
+    send_welcome_email(email)
+
+
+@celery.task()
+def send_plan_change_email(email, plan):
+    from app.blueprints.user.templates.emails import send_plan_change_email
+    send_plan_change_email(email, plan)
+
+
+@celery.task()
+def send_contact_us_email(email, message):
+    from app.blueprints.user.templates.emails import contact_us_email
+    contact_us_email(email, message)
+
+
+@celery.task()
+def send_cancel_email(email):
+    from app.blueprints.user.templates.emails import send_cancel_email
+    send_cancel_email(email)
+
+
+@celery.task()
+def send_export_email(email, csv):
+    from app.blueprints.user.templates.emails import send_export_email
+    send_export_email(email, csv)
+
 

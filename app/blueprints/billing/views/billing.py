@@ -113,7 +113,9 @@ def update():
                 # Set the user's current mailbox to the oldest mailbox
                 from app.blueprints.parse.models.mailbox import Mailbox
                 mailbox = Mailbox.query.filter(Mailbox.user_email == current_user.email).order_by(Mailbox.created_on.asc()).first()
-                current_user.mailbox_id = mailbox.mailbox_id
+
+                if mailbox:
+                    current_user.mailbox_id = mailbox.mailbox_id
 
                 # Set the mailbox and email limits accordingly
                 mailbox_limit = 1 if new_plan == 'hobby' else 10 if new_plan == 'startup'\
@@ -127,6 +129,7 @@ def update():
                 if plan['amount'] < active_plan['amount']:
                     current_user.email_count, current_user.mailbox_count = adjust_mailboxes(current_user.email,
                                                                                             current_user.mailbox_id,
+                                                                                            current_user.email_count,
                                                                                             mailbox_limit,
                                                                                             email_limit)
 
@@ -169,18 +172,15 @@ def cancel():
             if cache.get(mailbox_id):
                 cache.delete(mailbox_id)
 
-            from app.blueprints.parse.models.email import Email
             from app.blueprints.parse.models.mailbox import Mailbox
-            from app.blueprints.parse.models.rule import Rule
 
             # Delete the credentials from MG
             for mailbox in Mailbox.query.filter_by(user_email=email).all():
                 delete_inbox(mailbox.mailbox_id)
 
-            # Delete the emails, rules and mailboxes belonging to the user.
-            Email.query.filter_by(user_email=email).delete()
-            Mailbox.query.filter_by(user_email=email).delete()
-            Rule.query.filter_by(mailbox_id=mailbox_id).delete()
+            # Delete all emails, rules and mailboxes belonging to the user.
+            from app.blueprints.user.tasks import delete_all
+            delete_all.delay(email, mailbox_id)
 
             # Delete the user.
             from app.blueprints.billing.tasks import delete_users
@@ -188,8 +188,8 @@ def cancel():
             delete_users(ids)
 
             # Send a cancellation email.
-            from app.blueprints.user.templates.emails import send_cancel_email
-            send_cancel_email(email)
+            from app.blueprints.user.tasks import send_cancel_email
+            send_cancel_email.delay(email)
 
             flash('Sorry to see you go! Your subscription has been canceled.',
                   'success')

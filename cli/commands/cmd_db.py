@@ -44,29 +44,28 @@ def init(with_testdb):
         if not database_exists(db_uri):
             create_database(db_uri)
 
-    # Create a test email for the db
-    from app.blueprints.parse.parse import create_test_email, create_test_user
+    # Create a test user for the db
+    # from app.blueprints.parse.parse import create_test_user
+    #
+    # user = create_test_user()
+    # user.email = app.config['SEED_MEMBER_EMAIL']
+    # user.password = User.encrypt_password(app.config['SEED_ADMIN_PASSWORD'])
+    #
+    # user.save()
 
-    # email = create_test_email()
-    user = create_test_user()
-    user.email = app.config['SEED_MEMBER_EMAIL']
-    user.password = User.encrypt_password(app.config['SEED_ADMIN_PASSWORD'])
-
-    user.save()
-
-    from app.blueprints.parse.models.rule import Rule
-
-    # Create default rules
-    rules = ['From', 'To', 'Subject', 'Date']
-
-    for rule in rules:
-        r = Rule()
-        r.mailbox_id = user.mailbox_id
-        r.section = rule
-        r.name = 'Parsing rule for section: ' + rule
-        r.category = random.choice(['extract', 'replace', 'remove'])
-        r.options = get_rule_options(r.category)
-        r.save()
+    # from app.blueprints.parse.models.rule import Rule
+    #
+    # # Create default rules
+    # rules = ['From', 'To', 'Subject', 'Date']
+    #
+    # for rule in rules:
+    #     r = Rule()
+    #     r.mailbox_id = user.mailbox_id
+    #     r.section = rule
+    #     r.name = 'Parsing rule for section: ' + rule
+    #     r.category = random.choice(['extract', 'replace', 'remove'])
+    #     r.options = get_rule_options(r.category)
+    #     r.save()
 
     # db.session.add(user)
     # db.session.commit()
@@ -95,6 +94,16 @@ def seed():
 
 
 @click.command()
+def populate():
+    from app.blueprints.parse.parse import create_test_email
+    for x in range(2000):
+        email = create_test_email()
+        email.mailbox_id = 'TFT54UXK'
+
+        email.save()
+
+
+@click.command()
 @click.option('--with-testdb/--no-with-testdb', default=False,
               help='Create a test db too?')
 @click.pass_context
@@ -114,3 +123,4 @@ def reset(ctx, with_testdb):
 cli.add_command(init)
 cli.add_command(seed)
 cli.add_command(reset)
+cli.add_command(populate)

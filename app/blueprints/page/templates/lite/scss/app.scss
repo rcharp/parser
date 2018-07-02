@@ -1689,7 +1689,7 @@ Checkbox
     input[type="checkbox"]:checked + label {
         &::after {
             content: "\f00c";
-            font-family: 'FontAwesome';
+            font-family: 'Gotham', sans-serif;
         }
     }
     input[type="checkbox"]:disabled + label {

@@ -6,7 +6,7 @@ from sqlalchemy import exists
 from flask_login import current_app
 
 
-def generate_mailbox_id(size=8, chars=string.ascii_uppercase.replace('O', '') + string.digits.replace('0', '')):
+def generate_mailbox_id(size=8, chars=string.ascii_uppercase.replace('O', '').replace('I', '') + string.digits.replace('0', '')):
 
     # Generate a random 8-character user id
     mailbox_id = ''.join(random.choice(chars) for _ in range(size))

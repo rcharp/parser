@@ -19,9 +19,11 @@ def index():
 
     if form.validate_on_submit():
         # This prevents circular imports.
-        from app.blueprints.contact.tasks import deliver_contact_email
+        # from app.blueprints.contact.tasks import deliver_contact_email
+        from app.blueprints.user.tasks import send_contact_us_email
 
-        deliver_contact_email(request.form.get('email'), request.form.get('message'))
+        # deliver_contact_email(request.form.get('email'), request.form.get('message'))
+        send_contact_us_email(request.form.get('email'), request.form.get('message'))
 
         flash('Thanks for your email! You can expect a response shortly.', 'success')
         return redirect(url_for('contact.index'))

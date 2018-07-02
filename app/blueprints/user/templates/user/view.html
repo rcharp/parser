@@ -81,15 +81,14 @@
                 <br >
                 <div class="row" style="padding-top:10px;color:#606060;margin-bottom:30px;">
                     <div style="float:right;font-family: 'Gotham', sans-serif;">
-                       {{mailbox_id }}@mg.parsavvy.com
+                       {{ mailbox_id }}@mg.parsavvy.com
                     </div>
                 </div>
                 <hr />
                 <h3 style="color:#606060">Email: {{ email.subject }}</h3>
                 <div class="row" style="padding-top:30px;color:#606060">
                     <div class="col-lg-14">
-                        <div class="card-lite" style="min-height: 180px; width:70%; margin:0 auto; float:none; margin-bottom:30px;
-                          min-width: 250px;
+                        <div class="card-lite" style="min-height: 180px; width:95%; min-width:95%; margin:0 auto; float:none; margin-bottom:30px;
                           border-color: #d7dfe3;
                           box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
                           border-radius: 8px;
@@ -117,16 +116,52 @@
                                     </a>
                                 </h4>
                             </div>
-                            <div class="card-block" id="email" style="flex: 1 1 auto;padding: 5.25rem;outline: none;overflow-x:auto;">
+                            <div class="card-block" id="email" style="flex: 1 1 auto;padding: 2.25rem;outline: none;overflow-x:auto;word-wrap:break-word;">
                                 From: {{ email.sender }}<br />
                                 Subject: {{ email.subject }}<br />
                                 Date: {{ email.date }}<br />
-                                {% if email.cc is not none %}
-                                    Cc: {{ email.cc }}
+                                {% if email.cc %}
+                                    Cc: {{ email.cc }}<br />
                                 {% endif %}
-                                <div style="word-wrap:break-word;white-space:pre-wrap">
+                                {% if email.extracted_data %}
+                                    <b>Extracted Data:</b> <a href="#" class="show_data"><img id=body_image" src="../../../../static/images/body_plus.png" width="16px" /></a><br />
+                                    <div class="card-lite" id="data_div" style="min-height: 40px; margin-bottom:30px;
+                                          max-width: 95%;
+                                          border-color: #d7dfe3;
+                                          box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
+                                          border-radius: 8px;
+                                          display:none;
+                                          background-color:#fff;">
+                                        <div class="card-block" style="flex: 1 1 auto;padding: 1.25rem;outline: none;word-wrap:break-word;white-space:pre-line">
+                                            {{ email.extracted_data }}
+                                        </div>
+                                    </div>
+                                {% endif %}
+                                {% if email.autoparsed %}
+                                    <div style="display:block">
+                                    <b>Auto Parse Rules:</b> <a href="#" class="show_autoparse"><img id=autoparse_image" src="../../../../static/images/body_plus.png" width="16px" /></a><br />
+                                    <div class="card-lite" id="parse_div" style="min-height: 40px; margin-bottom:30px;
+                                          max-width: 95%;
+                                          border-color: #d7dfe3;
+                                          box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
+                                          border-radius: 8px;
+                                          display:none;
+                                          background-color:#fff;">
+                                        <div class="card-block" style="flex: 1 1 auto;padding: 1.25rem;outline: none;word-wrap:break-word;white-space:pre-line">
+                                            {% for rule in rules %}
+                                                <b>Rule Name:</b> {{ rule.name }}
+                                                <b>Section:</b> {{ rule.section|title }}
+                                                <b>Options:</b> {{ rule.options }}
+                                                {% if rule.args %} <b>Values:</b> {{ rule.args }}{% endif %}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                    </div><br />
+                                {% endif %}
+                                <div style="word-wrap:break-word;white-space:pre-line">
                                     {{ email.body }}
-                                </div><br />
+                                </div>
+                                <br />
                                 <a href="{{ url_for('user.inbox') }}" style="background-color: #007fd8;
                                                                         border: none;
                                                                         float:none;
@@ -184,6 +219,36 @@
     <!-- Chart JS --
     <script src="../../../page/templates/lite/js/dashboard1.js"></script>
     <!-- end Chart JS -->
+
+    <script>
+        $('a.show_data').click(function(e){
+            e.preventDefault();
+            var body = document.getElementById('data_div');
+            if(body.style.display === 'none'){
+                body.style.display = 'inline-block';
+
+                document.getElementById('body_image').src="../../../../static/images/body_minus.png";
+            }
+            else{
+                body.style.display = 'none';
+                document.getElementById('body_image').src="../../../../static/images/body_plus.png";
+            }
+        });
+
+        $('a.show_autoparse').click(function(e){
+            e.preventDefault();
+            var body = document.getElementById('parse_div');
+            if(body.style.display === 'none'){
+                body.style.display = 'inline-block';
+
+                document.getElementById('autoparse_image').src="../../../../static/images/body_minus.png";
+            }
+            else{
+                body.style.display = 'none';
+                document.getElementById('autoparse_image').src="../../../../static/images/body_plus.png";
+            }
+        });
+    </script>
 
 </body>
 {% endblock %}

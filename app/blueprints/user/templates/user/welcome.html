@@ -5,6 +5,7 @@
 
 {% block body %}
   <div class="row">
+  {% if not payment %}
     <div class="col-md-6"style="float:left;">
       <h2 class="sm-margin-bottom">Ready to upgrade?</h2>
 
@@ -18,6 +19,7 @@
         <a href="{{ url_for('billing.pricing') }}">becoming a paid member</a>.
       </p><br /><br />
     </div>
+  {% endif %}
     <div class="col-md-4 well2" style="float:left">
       {% call f.form_tag('user.welcome') %}
         <legend>Pick a username</legend>

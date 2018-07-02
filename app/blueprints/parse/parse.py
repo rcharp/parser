@@ -7,46 +7,92 @@ from app.blueprints.parse.models.rule import Rule
 from io import StringIO
 
 
-def parse_email(email_id, rules):
+def parse_email(email_id, rules, autoparse):
+
+    # Change the autoparse rules into a list, remove any null values
+    rules = list(filter(None, rules[0].split('\n')))
+
+    # Get the email to be parsed
+    email = Email.query.filter(Email.id == email_id).first()
 
     for rule_id in rules:
 
-        rule = Rule.query.filter(Rule.id == rule_id).first()
+        rule = Rule.query.filter(Rule.id == int(rule_id)).first()
         section = rule.section
         category = rule.category
         options = rule.options
         args = rule.args.split(',')
 
-        email = Email.query.filter(Email.id == email_id).first()
+        # Add the autoparse rules to this email if autoparse is true
+        if autoparse:
+            if str(rule_id) not in email.autoparse_rules.split('\n'): # Only add the autoparse rule if it isn't added already
+                email.autoparse_rules += str(rule_id) + '\n' # Add the autoparse rule
 
-        parse(email, section, category, options, args)
+        # Finally, parse the email
+        parse(email, section, category, options, args, autoparse)
 
 
 # Parsing rules -------------------------------------------------------------------
-def parse(email, section, category, options, args):
+def parse(email, section, category, options, args, autoparse):
     if section == "from":
         result = parse_from(email, category, options, args)
-        email.sender = result
+        if result is not None:
+            if category == 'extract':
+                for item in result:
+                    email.extracted_data += item + '\n'
+            else:
+                email.sender = result
     elif section == "to":
         result = parse_to(email, category, options, args)
-        email.to = result
+        if result is not None:
+            if category == 'extract':
+                for item in result:
+                    email.extracted_data += item + '\n'
+            else:
+                email.to = result
     elif section == "subject":
         result = parse_subject(email, category, options, args)
-        email.subject = result
+        if result is not None:
+            if category == 'extract':
+                for item in result:
+                    email.extracted_data += item + '\n'
+            else:
+                email.subject = result
     elif section == "date":
         result = parse_date(email, category, options, args)
-        email.date = result
+        if result is not None:
+            if category == 'extract':
+                for item in result:
+                    email.extracted_data += item + '\n'
+            else:
+                email.date = result
     elif section == "body":
         result = parse_body(email, category, options, args)
-        email.body = result
+        if result is not None:
+            if category == 'extract':
+                for item in result:
+                    email.extracted_data += item + '\n'
+            else:
+                email.body = result
     elif section == "CC":
         result = parse_cc(email, category, options, args)
-        email.cc = result
+        if result is not None:
+            if category == 'extract':
+                for item in result:
+                    email.extracted_data += item + '\n'
+            else:
+                email.cc = result
     elif section == "Headers":
         result = parse_headers(email, category, options, args)
-        email.headers = result
+        if result is not None:
+            if category == 'extract':
+                for item in result:
+                    email.extracted_data += item + '\n'
+            else:
+                email.headers = result
 
     email.parsed = 1
+    email.autoparsed = autoparse
     db.session.commit()
 
 
@@ -184,7 +230,7 @@ def rows_parse(item, args):
     results = []
     for arg in args:
         for line in item.split('\n'):
-            if arg.strip() in line:
+            if arg.lower().strip() in line.lower():
                 results.append(line.strip())
 
     return list(set(results))
@@ -282,8 +328,8 @@ def remove_whitespace_parse(item):
 
 # Working
 def remove_links_parse(item):
-    result = re.sub(r"http\S+", "", item)
-    result = re.sub(r"https\S+", "", result)
+    result = re.sub(r"<http\S+", "", item)
+    result = re.sub(r"<https\S+", "", result)
     return result
 
 
@@ -313,11 +359,12 @@ def generate_csv(emails):
 
     buffer = StringIO()
 
-    writer = csv.DictWriter(buffer, fieldnames=["Message Id", "From", "Subject", "Date", "Body"])
+    writer = csv.DictWriter(buffer, fieldnames=["Message Id", "From", "Cc", "Subject", "Date", "Body", "Extracted Data"])
     writer.writeheader()
 
     for email in emails:
-        writer.writerow({"Message Id": email.message_id, "From": email.sender, "Subject": email.subject, "Date": email.date, "Body": email.body})
+        writer.writerow({"Message Id": email.message_id, "From": email.sender, "Cc": email.cc, "Subject": email.subject,
+                         "Date": email.date, "Body": email.body, "Extracted Data": email.extracted_data})
 
     return buffer.getvalue()
 
@@ -336,7 +383,6 @@ def create_test_user():
 def create_test_email():
     e = Email()
     e.subject = "This is your first parsed email!"
-    e.id = 0
     e.mailbox_id = 0
     e.message_id = "testemail@parsavvy.com"
     e.sender = "team@parsavvy.com"
@@ -344,7 +390,7 @@ def create_test_email():
     e.body = "This is a test email from the team over at Parsavvy.\n\nThis will give you an idea of what to expect" \
              "when it comes to parsing an email. Just select the section of the email that you want to parse, then the" \
              "parsing options that best fit your needs. After creating the parsing rule, you'll be able to apply it to" \
-             "any emails that come to your inbox.\n\nThank you for using Parsavvy!\n\nSincerely,\n\nThe team at" \
+             "any emails that come to your inbox.\n\nThank you for using Parsavvy!\n\nSincerely,\n\nThe team at " \
              "Parsavvy."
 
     return e

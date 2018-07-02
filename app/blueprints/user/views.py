@@ -5,7 +5,6 @@ from flask import (
     flash,
     url_for,
     render_template,
-    current_app,
     json,
     jsonify)
 from flask_login import (
@@ -19,7 +18,6 @@ from app.blueprints.parse.parse import generate_csv
 from app.blueprints.user.decorators import anonymous_required
 from app.blueprints.user.models import User
 from app.blueprints.user.create_mailgun_user import generate_mailbox_id, create_inbox
-from app.blueprints.user.templates.emails import send_welcome_email, send_export_email
 from app.blueprints.user.forms import (
     LoginForm,
     BeginPasswordResetForm,
@@ -154,7 +152,8 @@ def signup():
 
         if login_user(u):
 
-            # send_welcome_email.delay(current_user.email)
+            from app.blueprints.user.tasks import send_welcome_email
+            send_welcome_email.delay(current_user.email)
 
             # Create a user id for the user
             mailbox_id = generate_mailbox_id()
@@ -218,7 +217,7 @@ def welcome():
         flash('Your username has been set.', 'success')
         return redirect(url_for('user.settings'))
 
-    return render_template('user/welcome.html', form=form)
+    return render_template('user/welcome.html', form=form, payment=current_user.payment_id)
 
 
 @user.route('/settings/update_credentials', methods=['GET', 'POST'])
@@ -275,11 +274,12 @@ def parse(email_id):
 
                 from app.blueprints.parse.models.email import Email
                 email = Email.query.filter(Email.id == email_id).first()
+
                 body = Email.query.with_entities(Email.body).filter(Email.id == email_id).first()
 
                 return render_template('user/parse.html', rules=rules, email=email, body=body, mailbox_id=current_user.mailbox_id, email_id=email_id)
             else:
-                flash('You don\'t have an inbox yet. Please get one below.', 'error')
+                flash('You don\'t have an inbox yet. Please create one below.', 'error')
         return redirect(url_for('user.settings'))
 
 
@@ -289,9 +289,15 @@ def parse(email_id):
 def parse_email(email_id):
 
     rules = request.form.getlist('select')
+    autoparse = request.form.get('autoparse')
+
+    if autoparse == "true":
+        autoparse = 1
+    else:
+        autoparse = 0
 
     from app.blueprints.parse.parse import parse_email
-    parse_email(email_id,rules)
+    parse_email(email_id,rules,autoparse)
 
     flash('Your email has been parsed. Check it out below!', 'success')
     return redirect(url_for('user.refresh'))
@@ -303,7 +309,18 @@ def parse_email(email_id):
 def view_email(email_id):
     from app.blueprints.parse.models.email import Email
     email = Email.query.filter(Email.id == email_id).first()
-    return render_template('user/view.html', mailbox_id=current_user.mailbox_id, email=email)
+
+    if email.autoparsed:
+        autoparse_rules = filter(None, email.autoparse_rules.split('\n'))
+        rules = []
+
+        for rule in autoparse_rules:
+            from app.blueprints.parse.models.rule import Rule
+            rules.append(Rule.query.filter(Rule.id == rule).first())
+    else:
+        rules = []
+
+    return render_template('user/view.html', mailbox_id=current_user.mailbox_id, email=email, rules=rules)
 
 
 # Rules -------------------------------------------------------------------
@@ -321,7 +338,7 @@ def rules():
                 rules = get_rules(current_user.mailbox_id)
                 return render_template('user/rules.html', mailbox_id=current_user.mailbox_id, rules=rules)
             else:
-                flash('You don\'t have an inbox yet. Please get one below.', 'error')
+                flash('You don\'t have an inbox yet. Please create one below.', 'error')
         return redirect(url_for('user.settings'))
 
 
@@ -399,7 +416,7 @@ def settings():
         trial_days_left = 14 - (datetime.datetime.now() - current_user.created_on.replace(tzinfo=None)).days
 
     if not current_user.active_mailbox:
-        flash('You don\'t have an inbox yet. Please get one below.', 'error')
+        flash('You don\'t have an inbox yet. Please create one below.', 'error')
 
     return render_template('user/settings.html', trial_days_left=trial_days_left, mailbox_id=mailbox_id,
                            mailbox_count=mailbox_count, mailbox_limit=mailbox_limit,
@@ -419,20 +436,21 @@ def inbox():
                 else:
                     return redirect(url_for('user.refresh'))
             else:
-                flash('You don\'t have an inbox yet. Please get one below.', 'error')
+                flash('You don\'t have an inbox yet. Please create one below.', 'error')
         return redirect(url_for('user.settings'))
 
 
 @user.route('/refresh', methods=['GET', 'POST'])
 @login_required
 def refresh():
-        from app.blueprints.user.tasks import get_emails, set_cache
 
-        emails = get_emails.delay(current_user.mailbox_id)
-        set_cache.delay(current_user.mailbox_id, emails.id)
+    from app.blueprints.user.tasks import get_emails, set_cache
 
-        return render_template('user/inbox.html', emails_id=emails.id, emails_state=emails.state,
-                               mailbox_id=current_user.mailbox_id, emails=[], route="refresh")
+    emails = get_emails.delay(current_user.mailbox_id)
+    set_cache.delay(current_user.mailbox_id, emails.id)
+
+    return render_template('user/inbox.html', emails_id=emails.id, emails_state=emails.state,
+                           mailbox_id=current_user.mailbox_id, emails=[], route="refresh")
 
 
 @user.route('/update/<emails_id>/<route>')
@@ -457,9 +475,10 @@ def export():
     emails = export_emails(current_user.mailbox_id)
     file = generate_csv(emails)
 
-    send_export_email(current_user.email, file)
+    from app.blueprints.user.tasks import send_export_email
+    send_export_email.delay(current_user.email, file)
 
-    flash('Your CSV has been sent to your email.', 'success')
+    flash('Your parsed data has been sent to your email in a CSV.', 'success')
     return redirect(url_for('user.inbox'))
 
 
@@ -510,7 +529,7 @@ def switch_mailboxes():
     current_user.mailbox_id = mailbox_id
     current_user.save()
 
-    return redirect(url_for('user.settings'))
+    return redirect(url_for('user.refresh'))
 
 
 # Webhooks -------------------------------------------------------------------
