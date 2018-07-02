@@ -208,7 +208,7 @@ class User(UserMixin, ResourceMixin, db.Model):
             if user is None:
                 continue
 
-            if user.payment_id is None:
+            if user.subscription is None:
                 user.delete()
             else:
                 subscription = Subscription()
