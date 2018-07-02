@@ -252,7 +252,7 @@ def delete_emails():
 def parse(email_id):
 
     if request.method == 'GET':
-        if current_user.subscription or current_user.trial:
+        if current_user.subscription or current_user.trial or current_user.role == 'admin':
             if current_user.mailbox_id:
 
                 from app.blueprints.user.tasks import get_rules
