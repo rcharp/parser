@@ -87,14 +87,9 @@ def seed():
     params = {
         'role': 'admin',
         'email': app.config['SEED_ADMIN_EMAIL'],
-        'password': app.config['SEED_ADMIN_PASSWORD']
+        'password': app.config['SEED_ADMIN_PASSWORD'],
+        'mailbox_id': 'ADMIN'
     }
-
-    # test = {
-    #     'role' : 'member',
-    #     'email': app.config['SEED_MEMBER_EMAIL'],
-    #     'password': app.config['SEED_ADMIN_PASSWORD']
-    # }
 
     return User(**params).save()
 
