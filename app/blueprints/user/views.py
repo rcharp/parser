@@ -407,7 +407,6 @@ def settings():
     mailbox_count, mailbox_limit = current_user.mailbox_count, current_user.mailbox_limit
     email_count, email_limit = current_user.email_count, current_user.email_limit
     mailboxes = get_mailboxes(current_user.email)
-    print(mailboxes)#
 
     if not current_user.subscription and not current_user.trial and current_user.role == 'member':
         flash('Your free trial has expired. Please sign up for a plan below to continue parsing emails.',

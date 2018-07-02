@@ -118,8 +118,8 @@ def update():
                     current_user.mailbox_id = mailbox.mailbox_id
 
                 # Set the mailbox and email limits accordingly
-                mailbox_limit = 1 if new_plan == 'hobby' else 10 if new_plan == 'startup'\
-                    else 40 if new_plan == 'professional' else 100 if new_plan == 'enterprise' else 0
+                mailbox_limit = 10 if new_plan == 'hobby' else 40 if new_plan == 'startup'\
+                    else 60 if new_plan == 'professional' else 100 if new_plan == 'enterprise' else 0
                 email_limit = 400 if new_plan == 'hobby' else 2000 if new_plan == 'startup'\
                     else 5000 if new_plan == 'professional' else 15000 if new_plan == 'enterprise' else 0
 
